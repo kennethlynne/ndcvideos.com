@@ -266,11 +266,11 @@ module.exports = function (grunt) {
         },
         concat: {
             js: {
-                src: '.tmp/scripts',
+                src: '.tmp/scripts/**/*.js',
                 dest: '<%= yeoman.dist %>/scripts/scripts.js'
             },
             css: {
-                src: '.tmp/styles',
+                src: '.tmp/styles/**/*.css',
                 dest: '<%= yeoman.dist %>/styles/main.css'
             }
         },
