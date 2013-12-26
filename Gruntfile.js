@@ -1,4 +1,4 @@
-// Generated on 2013-12-22 using generator-angular-xl 0.2.1
+// Generated on 2013-12-26 using generator-angular-xl 0.2.1
 'use strict';
 var path = require('path');
 
@@ -254,7 +254,7 @@ module.exports = function (grunt) {
         karma: {
             unit: {
                 configFile: 'karma.conf.js',
-                singleRun: false
+                singleRun: true
             }
         },
         ngmin: {
@@ -304,7 +304,7 @@ module.exports = function (grunt) {
                     startTag: '<!--INJECT SCRIPTS-->',
                     endTag: '<!--/INJECT SCRIPTS-->',
                     fileTmpl: '<script src="%s"></script>',
-                    appRoot: '<%= yeoman.app %>'
+                    appRoot: '<%= yeoman.dist %>/'
                 },
                 files: {
                     '<%= yeoman.app %>/index.html': ['<%= yeoman.dist %>/scripts/*.js']
@@ -329,13 +329,44 @@ module.exports = function (grunt) {
                     startTag: '<!--INJECT STYLES-->',
                     endTag: '<!--/INJECT STYLES-->',
                     fileTmpl: '<link rel="stylesheet" href="%s">',
-                    appRoot: '.tmp/public/'
+                    appRoot: '<%= yeoman.dist %>/'
                 },
                 files: {
                     '<%= yeoman.app %>/index.html': ['<%= yeoman.dist %>/styles/*.css']
                 }
             }
 
+        },
+        bump: {
+            options: {
+                files: ['package.json', 'bower.json'],
+                updateConfigs: [],
+                commit: true,
+                commitMessage: 'Release v%VERSION%',
+                commitFiles: ['-a'], // '-a' for all files
+                createTag: true,
+                tagName: 'v%VERSION%',
+                tagMessage: 'Version %VERSION%',
+                push: true,
+                pushTo: 'upstream',
+                gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d' // options to use with '$ git describe'
+            }
+        },
+        protractor: {
+            options: {
+                configFile: "node_modules/protractor/referenceConf.js", // Default config file
+                keepAlive: false, // If false, the grunt process stops when the test fails.
+                noColor: false, // If true, protractor will not use colors in its output.
+                args: {
+                    // Arguments passed to the command
+                }
+            }/*,
+            dist: {
+                options: {
+                    configFile: "e2e.conf.js", // Target-specific config file
+                    args: {} // Target-specific arguments
+                }
+            }*/
         }
 
     });
@@ -358,6 +389,10 @@ module.exports = function (grunt) {
         'karma'
     ]);
 
+    grunt.registerTask('test-e2e', [
+        'protractor'
+    ]);
+
     grunt.registerTask('build', [
         'clean:dist',
         'concurrent:dist',
@@ -369,6 +404,13 @@ module.exports = function (grunt) {
         'rev',
         'linkAssets-production',
         'htmlmin'
+    ]);
+
+    grunt.registerTask('release', [
+        'test',
+        'build',
+        'test-e2e',
+        'bump'
     ]);
 
     grunt.registerTask('linkAssets-dev', [
