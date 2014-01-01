@@ -1,4 +1,4 @@
-// Generated on 2013-12-26 using generator-angular-xl 0.2.1
+// Generated on 2014-01-01 using generator-angular-xl 0.2.1
 'use strict';
 var path = require('path');
 
@@ -179,8 +179,7 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     '<%= yeoman.dist %>/styles/main.css': [
-                        '.tmp/styles/**/*.css',
-                        '<%= yeoman.app %>/styles/**/*.css'
+                        '.tmp/styles/**/*.css'
                     ]
                 }
             }
@@ -219,7 +218,8 @@ module.exports = function (grunt) {
                         '*.{ico,png,txt}',
                         '.htaccess',
                         'images/**/*.{gif,webp}',
-                        'fonts/*'
+                        'fonts/*',
+                        'CNAME'
                     ]
                 }, {
                     expand: true,
@@ -262,7 +262,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     src: appJs,
-                    dest: '.tmp/app_scripts'
+                    dest: '.tmp/app_js/'
                 }]
             }
         },
@@ -279,9 +279,9 @@ module.exports = function (grunt) {
         uglify: {
             dist: {
                 files: {
-                    '.tmp/scripts/app.js': [
-                        '.tmp/app_scripts/**/*.js'
-                    ]
+                    '.tmp/scripts/app.js': appJs.map(function (path) {
+                        return '.tmp/app_js/' + path;
+                    })
                 }
             }
         },
@@ -341,13 +341,13 @@ module.exports = function (grunt) {
             options: {
                 files: ['package.json', 'bower.json'],
                 updateConfigs: [],
-                commit: true,
+                commit: false,
                 commitMessage: 'Release v%VERSION%',
                 commitFiles: ['-a'], // '-a' for all files
                 createTag: true,
                 tagName: 'v%VERSION%',
                 tagMessage: 'Version %VERSION%',
-                push: true,
+                push: false,
                 pushTo: 'upstream',
                 gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d' // options to use with '$ git describe'
             }
@@ -367,6 +367,14 @@ module.exports = function (grunt) {
                     args: {} // Target-specific arguments
                 }
             }*/
+        },
+        'gh-pages': {
+            options: {
+                base: 'dist',
+                tag: 'v' + require('./bower.json').version,
+                message: 'Auto-generated build from v' + require('./bower.json').version
+            },
+            src: ['**']
         }
 
     });
@@ -394,7 +402,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('build', [
-        'clean:dist',
+        'clean',
         'concurrent:dist',
         'ngmin',
         'uglify',
@@ -407,10 +415,15 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('release', [
+        'deploy',
+        'bump'
+    ]);
+
+    grunt.registerTask('deploy', [
         'test',
         'build',
         'test-e2e',
-        'bump'
+        'gh-pages'
     ]);
 
     grunt.registerTask('linkAssets-dev', [
