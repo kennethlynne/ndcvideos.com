@@ -1,4 +1,4 @@
-// Generated on 2014-01-01 using generator-angular-xl 0.2.1
+// Generated on 2014-01-02 using generator-angular-xl 0.2.1
 'use strict';
 var path = require('path');
 
@@ -42,7 +42,7 @@ module.exports = function (grunt) {
                 tasks: ['coffee:test']
             },
             compass: {
-                files: ['<%= yeoman.app %>/styles/**/*.{scss,sass}'],
+                files: ['<%= yeoman.app %>/styles/**/*.{scss,sass}', '<%= yeoman.app %>/components/**/*.{scss,sass}', '<%= yeoman.app %>/pages/**/*.{scss,sass}'],
                 tasks: ['compass:server']
             },
             styles: {
