@@ -1,17 +1,20 @@
-    angular.module('ndcApp')
+    angular.module('ndc')
         .constant('Config', {
             viewsDir:               'views/',
+            useMocks:               true,
             API: {
-                useMock:            true,
                 protocol:           'http',
                 host:               'api.example.com',
                 port:               '8080',
                 path:               '/api',
-                fakeDelay:          2000
+                fakeDelay:          800
             }
         })
         .config(function (componentFactoryProvider) { componentFactoryProvider.setViewPath(function (componentSnakeName, componentName) {
             return 'components/' + componentSnakeName + '/views/' + componentSnakeName + '.html';
         })})
-        .value('cgBusyTemplateName','views/angular-busy/default-spinner.html')
-        .run(function(editableOptions) {editableOptions.theme = 'bs3'});
+        .value('cgBusyTemplateName','views/angular-busy/default-spinner.html');
+
+
+
+

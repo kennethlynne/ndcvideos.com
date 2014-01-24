@@ -1,4 +1,4 @@
-// Generated on 2014-01-02 using generator-angular-xl 0.2.1
+// Generated on 2014-01-24 using generator-angular-xl 0.2.10
 'use strict';
 var path = require('path');
 
@@ -18,7 +18,7 @@ module.exports = function (grunt) {
     });
 
     var externalJsMin = includes.javascript.external.map(function (path) {
-        path = path.replace(".js", ".min.js");
+        path = path.replace(/(\.js|\.src.js)/, ".min.js");
         return yeomanConfig.app + '/' + path;
     });
 
@@ -31,6 +31,7 @@ module.exports = function (grunt) {
     });
 
     grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
         yeoman: yeomanConfig,
         watch: {
             coffee: {
@@ -201,7 +202,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: '<%= yeoman.app %>',
-                    src: ['*.html', 'views/**/*.html', 'pages/**/*.html', 'components/**/*.html'],
+                    src: ['*.html', '!index.html', '../.tmp/index.html', 'views/**/*.html', 'pages/**/*.html', 'components/**/*.html'],
                     dest: '<%= yeoman.dist %>'
                 }]
             }
@@ -219,7 +220,8 @@ module.exports = function (grunt) {
                         '.htaccess',
                         'images/**/*.{gif,webp}',
                         'fonts/*',
-                        'CNAME'
+                        'CNAME',
+                        'package.json'
                     ]
                 }, {
                     expand: true,
@@ -235,13 +237,38 @@ module.exports = function (grunt) {
                 cwd: '<%= yeoman.app %>/styles',
                 dest: '.tmp/styles/',
                 src: '**/*.css'
+            },
+            tmpStyles2dist: {
+                expand: true,
+                cwd: '.tmp/styles/',
+                dest: '<%= yeoman.dist %>/styles/',
+                src: '**/*.css'
+            },
+            dev: {
+                expand: true,
+                cwd: '<%= yeoman.app %>/dev',
+                dest: '<%= yeoman.dist %>/dev',
+                src: '**/*.js'
+            },
+            indexHTML: {
+                expand: true,
+                cwd: '<%= yeoman.app %>/',
+                dest: '<%= yeoman.dist %>/',
+                src: ['./index.html']
+            },
+            app: {
+                expand: true,
+                cwd: '<%= yeoman.app %>/',
+                dest: '<%= yeoman.dist %>/',
+                src: ['**/*', '!**/*.{scss,sass,coffee}', '!dev/**/*']
             }
         },
         concurrent: {
             server: [
                 'coffee:dist',
                 'compass:server',
-                'copy:styles'
+                'copy:styles',
+                'copy:dev'
             ],
             dist: [
                 'coffee',
@@ -267,6 +294,14 @@ module.exports = function (grunt) {
             }
         },
         concat: {
+            options: {
+                // Replace all 'use strict' statements in the code with a single one at the top
+                banner: "'use strict';\n",
+                process: function(src, filepath) {
+                    return '// Source: ' + filepath + '\n' +
+                        src.replace(/(^|\n)[ \t]*('use strict'|"use strict");?\s*/g, '$1');
+                }
+            },
             js: {
                 src: externalJsMin.concat(['.tmp/scripts/app.js']),
                 dest: '<%= yeoman.dist %>/scripts/scripts.js'
@@ -277,6 +312,17 @@ module.exports = function (grunt) {
             }
         },
         uglify: {
+            options: {
+                banner: [
+                    '/**',
+                    ' * <%= pkg.description %>',
+                    ' * @version v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>',
+                    ' * @link <%= pkg.homepage %>',
+                    ' * @author <%= pkg.author %>',
+                    ' * @license MIT License, http://www.opensource.org/licenses/MIT',
+                    ' */'
+                ].join('\n')
+            },
             dist: {
                 files: {
                     '.tmp/scripts/app.js': appJs.map(function (path) {
@@ -292,10 +338,11 @@ module.exports = function (grunt) {
                     startTag: '<!--INJECT SCRIPTS-->',
                     endTag: '<!--/INJECT SCRIPTS-->',
                     fileTmpl: '<script src="%s"></script>',
-                    appRoot: '<%= yeoman.app %>'
+                    appRoot: '<%= yeoman.app %>',
+                    relative: true
                 },
                 files: {
-                    '<%= yeoman.app %>/index.html': externalJsSrc.concat(appJs)
+                    '<%= yeoman.app %>/index.html': externalJsSrc.concat(appJs).concat([yeomanConfig.app + '/dev/**/*.js'])
                 }
             },
 
@@ -304,10 +351,11 @@ module.exports = function (grunt) {
                     startTag: '<!--INJECT SCRIPTS-->',
                     endTag: '<!--/INJECT SCRIPTS-->',
                     fileTmpl: '<script src="%s"></script>',
-                    appRoot: '<%= yeoman.dist %>/'
+                    appRoot: '<%= yeoman.dist %>',
+                    relative: true
                 },
                 files: {
-                    '<%= yeoman.app %>/index.html': ['<%= yeoman.dist %>/scripts/*.js']
+                    '<%= yeoman.dist %>/index.html': ['<%= yeoman.dist %>/scripts/*.js']
                 }
             },
 
@@ -316,7 +364,8 @@ module.exports = function (grunt) {
                     startTag: '<!--INJECT STYLES-->',
                     endTag: '<!--/INJECT STYLES-->',
                     fileTmpl: '<link rel="stylesheet" href="%s">',
-                    appRoot: '.tmp'
+                    appRoot: '.tmp',
+                    relative: true
                 },
 
                 files: {
@@ -329,10 +378,11 @@ module.exports = function (grunt) {
                     startTag: '<!--INJECT STYLES-->',
                     endTag: '<!--/INJECT STYLES-->',
                     fileTmpl: '<link rel="stylesheet" href="%s">',
-                    appRoot: '<%= yeoman.dist %>/'
+                    appRoot: '<%= yeoman.dist %>',
+                    relative: true
                 },
                 files: {
-                    '<%= yeoman.app %>/index.html': ['<%= yeoman.dist %>/styles/*.css']
+                    '<%= yeoman.dist %>/index.html': ['<%= yeoman.dist %>/styles/*.css']
                 }
             }
 
@@ -354,19 +404,13 @@ module.exports = function (grunt) {
         },
         protractor: {
             options: {
-                configFile: "node_modules/protractor/referenceConf.js", // Default config file
+                configFile: "protractor.conf.js",
                 keepAlive: false, // If false, the grunt process stops when the test fails.
                 noColor: false, // If true, protractor will not use colors in its output.
                 args: {
                     // Arguments passed to the command
                 }
-            }/*,
-            dist: {
-                options: {
-                    configFile: "e2e.conf.js", // Target-specific config file
-                    args: {} // Target-specific arguments
-                }
-            }*/
+            }
         },
         'gh-pages': {
             options: {
@@ -375,6 +419,43 @@ module.exports = function (grunt) {
                 message: 'Auto-generated build from v' + require('./bower.json').version
             },
             src: ['**']
+        },
+        changelog: {
+            options: {
+                dest: 'CHANGELOG.md',
+                versionFile: 'package.json'
+            }
+        },
+        "ddescribe-iit": {
+            files: [
+                'test/**/*.js'
+            ]
+        },
+        //The manifest file must be served with the MIME type text/cache-manifest.
+        manifest: {
+            generate: {
+                options: {
+                    basePath: '/',
+                    cache: ['/scripts/scripts.js', '/styles/main.css'],
+                    network: ['*', 'http://*', 'https://*'],
+                    fallback: ['/ /offline.html'],
+                    exclude: ['js/jquery.min.js'],
+                    preferOnline: true,
+                    verbose: true,
+                    timestamp: true,
+                    hash: true,
+                    master: ['index.html']
+                },
+                src: [ //TODO: Rev images, fonts, icons etc. to bust cache
+                    '**/*.html',
+                    '/scripts/**/*.js',
+                    '/styles/**/*.css',
+                    '*.{ico,png,txt}',
+                    'images/**/*',
+                    'fonts/*'
+                ],
+                dest: 'manifest.appcache'
+            }
         }
 
     });
@@ -401,28 +482,58 @@ module.exports = function (grunt) {
         'protractor'
     ]);
 
-    grunt.registerTask('build', [
-        'clean',
-        'concurrent:dist',
-        'ngmin',
-        'uglify',
-        'concat',
-        'copy:dist',
-        'cssmin',
-        'rev',
-        'linkAssets-production',
-        'htmlmin'
-    ]);
+    grunt.registerTask('build', function (target) {
+
+        if (target === 'dev') {
+            console.log('Building using development profile');
+            grunt.task.run([
+                'clean',
+                'compass:server',
+                'copy:styles',
+                'copy:tmpStyles2dist',
+                'copy:app',
+                'linkAssets-dev'
+            ]);
+        }
+        else if (target === 'prototype') {
+            console.log('Building using prototype profile');
+            grunt.task.run([
+                'clean',
+                'concurrent:server',
+                'copy',
+                'linkAssets-dev'
+            ]);
+        }
+        else
+        {
+            console.log('Building using production profile');
+            grunt.task.run([
+                'ddescribe-iit',
+                'test-e2e',
+                'test',
+                'clean',
+                'concurrent:dist',
+                'ngmin',
+                'uglify',
+                'concat:js',
+                'concat:css',
+                'copy:dist',
+                'cssmin',
+                'rev',
+                'copy:indexHTML',
+                'linkAssets-production',
+                'htmlmin',
+                'manifest'
+            ]);
+        }
+    });
 
     grunt.registerTask('release', [
-        'deploy',
+        'changelog',
         'bump'
     ]);
 
     grunt.registerTask('deploy', [
-        'test',
-        'build',
-        'test-e2e',
         'gh-pages'
     ]);
 

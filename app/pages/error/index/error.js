@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('ndcApp')
-    .config(function ($stateProvider, stateFactoryProvider) { $stateProvider.state('Error', stateFactoryProvider.$get()('Error', {url:'/error?code'})) })
+angular.module('ndc')
+    .config(function ($stateProvider, stateFactory) { $stateProvider.state('Error', stateFactory('Error', {url:'/error?code'})) })
     .service('ErrorCtrlInit', function ($q, $log) {
 
         var _prepare = function () {

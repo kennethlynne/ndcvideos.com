@@ -13,14 +13,14 @@ module.exports = function(config) {
     var jsFiles = js.external.concat(js.app).map(mapAppPath);
 
     var files = jsFiles.concat([
-        'test/loadTemplates.js',
-        'test/matchers/**/*.js',
-        'test/utils/*.js',
-        'test/utils/**/*.js',
+        'test/unit/loadTemplates.js',
+        'test/unit/matchers/**/*.js',
+        'test/unit/utils/*.js',
+        'test/unit/utils/**/*.js',
         appPath + '/scripts/*.js',
         appPath + '/scripts/**/*.js',
-        'test/mock/**/*.js',
-        'test/spec/**/*.js',
+        'test/unit/mock/**/*.js',
+        'test/unit/spec/**/*.js',
         appPath + '/views/**/*.html',
         appPath + '/components/**/*.html',
         appPath + '/pages/**/*.html'
@@ -61,7 +61,7 @@ module.exports = function(config) {
         // list of files / patterns to load in the browser
         files: files,
 
-        reporters: ['spec', 'progress', 'coverage'],
+        reporters: [/*'spec', */'progress', 'coverage'],
 
         // optionally, configure the reporter
         coverageReporter: {

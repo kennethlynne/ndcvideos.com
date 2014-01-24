@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('ndcApp')
-    .config(function ($stateProvider, stateFactoryProvider) {
-        $stateProvider.state('Index', stateFactoryProvider.$get()('Index', {url:'/'}))
+angular.module('ndc')
+    .config(function ($stateProvider, stateFactory) {
+        $stateProvider.state('Index', stateFactory('Index', {url:'/'}))
     })
     .service('IndexCtrlInit', function ($q, $log) {
 

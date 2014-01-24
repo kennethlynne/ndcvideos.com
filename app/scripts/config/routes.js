@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ndcApp')
+angular.module('ndc')
     .config(function ($urlRouterProvider) {
         $urlRouterProvider.when('', '/');
         $urlRouterProvider.otherwise("/error?code=404");
