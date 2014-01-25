@@ -20,9 +20,10 @@ angular.module('ndc')
         }
 
     })
-    .controller('IndexCtrl', function ($scope, init) {
-        $scope.videos = [
-            {id: '1', title: 'Title', description: 'desc', duration: 1234, vimeoId: 123},
-            {id: '2', title: 'Titl2e', description: 'desc', duration: 12324, vimeoId: 1223}
-        ];
+    .controller('IndexCtrl', function ($scope, VideoContext) {
+
+        VideoContext.getAll().then(function (response) {
+            $scope.videos = response;
+        });
+        
     });
