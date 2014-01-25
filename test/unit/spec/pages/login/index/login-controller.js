@@ -2,13 +2,17 @@
 
 describe('Controller(/login): LoginCtrl', function () {
 
-    var LoginCtrl, scope, authentication, $q, promise;
+    var LoginCtrl, scope, authentication, $q, promise, $state, isLoggedIn = true;
 
     beforeEach(function () {
 
         authentication = {
             login: jasmine.createSpy('authentication.login').andReturn(promise),
-            isLoggedIn: jasmine.createSpy('authentication.isLoggedIn')
+            isLoggedIn: jasmine.createSpy('authentication.isLoggedIn').andReturn(isLoggedIn)
+        };
+
+        $state = {
+            go: jasmine.createSpy('$state.go')
         };
 
         module('ndc', function ($provide) {
@@ -20,12 +24,17 @@ describe('Controller(/login): LoginCtrl', function () {
             $q = _$q_;
             LoginCtrl = $controller('LoginCtrl', {
                 $scope: scope,
-                init: 'DATA'
+                init: 'DATA',
+                $state: $state
             });
 
             promise = $q.all([]);
 
         });
+    });
+
+    it('should redirect if the user is already logged in', function() {
+        expect($state.go).toHaveBeenCalled();
     });
 
     it('should attach init data to scope', function () {

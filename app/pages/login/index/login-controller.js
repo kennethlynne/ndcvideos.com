@@ -22,6 +22,11 @@ angular.module('ndc')
 
     })
     .controller('LoginCtrl', function ($scope, init, authentication, $state) {
+
+        if (authentication.isLoggedIn()) {
+            $state.go('Index');
+        }
+
         $scope.data = init;
 
         $scope.login = function (username, password) {
