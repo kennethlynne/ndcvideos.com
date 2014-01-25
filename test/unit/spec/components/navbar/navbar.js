@@ -27,11 +27,18 @@ describe('Component: navbarComponent', function () {
 
     describe('Controller: navbarComponentCtrl', function () {
 
-        var Ctrl, scope, element;
+        var Ctrl, scope, element, authentication;
 
         beforeEach(function () {
 
-            module('ndc');
+            authentication = {
+                logout: jasmine.createSpy('authentication.logout'),
+                isLoggedIn: jasmine.createSpy('authentication.isLoggedIn')
+            };
+
+            module('ndc', function ($provide) {
+                $provide.value('authentication', authentication)
+            });
 
             inject(function ($controller, $rootScope) {
                 scope = $rootScope.$new();
@@ -43,8 +50,9 @@ describe('Component: navbarComponent', function () {
             });
         });
 
-        it('should render a message', function () {
-            expect(scope.text).toEqual('this is the navbar component');
+        it('should sign a user out a message', function () {
+            scope.signout();
+            expect(authentication.logout).toHaveBeenCalled();
         });
     });
 
