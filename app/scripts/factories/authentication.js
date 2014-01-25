@@ -2,11 +2,15 @@
 
 angular.module('ndc')
     .config(function ($httpProvider) {
-        $httpProvider.interceptors.push(function ($q, $injector) {
+        $httpProvider.interceptors.push(function ($q, $injector, BaseUrl) {
             return {
                 request: function (cfg) {
                     var token = $injector.get('authentication').getToken();
-                    if(token) cfg.headers['Authorization'] = token;
+                    var matchesAPIUrl = cfg.url.substr(0, BaseUrl.length) === BaseUrl;
+
+                    if(token && matchesAPIUrl) {
+                        cfg.headers['Authorization'] = token;
+                    }
                     return cfg || $q.when(cfg);
                 }
             };
@@ -42,6 +46,9 @@ angular.module('ndc')
             },
             getToken: function () {
                 return _model.token;
+            },
+            logout: function () {
+                _model = angular.copy(_default);
             }
         }
     });

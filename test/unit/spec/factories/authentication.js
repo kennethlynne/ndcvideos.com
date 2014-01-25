@@ -2,11 +2,22 @@
 
 describe('Service: authentication', function () {
 
-    var authentication, $httpBackend, BaseUrl, $http, loginSuccessfullResponse;
+    var authentication, $httpBackend, BaseUrl, $http, loginSuccessfullResponse, logIn;
 
     beforeEach(function () {
 
         module('ndc');
+
+        logIn = function logIn() {
+            $httpBackend.expectPOST( BaseUrl + 'token', 'grant_type=password&username=Ali&password=password123',
+                {
+                    'Content-Type':'application/x-www-form-urlencoded',
+                    'Accept':'application/json, text/plain, */*'
+                }).respond(loginSuccessfullResponse);
+
+            authentication.login('password', 'Ali', 'password123');
+            $httpBackend.flush();
+        };
 
         loginSuccessfullResponse = {
             "access_token":"take-on-me",
@@ -35,77 +46,44 @@ describe('Service: authentication', function () {
         expect(authentication.isLoggedIn()).toBeFalsy();
     });
 
-    it('should POST credentials to the server on log in', function() {
-        $httpBackend.expectPOST( BaseUrl + 'token', 'grant_type=password&username=Ali&password=password123',             {
-            'Content-Type':'application/x-www-form-urlencoded',
-            'Accept':'application/json, text/plain, */*'
-        }).respond();
-        authentication.login('password', 'Ali', 'password123');
-        $httpBackend.flush();
-    });
-
     it('should return undefined token when not logged in', function() {
         expect(authentication.getToken()).toBeUndefined();
     });
 
     it('should remember token', function() {
-        $httpBackend.expectPOST( BaseUrl + 'token', 'grant_type=password&username=Ali&password=password123',
-            {
-                'Content-Type':'application/x-www-form-urlencoded',
-                'Accept':'application/json, text/plain, */*'
-            }).respond(loginSuccessfullResponse);
-        authentication.login('password', 'Ali', 'password123');
-        $httpBackend.flush();
-
+        logIn();
         expect(authentication.getToken()).toBe('take-on-me');
     });
 
     it('should not decorate requests not targeted at the API with token information', function() {
-        $httpBackend.expectGET( 'test' ).respond();
-        $http.get('test');
+        logIn();
+        $httpBackend.expectGET( 'external-api', {"Accept":"application/json, text/plain, */*"} ).respond();
+        $http.get('external-api');
         $httpBackend.flush();
     });
 
     it('should decorate all subsequent requests to the API with the token information', function() {
-
-        $httpBackend.expectPOST( BaseUrl + 'token', 'grant_type=password&username=Ali&password=password123',
-            {
-                'Content-Type':'application/x-www-form-urlencoded',
-                'Accept':'application/json, text/plain, */*'
-            }).respond(loginSuccessfullResponse);
-
-        authentication.login('password', 'Ali', 'password123');
-        $httpBackend.flush();
-
-        $httpBackend.expectGET( 'test', {"Accept":"application/json, text/plain, */*","Authorization":"take-on-me"} ).respond();
-        $http.get('test');
+        logIn();
+        $httpBackend.expectGET( BaseUrl + 'test', {"Accept":"application/json, text/plain, */*","Authorization":"take-on-me"} ).respond();
+        $http.get( BaseUrl + 'test' );
         $httpBackend.flush();
     });
 
     it('should indicate that the user is logged in', function() {
-
-        $httpBackend.expectPOST( BaseUrl + 'token', 'grant_type=password&username=Ali&password=password123',
-            {
-                'Content-Type':'application/x-www-form-urlencoded',
-                'Accept':'application/json, text/plain, */*'
-            }).respond(loginSuccessfullResponse);
-        authentication.login('password', 'Ali', 'password123');
-        $httpBackend.flush();
-
+        logIn();
         expect(authentication.isLoggedIn()).toBeTruthy();
     });
 
     it('should reset information on logout', function() {
-        $httpBackend.expectPOST( BaseUrl + 'token', 'grant_type=password&username=Ali&password=password123',
-            {
-                'Content-Type':'application/x-www-form-urlencoded',
-                'Accept':'application/json, text/plain, */*'
-            }).respond(loginSuccessfullResponse);
-        authentication.login('password', 'Ali', 'password123');
-        $httpBackend.flush();
+        logIn();
+        authentication.logout();
 
-        expect(authentication.isLoggedIn()).toBeTruthy();
         expect(authentication.getToken()).toBeUndefined();
+        expect(authentication.isLoggedIn()).toBeFalsy();
+
+        $httpBackend.expectGET( BaseUrl + 'test', {"Accept":"application/json, text/plain, */*"} ).respond();
+        $http.get(BaseUrl + 'test', {"Accept":"application/json, text/plain, */*"});
+        $httpBackend.flush();
     });
 
 });
