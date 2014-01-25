@@ -28,8 +28,8 @@ angular.module('ndc')
             $scope.working = true;
 
             authentication.login('password', username, password)
-                .then(function () {
-                    $state.go('Index');
+                .then(function (isLoggedIn) {
+                    if(isLoggedIn) $state.go('Index');
                 })
                 .finally(function () {
                     $scope.working = false;
