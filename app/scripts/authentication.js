@@ -47,5 +47,9 @@ angular.module('ndc')
         }
     })
     .run(function (authentication, $state) {
-        //$state.go('^.login');
+//        $state.go('login',
+//        {
+//            location: 'replace',
+//            reload: true
+//        });
     });
