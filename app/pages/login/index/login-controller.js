@@ -21,13 +21,16 @@ angular.module('ndc')
         }
 
     })
-    .controller('LoginCtrl', function ($scope, init, authentication) {
+    .controller('LoginCtrl', function ($scope, init, authentication, $state) {
         $scope.data = init;
 
         $scope.login = function (username, password) {
             $scope.working = true;
 
             authentication.login('password', username, password)
+                .then(function () {
+                    $state.go('Index');
+                })
                 .finally(function () {
                     $scope.working = false;
                 })
