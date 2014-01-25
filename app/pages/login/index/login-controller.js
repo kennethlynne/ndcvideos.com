@@ -21,6 +21,10 @@ angular.module('ndc')
         }
 
     })
-    .controller('LoginCtrl', function ($scope, init) {
+    .controller('LoginCtrl', function ($scope, init, authentication) {
         $scope.data = init;
+
+        $scope.login = function (username, password) {
+            authentication.login('password', username, password);
+        };
     });

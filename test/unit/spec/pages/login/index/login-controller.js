@@ -2,13 +2,19 @@
 
 describe('Controller(/login): LoginCtrl', function () {
 
-    var LoginCtrl, scope;
+    var LoginCtrl, scope, authentication;
 
     beforeEach(function () {
 
-        module('ndc');
+        authentication = {
+            login: jasmine.createSpy('authentication.login')
+        };
 
-        inject(function ($controller, $rootScope) {
+        module('ndc', function ($provide) {
+            $provide.value('authentication', authentication);
+        });
+
+        inject(function ($controller, $rootScope, _authentication_) {
             scope = $rootScope.$new();
             LoginCtrl = $controller('LoginCtrl', {
                 $scope: scope,
@@ -19,6 +25,11 @@ describe('Controller(/login): LoginCtrl', function () {
 
     it('should attach init data to scope', function () {
         expect(scope.data).toEqual('DATA');
+    });
+
+    it('should trigger a login', function() {
+        scope.login('user', 'pw');
+        expect(authentication.login).toHaveBeenCalledWith('password', 'user', 'pw');
     });
 });
 
