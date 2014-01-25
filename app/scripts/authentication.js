@@ -16,7 +16,7 @@ angular.module('ndc')
             };
         });
     })
-    .factory('authentication', function ($http, BaseUrl, $localStorage, $log) {
+    .factory('authentication', function ($http, BaseUrl, $localStorage, $log, $q) {
 
         var _logout = function () {
                 delete $localStorage.token;
@@ -26,6 +26,8 @@ angular.module('ndc')
             },
             _login = function (grantType, username, password) {
 
+                var deferred = $q.defer();
+
                 var cfg = {
                     method: 'POST',
                     url: BaseUrl + 'token',
@@ -33,24 +35,27 @@ angular.module('ndc')
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                 };
 
-                return $http(cfg).then(function (response) {
+                $http(cfg).then(function (response) {
                     if (response && response.data) {
                         var data = response.data;
                         $localStorage.token = data.access_token;
-                        return true;
+                        deferred.resolve(true);
                     }
                     else
                     {
                         _logout();
-                        return false;
+                        deferred.reject('No data received');
                     }
                 })
                 .catch(function (reason) {
-                    $log.error('Could not log you in.',reason);
+                    deferred.reject('Could not log you in. ' + reason);
                 })
                 .finally(function () {
                     $log.log('Log in request finished.');
-                })
+                });
+
+                return deferred.promise;
+
             },
             _isLoggedIn = function () {
                 return typeof $localStorage.token == 'string';

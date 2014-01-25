@@ -2,7 +2,7 @@
 
 describe('Service: authentication', function () {
 
-    var authentication, $httpBackend, BaseUrl, $http, loginSuccessfullResponse, logIn, $localStorage;
+    var authentication, $httpBackend, BaseUrl, $http, loginSuccessfullResponse, loginFailedResponse, logIn, $localStorage;
 
     beforeEach(function () {
 
@@ -17,7 +17,7 @@ describe('Service: authentication', function () {
                 {
                     'Content-Type':'application/x-www-form-urlencoded',
                     'Accept':'application/json, text/plain, */*'
-                }).respond(loginSuccessfullResponse);
+                }).respond(200, loginSuccessfullResponse);
 
             authentication.login('password', 'Ali', 'password123');
             $httpBackend.flush();
@@ -30,6 +30,10 @@ describe('Service: authentication', function () {
             "userName":"Ali",
             ".issued":"Mon, 14 Oct 2013 06:53:32 GMT",
             ".expires":"Mon, 28 Oct 2013 06:53:32 GMT"
+        };
+
+        loginFailedResponse = {
+            message: 'Not authorized.'
         };
 
         inject(function (_authentication_, _$httpBackend_, _BaseUrl_, _$http_) {
@@ -91,6 +95,7 @@ describe('Service: authentication', function () {
     });
 
     it('should save token to local storage', function() {
+        expect($localStorage.token).toBeUndefined();
         logIn();
         expect($localStorage.token).toBe('take-on-me');
     });
@@ -98,6 +103,24 @@ describe('Service: authentication', function () {
     it('should use the token from local storage if defined', function() {
         $localStorage.token = 'awesome';
         expect(authentication.getToken()).toBe('awesome');
+    });
+
+    it('should reject the promise if the password or username is wrong', function() {
+        $httpBackend.expectPOST( BaseUrl + 'token', 'grant_type=password&username=wrong&password=pw',
+            {
+                'Content-Type':'application/x-www-form-urlencoded',
+                'Accept':'application/json, text/plain, */*'
+            }).respond(403, loginFailedResponse);
+
+        var failed = jasmine.createSpy('failed');
+        var success = jasmine.createSpy('success');
+        var done = jasmine.createSpy('finally');
+
+        authentication.login('password', 'wrong', 'pw').then(success).catch(failed).finally(done);
+        $httpBackend.flush();
+
+        expect(failed).toHaveBeenCalled();
+        expect(success).not.toHaveBeenCalled();
     });
 
 });
