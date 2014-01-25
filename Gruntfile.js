@@ -26,6 +26,9 @@ module.exports = function (grunt) {
         return yeomanConfig.app + '/' + path;
     });
 
+    var prototypeAppJs = appJs.slice(0);
+    prototypeAppJs.splice(1, 0, (yeomanConfig.app + '/dev/**/*.js') );
+
     var cssFiles = includes.css.map(function (path) {
         return '.tmp/' + path;
     });
@@ -342,7 +345,7 @@ module.exports = function (grunt) {
                     relative: true
                 },
                 files: {
-                    '<%= yeoman.app %>/index.html': externalJsSrc.concat([yeomanConfig.app + '/dev/**/*.js']).concat(appJs)
+                    '<%= yeoman.app %>/index.html': externalJsSrc.concat(prototypeAppJs)
                 }
             },
 

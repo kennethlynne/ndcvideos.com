@@ -4,8 +4,8 @@
             useMocks:               true,
             API: {
                 protocol:           'http',
-                host:               'api.example.com',
-                port:               '8080',
+                host:               'ndc.azurewebsites.net',
+                port:               '80',
                 path:               '/api',
                 fakeDelay:          800
             }
