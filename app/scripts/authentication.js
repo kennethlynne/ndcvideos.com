@@ -8,7 +8,7 @@ angular.module('ndc')
                     var token = $injector.get('authentication').getToken();
                     var matchesAPIUrl = cfg.url.substr(0, BaseUrl.length) === BaseUrl;
 
-                    if(token && matchesAPIUrl) {
+                    if (token && matchesAPIUrl) {
                         cfg.headers['Authorization'] = token;
                     }
                     return cfg || $q.when(cfg);
@@ -16,36 +16,53 @@ angular.module('ndc')
             };
         });
     })
-    .factory('authentication', function ($http, BaseUrl, $localStorage) {
+    .factory('authentication', function ($http, BaseUrl, $localStorage, $log) {
 
-        return {
-            isLoggedIn: function () {
-                return typeof $localStorage.token == 'string';
+        var _logout = function () {
+                delete $localStorage.token;
             },
-            login: function (grantType, username, password) {
+            _getToken = function () {
+                return $localStorage.token;
+            },
+            _login = function (grantType, username, password) {
 
                 var cfg = {
                     method: 'POST',
                     url: BaseUrl + 'token',
                     data: 'grant_type=' + grantType + '&username=' + username + '&password=' + password,
-                    headers: {'Content-Type':'application/x-www-form-urlencoded'}
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                 };
 
-                $http(cfg).then(function (response) {
+                return $http(cfg).then(function (response) {
                     if (response && response.data) {
                         var data = response.data;
                         $localStorage.token = data.access_token;
+                        return true;
                     }
-                });
+                    else
+                    {
+                        _logout();
+                        return false;
+                    }
+                })
+                .catch(function (reason) {
+                    $log.error('Could not log you in.',reason);
+                })
+                .finally(function () {
+                    $log.log('Log in request finished.');
+                })
             },
-            getToken: function () {
-                return $localStorage.token;
-            },
-            logout: function () {
-                delete $localStorage.token;
-            }
+            _isLoggedIn = function () {
+                return typeof $localStorage.token == 'string';
+            };
+
+        return {
+            isLoggedIn: _isLoggedIn,
+            login: _login,
+            getToken: _getToken,
+            logout: _logout
         }
     })
     .run(function (authentication, $location) {
-        authentication.isLoggedIn || $location.path('/login')
+        authentication.isLoggedIn() || $location.path('/login')
     });
