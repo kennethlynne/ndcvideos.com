@@ -10,8 +10,14 @@ angular.module('ndc')
         console.log('Stubbing video API - ' + collectionUrl);
         console.log('************');
 
+
         var VideoRepo = {};
-        VideoRepo.data = [{id: guid(), text:'Hello World'}];
+        VideoRepo.data = [
+            {id: guid(), title: 'Title', description: 'desc', duration: 1234, vimeoId: 123},
+            {id: guid(), title: 'Titl2e', description: 'desc', duration: 12324, vimeoId: 12223},
+            {id: guid(), title: 'Title3', description: 'desc', duration: 123224, vimeoId: 1123},
+            {id: guid(), title: 'Titl2e', description: 'desc', duration: 121324, vimeoId: 12123}
+        ];
         VideoRepo.index = {};
 
         angular.forEach(VideoRepo.data, function(item, key) {
@@ -19,17 +25,20 @@ angular.module('ndc')
         });
 
         function assertLoggedIn(headers) {
-            if (headers != {"Accept":"application/json, text/plain, */*","Authorization":"take-on-me"}) {
-                $log.error('Not authorized.');
-                return [403];
-            };
+            if (headers == {"Accept":"application/json, text/plain, */*","Authorization":"take-on-me"}) {
+                return true
+            }
+            $log.error('Not authorized.');
+            return false;
         }
 
         //GET video/ should return a list og messages
         $httpBackend.whenGET(collectionUrl).respond(function(method, url, data, headers) {
             $log.log('Intercepted GET to video', data);
 
-            assertLoggedIn(headers);
+            if (assertLoggedIn(headers)) {
+                return [403];
+            }
 
             return [200, VideoRepo.data, {/*headers*/}];
         });
@@ -38,7 +47,9 @@ angular.module('ndc')
         $httpBackend.whenPOST(collectionUrl).respond(function(method, url, data, headers) {
             $log.log('Intercepted POST to video', data);
 
-            assertLoggedIn(headers);
+            if (assertLoggedIn(headers)) {
+                return [403];
+            }
 
             var Video = angular.fromJson(data);
 
@@ -53,7 +64,9 @@ angular.module('ndc')
         $httpBackend.whenGET( new RegExp(regexEscape(collectionUrl + '/') + IdRegExp ) ).respond(function(method, url, data, headers) {
             $log.log('Intercepted GET to video');
 
-            assertLoggedIn(headers);
+            if (assertLoggedIn(headers)) {
+                return [403];
+            }
 
             var id = url.match( new RegExp(IdRegExp) )[0];
             return [200, VideoRepo.index[id] || null, {/*headers*/}];
