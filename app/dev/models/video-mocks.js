@@ -25,8 +25,8 @@ angular.module('ndc')
         });
 
         function assertLoggedIn(headers) {
-            if (headers == {"Accept":"application/json, text/plain, */*","Authorization":"take-on-me"}) {
-                return true
+            if (headers["Accept"] == "application/json, text/plain, */*" && headers["Authorization"] == "take-on-me") {
+                return true;
             }
             $log.error('Not authorized.');
             return false;
@@ -36,8 +36,8 @@ angular.module('ndc')
         $httpBackend.whenGET(collectionUrl).respond(function(method, url, data, headers) {
             $log.log('Intercepted GET to video', data);
 
-            if (assertLoggedIn(headers)) {
-                return [403];
+            if (!assertLoggedIn(headers)) {
+                return [403, {message: 'Not authorized'}];
             }
 
             return [200, VideoRepo.data, {/*headers*/}];
@@ -47,8 +47,8 @@ angular.module('ndc')
         $httpBackend.whenPOST(collectionUrl).respond(function(method, url, data, headers) {
             $log.log('Intercepted POST to video', data);
 
-            if (assertLoggedIn(headers)) {
-                return [403];
+            if (!assertLoggedIn(headers)) {
+                return [403, {message: 'Not authorized'}];
             }
 
             var Video = angular.fromJson(data);
@@ -64,8 +64,8 @@ angular.module('ndc')
         $httpBackend.whenGET( new RegExp(regexEscape(collectionUrl + '/') + IdRegExp ) ).respond(function(method, url, data, headers) {
             $log.log('Intercepted GET to video');
 
-            if (assertLoggedIn(headers)) {
-                return [403];
+            if (!assertLoggedIn(headers)) {
+                return [403, {message: 'Not authorized'}];
             }
 
             var id = url.match( new RegExp(IdRegExp) )[0];
