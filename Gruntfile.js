@@ -342,7 +342,7 @@ module.exports = function (grunt) {
                     relative: true
                 },
                 files: {
-                    '<%= yeoman.app %>/index.html': externalJsSrc.concat(appJs).concat([yeomanConfig.app + '/dev/**/*.js'])
+                    '<%= yeoman.app %>/index.html': externalJsSrc.concat([yeomanConfig.app + '/dev/**/*.js']).concat(appJs)
                 }
             },
 
