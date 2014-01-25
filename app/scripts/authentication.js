@@ -43,12 +43,12 @@ angular.module('ndc')
                     }
                     else
                     {
-                        _logout();
                         deferred.reject('No data received');
                     }
                 })
-                .catch(function (reason) {
-                    deferred.reject('Could not log you in. ' + reason);
+                .catch(function (response) {
+                    var message = (response && response.data && response.data.message) ? response.data.message : '';
+                    deferred.reject('Could not log you in. ' + message);
                 })
                 .finally(function () {
                     $log.log('Log in request finished.');
