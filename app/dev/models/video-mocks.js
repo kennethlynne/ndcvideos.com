@@ -18,15 +18,28 @@ angular.module('ndc')
             VideoRepo.index[item.id] = item; //Index messages to be able to do efficient lookups on id
         });
 
+        function assertLoggedIn(headers) {
+            if (headers != {"Accept":"application/json, text/plain, */*","Authorization":"take-on-me"}) {
+                $log.error('Not authorized.');
+                return [403];
+            };
+        }
+
         //GET video/ should return a list og messages
         $httpBackend.whenGET(collectionUrl).respond(function(method, url, data, headers) {
             $log.log('Intercepted GET to video', data);
+
+            assertLoggedIn(headers);
+
             return [200, VideoRepo.data, {/*headers*/}];
         });
 
         //POST video/ should save a message and return the message with an id
         $httpBackend.whenPOST(collectionUrl).respond(function(method, url, data, headers) {
             $log.log('Intercepted POST to video', data);
+
+            assertLoggedIn(headers);
+
             var Video = angular.fromJson(data);
 
             Video.id = guid();
@@ -39,6 +52,9 @@ angular.module('ndc')
         //GET video/id should return a message
         $httpBackend.whenGET( new RegExp(regexEscape(collectionUrl + '/') + IdRegExp ) ).respond(function(method, url, data, headers) {
             $log.log('Intercepted GET to video');
+
+            assertLoggedIn(headers);
+
             var id = url.match( new RegExp(IdRegExp) )[0];
             return [200, VideoRepo.index[id] || null, {/*headers*/}];
         });
