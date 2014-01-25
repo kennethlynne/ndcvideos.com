@@ -16,17 +16,11 @@ angular.module('ndc')
             };
         });
     })
-    .factory('authentication', function ($http, BaseUrl) {
-
-        var _default = {
-            token: undefined
-        };
-
-        var _model = angular.copy(_default);
+    .factory('authentication', function ($http, BaseUrl, $localStorage) {
 
         return {
             isLoggedIn: function () {
-                return typeof _model.token == 'string';
+                return typeof $localStorage.token == 'string';
             },
             login: function (grantType, username, password) {
 
@@ -40,15 +34,18 @@ angular.module('ndc')
                 $http(cfg).then(function (response) {
                     if (response && response.data) {
                         var data = response.data;
-                        _model.token = data.access_token;
+                        $localStorage.token = data.access_token;
                     }
                 });
             },
             getToken: function () {
-                return _model.token;
+                return $localStorage.token;
             },
             logout: function () {
-                _model = angular.copy(_default);
+                delete $localStorage.token;
             }
         }
+    })
+    .run(function (authentication, $state) {
+        //$state.go('^.login');
     });

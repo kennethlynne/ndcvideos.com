@@ -2,11 +2,17 @@
 
 describe('Service: authentication', function () {
 
-    var authentication, $httpBackend, BaseUrl, $http, loginSuccessfullResponse, logIn;
+    var authentication, $httpBackend, BaseUrl, $http, loginSuccessfullResponse, logIn, $localStorage;
 
     beforeEach(function () {
 
-        module('ndc');
+        $localStorage = {
+
+        };
+
+        module('ndc', function ($provide) {
+            $provide.value('$localStorage', $localStorage);
+        });
 
         logIn = function logIn() {
             $httpBackend.expectPOST( BaseUrl + 'token', 'grant_type=password&username=Ali&password=password123',
@@ -84,6 +90,16 @@ describe('Service: authentication', function () {
         $httpBackend.expectGET( BaseUrl + 'test', {"Accept":"application/json, text/plain, */*"} ).respond();
         $http.get(BaseUrl + 'test', {"Accept":"application/json, text/plain, */*"});
         $httpBackend.flush();
+    });
+
+    it('should save token to local storage', function() {
+        logIn();
+        expect($localStorage.token).toBe('take-on-me');
+    });
+    
+    it('should use the token from local storage if defined', function() {
+        $localStorage.token = 'awesome';
+        expect(authentication.getToken()).toBe('awesome');
     });
 
 });
