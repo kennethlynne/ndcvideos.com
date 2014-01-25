@@ -2,12 +2,12 @@
 
 describe('Controller(/login): LoginCtrl', function () {
 
-    var LoginCtrl, scope, authentication;
+    var LoginCtrl, scope, authentication, $q, promise;
 
     beforeEach(function () {
 
         authentication = {
-            login: jasmine.createSpy('authentication.login'),
+            login: jasmine.createSpy('authentication.login').andReturn(promise),
             isLoggedIn: jasmine.createSpy('authentication.isLoggedIn')
         };
 
@@ -15,12 +15,16 @@ describe('Controller(/login): LoginCtrl', function () {
             $provide.value('authentication', authentication);
         });
 
-        inject(function ($controller, $rootScope) {
+        inject(function ($controller, $rootScope, _$q_) {
             scope = $rootScope.$new();
+            $q = _$q_;
             LoginCtrl = $controller('LoginCtrl', {
                 $scope: scope,
                 init: 'DATA'
             });
+
+            promise = $q.all([]);
+
         });
     });
 

@@ -25,6 +25,11 @@ angular.module('ndc')
         $scope.data = init;
 
         $scope.login = function (username, password) {
-            authentication.login('password', username, password);
+            $scope.working = true;
+
+            authentication.login('password', username, password)
+                .finally(function () {
+                    $scope.working = false;
+                })
         };
     });
