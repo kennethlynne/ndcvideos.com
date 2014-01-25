@@ -7,7 +7,8 @@ describe('Controller(/login): LoginCtrl', function () {
     beforeEach(function () {
 
         authentication = {
-            login: jasmine.createSpy('authentication.login')
+            login: jasmine.createSpy('authentication.login'),
+            isLoggedIn: jasmine.createSpy('authentication.isLoggedIn')
         };
 
         module('ndc', function ($provide) {
