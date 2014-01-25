@@ -2,17 +2,14 @@
 
     <div class="row">
         <ul class="thumbnails list-unstyled">
-            <li class="col-md-3">
+            <li class="col-md-3" ng-repeat="video in videos">
                 <div class="thumbnail">
                     <div>
                         <img src="http://placehold.it/200x150">
                     </div>
                     <div class="caption">
-                        <h2>Project A</h2>
-
-                        <p>My project description</p>
-
-                        <p><i class="icon icon-map-marker"></i> Place, Country</p>
+                        <h2>{{video.title}}</h2>
+                        <p>{{video.desc}}</p>
                     </div>
                     <div class="modal-footer">
                         <div class="progress">

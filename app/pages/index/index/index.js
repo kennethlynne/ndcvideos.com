@@ -9,13 +9,9 @@ angular.module('ndc')
         var _prepare = function () {
             $log.log("IndexCtrl loading");
 
-            return $q.all(['Data from service 1', 'Data from service 2']).then(function (data) {
+            return $q.all([]).then(function (data) {
                 $log.log("IndexCtrl loaded!");
-
-                return {
-                    message1: data[0],
-                    message2: data[1]
-                }
+                return {}
             });
         };
 
@@ -25,5 +21,8 @@ angular.module('ndc')
 
     })
     .controller('IndexCtrl', function ($scope, init) {
-        $scope.data = init;
+        $scope.videos = [
+            {id: '1', title: 'Title', description: 'desc', duration: 1234, vimeoId: 123},
+            {id: '2', title: 'Titl2e', description: 'desc', duration: 12324, vimeoId: 1223}
+        ];
     });
