@@ -1,7 +1,18 @@
 'use strict';
 
 angular.module('ndc')
-    .factory('authentication', function ($http, BaseUrl, $httpBackend) {
+    .config(function ($httpProvider) {
+        $httpProvider.interceptors.push(function ($q, $injector) {
+            return {
+                request: function (cfg) {
+                    var token = $injector.get('authentication').getToken();
+                    if(token) cfg.headers['Authorization'] = token;
+                    return cfg || $q.when(cfg);
+                }
+            };
+        });
+    })
+    .factory('authentication', function ($http, BaseUrl) {
 
         var _default = {
             token: undefined
@@ -11,14 +22,14 @@ angular.module('ndc')
 
         return {
             isLoggedIn: function () {
-                return false;
+                return typeof _model.token == 'string';
             },
             login: function (grantType, username, password) {
 
                 var cfg = {
                     method: 'POST',
                     url: BaseUrl + 'token',
-                    data: 'grant_type=password&username=' + username + '&password=' + password,
+                    data: 'grant_type=' + grantType + '&username=' + username + '&password=' + password,
                     headers: {'Content-Type':'application/x-www-form-urlencoded'}
                 };
 
