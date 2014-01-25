@@ -6,9 +6,7 @@ describe('Service: authentication', function () {
 
     beforeEach(function () {
 
-        $localStorage = {
-
-        };
+        $localStorage = {};
 
         module('ndc', function ($provide) {
             $provide.value('$localStorage', $localStorage);
