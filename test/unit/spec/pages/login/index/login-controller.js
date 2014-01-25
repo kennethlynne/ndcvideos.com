@@ -14,7 +14,7 @@ describe('Controller(/login): LoginCtrl', function () {
             $provide.value('authentication', authentication);
         });
 
-        inject(function ($controller, $rootScope, _authentication_) {
+        inject(function ($controller, $rootScope) {
             scope = $rootScope.$new();
             LoginCtrl = $controller('LoginCtrl', {
                 $scope: scope,
