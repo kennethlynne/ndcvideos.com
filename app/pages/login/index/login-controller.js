@@ -36,6 +36,9 @@ angular.module('ndc')
                 .then(function (isLoggedIn) {
                     if(isLoggedIn) $state.go('Index');
                 })
+                .catch(function (reason) {
+                    alert(reason);
+                })
                 .finally(function () {
                     $scope.working = false;
                 })
