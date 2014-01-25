@@ -1,3 +1,22 @@
-.index-page
-{
+.index-page {
+
+  .thumbnail {
+    padding: 0;
+  }
+
+  .thumbnail > div {
+    padding: 4px;
+  }
+
+  .thumbnail > div > img {
+    width: 100%;
+  }
+
+  .modal-footer {
+    text-align: left;
+  }
+
+  .progress-bar {
+    width: 60%;
+  }
 }
