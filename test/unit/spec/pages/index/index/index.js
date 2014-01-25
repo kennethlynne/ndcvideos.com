@@ -17,7 +17,7 @@ describe('Controller: IndexCtrl', function () {
         });
     });
 
-    it('should attach init data to scope', function () {
+    xit('should attach init data to scope', function () {
         expect(scope.data).toEqual('DATA');
     });
 });
