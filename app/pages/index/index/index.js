@@ -20,11 +20,7 @@ angular.module('ndc')
         }
 
     })
-    .controller('IndexCtrl', function ($scope, VideoContext, authentication, $state) {
-
-        if (!authentication.isAuthenticated()) {
-            $state.go('login');
-        }
+    .controller('IndexCtrl', function ($scope, VideoContext) {
 
         VideoContext.getAll().then(function (response) {
             $scope.videos = response;

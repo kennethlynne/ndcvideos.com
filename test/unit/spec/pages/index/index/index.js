@@ -2,11 +2,7 @@
 
 describe('Controller: IndexCtrl', function () {
 
-    var IndexCtrl, scope, $state;
-
-    $state = {
-        go: jasmine.createSpy('$state.go')
-    };
+    var IndexCtrl, scope;
 
     beforeEach(function () {
 
@@ -16,8 +12,7 @@ describe('Controller: IndexCtrl', function () {
             scope = $rootScope.$new();
             IndexCtrl = $controller('IndexCtrl', {
                 $scope: scope,
-                init: 'DATA',
-                $state: $state
+                init: 'DATA'
             });
         });
     });
@@ -26,9 +21,6 @@ describe('Controller: IndexCtrl', function () {
         expect(scope.data).toEqual('DATA');
     });
 
-    it('should redirect to login if the user is not authorized', function() {
-        expect($state.go).toHaveBeenCalled();
-    });
 });
 
 describe('Service: IndexCtrlInit', function () {

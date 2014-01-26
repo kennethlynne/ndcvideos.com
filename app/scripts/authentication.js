@@ -68,6 +68,16 @@ angular.module('ndc')
             logout: _logout
         }
     })
-    .run(function (authentication, $state) {
-        authentication.isAuthenticated() || $state.go('login')
+    .run(function($rootScope, $urlRouter, authentication, $state) {
+        $rootScope.$on('$locationChangeSuccess', function(e) {
+            e.preventDefault();
+
+            if (authentication.isAuthenticated()) {
+                $urlRouter.sync();
+            }
+            else
+            {
+                $state.go('login');
+            }
+        });
     });

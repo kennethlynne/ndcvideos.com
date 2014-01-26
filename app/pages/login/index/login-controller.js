@@ -24,7 +24,7 @@ angular.module('ndc')
     .controller('LoginCtrl', function ($scope, init, authentication, $state) {
 
         if (authentication.isAuthenticated()) {
-            $state.go('Index');
+            $state.go('index');
         }
 
         $scope.data = init;
