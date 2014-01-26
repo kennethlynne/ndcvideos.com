@@ -8,7 +8,7 @@ describe('Controller(/login): LoginCtrl', function () {
 
         authentication = {
             login: jasmine.createSpy('authentication.login').andReturn(promise),
-            isLoggedIn: jasmine.createSpy('authentication.isLoggedIn').andReturn(isLoggedIn)
+            isAuthenticated: jasmine.createSpy('authentication.isLoggedIn').andReturn(isLoggedIn)
         };
 
         $state = {

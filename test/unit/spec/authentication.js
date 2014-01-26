@@ -51,7 +51,7 @@ describe('Service: authentication', function () {
     });
 
     it('should return the current login state', function() {
-        expect(authentication.isLoggedIn()).toBeFalsy();
+        expect(authentication.isAuthenticated()).toBeFalsy();
     });
 
     it('should return undefined token when not logged in', function() {
@@ -79,7 +79,7 @@ describe('Service: authentication', function () {
 
     it('should indicate that the user is logged in', function() {
         logIn();
-        expect(authentication.isLoggedIn()).toBeTruthy();
+        expect(authentication.isAuthenticated()).toBeTruthy();
     });
 
     it('should reset information on logout', function() {
@@ -87,7 +87,7 @@ describe('Service: authentication', function () {
         authentication.logout();
 
         expect(authentication.getToken()).toBeUndefined();
-        expect(authentication.isLoggedIn()).toBeFalsy();
+        expect(authentication.isAuthenticated()).toBeFalsy();
 
         $httpBackend.expectGET( BaseUrl + 'test', {"Accept":"application/json, text/plain, */*"} ).respond();
         $http.get(BaseUrl + 'test', {"Accept":"application/json, text/plain, */*"});

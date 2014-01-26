@@ -22,7 +22,7 @@ angular.module('ndc')
     })
     .controller('IndexCtrl', function ($scope, VideoContext, authentication, $state) {
 
-        if (!authentication.isLoggedIn()) {
+        if (!authentication.isAuthenticated()) {
             $state.go('login');
         }
 

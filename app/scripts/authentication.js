@@ -57,17 +57,17 @@ angular.module('ndc')
                 return deferred.promise;
 
             },
-            _isLoggedIn = function () {
+            _isAuthenticated = function () {
                 return typeof $localStorage.token == 'string';
             };
 
         return {
-            isLoggedIn: _isLoggedIn,
+            isAuthenticated: _isAuthenticated,
             login: _login,
             getToken: _getToken,
             logout: _logout
         }
     })
     .run(function (authentication, $location) {
-        authentication.isLoggedIn() || $location.path('/login')
+        authentication.isAuthenticated() || $location.path('/login')
     });
