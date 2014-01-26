@@ -15,7 +15,7 @@
                     <a ui-sref="Index">Home</a>
                 </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right" ng-show="isAuthenticated()">
                 <li>
                    <button class="btn btn-primary" ng-click="signout()">Sign out</button>
                 </li>
