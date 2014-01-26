@@ -5,7 +5,11 @@ angular.module('ndc.components')
         $scope.signout = function () {
             authentication.logout();
             $location.path('/login');
-        }
+        };
+
+        $scope.isAuthenticated = function () {
+            return authentication.isAuthenticated();
+        };
     })
     .component('navbar', function () {
         return {
