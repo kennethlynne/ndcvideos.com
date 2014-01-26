@@ -68,6 +68,6 @@ angular.module('ndc')
             logout: _logout
         }
     })
-    .run(function (authentication, $location) {
-        authentication.isAuthenticated() || $location.path('/login')
+    .run(function (authentication, $state) {
+        authentication.isAuthenticated() || $state.go('login')
     });
