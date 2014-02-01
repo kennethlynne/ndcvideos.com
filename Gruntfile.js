@@ -1,4 +1,4 @@
-// Generated on 2014-01-24 using generator-angular-xl 0.2.10
+// Generated on 2014-02-01 using generator-angular-xl 0.2.12
 'use strict';
 var path = require('path');
 
@@ -26,8 +26,8 @@ module.exports = function (grunt) {
         return yeomanConfig.app + '/' + path;
     });
 
-    var prototypeAppJs = appJs.slice(0);
-    prototypeAppJs.splice(1, 0, (yeomanConfig.app + '/dev/**/*.js') );
+    var prototypeAppJs = appJs.slice(0); //copy appJs
+    prototypeAppJs.splice(1, 0, (yeomanConfig.app + '/dev/**/*.js') ); //insert dev stuff (mocks etc) after module.js
 
     var cssFiles = includes.css.map(function (path) {
         return '.tmp/' + path;

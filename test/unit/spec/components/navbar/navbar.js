@@ -27,20 +27,11 @@ describe('Component: navbarComponent', function () {
 
     describe('Controller: navbarComponentCtrl', function () {
 
-        var Ctrl, scope, element, authentication, isLoggedIn = false;
+        var Ctrl, scope, element;
 
         beforeEach(function () {
 
-            authentication = {
-                logout: jasmine.createSpy('authentication.logout'),
-                isAuthenticated: jasmine.createSpy('authentication.isAuthenticated').andCallFake(function () {
-                    return isLoggedIn;
-                })
-            };
-
-            module('ndc', function ($provide) {
-                $provide.value('authentication', authentication)
-            });
+            module('ndc');
 
             inject(function ($controller, $rootScope) {
                 scope = $rootScope.$new();
@@ -52,17 +43,8 @@ describe('Component: navbarComponent', function () {
             });
         });
 
-        it('should sign a user out a message', function () {
-            scope.signout();
-            expect(authentication.logout).toHaveBeenCalled();
-        });
+        it('should expose the users auth state');
 
-        it('should output the authentication state', function() {
-            isLoggedIn = false;
-            expect(scope.isAuthenticated()).toBeFalsy();
-            isLoggedIn = true;
-            expect(scope.isAuthenticated()).toBeTruthy();
-        });
     });
 
 });

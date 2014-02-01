@@ -13,38 +13,12 @@ describe('Controller: ErrorCtrl', function () {
         inject(function ($controller, $rootScope) {
             scope = $rootScope.$new();
             ErrorCtrl = $controller('ErrorCtrl', {
-                $scope: scope,
-                init: 'DATA'
+                $scope: scope
             });
         });
-    });
-
-    it('should attach init data to scope', function () {
-        expect(scope.data).toEqual('DATA');
     });
 
     it('should attach error code', function() {
         expect(scope.errorCode).toEqual(1337);
     });
-});
-
-describe('Service: ErrorCtrlInit', function () {
-
-    var ErrorCtrlInit;
-
-    beforeEach(function () {
-
-        module('ndc');
-
-        inject(function (_ErrorCtrlInit_) {
-            ErrorCtrlInit = _ErrorCtrlInit_;
-        });
-
-    });
-
-
-    it('should have a prepare function', function () {
-        expect(typeof ErrorCtrlInit.prepare).toEqual('function');
-    });
-
 });

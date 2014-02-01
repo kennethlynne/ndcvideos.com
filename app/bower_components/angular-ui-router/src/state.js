@@ -1,3 +1,25 @@
+/**
+ * @ngdoc object
+ * @name ui.router.state.$stateProvider
+ *
+ * @requires ui.router.router.$urlRouterProvider
+ * @requires ui.router.util.$urlMatcherFactoryProvider
+ * @requires $locationProvider
+ *
+ * @description
+ * The new `$stateProvider` works similar to Angular's v1 router, but it focuses purely
+ * on state.
+ *
+ * A state corresponds to a "place" in the application in terms of the overall UI and
+ * navigation. A state describes (via the controller / template / view properties) what
+ * the UI looks like and does at that place.
+ *
+ * States often have things in common, and the primary way of factoring out these
+ * commonalities in this model is via the state hierarchy, i.e. parent/child states aka
+ * nested states.
+ *
+ * The `$stateProvider` provides interfaces to declare these states for your app.
+ */
 $StateProvider.$inject = ['$urlRouterProvider', '$urlMatcherFactoryProvider', '$locationProvider'];
 function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $locationProvider) {
 
@@ -207,9 +229,96 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
   root.navigable = null;
 
 
-  // .decorator()
-  // .decorator(name)
-  // .decorator(name, function)
+  /**
+   * @ngdoc function
+   * @name ui.router.state.$stateProvider#decorator
+   * @methodOf ui.router.state.$stateProvider
+   *
+   * @description
+   * Allows you to extend (carefully) or override (at your own peril) the 
+   * `stateBuilder` object used internally by `$stateProvider`. This can be used 
+   * to add custom functionality to ui-router, for example inferring templateUrl 
+   * based on the state name.
+   *
+   * When passing only a name, it returns the current (original or decorated) builder
+   * function that matches `name`.
+   *
+   * The builder functions that can be decorated are listed below. Though not all
+   * necessarily have a good use case for decoration, that is up to you to decide.
+   *
+   * In addition, users can attach custom decorators, which will generate new 
+   * properties within the state's internal definition. There is currently no clear 
+   * use-case for this beyond accessing internal states (i.e. $state.$current), 
+   * however, expect this to become increasingly relevant as we introduce additional 
+   * meta-programming features.
+   *
+   * **Warning**: Decorators should not be interdependent because the order of 
+   * execution of the builder functions in nondeterministic. Builder functions 
+   * should only be dependent on the state definition object and super function.
+   *
+   *
+   * Existing builder functions and current return values:
+   *
+   * - parent - `{object}` - returns the parent state object.
+   * - data - `{object}` - returns state data, including any inherited data that is not
+   *   overridden by own values (if any).
+   * - url - `{object}` - returns a UrlMatcher or null.
+   * - navigable - returns closest ancestor state that has a URL (aka is 
+   *   navigable).
+   * - params - `{object}` - returns an array of state params that are ensured to 
+   *   be a super-set of parent's params.
+   * - views - `{object}` - returns a views object where each key is an absolute view 
+   *   name (i.e. "viewName@stateName") and each value is the config object 
+   *   (template, controller) for the view. Even when you don't use the views object 
+   *   explicitly on a state config, one is still created for you internally.
+   *   So by decorating this builder function you have access to decorating template 
+   *   and controller properties.
+   * - ownParams - `{object}` - returns an array of params that belong to the state, 
+   *   not including any params defined by ancestor states.
+   * - path - `{string}` - returns the full path from the root down to this state. 
+   *   Needed for state activation.
+   * - includes - `{object}` - returns an object that includes every state that 
+   *   would pass a '$state.includes()' test.
+   *
+   * @example
+   * <pre>
+   * // Override the internal 'views' builder with a function that takes the state
+   * // definition, and a reference to the internal function being overridden:
+   * $stateProvider.decorator('views', function ($state, parent) {
+   *   var result = {},
+   *       views = parent(state);
+   *
+   *   angular.forEach(view, function (config, name) {
+   *     var autoName = (state.name + '.' + name).replace('.', '/');
+   *     config.templateUrl = config.templateUrl || '/partials/' + autoName + '.html';
+   *     result[name] = config;
+   *   });
+   *   return result;
+   * });
+   *
+   * $stateProvider.state('home', {
+   *   views: {
+   *     'contact.list': { controller: 'ListController' },
+   *     'contact.item': { controller: 'ItemController' }
+   *   }
+   * });
+   *
+   * // ...
+   *
+   * $state.go('home');
+   * // Auto-populates list and item views with /partials/home/contact/list.html,
+   * // and /partials/home/contact/item.html, respectively.
+   * </pre>
+   *
+   * @param {string} name The name of the builder function to decorate. 
+   * @param {object} func A function that is responsible for decorating the original 
+   * builder function. The function receives two parameters:
+   *
+   *   - `{object}` - state - The state config object.
+   *   - `{object}` - super - The original builder function.
+   *
+   * @return {object} $stateProvider - $stateProvider instance
+   */
   this.decorator = decorator;
   function decorator(name, func) {
     /*jshint validthis: true */
@@ -226,8 +335,85 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
     return this;
   }
 
-  // .state(state)
-  // .state(name, state)
+  /**
+   * @ngdoc function
+   * @name ui.router.state.$stateProvider#state
+   * @methodOf ui.router.state.$stateProvider
+   *
+   * @description
+   * Registers a state configuration under a given state name. The stateConfig object
+   * has the following acceptable properties.
+   * 
+   * - [`template`, `templateUrl`, `templateProvider`] - There are three ways to setup
+   *   your templates.
+   *
+   *   - `{string|object}` - template - String HTML content, or function that returns an HTML
+   *   string.
+   *   - `{string}` - templateUrl - String URL path to template file OR function,
+   *   that returns URL path string.
+   *   - `{object}` - templateProvider - Provider function that returns HTML content
+   *   string.
+   *
+   * - [`controller`, `controllerProvider`] - A controller paired to the state. You can
+   *   either use a controller, or a controller provider.
+   *
+   *   - `{string|object}` - controller - Controller function or controller name.
+   *   - `{object}` - controllerProvider - Injectable provider function that returns
+   *   the actual controller or string.
+   *
+   * - `{object}` - resolve - A map of dependencies which should be injected into the
+   *   controller.
+   *
+   * - `{string}` - url - A url with optional parameters. When a state is navigated or
+   *   transitioned to, the `$stateParams` service will be populated with any 
+   *   parameters that were passed.
+   *
+   * - `{object}` - params - An array of parameter names or regular expressions. Only 
+   *   use this within a state if you are not using url. Otherwise you can specify your
+   *   parameters within the url. When a state is navigated or transitioned to, the 
+   *   $stateParams service will be populated with any parameters that were passed.
+   *
+   * - `{object}` - views - Use the views property to set up multiple views. 
+   *   If you don't need multiple views within a single state this property is not 
+   *   needed. Tip: remember that often nested views are more useful and powerful 
+   *   than multiple sibling views.
+   *
+   * - `{boolean}` - abstract - An abstract state will never be directly activated, 
+   *   but can provide inherited properties to its common children states.
+   *
+   * - `{object}` - onEnter - Callback function for when a state is entered. Good way
+   *   to trigger an action or dispatch an event, such as opening a dialog.
+   *
+   * - `{object}` - onExit - Callback function for when a state is exited. Good way to
+   *   trigger an action or dispatch an event, such as opening a dialog.
+   *
+   * - `{object}` - data - Arbitrary data object, useful for custom configuration.
+   *
+   * @example
+   * <pre>
+   * // The state() method takes a unique stateName (String) and a stateConfig (Object)
+   * $stateProvider.state(stateName, stateConfig);
+   *
+   * // stateName can be a single top-level name (must be unique).
+   * $stateProvider.state("home", {});
+   *
+   * // Or it can be a nested state name. This state is a child of the above "home" state.
+   * $stateProvider.state("home.newest", {});
+   *
+   * // Nest states as deeply as needed.
+   * $stateProvider.state("home.newest.abc.xyz.inception", {});
+   *
+   * // state() returns $stateProvider, so you can chain state declarations.
+   * $stateProvider
+   *   .state("home", {})
+   *   .state("about", {})
+   *   .state("contacts", {});
+   * </pre>
+   *
+   * @param {string} name A unique state name, e.g. "home", "about", "contacts". 
+   * To create a parent/child state use a dot, e.g. "about.sales", "home.newest".
+   * @param {object} definition State configuratino object.
+   */
   this.state = state;
   function state(name, definition) {
     /*jshint validthis: true */
@@ -237,6 +423,29 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
     return this;
   }
 
+  /**
+   * @ngdoc object
+   * @name ui.router.state.$state
+   *
+   * @requires $rootScope
+   * @requires $q
+   * @requires ui.router.state.$view
+   * @requires $injector
+   * @requires ui.router.util.$resolve
+   * @requires ui.router.state.$stateParams
+   *
+   * @property {object} params A param object, e.g. {sectionId: section.id)}, that 
+   * you'd like to test against the current active state.
+   * @property {object} current A reference to the state's config object. However 
+   * you passed it in. Useful for accessing custom data.
+   * @property {object} transition Currently pending transition. A promise that'll 
+   * resolve or reject.
+   *
+   * @description
+   * `$state` service is responsible for representing states as well as transitioning
+   * between them. It also provides interfaces to ask for current state or even states
+   * you're coming from.
+   */
   // $urlRouter is injected just to ensure it gets instantiated
   this.$get = $get;
   $get.$inject = ['$rootScope', '$q', '$view', '$injector', '$resolve', '$stateParams', '$location', '$urlRouter'];
@@ -263,14 +472,92 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
       transition: null
     };
 
+    /**
+     * @ngdoc function
+     * @name ui.router.state.$state#reload
+     * @methodOf ui.router.state.$state
+     *
+     * @description
+     * Reloads the current state by re-transitioning to it.
+     *
+     * @example
+     * <pre>
+     * var app angular.module('app', ['ui.router.state']);
+     *
+     * app.controller('ctrl', function ($state) {
+     *   $state.reload();
+     * });
+     * </pre>
+     */
     $state.reload = function reload() {
       $state.transitionTo($state.current, $stateParams, { reload: true, inherit: false, notify: false });
     };
 
+    /**
+     * @ngdoc function
+     * @name ui.router.state.$state#go
+     * @methodOf ui.router.state.$state
+     *
+     * @description
+     * Convenience method for transitioning to a new state. `$state.go` calls 
+     * `$state.transitionTo` internally but automatically sets options to 
+     * `{ location: true, inherit: true, relative: $state.$current, notify: true }`. 
+     * This allows you to easily use an absolute or relative to path and specify 
+     * only the parameters you'd like to update (while letting unspecified parameters 
+     * inherit from the current state.
+     *
+     * Some examples:
+     *
+     * - `$state.go('contact.detail')` - will go to the `contact.detail` state
+     * - `$state.go('^')` - will go to a parent state
+     * - `$state.go('^.sibling')` - will go to a sibling state
+     * - `$state.go('.child.grandchild')` - will go to grandchild state
+     *
+     * @example
+     * <pre>
+     * var app = angular.module('app', ['ui.router.state']);
+     *
+     * app.controller('ctrl', function ($scope, $state) {
+     *   $scope.changeState = function () {
+     *     $state.go('contact.detail');
+     *   };
+     * });
+     * </pre>
+     *
+     * @param {string} to Absolute State Name or Relative State Path.
+     * @param {object} params A map of the parameters that will be sent to the state, 
+     * will populate $stateParams.
+     * @param {object} options If Object is passed, object is an options hash.
+     */
     $state.go = function go(to, params, options) {
       return this.transitionTo(to, params, extend({ inherit: true, relative: $state.$current }, options));
     };
 
+    /**
+     * @ngdoc function
+     * @name ui.router.state.$state#transitionTo
+     * @methodOf ui.router.state.$state
+     *
+     * @description
+     * Low-level method for transitioning to a new state. {@link ui.router.state.$state#methods_go $state.go}
+     * uses `transitionTo` internally. `$state.go` is recommended in most situations.
+     *
+     * @example
+     * <pre>
+     * var app = angular.module('app', ['ui.router.state']);
+     *
+     * app.controller('ctrl', function ($scope, $state) {
+     *   $scope.changeState = function () {
+     *     $state.transitionTo('contact.detail');
+     *   };
+     * });
+     * </pre>
+     *
+     * @param {string} to Absolute State Name or Relative State Path.
+     * @param {object} params A map of the parameters that will be sent to the state, 
+     * will populate $stateParams.
+     * @param {object} options If Object is passed, object is an options hash.
+     */
     $state.transitionTo = function transitionTo(to, toParams, options) {
       toParams = toParams || {};
       options = extend({
@@ -434,6 +721,30 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
       return transition;
     };
 
+    /**
+     * @ngdoc function
+     * @name ui.router.state.$state#is
+     * @methodOf ui.router.state.$state
+     *
+     * @description
+     * Similar to {@link ui.router.state.$state#methods_includes $state.includes},
+     * but only checks for the full state name. If params is supplied then it will be 
+     * tested for strict equality against the current active params object, so all params 
+     * must match with none missing and no extras.
+     *
+     * @example
+     * <pre>
+     * $state.is('contact.details.item'); // returns true
+     * $state.is(contactDetailItemStateObject); // returns true
+     *
+     * // everything else would return false
+     * </pre>
+     *
+     * @param {string|object} stateName The state name or state object you'd like to check.
+     * @param {object} params A param object, e.g. `{sectionId: section.id}`, that you'd like 
+     * to test against the current active state.
+     * @returns {boolean} Returns true or false whether its the state or not.
+     */
     $state.is = function is(stateOrName, params) {
       var state = findState(stateOrName);
 
@@ -445,9 +756,33 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
         return false;
       }
 
-      return isDefined(params) ? angular.equals($stateParams, params) : true;
+      return isDefined(params) && params !== null ? angular.equals($stateParams, params) : true;
     };
 
+    /**
+     * @ngdoc function
+     * @name ui.router.state.$state#includes
+     * @methodOf ui.router.state.$state
+     *
+     * @description
+     * A method to determine if the current active state is equal to or is the child of the 
+     * state stateName. If any params are passed then they will be tested for a match as well.
+     * Not all the parameters need to be passed, just the ones you'd like to test for equality.
+     *
+     * @example
+     * <pre>
+     * $state.includes("contacts"); // returns true
+     * $state.includes("contacts.details"); // returns true
+     * $state.includes("contacts.details.item"); // returns true
+     * $state.includes("contacts.list"); // returns false
+     * $state.includes("about"); // returns false
+     * </pre>
+     *
+     * @param {string} stateOrName A partial name to be searched for within the current state name.
+     * @param {object} params A param object, e.g. `{sectionId: section.id}`, 
+     * that you'd like to test against the current active state.
+     * @returns {boolean} True or false
+     */
     $state.includes = function includes(stateOrName, params) {
       var state = findState(stateOrName);
       if (!isDefined(state)) {
@@ -467,6 +802,23 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
       return validParams;
     };
 
+    /**
+     * @ngdoc function
+     * @name ui.router.state.$state#href
+     * @methodOf ui.router.state.$state
+     *
+     * @description
+     * A url generation method that returns the compiled url for the given state populated with the given params.
+     *
+     * @example
+     * <pre>
+     * expect($state.href("about.person", { person: "bob" })).toEqual("/about/bob");
+     * </pre>
+     *
+     * @param {string|object} stateOrName The state name or state object you'd like to generate a url from.
+     * @param {object} params An object of parameter values to fill the state's required parameters.
+     * @returns {string} url
+     */
     $state.href = function href(stateOrName, params, options) {
       options = extend({ lossy: true, inherit: false, absolute: false, relative: $state.$current }, options || {});
       var state = findState(stateOrName, options.relative);
@@ -488,6 +840,20 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
       return url;
     };
 
+    /**
+     * @ngdoc function
+     * @name ui.router.state.$state#get
+     * @methodOf ui.router.state.$state
+     *
+     * @description
+     * Returns the state configuration object for any state by passing the name
+     * as a string. Without any arguments it'll return a array of all configured
+     * state objects.
+     *
+     * @param {string|object} stateOrName The name of the state for which you'd like 
+     * to get the original state configuration object for.
+     * @returns {object} State configuration object or array of all objects.
+     */
     $state.get = function (stateOrName, context) {
       if (!isDefined(stateOrName)) {
         var list = [];

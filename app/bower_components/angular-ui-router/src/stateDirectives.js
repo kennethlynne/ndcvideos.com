@@ -12,6 +12,42 @@ function stateContext(el) {
   }
 }
 
+/**
+ * @ngdoc directive
+ * @name ui.router.state.directive:ui-sref
+ *
+ * @requires ui.router.state.$state
+ * @requires $timeout
+ *
+ * @restrict A
+ *
+ * @description
+ * A directive that binds a link (`<a>` tag) to a state. If the state has an associated 
+ * URL, the directive will automatically generate & update the `href` attribute via 
+ * the {@link ui.router.state.$state#methods_href $state.href()} method. Clicking 
+ * the link will trigger a state transition with optional parameters. 
+ *
+ * Also middle-clicking, right-clicking, and ctrl-clicking on the link will be 
+ * handled natively by the browser.
+ *
+ * You can also use relative state paths within ui-sref, just like the relative 
+ * paths passed to `$state.go()`. You just need to be aware that the path is relative
+ * to the state that the link lives in, in other words the state that loaded the 
+ * template containing the link.
+ *
+ * @example
+ * <pre>
+ * <a ui-sref="home">Home</a> | <a ui-sref="about">About</a>
+ *
+ * <ul>
+ *   <li ng-repeat="contact in contacts">
+ *     <a ui-sref="contacts.detail({ id: contact.id })">{{ contact.name }}</a>
+ *   </li>
+ * </ul>
+ * </pre>
+ *
+ * @param {string} ui-sref 'stateName' can be any valid absolute or relative state
+ */
 $StateRefDirective.$inject = ['$state', '$timeout'];
 function $StateRefDirective($state, $timeout) {
   return {
@@ -29,14 +65,14 @@ function $StateRefDirective($state, $timeout) {
 
         var newHref = $state.href(ref.state, params, { relative: base });
 
+        if (uiSrefActive) {
+          uiSrefActive.$$setStateInfo(ref.state, params);
+        }
         if (!newHref) {
           nav = false;
           return false;
         }
         element[0][attr] = newHref;
-        if (uiSrefActive) {
-          uiSrefActive.$$setStateInfo(ref.state, params);
-        }
       };
 
       if (ref.paramExpr) {
@@ -51,13 +87,10 @@ function $StateRefDirective($state, $timeout) {
 
       element.bind("click", function(e) {
         var button = e.which || e.button;
-
-        if ((button === 0 || button == 1) && !e.ctrlKey && !e.metaKey && !e.shiftKey) {
+        if ( !(button > 1 || e.ctrlKey || e.metaKey || e.shiftKey || element.attr('target')) ) {
           // HACK: This is to allow ng-clicks to be processed before the transition is initiated:
           $timeout(function() {
-            scope.$apply(function() {
-              $state.go(ref.state, params, { relative: base });
-            });
+            $state.go(ref.state, params, { relative: base });
           });
           e.preventDefault();
         }
@@ -66,11 +99,38 @@ function $StateRefDirective($state, $timeout) {
   };
 }
 
+/**
+ * @ngdoc directive
+ * @name ui.router.state.directive:ui-sref-active
+ *
+ * @requires ui.router.state.$state
+ * @requires ui.router.state.$stateParams
+ * @requires $interpolate
+ *
+ * @restrict A
+ *
+ * @description
+ * A directive working alongside ui-sref to add classes to an element when the 
+ * related ui-sref directive's state is active, and removing them when it is inactive.
+ * The primary use-case is to simplify the special appearance of navigation menus 
+ * relying on `ui-sref`, by having the "active" state's menu button appear different,
+ * distinguishing it from the inactive menu items.
+ *
+ * @example
+ * <pre>
+ * <ul>
+ *   <li ui-sref-active="active" class="item active">
+ *     <a ui-sref="app.user({user: 'bilbobaggins'})" href="/users/bilbobaggins">@bilbobaggins</a>
+ *   </li>
+ *   <!-- ... -->
+ * </ul>
+ * </pre>
+ */
 $StateActiveDirective.$inject = ['$state', '$stateParams', '$interpolate'];
 function $StateActiveDirective($state, $stateParams, $interpolate) {
   return {
     restrict: "A",
-    controller: function($scope, $element, $attrs) {
+    controller: ['$scope', '$element', '$attrs', function($scope, $element, $attrs) {
       var state, params, activeClass;
 
       // There probably isn't much point in $observing this
@@ -97,7 +157,7 @@ function $StateActiveDirective($state, $stateParams, $interpolate) {
       function matchesParams() {
         return !params || equalForKeys(params, $stateParams);
       }
-    }
+    }]
   };
 }
 
