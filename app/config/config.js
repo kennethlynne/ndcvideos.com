@@ -1,6 +1,7 @@
     angular.module('ndc')
         .constant('Config', {
             viewsDir:               'views/',
+            componentsDir:          'components/',
             useMocks:               true,
             API: {
                 protocol:           'http',
@@ -13,7 +14,8 @@
         .config(function (componentFactoryProvider) { componentFactoryProvider.setViewPath(function (componentSnakeName, componentName) {
             return 'components/' + componentSnakeName + '/' + componentSnakeName + '.html';
         })})
-        .value('cgBusyTemplateName','views/angular-busy/default-spinner.html');
+        .value('cgBusyTemplateName','views/angular-busy/default-spinner.html')
+        .run(function(editableOptions) {editableOptions.theme = 'bs3'});
 
 
 
