@@ -2,28 +2,14 @@
 
 angular.module('ndc')
     .config(function ($stateProvider, stateFactory) {
-        $stateProvider.state('Index', stateFactory('Index', {url:'/'}))
-    })
-    .service('IndexCtrlInit', function ($q, $log) {
-
-        var _prepare = function () {
-            $log.log("IndexCtrl loading");
-
-            return $q.all([]).then(function (data) {
-                $log.log("IndexCtrl loaded!");
-                return {}
-            });
-        };
-
-        return {
-            prepare: _prepare
-        }
-
+        $stateProvider.state('index', stateFactory('Index', {
+            url:'/'
+        }));
     })
     .controller('IndexCtrl', function ($scope, VideoContext) {
 
         VideoContext.getAll().then(function (response) {
             $scope.videos = response;
         });
-        
+
     });
