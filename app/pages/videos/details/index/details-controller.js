@@ -7,14 +7,13 @@ angular.module('ndc')
             templateUrl: 'pages/videos/details/index/views/main-view.html'
         }));
     })
-    .controller('DetailsCtrl', function ($scope, $stateParams, videoContext) {
+    .controller('DetailsCtrl', function ($scope, $stateParams, VideoContext, $state) {
 
-        videoContext.getById($stateParams.videoId)
+        VideoContext.getById($stateParams.videoId)
         .then(function (result)
         {
-            if(!result || !result.length)
+            if(!!result)
                 $state.go('error');
-
             $scope.video = result;
         });
     });

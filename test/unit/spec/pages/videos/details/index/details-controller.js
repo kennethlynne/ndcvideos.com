@@ -3,13 +3,13 @@
 describe('Controller(videos/details): DetailsCtrl', function () {
 
     var DetailsCtrl, scope, video,
-        videoContext, $stateParams, deferred, $q, promise, $rootScope, $state;
+        VideoContext, $stateParams, deferred, $q, promise, $rootScope, $state;
 
 
 
     beforeEach(function () {
 
-        videoContext = {
+        VideoContext = {
             getById: jasmine.createSpy("videoContext.getById(1)").andCallFake(function ()
             {
                 return promise;
@@ -25,7 +25,7 @@ describe('Controller(videos/details): DetailsCtrl', function () {
         };
 
         module('ndc', function ($provide) {
-            $provide.value('videoContext', videoContext);
+            $provide.value('VideoContext', VideoContext);
         });
 
         inject(function ($controller, _$rootScope_, _$q_) {
@@ -49,9 +49,13 @@ describe('Controller(videos/details): DetailsCtrl', function () {
 
         expect(scope.video).toEqual(video);
     });
-    
+
     it('should redirect to error page on parameter not found', function () {
+        video = null;
+
+        deferred.resolve(video);
+        $rootScope.$digest();
+
         expect($state.go).toHaveBeenCalledWith('error');
     });
-
 });
