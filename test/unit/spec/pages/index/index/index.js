@@ -17,5 +17,5 @@ describe('Controller: IndexCtrl', function () {
     });
 
     it('should attach a video to scope');
-    
+
 });
