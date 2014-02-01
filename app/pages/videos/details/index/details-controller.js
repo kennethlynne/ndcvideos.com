@@ -12,6 +12,9 @@ angular.module('ndc')
         videoContext.getById($stateParams.videoId)
         .then(function (result)
         {
+            if(!result || !result.length)
+                $state.go('error');
+
             $scope.video = result;
         });
     });
