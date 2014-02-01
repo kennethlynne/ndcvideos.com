@@ -11,8 +11,8 @@ var app = angular.module('ndc', [
   'cgBusy',
   'chieffancypants.loadingBar',
   'ui.router',
-  'ngSanitize',
   'ngTouch',
+  'xeditable',
   'ui.bootstrap',
   'ngStorage'
 ]);
