@@ -12,7 +12,7 @@ angular.module('ndc')
                     return "-" + match.toLowerCase();
                 })
                 .replace(/^-/, ''); // CamelCase -> -snake-case -> snake-case
-        };
+        }
 
         var _defaults = {
             url: '/' + dasherize(classedName),
@@ -28,9 +28,6 @@ angular.module('ndc')
                         if (typeof service.prepare !== 'function') throw _INITSERVICE + ' has no prepare method.';
 
                         return service.prepare();
-                    }
-                    else {
-                        throw 'Serious error occurred trying to load controller. No such service: ' + _INITSERVICE;
                     }
                 }]
             }
