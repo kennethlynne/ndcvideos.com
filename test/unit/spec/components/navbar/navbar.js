@@ -43,9 +43,8 @@ describe('Component: navbarComponent', function () {
             });
         });
 
-        it('should render a message', function () {
-            expect(scope.text).toEqual('this is the navbar component');
-        });
+        it('should expose the users auth state');
+
     });
 
 });

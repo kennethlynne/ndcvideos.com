@@ -34,7 +34,7 @@ angular.module('ndc')
 
             authentication.login('password', username, password)
                 .then(function (isLoggedIn) {
-                    if(isLoggedIn) $state.go('Index');
+                    if(isLoggedIn) $state.go('index');
                 })
                 .catch(function (reason) {
                     alert(reason);
