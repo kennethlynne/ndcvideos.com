@@ -10,7 +10,7 @@ describe('Controller(videos/details): DetailsCtrl', function () {
     beforeEach(function () {
 
         VideoContext = {
-            getById: jasmine.createSpy("videoContext.getById(1)").andCallFake(function ()
+            getById: jasmine.createSpy("videoContext.getById").andCallFake(function ()
             {
                 return promise;
             })
@@ -18,7 +18,7 @@ describe('Controller(videos/details): DetailsCtrl', function () {
 
         $stateParams = {videoId:1};
 
-        video = {id:1, vimeoUrl:"horseWithBalls"};
+        video = {id:1};
 
         $state = {
             go: jasmine.createSpy('$state.go')
@@ -37,25 +37,22 @@ describe('Controller(videos/details): DetailsCtrl', function () {
 
             DetailsCtrl = $controller('DetailsCtrl', {
                 $scope: scope,
-                $stateParams:$stateParams
+                $stateParams:$stateParams,
+                $state: $state
             });
 
         });
     });
 
     it('should get a video with parameter ID and attach it to scope', function () {
-        deferred.resolve(video);
+        deferred.resolve('video');
         $rootScope.$digest();
-
-        expect(scope.video).toEqual(video);
+        expect(scope.video).toEqual('video');
     });
 
     it('should redirect to error page on parameter not found', function () {
-        video = null;
-
-        deferred.resolve(video);
+        deferred.reject();
         $rootScope.$digest();
-
-        expect($state.go).toHaveBeenCalledWith('error');
+        expect($state.go).toHaveBeenCalledWith('error', {code:404});
     });
 });

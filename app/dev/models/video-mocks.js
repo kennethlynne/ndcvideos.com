@@ -13,10 +13,10 @@ angular.module('ndc')
 
         var VideoRepo = {};
         VideoRepo.data = [
-            {id: guid(), title: 'Title', description: 'desc', duration: 1234, vimeoId: 123},
-            {id: guid(), title: 'Titl2e', description: 'desc', duration: 12324, vimeoId: 12223},
-            {id: guid(), title: 'Title3', description: 'desc', duration: 123224, vimeoId: 1123},
-            {id: guid(), title: 'Titl2e', description: 'desc', duration: 121324, vimeoId: 12123}
+            {id: 1, title: 'Title', description: 'desc', duration: 1234, vimeoId: 123},
+            {id: 2, title: 'Titl2e', description: 'desc', duration: 12324, vimeoId: 12223},
+            {id: 3, title: 'Title3', description: 'desc', duration: 123224, vimeoId: 1123},
+            {id: 4, title: 'Titl2e', description: 'desc', duration: 121324, vimeoId: 12123}
         ];
         VideoRepo.index = {};
 
@@ -69,7 +69,7 @@ angular.module('ndc')
             }
 
             var id = url.match( new RegExp(IdRegExp) )[0];
-            return [200, VideoRepo.index[id] || null, {/*headers*/}];
+            return [VideoRepo.index[id]?200:403, VideoRepo.index[id] || null, {/*headers*/}];
         });
 
     });
