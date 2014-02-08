@@ -11,9 +11,14 @@
                 fakeDelay:          800
             }
         })
-        .config(function (componentFactoryProvider) { componentFactoryProvider.setViewPath(function (componentSnakeName, componentName) {
-            return 'components/' + componentSnakeName + '/' + componentSnakeName + '.html';
-        })})
+        .config(function (componentFactoryProvider, $sceDelegateProvider) { componentFactoryProvider.setViewPath(function (componentSnakeName, componentName) {
+            return 'components/' + componentSnakeName + '/' + componentSnakeName + '.html';})
+
+            $sceDelegateProvider.resourceUrlWhitelist([
+                'self',
+                '**' //TODO: Temporary catch all for all URLS.
+            ]);
+        })
         .value('cgBusyTemplateName','views/angular-busy/default-spinner.html')
         .run(function(editableOptions) {editableOptions.theme = 'bs3'});
 
