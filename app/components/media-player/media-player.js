@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ndc.components')
-   /* .filter('videoOptions', function () {
+    .filter('videoOptions', function () {
 
         //Used to format query parameters for player
         return function (options) {
@@ -18,6 +18,7 @@ angular.module('ndc.components')
             var PlayerConfig = function (init) {
                 this.playerRegExp = init.playerRegExp;
                 this.whitelist = init.whitelist;
+                this.type = init.type;
                 this.config = {
                     width: 560,
                     height: 315,
@@ -26,44 +27,55 @@ angular.module('ndc.components')
                 };
                 this.isPlayerFromURL = function (url) {
                     return (url.match(this.playerRegExp) != null);
+                };
+                this.isPlayerFromType = function(type){
+                	return this.type == type;
                 }
+                this.getEmbedUrl = function(videoId){
+                	return init.protocol + init.playerID + videoId;
+                }
+                
+                
             };
             return new PlayerConfig(init);
         }
-    })*/
-    /*.factory('RegisteredPlayers', function(){
+    })
+    .factory('RegisteredPlayers', function(PlayerConfig){
 
         var configurations = {
             youtube: {
                 options: {
                     autoplay: 0,
                     controls: 1,
-                    loop: 0,
+                    loop: 0
                 },
                 whitelist: ['autoplay', 'controls', 'loop', 'playlist', 'rel'],
                 playerID: 'www.youtube.com/embed/',
                 protocol: 'http://',
+                type:'youtube',
                 playerRegExp: /(http:\/\/|https:\/\/)www\.youtube\.com\/watch\?v=([A-Za-z0-9\-\_]+)/
             },
             youtubeNoCookie: {
                 options: {
                     autoplay: 0,
                     controls: 1,
-                    loop: 0,
+                    loop: 0
                 },
                 whitelist: ['autoplay', 'controls', 'loop', 'playlist', 'rel'],
                 playerID: 'www.youtube-nocookie.com/embed/',
                 protocol: 'http://',
+                type:'youtubenocookie',
                 playerRegExp: /(http:\/\/|https:\/\/)www\.youtube\-nocookie\.com\/watch\?v=([A-Za-z0-9\-\_]+)/
             },
             vimeo: {
                 options: {
                     autoplay: 0,
-                    loop: 0,
+                    loop: 0
                 },
                 whitelist: ['autoplay', 'color', 'loop'],
                 playerID: 'player.vimeo.com/video/',
                 protocol: 'http://',
+                type:'vimeo',
                 playerRegExp: /(http:\/\/)vimeo\.com\/([A-Za-z0-9]+)/
             }
         };
@@ -74,43 +86,57 @@ angular.module('ndc.components')
         return players;
 
 
-    })*/
-    .controller('mediaPlayerComponentCtrl', function ($scope, $element, $sce) {
-
-        console.log($scope.video);
-        $sce.trustAsResourceUrl($scope.video);
     })
-    .component('mediaPlayer', function ($sce) {
+    .controller('mediaPlayerComponentCtrl', function ($scope, RegisteredPlayers, $filter, $sce) {
+
+        var player = null;
+        var url = null;
+
+        //search for the right player in the list of registered players
+        angular.forEach(RegisteredPlayers, function (value) {
+            if (value.isPlayerFromType($scope.video.type)) {
+                player = value;
+                url = value.getEmbedUrl($scope.video.videoId);
+            }
+
+        });
+
+        var config = player.config;
+
+        var kjekse = $filter('videoOptions')(config.options).toString();
+        var tjukk = url + kjekse;
+        
+        $sce.trustAsResourceUrl(tjukk);
+
+        $scope.videoUrl = tjukk;
+
+
+        console.log($scope.width);
+
+
+        //copy configuration from player
+
+        //overwrite playback options
+/*        angular.forEach($filter('whitelist')(attrs, player.whitelist), function (value, key) {
+            $scope.config.options[key] = value;
+        });*/
+
+    })
+    .component('mediaPlayer', function () {
         return {
             controller: 'mediaPlayerComponentCtrl',
-            restrict: 'EA',
+            restrict: 'E',
             replace: true,
-            transclude: true,
+//            transclude: true,
             scope: {
-                video:'@'
+                video:'='
             },
-            link: function ($scope, element, attrs) {
+            link: function (scope, element, attrs) {
                 var ratio = (attrs.height / attrs.width) * 100;
                 element[0].style.paddingTop = ratio + '%';
-                console.log(element);
 
-
-                /*var url = attrs.href;
-                var player = null;
-
-                //search for the right player in the list of registered players
-                angular.forEach(RegisteredPlayers, function (value) {
-                    if (value.isPlayerFromURL(url)) {
-                        player = value;
-                    }
-                });
-
-                var _config = player.config;
-                _config.protocol = url.match(player.playerRegExp)[1];
-                _config.videoID = url.match(player.playerRegExp)[2];
-
-
-                $scope.video = _config.protocol + _config.playerID + _config.videoID;*/
+                scope.width = attrs.width;
+                scope.height = attrs.height;
 
                 //TODO: Pass player options filtered by PlayerOptions filter: _config.options | videoOptions}}
 

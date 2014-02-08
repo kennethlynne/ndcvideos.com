@@ -7,13 +7,25 @@ angular.module('ndc')
             templateUrl: 'pages/videos/details/index/views/main-view.html'
         }));
     })
-    .controller('DetailsCtrl', function ($scope, $stateParams, VideoContext, $state) {
+    .service('DetailsCtrlInit', function ($q, $log, $stateParams, $state, VideoContext) {
 
-        VideoContext.getById($stateParams.videoId)
-        .then(function (result)
-        {
-            if(!!result)
-                $state.go('error');
-            $scope.video = result;
-        });
+        var dependancies = [VideoContext.getById(2)],
+
+                finishedCb = function (response) {
+                $log.log('DetailsCtrl loaded. Data:', response);
+                return response;
+            };
+
+        return {
+            prepare: function () {
+                $log.log('DetailsCtrl loading');
+                return $q.all(dependancies).then(finishedCb);
+            }
+        }
+
+    })
+    .controller('DetailsCtrl', function ($scope, init) {
+
+        $scope.video = init[0];
+
     });
