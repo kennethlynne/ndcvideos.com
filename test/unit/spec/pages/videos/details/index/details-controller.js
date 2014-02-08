@@ -50,13 +50,12 @@ describe('Controller(videos/details): DetailsCtrl', function () {
         expect(scope.video).toEqual(video);
     });
 
-    xit('should redirect to error page on parameter not found', function () {
-        video.id = null;
+    it('should redirect to error page on parameter not found', function () {
+        video = null;
 
         deferred.resolve(video);
         $rootScope.$digest();
 
-        expect($state.go).toHaveBeenCalled();
-        expect($state.go).toHaveBeenCalled();
+        expect($state.go).toHaveBeenCalledWith('error');
     });
 });
