@@ -2,8 +2,8 @@
 
 angular.module('ndc')
     .config(function ($stateProvider, stateFactory) {
-        $stateProvider.state('details', stateFactory('Details', {
-            url:'/videos/{videoId}',
+        $stateProvider.state('videoDetails', stateFactory('Details', {
+            url: '/videos/{videoId}',
             templateUrl: 'pages/videos/details/index/views/main-view.html'
         }));
     })

@@ -11,17 +11,21 @@ angular.module('ndc')
             if(instance)
             {
                 deferred.resolve(instance);
-                return deferred.promise;
             }
             else
             {
-                return $http.get(VideoModel.$urlBase + '/' + id).then(function (response) {
-                    var Video = new VideoModel(response.data);
-                    _pool[id] = Video;
-                    return Video;
-                });
+                $http.get(VideoModel.$urlBase + '/' + id)
+                    .then(function (response) {
+                        var Video = new VideoModel(response.data);
+                        _pool[id] = Video;
+                        deferred.resolve(Video);
+                    })
+                    .catch(function (reason) {
+                        deferred.reject(reason);
+                    });
             }
 
+            return deferred.promise;
         };
 
         var _getAll = function () {
