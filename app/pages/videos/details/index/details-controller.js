@@ -9,7 +9,7 @@ angular.module('ndc')
     })
     .service('DetailsCtrlInit', function ($q, $log, $stateParams, $state, VideoContext) {
 
-        var dependancies = [VideoContext.getById(2)],
+        var dependancies = [VideoContext.getById(1)],
 
                 finishedCb = function (response) {
                 $log.log('DetailsCtrl loaded. Data:', response);

@@ -47,7 +47,7 @@ describe('Controller(videos/details): DetailsCtrl', function () {
     it('should get a video with parameter ID and attach it to scope', function () {
         deferred.resolve('video');
         $rootScope.$digest();
-        expect(scope.video).toEqual('video');
+        expect(scope.video).toEqual(video);
     });
 
     xit('should redirect to error page on parameter not found', function () {

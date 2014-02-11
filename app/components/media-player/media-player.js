@@ -110,10 +110,6 @@ angular.module('ndc.components')
 
         $scope.videoUrl = tjukk;
 
-
-        console.log($scope.width);
-
-
         //copy configuration from player
 
         //overwrite playback options

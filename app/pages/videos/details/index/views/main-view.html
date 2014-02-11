@@ -3,12 +3,18 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="page-header">
-                <h1 id="container">Container - <small>details</small></h1>
+                <h1 id="container">{{video.title}}</h1>
             </div>
             <div class="bs-example">
                 <div class="col-lg-8">
                     <media-player-component video="video"></media-player-component>
+
                 </div>
+                <div class="col-lg-4">
+                    <h2>About</h2>
+                    {{video.description}}
+                </div>
+
             </div>
         </div>
     </div>
