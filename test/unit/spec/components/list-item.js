@@ -31,7 +31,7 @@ describe('Component: listItemComponent', function () {
 
         beforeEach(function () {
 
-            module('ndc');
+            module('ndc.components');
 
             inject(function ($controller, $rootScope) {
                 scope = $rootScope.$new();

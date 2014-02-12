@@ -6,10 +6,8 @@ angular.module('ndc')
             url:'/'
         }));
     })
-    .controller('IndexCtrl', function ($scope, VideoContext) {
-
-        VideoContext.getAll().then(function (response) {
-            $scope.videos = response;
+    .controller('IndexCtrl', function ($scope, VideoRepository) {
+        VideoRepository.getAll().then(function (videos) {
+            $scope.videos = videos;
         });
-
     });

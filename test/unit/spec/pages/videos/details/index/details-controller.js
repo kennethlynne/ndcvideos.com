@@ -1,16 +1,14 @@
 'use strict';
 
-describe('Controller(videos/details): DetailsCtrl', function () {
+describe('Controller(/videos/details): VideoDetailsCtrl', function () {
 
-    var DetailsCtrl, scope, video,
-        VideoContext, $stateParams, deferred, $q, promise, $rootScope, $state;
-
-
+    var VideoDetailsCtrl, scope, video,
+        VideoRepository, $stateParams, deferred, $q, promise, $rootScope, $state;
 
     beforeEach(function () {
 
-        VideoContext = {
-            getById: jasmine.createSpy("videoContext.getById").andCallFake(function ()
+        VideoRepository = {
+            getById: jasmine.createSpy("VideoRepository.getById").andCallFake(function ()
             {
                 return promise;
             })
@@ -24,10 +22,6 @@ describe('Controller(videos/details): DetailsCtrl', function () {
             go: jasmine.createSpy('$state.go')
         };
 
-        module('ndc', function ($provide) {
-            $provide.value('VideoContext', VideoContext);
-        });
-
         inject(function ($controller, _$rootScope_, _$q_) {
             scope = _$rootScope_.$new();
             $q = _$q_;
@@ -35,10 +29,11 @@ describe('Controller(videos/details): DetailsCtrl', function () {
             promise = deferred.promise;
             $rootScope = _$rootScope_;
 
-            DetailsCtrl = $controller('DetailsCtrl', {
+            VideoDetailsCtrl = $controller('VideoDetailsCtrl', {
                 $scope: scope,
                 $stateParams:$stateParams,
-                $state: $state
+                $state: $state,
+                VideoRepository: VideoRepository
             });
 
         });

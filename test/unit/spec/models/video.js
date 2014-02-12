@@ -2,15 +2,15 @@
 
 describe('Model: VideoModel', function () {
 
-    var VideoModel, $httpBackend, $rootScope, APIBaseUrl, VideoContext, collectionUrl = 'video';
+    var VideoModel, $httpBackend, $rootScope, APIBaseUrl, VideoRepository, collectionUrl = 'video';
 
     beforeEach(function () {
 
-        VideoContext = jasmine.createSpy('VideoContext');
-        VideoContext.attach = jasmine.createSpy('VideoContext.attach');
+        VideoRepository = jasmine.createSpy('VideoRepository');
+        VideoRepository.attach = jasmine.createSpy('VideoRepository.attach');
 
         module('ndc', function ($provide) {
-            $provide.value('VideoContext', VideoContext);
+            $provide.value('VideoRepository', VideoRepository);
         });
 
         inject(function (_VideoModel_, _$httpBackend_, _$rootScope_, _APIBaseUrl_) {
@@ -54,13 +54,13 @@ describe('Model: VideoModel', function () {
             expect(typeof promise.then).toBe('function');
         });
 
-        it('should attach itself to the context on save', function() {
+        it('should attach itself to the Repository on save', function() {
             $httpBackend.expectPUT( APIBaseUrl + collectionUrl + '/5', {title:'New title', id:5}).respond(200, {id: 5, title:'New title from server'});
             var model = new VideoModel({title: 'New title', id: 5});
-            expect(VideoContext.attach).not.toHaveBeenCalled();
+            expect(VideoRepository.attach).not.toHaveBeenCalled();
             var promise = model.$save();
             $httpBackend.flush();
-            expect(VideoContext.attach).toHaveBeenCalledWith(model);
+            expect(VideoRepository.attach).toHaveBeenCalledWith(model);
         });
     });
 

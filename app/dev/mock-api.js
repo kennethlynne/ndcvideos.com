@@ -2,12 +2,11 @@
 
 angular.module('ndc')
     .config(function ($httpProvider, Config, $provide) {
-        if(!Config.useMocks) return;
+        if(!Config.API.useMocks) return;
 
         console.log('Stubbing API');
         console.log('************');
 
-        //Decorate httpBackend with awesomesauce
         $provide.decorator('$httpBackend', angular.mock.e2e.$httpBackendDecorator);
 
         var APIUrl = (Config.API.protocol + '://' + Config.API.host + ':' + Config.API.port + Config.API.path + '/');
@@ -36,17 +35,15 @@ angular.module('ndc')
         })
 
     })
-    .run(function (Config, $httpBackend, $log, APIBaseUrl, regexEscape, guid) {
-
-        //Only load mocks if config says so
-        if(!Config.useMocks) return;
+    .run(function (Config, $httpBackend, $log, APIBaseUrl, regexEscape) {
+        if(!Config.API.useMocks) return;
 
         function passThrough(url) {
             $httpBackend.whenGET( new RegExp( regexEscape( url ) ) ).passThrough();
         }
 
-        //When backend receives a request to the views folder, pass it through
         passThrough(Config.viewsDir);
         passThrough(Config.componentsDir);
+        passThrough(Config.pagesDir);
 
      });

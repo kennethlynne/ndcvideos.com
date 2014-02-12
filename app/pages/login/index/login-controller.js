@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ndc')
-    .config(function ($stateProvider, stateFactory) { $stateProvider.state('login', stateFactory('Login', {url:'/login', templateUrl: 'pages/login/index/views/main-view.html'})) })
+    .config(function ($stateProvider, stateFactory) { $stateProvider.state('login', stateFactory('Login', {url:'/login', templateUrl: 'pages/login/index/main-view.html'})) })
     .service('LoginCtrlInit', function ($q, $log) {
 
         var _prepare = function () {

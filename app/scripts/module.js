@@ -5,15 +5,16 @@ angular.componentFactory.moduleDecorator(components);
 
 var app = angular.module('ndc', [
   'kennethlynne.componentFactory',
+  'ngSymbiosis.utils',
+  'ngSymbiosis.routeProvider',
   'ndc.components',
   'ngAnimate',
   'ajoslin.promise-tracker',
   'cgBusy',
   'chieffancypants.loadingBar',
   'ui.router',
-  'ngTouch',
-  'xeditable',
   'ui.bootstrap',
+  'ngTouch',
   'ngStorage'
 ]);
 angular.componentFactory.moduleDecorator(app);

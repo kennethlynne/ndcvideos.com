@@ -1,4 +1,4 @@
-htmnl {
+html {
   overflow-y: scroll;
 }
 
@@ -11,6 +11,7 @@ htmnl {
     > .container
     {
       max-width: none;
+      width: 100%;
       margin-top: 40px;
     }
   }

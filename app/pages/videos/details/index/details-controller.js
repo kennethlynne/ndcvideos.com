@@ -4,12 +4,12 @@ angular.module('ndc')
     .config(function ($stateProvider, stateFactory) {
         $stateProvider.state('videoDetails', stateFactory('Details', {
             url: '/videos/{videoId}',
-            templateUrl: 'pages/videos/details/index/views/main-view.html'
+            templateUrl: 'pages/videos/details/index/main-view.html'
         }));
     })
-    .controller('DetailsCtrl', function ($scope, $stateParams, VideoContext, $state) {
+    .controller('VideoDetailsCtrl', function ($scope, $stateParams, VideoRepository, $state) {
 
-        VideoContext.getById($stateParams.videoId)
+        VideoRepository.getById($stateParams.videoId)
             .then(function (result) {
                 $scope.video = result;
             })

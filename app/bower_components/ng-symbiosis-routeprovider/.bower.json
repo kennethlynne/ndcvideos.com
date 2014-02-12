@@ -1,0 +1,27 @@
+{
+  "version": "0.0.2",
+  "name": "ng-symbiosis-routeprovider",
+  "description": "Route provider",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "angular": "~1.2.7"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.2.7"
+  },
+  "homepage": "https://github.com/ngSymbiosis/ngSymbiosis.routeProvider",
+  "_release": "0.0.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.0.2",
+    "commit": "81a4dd453e15022a264ec3140bb5d8be14157b8c"
+  },
+  "_source": "git://github.com/ngSymbiosis/ngSymbiosis.routeProvider.git",
+  "_target": "~0.0.0",
+  "_originalSource": "ng-symbiosis-routeprovider"
+}

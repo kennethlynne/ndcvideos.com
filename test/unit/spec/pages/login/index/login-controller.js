@@ -45,28 +45,5 @@ describe('Controller(/login): LoginCtrl', function () {
         scope.login('user', 'pw');
         expect(authentication.login).toHaveBeenCalledWith('password', 'user', 'pw');
     });
-});
-
-describe('Service(/login): LoginCtrlInit', function () {
-
-    var LoginCtrlInit;
-
-    beforeEach(function () {
-
-        module('ndc');
-
-        inject(function (_LoginCtrlInit_) {
-            LoginCtrlInit = _LoginCtrlInit_;
-        });
-
-    });
-
-    it('should have a prepare function', function () {
-        expect(typeof LoginCtrlInit.prepare).toEqual('function');
-    });
-
-    it('should return a promise', function () {
-        expect(typeof LoginCtrlInit.prepare().then).toEqual('function');
-    });
 
 });

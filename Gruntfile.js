@@ -1,4 +1,4 @@
-// Generated on 2014-02-01 using generator-angular-xl 0.2.12
+// Generated on 2014-02-12 using generator-angular-xl 0.2.17
 'use strict';
 var path = require('path');
 
@@ -61,7 +61,7 @@ module.exports = function (grunt) {
                     '<%= yeoman.app %>/**/*.html',
                     '.tmp/styles/**/*.css',
                     '{.tmp,<%= yeoman.app %>}/scripts/**/*.js',
-                    '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+                    '<%= yeoman.app %>/assets/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
                 ]
             },
             sailslinker: {
@@ -141,14 +141,14 @@ module.exports = function (grunt) {
             options: {
                 sassDir: '<%= yeoman.app %>/styles',
                 cssDir: '.tmp/styles',
-                generatedImagesDir: '.tmp/images/generated',
-                imagesDir: '<%= yeoman.app %>/images',
+                generatedImagesDir: '.tmp/assets/images/generated',
+                imagesDir: '<%= yeoman.app %>/assets/images',
                 javascriptsDir: '<%= yeoman.app %>/scripts',
-                fontsDir: '<%= yeoman.app %>/fonts',
+                fontsDir: '<%= yeoman.app %>/assets/fonts',
                 importPath: '<%= yeoman.app %>/bower_components',
-                httpImagesPath: '/images',
-                httpGeneratedImagesPath: '/images/generated',
-                httpFontsPath: '/fonts',
+                httpImagesPath: '/assets/images',
+                httpGeneratedImagesPath: '/assets/images/generated',
+                httpFontsPath: '/assets/fonts',
                 relativeAssets: false
             },
             dist: {},
@@ -164,7 +164,7 @@ module.exports = function (grunt) {
                     src: [
                         '<%= yeoman.dist %>/scripts/**/*.js',
                         '<%= yeoman.dist %>/styles/**/*.css',
-                        '<%= yeoman.dist %>/styles/fonts/*'
+                        '<%= yeoman.dist %>/assets/fonts/*'
                     ]
                 }
             }
@@ -173,9 +173,9 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    cwd: '<%= yeoman.app %>/images',
+                    cwd: '<%= yeoman.app %>/assets/images',
                     src: '{,*/}*.{png,jpg,jpeg}',
-                    dest: '<%= yeoman.dist %>/images'
+                    dest: '<%= yeoman.dist %>/assets/images'
                 }]
             }
         },
@@ -228,8 +228,8 @@ module.exports = function (grunt) {
                     ]
                 }, {
                     expand: true,
-                    cwd: '.tmp/images',
-                    dest: '<%= yeoman.dist %>/images',
+                    cwd: '.tmp/assets/images',
+                    dest: '<%= yeoman.dist %>/assets/images',
                     src: [
                         'generated/*'
                     ]
@@ -434,6 +434,21 @@ module.exports = function (grunt) {
                 'test/**/*.js'
             ]
         },
+
+        autoprefixer: {
+            options: {
+                browsers: ['last 1 version']
+            },
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: '.tmp/styles/',
+                    src: '**/*.css',
+                    dest: '.tmp/styles/'
+                }]
+            }
+        },
+
         //The manifest file must be served with the MIME type text/cache-manifest.
         manifest: {
             generate: {
@@ -471,6 +486,7 @@ module.exports = function (grunt) {
         grunt.task.run([
             'clean:server',
             'concurrent:server',
+            'autoprefixer',
             'connect:livereload',
             'linkAssets-dev',
             'watch'
@@ -492,6 +508,7 @@ module.exports = function (grunt) {
             grunt.task.run([
                 'clean',
                 'compass:server',
+                'autoprefixer',
                 'copy:styles',
                 'copy:tmpStyles2dist',
                 'copy:app',
@@ -503,6 +520,7 @@ module.exports = function (grunt) {
             grunt.task.run([
                 'clean',
                 'concurrent:server',
+                'autoprefixer',
                 'copy',
                 'linkAssets-dev'
             ]);
@@ -516,6 +534,7 @@ module.exports = function (grunt) {
                 'test',
                 'clean',
                 'concurrent:dist',
+                'autoprefixer',
                 'ngmin',
                 'uglify',
                 'concat:js',
@@ -531,7 +550,7 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('release', [
+    grunt.registerTask('changelog', [
         'changelog',
         'bump'
     ]);
