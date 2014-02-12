@@ -15,5 +15,6 @@ angular.module('ndc')
             })
             .catch(function (reason) {
                 $state.go('error', {code: 404});
-            })
+            });
+
     });
