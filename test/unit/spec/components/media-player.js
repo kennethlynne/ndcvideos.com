@@ -18,7 +18,7 @@ describe('Component: mediaPlayerComponent', function () {
         });
 
 
-        it('should render a vimeo video', function() {
+        xit('should render a vimeo video', function() {
             scope.video = vimeoVideo;
             element = angular.element('<media-player-component video="video" height="281" width="500"></media-player-component>');
             element = $compile(element)(scope);

@@ -10,10 +10,11 @@ angular.module('ndc')
 
         var VideoRepo = {};
         VideoRepo.data = [
-            {id: 1, title: 'Title', description: 'desc', duration: 1234, vimeoId: 123},
-            {id: 2, title: 'Titl2e', description: 'desc', duration: 12324, vimeoId: 12223},
-            {id: 3, title: 'Title3', description: 'desc', duration: 123224, vimeoId: 1123},
-            {id: 4, title: 'Titl2e', description: 'desc', duration: 121324, vimeoId: 12123}
+            {id: 1, title: 'In The Open: Ellie Goulding - Guns And Horses', description: 'Having listened to Ellie Gouldings debut album, Lights, I was always curious as to how it would translate acoustically since most of the album is more electronic driven. After a long drive from Portland, Oregon Ellie made it to San Francisco with just enough time to meet up.', duration: 1234, videoId: 23919731, type:'vimeo'},
+            {id: 2, title: 'Titl2e', description: 'desc', duration: 12324, videoId: "8NNSXiLNKkM", type:'youtube'},
+            {id: 3, title: 'Title3', description: 'desc', duration: 123224, videoId: 1123, type:'vimeo'},
+            {id: 4, title: 'Titl2e', description: 'desc', duration: 121324, videoId: 12123, type:'vimeo'}
+
         ];
         VideoRepo.index = {};
 

@@ -12,10 +12,16 @@ angular.module('ndc')
             fakeDelay: 800
         }
     })
-    .config(function (componentFactoryProvider) {
+    .config(function (componentFactoryProvider, $sceDelegateProvider) {
         componentFactoryProvider.setViewPath(function (componentSnakeName, componentName) {
             return 'components/' + componentSnakeName + '/' + componentSnakeName + '.html';
         })
+
+        //OMG NONO REMOVE BE$ PROUDUCITON
+        $sceDelegateProvider.resourceUrlWhitelist([
+            'self',
+            '**'
+        ]);
     })
     .value('cgBusyTemplateName', 'views/angular-busy/default-spinner.html')
     .factory('APIBaseUrl', function (Config) {
