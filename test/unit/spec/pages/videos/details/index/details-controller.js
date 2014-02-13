@@ -43,6 +43,7 @@ describe('Controller(/videos/details): VideoDetailsCtrl', function () {
         expect(scope.video).toEqual(video);
     });
 
+
     xit('should redirect to error page on parameter not found', function () {
         video.id = null;
 
@@ -51,4 +52,6 @@ describe('Controller(/videos/details): VideoDetailsCtrl', function () {
         $rootScope.$digest();
         expect($state.go).toHaveBeenCalledWith('error', {code:404});
     });
+
+
 });

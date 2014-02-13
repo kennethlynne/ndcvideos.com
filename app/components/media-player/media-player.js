@@ -99,11 +99,13 @@ angular.module('ndc.components')
 
         var options = player.options;
 
-        var url = player.getEmbedUrl($scope.video.mediaId) + $filter('videoOptions')(options).toString();
-        
+        var url = player.getEmbedUrl($scope.video.videoId) + $filter('videoOptions')(options).toString();
+
         $sce.trustAsResourceUrl(url);
 
         $scope.videoUrl = url;
+
+
 
     })
     .component('mediaPlayer', function () {
