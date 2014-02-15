@@ -18,6 +18,10 @@ body {
   background: #2f6193;
 }
 
+a {
+  color: $green;
+}
+
 button {
   cursor: pointer;
 
@@ -30,7 +34,7 @@ button {
       color: $primary-color;
     }
   }
-}
+} 
 
 .popover {
   font-size: 1em;

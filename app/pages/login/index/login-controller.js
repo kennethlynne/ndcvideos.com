@@ -43,4 +43,16 @@ angular.module('ndc')
                     $scope.working = false;
                 })
         };
+
+        setEyecatcherFullHeight();
+        $( window ).resize(function() {
+            setEyecatcherFullHeight();
+        });
+
+        function setEyecatcherFullHeight() {
+            $(".eyecatcher.full-height").css({
+                "height": $(window).height()
+            });
+        }
+
     });

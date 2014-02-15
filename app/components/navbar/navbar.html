@@ -1,4 +1,4 @@
-<aside class="leftnav">
+<aside class="leftnav" ng-show="isAuthenticated()">
 
     <header class="actionbar">
         <button ng-show="isAuthenticated()" ng-click="signout()" class="has-tooltip" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="fa fa-sign-out"></i></button>

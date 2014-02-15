@@ -146,6 +146,10 @@
 		width: $leftnav-width;
 		z-index: 10;
 
+		@include media($smalldesktop) {
+		  display: none;
+		}
+
 		.fullscreen-trigger {
 			height: 40px;
 			width: 40px;

@@ -1,38 +1,39 @@
-<div class="login-page container">
+<div class="login-page">
 
-    <div class="row vertical-offset-100">
-        <div class="col-md-4 col-md-offset-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Please sign in</h3>
-                </div>
-                <div class="panel-body">
-                    <form role="form">
-                        <fieldset>
-                            <div class="form-group">
-                                <input type="email" ng-model="email" name="email" id="email" class="form-control input-lg" placeholder="Email Address">
-                            </div>
-                            <div class="form-group">
-                                <input type="password" ng-model="password" class="form-control input-lg" placeholder="Password">
-                            </div>
-                            <span class="button-checkbox">
-                                <button type="button" class="btn" data-color="info">Remember Me</button>
-                                <input type="checkbox" name="remember_me" id="remember_me" checked="checked" class="hidden">
-                                <a href="" class="btn btn-link pull-right">Forgot Password?</a>
-                            </span>
-                            <hr class="colorgraph">
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6">
-                                    <button class="btn btn-lg btn-success btn-block" ng-click="login(email, password)">{{working?'Signing in..':'Sign In'}}</button>
-                                </div>
-                                <!--<div class="col-xs-6 col-sm-6 col-md-6">-->
-                                <!--<a href="" class="btn btn-lg btn-primary btn-block">Register</a>-->
-                                <!--</div>-->
-                            </div>
-                        </fieldset>
-                    </form>
-                </div>
+    <div class="outer eyecatcher full-height" style="background-image: url(assets/images/background-placeholder.jpg);">
+        <div class="inner">
+            <h1>Norwegian Developer Conference</h1>
+            <div class="login-wrapper">
+                <h2>Please sign in</h2>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="email" ng-model="email" name="email" id="email" class="form-control input-lg" placeholder="Email Address">
+                        <label class="login-field-icon fui-user" for="login-email"></label>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" ng-model="password" class="form-control input-lg" placeholder="Password">
+                    </div>
+                    <span class="button-checkbox">
+                        <!-- <a href="#" type="button" data-color="info">Remember Me</a> -->
+                         <label>
+                             <input type="checkbox" name="remember_me" id="remember_me" checked="checked" class="hidden">
+                             Remember me
+                         </label>
+                         <a href="" class="forgot">Forgot Password?</a>
+                    </span>
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <button class="button" ng-click="login(email, password)">{{working?'Signing in..':'Sign In'}}</button>
+                        </div>
+                        <!--<div class="col-xs-6 col-sm-6 col-md-6">-->
+                        <!--<a href="" class="btn btn-lg btn-primary btn-block">Register</a>-->
+                        <!--</div>-->
+                    </div>
+                </form>
             </div>
+            <p>Powered by <a href="#" target="_blank">Sockless Developement</a>.</p>
+            <!-- <p>Scroll down to read more about NDC</p>
+            <i class="fa fa-chevron-circle-down read-more-icon"></i> -->
         </div>
     </div>
 
