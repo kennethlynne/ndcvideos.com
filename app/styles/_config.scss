@@ -13,3 +13,25 @@ $font-weight-base:        300;
 
 $iconSpritePath:          "../assets/images/glyphicons-halflings.png" !default;
 $iconWhiteSpritePath:     "../assets/images/glyphicons-halflings-white.png" !default;
+
+$grid-columns: 12;
+$smalldesktop: new-breakpoint(max-width 1200px 12);
+$tablet: new-breakpoint(max-width 1000px 4);
+$phone: new-breakpoint(max-width 480px 4);
+
+$leftnav-width: 260px;
+$leftnav-background: #1c3a58;
+
+$rightnav-width: 230px;
+$rightnav-background: rgba(0, 0, 0, 0.4);
+
+$content-gutter: 20px;
+
+$green: #1bb776;
+$pink: #EE3D8A;
+$red: #FF4136;
+$purple: #6a2a78;
+$orange: #f8aa45;
+$blue: #66c2e7;
+
+$primary-color: $green;

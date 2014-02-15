@@ -1,25 +1,47 @@
-<header class="navbar-component navbar navbar-inverse navbar-fixed-top" role="banner">
-    <div class="container">
-        <div class="navbar-header">
-            <button class="navbar-toggle" type="button">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a ui-sref="index" class="navbar-brand">Brand</a>
+<aside class="leftnav">
+
+    <header class="actionbar">
+        <button ng-show="isAuthenticated()" ng-click="signout()" class="has-tooltip" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="fa fa-sign-out"></i></button>
+        <button class="has-tooltip" data-toggle="tooltip" data-placement="bottom" title="Settings"><i class="fa fa-gear"></i></button>
+        <button class="mute-button has-tooltip" data-toggle="tooltip" data-placement="bottom" title="Mute"><i class="fa fa-volume-up"></i></button>
+    </header>
+
+    <!-- <div class="logo"><img src="images/ndc_logo.png" alt=""></div> -->
+
+    <!-- <h1>NDC 
+        <small>Norwegian Developer Conference</small>
+    </h1> -->
+
+    <ul class="navigation">
+        <li class="active"><a ui-sref="index">All videos</a></li>
+        <li><a href="#">Your favorites</a></li>
+        <li><a href="#">NDC 2014 Agenda</a></li>
+    </ul>
+
+    <h2>Search</h2>
+    <input type="text" class="search" placeholder="Add tags to filter videos ..">
+
+    <ul class="tags">
+        <li>Angular <a href="#" class="close">&times;</a></li>
+        <li>Firebase <a href="#" class="close">&times;</a></li>
+    </ul>
+
+    <!--
+    <h2>Filter by tags</h2>
+    <input type="text" class="search" placeholder="Write tags ..">
+
+    <h2>Active tags</h2>
+    <p>There are no active tags.</p>
+    -->
+
+    <div class="mini-player">
+        <button class="fullscreen-trigger has-tooltip" data-toggle="tooltip" data-placement="left" title="Fullscreen"><i class="fa fa-expand"></i></button>
+        <div class="video"><img src="assets/images/video-placeholder.png" alt=""></div>
+        <div class="controls">
+            <button class="has-tooltip" data-toggle="tooltip" data-placement="top" title="From the start"><i class="fa fa-step-backward"></i></button>
+            <button class="play-pause-button has-tooltip" data-toggle="tooltip" data-placement="top" title="Start"><i class="fa fa-play"></i></button>
+            <button class="has-tooltip" data-toggle="tooltip" data-placement="top" title="Next video"><i class="fa fa-step-forward"></i></button>
         </div>
-        <nav class="collapse navbar-collapse nsb-navbar-collapse" role="navigation">
-            <ul class="nav navbar-nav">
-                <li class="active">
-                    <a ui-sref="index">Home</a>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right" ng-show="isAuthenticated()">
-                <li>
-                   <button class="btn btn-primary" ng-click="signout()">Sign out</button>
-                </li>
-            </ul>
-        </nav>
     </div>
-</header>
+
+</aside>

@@ -1,28 +1,161 @@
-html {
-  overflow-y: scroll;
+/* --------------------------------
+    General
+-------------------------------- */
+* {
+  box-sizing: border-box !important;
+  font-family: 'Roboto', sans-serif;
 }
 
-#root
-{
-  position: relative; //View will be positioned absolute during animations
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  // background: #09131c url('../images/blurred-background.jpg') no-repeat center center; 
+  // -webkit-background-size: cover;
+  // -moz-background-size: cover;
+  // -o-background-size: cover;
+  // background-size: cover;
 
-  > div[ng-view], > div[ui-view]
-  {
-    > .container
-    {
-      max-width: none;
-      width: 100%;
-      margin-top: 40px;
+  background: #2f6193;
+}
+
+button {
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    i {
+      color: $primary-color;
     }
   }
 }
 
-.no-left-margin
-{
-  margin-left: 0 !important;
+.popover {
+  font-size: 1em;
+  border-radius: 0;
+
+  h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+  }
+
+  p {
+    margin: 0 0 5px 0;
+    padding: 0;
+    font-size: 0.8em;
+  }
 }
 
-[ng-click]
-{
-  cursor: pointer;
+
+/* --------------------------------
+    Wrappers
+-------------------------------- */
+.content-wrapper {
+  @include clearfix;
+  margin-left: $leftnav-width + 5;
+  // margin-right: $rightnav-width;
+  padding-bottom: $content-gutter;
+  padding-top: $content-gutter / 2;
+  color: #fff;
+
+  hr {
+    @include span-columns(12);
+    width: 100%;
+    display: block;
+    margin: $content-gutter 0 0 0;
+    height: 0px;
+    border: none;
+    border-top: 5px solid #333;
+    outline: none;
+
+  }
+
+  h2 {
+    padding: 0 ($content-gutter / 2);
+    margin: $content-gutter 0 ($content-gutter / 2) ($content-gutter / 2);
+    @include span-columns(12);
+    font-size: 0.8em;
+    text-transform: uppercase;
+
+    &.first {
+      margin-top: -30px;
+    }
+
+    small {
+      opacity: 0.4;
+      margin-left: 5px;
+    }
+  }
+}
+
+
+/* --------------------------------
+    Modal
+-------------------------------- */
+.modal {
+  .modal-dialog {
+    @include clearfix;
+    position: absolute;
+    top: 50%;
+    margin-top: -200px;
+    left: 50%;
+    margin-left: -450px;
+    background: rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 150px rgba(0, 0, 0, 0.7);
+
+    .modal-body {
+      margin: 0 auto;
+    }
+
+    .close {
+      position: absolute;
+      top: -50px;
+      right: 0;
+      font-size: 40px;
+      background: none;
+      box-shadow: none;
+      border: none;
+      color: #fff;
+    }
+
+    .modal-video {
+      @include span-columns(6 of 10);
+    }
+
+    .modal-video-info {
+      @include span-columns(4 of 10);
+      color: #fff;
+      padding: $content-gutter;
+
+      h2 {
+        margin-top: 0;
+      }
+    }
+
+    .modal-video-actions {
+      padding: 0 $content-gutter;
+      @include span-columns(4 of 10);
+
+      button {
+        float: left;
+        background: none;
+        border: none;
+        box-shadow: none;
+        color: #fff;
+        font-size: 30px;
+        padding: 0;
+
+        i.fa-star {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+}
+
+.modal-backdrop {
+  opacity: 0.8 !important;
 }

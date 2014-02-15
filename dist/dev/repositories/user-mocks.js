@@ -55,7 +55,6 @@ angular.module('ndc')
             var id = url.match( new RegExp(IdRegExp) )[0];
             return [200, UserRepo.index[id].favourites || null, {/*headers*/}];
         });
-
     });
 
 
