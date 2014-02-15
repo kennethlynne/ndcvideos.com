@@ -29,9 +29,15 @@
             vertical-align: middle;  
 
             & > h1 {
-                margin: 60px 0;
+                margin: 20px 0 40px 0;
                 font-size: 40px;
                 color: #fff;
+
+                small {
+                    color: $green;
+                    display: block;
+                    margin-top: 5px;
+                }
             }
 
             & > p {

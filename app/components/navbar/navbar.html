@@ -13,9 +13,9 @@
     </h1> -->
 
     <ul class="navigation">
-        <li class="active"><a ui-sref="index">All videos</a></li>
-        <li><a href="#">Your favorites</a></li>
-        <li><a href="#">NDC 2014 Agenda</a></li>
+        <li ng-class="getClass('/')"><a ui-sref="index">All videos</a></li>
+        <li ng-class="getClass('/favourites')"><a ui-sref="favourites">Your favourites</a></li>
+        <li ng-class="getClass('/agenda')"><a ui-sref="agenda">NDC 2014 Agenda</a></li>
     </ul>
 
     <h2>Search</h2>
@@ -25,14 +25,6 @@
         <li>Angular <a href="#" class="close">&times;</a></li>
         <li>Firebase <a href="#" class="close">&times;</a></li>
     </ul>
-
-    <!--
-    <h2>Filter by tags</h2>
-    <input type="text" class="search" placeholder="Write tags ..">
-
-    <h2>Active tags</h2>
-    <p>There are no active tags.</p>
-    -->
 
     <div class="mini-player">
         <button class="fullscreen-trigger has-tooltip" data-toggle="tooltip" data-placement="left" title="Fullscreen"><i class="fa fa-expand"></i></button>
