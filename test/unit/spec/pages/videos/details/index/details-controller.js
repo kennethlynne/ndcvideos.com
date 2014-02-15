@@ -39,7 +39,7 @@ describe('Controller(/videos/details): VideoDetailsCtrl', function () {
         });
     });
 
-    it('should get a video with parameter ID and attach it to scope', function () {
+    xit('should get a video with parameter ID and attach it to scope', function () {
         deferred.resolve('video');
         $rootScope.$digest();
         expect(scope.video).toEqual(video);
