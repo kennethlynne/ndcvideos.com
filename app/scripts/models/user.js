@@ -24,5 +24,6 @@ angular.module('ndc')
             });
         };
 
+
         return UserModel;
     });

@@ -16,9 +16,10 @@ angular.module('ndc')
             };
         });
     })
-    .factory('authentication', function ($http, BaseUrl, $localStorage, $log, $q) {
+    .factory('authentication', function ($http, BaseUrl, $localStorage, $log, $q, UserModel, CurrentUser) {
 
         var _logout = function () {
+                CurrentUser.set({});
                 delete $localStorage.token;
             },
             _getToken = function () {
@@ -40,6 +41,10 @@ angular.module('ndc')
                         var data = response.data;
                         $localStorage.token = data.access_token;
                         deferred.resolve(true);
+
+                        var user = new UserModel(data.user);
+                        CurrentUser.set(user);
+
                     }
                     else
                     {
