@@ -29,9 +29,11 @@ describe('Controller(/videos/details): VideoDetailsCtrl', function () {
 
             VideoDetailsCtrl = $controller('VideoDetailsCtrl', {
                 $scope: scope,
+                $log:null,
                 $stateParams:$stateParams,
                 $state: $state,
                 VideoRepository: VideoRepository
+//                init: video
             });
 
         });

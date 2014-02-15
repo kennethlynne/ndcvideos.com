@@ -86,27 +86,31 @@ angular.module('ndc.components')
         return players;
 
     })
-    .controller('mediaPlayerComponentCtrl', function ($scope, RegisteredPlayers, $filter, $sce) {
+    .controller('mediaPlayerComponentCtrl', function ($scope, $log, RegisteredPlayers, $filter, $sce) {
+        if(!$scope.video)
+        {
+            $scope.errorMsg = 'The video was not found';
+            $log.log('No video in video-component')
+        }
+        else{
+            InitializeVideo();
+        }
 
-        var player = null;
+        function InitializeVideo()
+        {
+            var player = null;
 
-        //search for the right player in the list of registered players
-        angular.forEach(RegisteredPlayers, function (value) {
-            if (value.type == $scope.video.type) {
-                player = value;
-            }
-        });
-
-        var options = player.options;
-
-        var url = player.getEmbedUrl($scope.video.videoId) + $filter('videoOptions')(options).toString();
-
-        $sce.trustAsResourceUrl(url);
-
-        $scope.videoUrl = url;
-
-
-
+            //search for the right player in the list of registered players
+            angular.forEach(RegisteredPlayers, function (value) {
+                if (value.type == $scope.video.type) {
+                    player = value;
+                }
+            });
+            var options = player.options;
+            var url = player.getEmbedUrl($scope.video.videoId) + $filter('videoOptions')(options).toString();
+            $sce.trustAsResourceUrl(url);
+            $scope.videoUrl = url;
+        }
     })
     .component('mediaPlayer', function () {
         return {

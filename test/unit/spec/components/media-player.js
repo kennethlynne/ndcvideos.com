@@ -36,6 +36,17 @@ describe('Component: mediaPlayerComponent', function () {
             expect(element.html()).toContain('youtube');
         });
 
+        it('should give an appropriate error message when no video found', function () {
+
+            scope.video = null;
+            element = angular.element('<media-player-component video="video" height="281" width="500"></media-player-component>');
+            element = $compile(element)(scope);
+            scope.$digest();
+
+            expect(element.find('.error').html()).toContain('The video was not found');
+        });
+
+
     });
 
     describe('Controller: mediaPlayerComponentCtrl', function () {

@@ -7,16 +7,13 @@
             </div>
             <div class="bs-example">
                 <div class="col-lg-8">
-                    <media-player-component video="video"></media-player-component>
-
+                    <media-player-component ng-if="video" video="video"></media-player-component>
                 </div>
                 <div class="col-lg-4">
                     <h2>About</h2>
                     {{video.description}}
                 </div>
-
             </div>
         </div>
     </div>
-
 </div>
