@@ -1,11 +1,16 @@
-<div class="col-md-3 list-item-component">
-    <a class="thumbnail" ui-sref="videoDetails({videoId:1})">
-        <div>
-            <img src="http://placehold.it/200x150">
-        </div>
-        <div class="caption">
-            <h2>{{video.title}}</h2>
-            <p>{{video.desc}}</p>
-        </div>
-    </a>
+<div class="video-wrapper">
+	<div class="progress-wrapper">
+		<div class="progress-bar"style="width: 38%;"></div>
+	</div>
+	<div class="video">
+		<a ui-sref="videoDetails({videoId:1})">
+		<!-- <a ui-sref="videoDetails({videoId:1})" data-toggle="modal" data-target="#videoModal"> -->
+			<img src="assets/images/video-placeholder.png" alt="">
+			<div class="video-info">
+				<h3>{{video.title}}</h3>
+				<p>{{video.desc}}</p>
+			</div>
+		</a>
+	</div>
+	<button class="favorite has-tooltip" data-toggle="tooltip" data-placement="bottom" title="Set favorite"><i class="fa fa-star-o"></i></button>
 </div>

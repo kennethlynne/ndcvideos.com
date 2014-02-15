@@ -2,7 +2,7 @@ angular.module('ndc')
     .run(function (Config, $httpBackend, $log, BaseUrl) {
 
         //Only load mocks if config says so
-        if(!Config.useMocks) return;
+        if(!Config.API.useMocks) return;
 
         var baseUrl = BaseUrl + 'token';
         var IdRegExp = /[\d\w-_]+$/.toString().slice(1, -1);
