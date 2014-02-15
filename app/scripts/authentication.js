@@ -20,6 +20,7 @@ angular.module('ndc')
 
         var _logout = function () {
                 CurrentUser.set({});
+                delete $localStorage.currentUserId;
                 delete $localStorage.token;
             },
             _getToken = function () {
@@ -44,7 +45,7 @@ angular.module('ndc')
 
                         var user = new UserModel(data.user);
                         CurrentUser.set(user);
-
+                        $localStorage.currentUserId = user.id;
                     }
                     else
                     {
