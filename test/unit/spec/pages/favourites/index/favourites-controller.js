@@ -2,46 +2,35 @@
 
 describe('Controller(/favourites): FavouritesCtrl', function () {
 
-    var FavouritesCtrl, scope;
+    var FavouritesCtrl, scope, favourites,
+        UserRepository, deferred, $q, promise, $rootScope;
 
     beforeEach(function () {
 
         module('ndc');
 
-        inject(function ($controller, $rootScope) {
-            scope = $rootScope.$new();
+        inject(function ($controller, _$rootScope_, _$q_) {
+            scope = _$rootScope_.$new();
+            $q = _$q_;
+            deferred = $q.defer();
+            promise = deferred.promise;
+            $rootScope = _$rootScope_;
             FavouritesCtrl = $controller('FavouritesCtrl', {
                 $scope: scope,
-                init: 'DATA'
+                $log:null
             });
         });
     });
 
-    it('should attach init data to scope', function () {
-        expect(scope.data).toEqual('DATA');
-    });
-});
+    xit('should attach favourites to scope', function () {
 
-describe('Service(/favourites): FavouritesCtrlInit', function () {
-
-    var FavouritesCtrlInit;
-
-    beforeEach(function () {
-
-        module('ndc');
-
-        inject(function (_FavouritesCtrlInit_) {
-            FavouritesCtrlInit = _FavouritesCtrlInit_;
-        });
+        deferred.resolve(favourites);
+        $rootScope.$digest();
+        expect(scope.favourites).toEqual(favourites);
 
     });
 
-    it('should have a prepare function', function () {
-        expect(typeof FavouritesCtrlInit.prepare).toEqual('function');
-    });
 
-    it('should return a promise', function () {
-        expect(typeof FavouritesCtrlInit.prepare().then).toEqual('function');
-    });
+
 
 });

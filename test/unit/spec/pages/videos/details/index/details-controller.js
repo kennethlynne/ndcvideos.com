@@ -7,6 +7,8 @@ describe('Controller(/videos/details): VideoDetailsCtrl', function () {
 
     beforeEach(function () {
 
+        module('ndc');
+
         VideoRepository = {
             getById: jasmine.createSpy("VideoRepository.getById").andCallFake(function ()
             {
@@ -39,18 +41,16 @@ describe('Controller(/videos/details): VideoDetailsCtrl', function () {
         });
     });
 
-    xit('should get a video with parameter ID and attach it to scope', function () {
-        deferred.resolve('video');
+    it('should get a video with parameter ID and attach it to scope', function () {
+        deferred.resolve(video);
         $rootScope.$digest();
         expect(scope.video).toEqual(video);
     });
 
 
     xit('should redirect to error page on parameter not found', function () {
-        video.id = null;
-
+        video = null;
         deferred.resolve(video);
-
         $rootScope.$digest();
         expect($state.go).toHaveBeenCalledWith('error', {code:404});
     });
