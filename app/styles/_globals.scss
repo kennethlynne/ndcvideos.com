@@ -37,6 +37,15 @@ button {
   }
 } 
 
+.button {
+	background: $green;
+	border: none;
+	font-size: 14px;
+	padding: 12px 15px;
+	font-weight: bold;
+	color: #fff;
+}
+
 .popover {
   font-size: 1em;
   border-radius: 0;
