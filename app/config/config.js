@@ -23,6 +23,17 @@ angular.module('ndc')
             '**'
         ]);
     })
+    .run(function (CurrentUser, UserRepository, $localStorage)
+    {
+        if($localStorage.currentUserId)
+        {
+            UserRepository.getById($localStorage.currentUserId)
+            .then(function (result)
+            {
+                CurrentUser.set(result);
+            })
+        }
+    })
     .value('cgBusyTemplateName', 'views/angular-busy/default-spinner.html')
     .factory('APIBaseUrl', function (Config) {
         return (Config.API.protocol + '://' + Config.API.host + ':' + Config.API.port + Config.API.path + '/');

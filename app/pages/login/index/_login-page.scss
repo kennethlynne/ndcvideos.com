@@ -1,17 +1,122 @@
 .login-page {
-  margin-top: 150px !important;
+    .eyecatcher {
+        background-color: #fdfdfb;
+        background-repeat: no-repeat;
+        background-position: center center;
 
-  margin-left: auto;
-  margin-right: auto;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        
+        text-align: center;
+        position: relative;
+        display: table; 
+        margin: 0 auto;
+        width: 100%;
 
-  .colorgraph {
-    height: 5px;
-    border-top: 0;
-    background: #c4e17f;
-    border-radius: 5px;
-    background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
-    background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
-    background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
-    background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
-  }
+        &.solid {
+            background: #2f6193;
+        }
+
+        .inner {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            max-width: none;
+            display: table-cell;   
+            vertical-align: middle;  
+
+            & > h1 {
+                margin: 20px 0 40px 0;
+                font-size: 40px;
+                color: #fff;
+
+                small {
+                    color: $green;
+                    display: block;
+                    margin-top: 5px;
+                }
+            }
+
+            & > p {
+                margin: 50px 0 30px 0;
+                color: #fff;
+                font-size: 14px;
+                font-style: italic;
+            }
+
+        }
+    }
+
+    .read-more-icon {
+        font-size: 25px;
+        color: #fff;
+    }
+
+    .login-wrapper {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 10px;
+        text-align: left;
+
+        h2 {
+            margin-top: 5px;
+            font-size: 16px;
+        }
+
+        .button-checkbox {
+            display: block;
+            margin: ($content-gutter / 2) 0 $content-gutter 0;
+            font-size: 12px;
+
+            input[type="checkbox"] {
+                float: left;
+                margin-right: 8px;
+                margin-top: 1px;
+            }
+        }
+
+        .button {
+            padding: 10px 19px;
+            font-size: 17px;
+            line-height: 1.471;
+            border-radius: 6px;
+            border: none;
+            -webkit-font-smoothing: subpixel-antialiased;
+            -webkit-transition: border .25s linear, color .25s linear, background-color .25s linear;
+            transition: border .25s linear, color .25s linear, background-color .25s linear;
+            display: block;
+            width: 100%;
+            background: $green;
+            color: #fff;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .forgot {
+            float: right;
+            color: $green;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            padding: 10px;
+            font-size: 16px;
+            background: #fff;
+            box-shadow: none;
+            border-radius: 5px;
+            width: 100%;
+            border: none;
+            border: 1px solid #ccc;
+            margin-bottom: 5px;
+
+            &:focus {
+                outline: none;
+            }
+        }
+    }
 }

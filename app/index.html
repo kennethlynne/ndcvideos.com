@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>ndc</title>
+    <title>NDC | Norwegian Developer Conference</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -24,6 +24,11 @@
 
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
 
+    <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/bootstrap-tooltips/bootstrap-tooltips.css">
+    <link rel="stylesheet" href="assets/bootstrap-popovers/bootstrap-popovers.css">
+    <link rel="stylesheet" href="assets/bootstrap-modals/bootstrap-modals.css">
+
     <!--INJECT STYLES-->
     <link rel="stylesheet" href="styles/main.css">
     <!--/INJECT STYLES-->
@@ -43,8 +48,8 @@
 
     <div id="root" class="ng-cloak">
 
+        <div ui-view class="view-change-animation"></div>
         <navbar-component></navbar-component>
-        <div ui-view class="view-change-animation content-wrapper"></div>
 
     </div>
 
@@ -100,6 +105,10 @@
     <script src="scripts/repositories/user-repository.js"></script>
     <script src="scripts/repositories/video-repository.js"></script>
     <!--/INJECT SCRIPTS-->
+
+    <script src="assets/bootstrap-tooltips/bootstrap-tooltips.js"></script>
+    <script src="assets/bootstrap-popovers/bootstrap-popovers.js"></script>
+    <script src="assets/bootstrap-modals/bootstrap-modals.js"></script>
 
   </body>
 </html>

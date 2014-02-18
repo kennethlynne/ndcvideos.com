@@ -37,4 +37,5 @@ angular.module('ndc')
     })
     .controller('AgendaCtrl', function ($scope, init) {
         $scope.data = init;
+
     });

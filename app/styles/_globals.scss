@@ -1,5 +1,5 @@
 /* --------------------------------
-    General
+	General
 -------------------------------- */
 * {
   box-sizing: border-box !important;
@@ -18,18 +18,32 @@ body {
   background: #2f6193;
 }
 
+a {
+  color: $green;
+  cursor: pointer;
+}
+
 button {
   cursor: pointer;
 
   &:focus {
-    outline: none;
+	outline: none;
   }
 
   &:hover {
-    i {
-      color: $primary-color;
-    }
+	i {
+	  color: $primary-color;
+	}
   }
+} 
+
+.button {
+	background: $green;
+	border: none;
+	font-size: 14px;
+	padding: 12px 15px;
+	font-weight: bold;
+	color: #fff;
 }
 
 .popover {
@@ -37,21 +51,21 @@ button {
   border-radius: 0;
 
   h2 {
-    margin: 0;
-    padding: 0;
-    font-size: 1em;
+	margin: 0;
+	padding: 0;
+	font-size: 1em;
   }
 
   p {
-    margin: 0 0 5px 0;
-    padding: 0;
-    font-size: 0.8em;
+	margin: 0 0 5px 0;
+	padding: 0;
+	font-size: 0.8em;
   }
 }
 
 
 /* --------------------------------
-    Wrappers
+	Wrappers
 -------------------------------- */
 .content-wrapper {
   @include clearfix;
@@ -62,97 +76,97 @@ button {
   color: #fff;
 
   hr {
-    @include span-columns(12);
-    width: 100%;
-    display: block;
-    margin: $content-gutter 0 0 0;
-    height: 0px;
-    border: none;
-    border-top: 5px solid #333;
-    outline: none;
+	@include span-columns(12);
+	width: 100%;
+	display: block;
+	margin: $content-gutter 0 0 0;
+	height: 0px;
+	border: none;
+	border-top: 5px solid #333;
+	outline: none;
 
   }
 
   h2 {
-    padding: 0 ($content-gutter / 2);
-    margin: $content-gutter 0 ($content-gutter / 2) ($content-gutter / 2);
-    @include span-columns(12);
-    font-size: 0.8em;
-    text-transform: uppercase;
+	padding: 0 ($content-gutter / 2);
+	margin: $content-gutter 0 ($content-gutter / 2) ($content-gutter / 2);
+	@include span-columns(12);
+	font-size: 0.8em;
+	text-transform: uppercase;
 
-    &.first {
-      margin-top: -30px;
-    }
+	&.first {
+	  margin-top: -30px;
+	}
 
-    small {
-      opacity: 0.4;
-      margin-left: 5px;
-    }
+	small {
+	  opacity: 0.4;
+	  margin-left: 5px;
+	}
   }
 }
 
 
 /* --------------------------------
-    Modal
+	Modal
 -------------------------------- */
 .modal {
   .modal-dialog {
-    @include clearfix;
-    position: absolute;
-    top: 50%;
-    margin-top: -200px;
-    left: 50%;
-    margin-left: -450px;
-    background: rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 0px 150px rgba(0, 0, 0, 0.7);
+	@include clearfix;
+	position: absolute;
+	top: 50%;
+	margin-top: -200px;
+	left: 50%;
+	margin-left: -450px;
+	background: rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 0px 150px rgba(0, 0, 0, 0.7);
 
-    .modal-body {
-      margin: 0 auto;
-    }
+	.modal-body {
+	  margin: 0 auto;
+	}
 
-    .close {
-      position: absolute;
-      top: -50px;
-      right: 0;
-      font-size: 40px;
-      background: none;
-      box-shadow: none;
-      border: none;
-      color: #fff;
-    }
+	.close {
+	  position: absolute;
+	  top: -50px;
+	  right: 0;
+	  font-size: 40px;
+	  background: none;
+	  box-shadow: none;
+	  border: none;
+	  color: #fff;
+	}
 
-    .modal-video {
-      @include span-columns(6 of 10);
-    }
+	.modal-video {
+	  @include span-columns(6 of 10);
+	}
 
-    .modal-video-info {
-      @include span-columns(4 of 10);
-      color: #fff;
-      padding: $content-gutter;
+	.modal-video-info {
+	  @include span-columns(4 of 10);
+	  color: #fff;
+	  padding: $content-gutter;
 
-      h2 {
-        margin-top: 0;
-      }
-    }
+	  h2 {
+		margin-top: 0;
+	  }
+	}
 
-    .modal-video-actions {
-      padding: 0 $content-gutter;
-      @include span-columns(4 of 10);
+	.modal-video-actions {
+	  padding: 0 $content-gutter;
+	  @include span-columns(4 of 10);
 
-      button {
-        float: left;
-        background: none;
-        border: none;
-        box-shadow: none;
-        color: #fff;
-        font-size: 30px;
-        padding: 0;
+	  button {
+		float: left;
+		background: none;
+		border: none;
+		box-shadow: none;
+		color: #fff;
+		font-size: 30px;
+		padding: 0;
 
-        i.fa-star {
-          color: $primary-color;
-        }
-      }
-    }
+		i.fa-star {
+		  color: $primary-color;
+		}
+	  }
+	}
   }
 }
 
