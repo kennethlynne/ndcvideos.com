@@ -5,7 +5,7 @@
 	<div class="video">
 		<a ui-sref="videoDetails({videoId:1})">
 		<!-- <a ui-sref="videoDetails({videoId:1})" data-toggle="modal" data-target="#videoModal"> -->
-			<img src="assets/images/video-placeholder.png" alt="">
+			<img ng-src="{{video.thumbnailUrl || 'assets/images/video-placeholder.png'}}" alt="">
 			<div class="video-info">
 				<h3>{{video.title}}</h3>
 				<p>{{video.desc}}</p>
