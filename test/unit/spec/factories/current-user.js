@@ -2,12 +2,17 @@
 
 describe('Service: CurrentUser', function () {
 
-    var CurrentUser, data;
+    var CurrentUser, data, $log;
 
     beforeEach(function () {
 
-        module('ndc');
+        $log = {
+            error: jasmine.createSpy('$log.error')
+        };
 
+        module('ndc', function ($provide) {
+            $provide.value('$log', $log);
+        });
 
         data = {id:1, userName:"balle"};
 
@@ -28,7 +33,8 @@ describe('Service: CurrentUser', function () {
     });
     
     it('should not set data if data not defined', function () {
-        expect(function (){CurrentUser.set(null)}).toThrow(new Error("No data defined when initializing CurrentUser"));
+        CurrentUser.set(null);
+        expect($log.error).toHaveBeenCalled();
     });
     
 });
