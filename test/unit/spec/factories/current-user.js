@@ -36,5 +36,17 @@ describe('Service: CurrentUser', function () {
         CurrentUser.set(null);
         expect($log.error).toHaveBeenCalled();
     });
+
+    it('should set the users permissions', function() {
+        CurrentUser.setPermissions(['troll']);
+        CurrentUser.setPermissions(['roll', 'eat', 'sleep']);
+        expect(CurrentUser.getPermissions()).toEqual(['roll', 'eat', 'sleep']);
+    });
+
+    it('should return the users right', function() {
+        CurrentUser.setPermissions(['roll', 'eat', 'sleep']);
+        expect(CurrentUser.can('wear socks')).toBeFalsy();
+        expect(CurrentUser.can('sleep')).toBeTruthy();
+    });
     
 });
