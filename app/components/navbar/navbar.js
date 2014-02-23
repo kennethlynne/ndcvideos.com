@@ -22,6 +22,26 @@ angular.module('ndc.components')
                 return "";
             }
         }
+
+        $(".has-tooltip").tooltip();
+
+        $(".actionbar .toggle").click(function() {
+            $(".actionbar .toggle").removeClass("active");
+            $(this).addClass("active");
+
+            $(".toggle-wrapper").hide();
+
+            if ($(this).hasClass("toggle-navigation")) {
+                $(".navigation-wrapper").show();
+            } 
+            else if ($(this).hasClass("toggle-settings")) {
+                $(".settings-wrapper").show();
+            }
+            else if ($(this).hasClass("toggle-notifications")) {
+                $(".notifications-wrapper").show();
+            }
+        });
+        
     })
     .component('navbar', function () {
         return {

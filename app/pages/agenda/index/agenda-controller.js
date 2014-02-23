@@ -38,15 +38,4 @@ angular.module('ndc')
     .controller('AgendaCtrl', function ($scope, init) {
         $scope.data = init;
 
-        setHighest($(".tracks .column"));
-
-        function setHighest(element) {
-            var tallest = 0;
-            element.each(function() {
-                if ($(this).outerHeight() > tallest) {
-                    tallest = $(this).outerHeight();
-                }
-            });
-            element.css("height", (tallest + 40));
-        }
     });

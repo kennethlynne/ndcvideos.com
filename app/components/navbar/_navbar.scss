@@ -2,7 +2,8 @@
 	position: fixed;
 	padding: $content-gutter;
 	color: #fff;
-	overflow-y: scroll;
+	overflow-y: auto !important;
+	overflow-x: hidden;
 	width: $leftnav-width;
 	background: $leftnav-background;
 	left: 0;
@@ -17,10 +18,48 @@
 		text-transform: uppercase;
 	}
 
-	p {
-		font-size: 0.8em;
-		margin: 0;
-		opacity: 0.7;
+	.toggle-wrapper {
+		display: none;
+
+		&.navigation-wrapper {
+			display: block;
+		}
+
+		&.notifications-wrapper {
+			.notifications {
+				list-style: none;
+				padding: 0;
+
+				li {
+					padding-bottom: $content-gutter;
+					margin-bottom: $content-gutter;
+					border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+
+					&:last-child {
+						border-bottom: 0;
+						margin-bottom: 0;
+						padding-bottom: 0;
+					}
+
+					p {
+						font-size: 0.8em;
+						margin: 0;
+
+						small {
+							display: block;
+							opacity: 0.6;
+							margin-top: 4px;
+						}
+					}
+				}
+			}
+		}
+
+		&.settings-wrapper {
+			h2 {
+				margin-top: 0px;
+			}
+		}
 	}
 
 	header.actionbar {
@@ -40,6 +79,32 @@
 			box-shadow: none;
 			color: #fff;
 			font-size: 1em;
+			position: relative;
+
+			&.active {
+				i {
+					color: $green;
+				}
+			}
+
+			.notification-count {
+				position: absolute;
+				bottom: -4px;
+				right: -4px;
+				border-radius: 50%;
+				background: $red;
+				font-size: 12px;
+				padding: 2px 0;
+				text-align: center;
+				height: 18px;
+				width: 18px;
+			}
+		}
+
+		.pull-right {
+			button {
+				margin: 0 0 0 10px;
+			}
 		}
 	}
 
@@ -81,7 +146,7 @@
 		margin: 1em 0 2.5em 0;
 
 		li {
-			margin-bottom: 3px;
+			margin-bottom: 4px;
 
 			a {
 				color: #fff;
@@ -129,7 +194,8 @@
 		}
 	}
 
-	.search {
+	input[type="text"],
+	input[type="password"] {
 		width: 100%;
 		box-shadow: none;
 		outline: none;
