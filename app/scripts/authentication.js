@@ -74,11 +74,19 @@ angular.module('ndc')
             logout: _logout
         }
     })
-    .run(function($rootScope, $urlRouter, authentication, $state) {
+    .run(function($rootScope, $urlRouter, authentication, $state, $location) {
         $rootScope.$on('$locationChangeSuccess', function(e) {
             e.preventDefault();
 
-            if (authentication.isAuthenticated()) {
+            var path = $location.path().substr(1);
+
+            //List of pages you can visit without being authotized
+            var allowAnonymous = [
+                'login',
+                'error'
+            ];
+
+            if (allowAnonymous.indexOf(path) >= 0 || authentication.isAuthenticated()) {
                 $urlRouter.sync();
             }
             else
