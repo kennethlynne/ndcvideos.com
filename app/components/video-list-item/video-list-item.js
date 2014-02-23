@@ -17,7 +17,7 @@ angular.module('ndc.components')
 
 
             modalInstance.result.then(function (progress) {
-                //Store progress information
+                //TODO: Store progress information
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });
