@@ -22,7 +22,7 @@ angular.module('ndc.components')
                 return "";
             }
         }
-
+//TODO: Remove this!?
 //        $(".has-tooltip").tooltip();
 //
 //        $(".actionbar .toggle").click(function() {
