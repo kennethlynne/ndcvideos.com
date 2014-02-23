@@ -1,13 +1,13 @@
 {
   "name": "angular-busy",
-  "version": "2.2.0",
+  "version": "3.0.2",
   "main": [
     "dist/angular-busy.js",
     "dist/angular-busy.css"
   ],
   "dependencies": {
     "angular": "~1.2",
-    "angular-promise-tracker": "~1.4",
+    "angular-promise-tracker": "~1.5",
     "angular-animate": "~1.2"
   },
   "ignore": [
@@ -29,11 +29,11 @@
     "jquery": "~2.0.2"
   },
   "homepage": "https://github.com/cgross/angular-busy",
-  "_release": "2.2.0",
+  "_release": "3.0.2",
   "_resolution": {
     "type": "version",
-    "tag": "v2.2.0",
-    "commit": "1a79b0f2e71ce904da4a204c825d1abcd96c1b5e"
+    "tag": "v3.0.2",
+    "commit": "2edf5ac471deb482d19b369793e0267105c0e470"
   },
   "_source": "git://github.com/cgross/angular-busy.git",
   "_target": "*",
