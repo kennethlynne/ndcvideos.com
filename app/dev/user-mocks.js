@@ -5,7 +5,7 @@ angular.module('ndc')
         if(!Config.API.useMocks)
             return;
 
-        var collectionUrl = APIBaseUrl + 'user';
+        var collectionUrl = APIBaseUrl + 'users';
 
         var IdRegExp = /[\d\w-_]+$/.toString().slice(1, -1);
 

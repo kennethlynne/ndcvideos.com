@@ -2,7 +2,7 @@
 
 describe('Model: VideoModel', function () {
 
-    var VideoModel, $httpBackend, $rootScope, APIBaseUrl, VideoRepository, collectionUrl = 'video';
+    var VideoModel, $httpBackend, $rootScope, APIBaseUrl, VideoRepository, collectionUrl = 'videos';
 
     beforeEach(function () {
 
@@ -28,7 +28,7 @@ describe('Model: VideoModel', function () {
     });
 
     it('should have the $urlBase property set', function() {
-        expect(VideoModel.$urlBase).toBe(APIBaseUrl + collectionUrl);
+        expect(VideoModel.$settings.url).toBe(APIBaseUrl + collectionUrl);
     });
 
     describe('$save', function () {

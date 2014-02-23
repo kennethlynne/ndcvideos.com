@@ -1,0 +1,19 @@
+{
+    "version": "0.0.2",
+    "name": "ng-symbiosis-repository",
+    "description": "AngularJS repository",
+    "license": "MIT",
+    "author": "Kenneth Lynne <kenneth.lynne@gmail.com",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components"
+    ],
+    "dependencies": {
+        "angular": "~1.2.7"
+    },
+    "devDependencies": {
+        "angular-mocks": "~1.2.7"
+    }
+}
+

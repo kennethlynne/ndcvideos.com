@@ -1,25 +1,26 @@
 'use strict';
 
 angular.module('ndc')
-    .factory('UserModel', function ($q, $http, $rootScope, ModelFactory, APIBaseUrl, UserRepository) {
+    .factory('UserModel', function ($q, $http, $rootScope, BaseModel, APIBaseUrl, $injector) {
 
-        var collectionUrl = 'user';
+        var collectionUrl = 'users';
 
         function UserModel(data) {
             data = data || {};
-            data.$urlBase = APIBaseUrl + collectionUrl;
-            ModelFactory.call(this,data);
-        };
+            data.url = APIBaseUrl + collectionUrl;
+            BaseModel.call(this,data);
+        }
 
-        UserModel.$urlBase = APIBaseUrl + collectionUrl;
-        UserModel.prototype = Object.create(ModelFactory.prototype);
+        UserModel.$settings = {url: APIBaseUrl + collectionUrl};
+        UserModel.prototype = Object.create(BaseModel.prototype);
 
         //Decorate save to attach this item to the Repository on successful save
         var _$save = UserModel.prototype.$save;
         UserModel.prototype.$save = function () {
             var User = this;
             return _$save.apply(this, arguments).then(function (response) {
-                UserRepository.attach(User);
+                var Repository = $injector.get('UserRepository');
+                Repository.attach(User);
                 return response;
             });
         };

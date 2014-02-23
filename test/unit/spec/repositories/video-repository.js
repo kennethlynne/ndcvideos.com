@@ -22,7 +22,7 @@ describe('Model Repository: VideoRepository', function () {
 
     describe('getById', function () {
         it('should return models by id', function() {
-            $httpBackend.expectGET(VideoModel.$urlBase + '/5').respond(200, {id: 5, title:'Video title'});
+            $httpBackend.expectGET(VideoModel.$settings.url + '/5').respond(200, {id: 5, title:'Video title'});
 
             var promise = VideoRepository.getById(5);
 
@@ -39,7 +39,7 @@ describe('Model Repository: VideoRepository', function () {
         });
 
         it('should not do subsequent calls if model already exits in pool', function() {
-            $httpBackend.expectGET(VideoModel.$urlBase + '/5').respond(200, {id: 5, title:'Video title'});
+            $httpBackend.expectGET(VideoModel.$settings.url + '/5').respond(200, {id: 5, title:'Video title'});
             VideoRepository.getById(5);
             $httpBackend.flush();
 
@@ -58,7 +58,7 @@ describe('Model Repository: VideoRepository', function () {
         });
 
         it('should handle rejects', function() {
-            $httpBackend.expectGET(VideoModel.$urlBase + '/5').respond(404, 'No such thang!');
+            $httpBackend.expectGET(VideoModel.$settings.url + '/5').respond(404, 'No such thang!');
 
             var promise = VideoRepository.getById(5),
                 response,
@@ -76,7 +76,7 @@ describe('Model Repository: VideoRepository', function () {
 
     describe('getAll', function () {
         it('should return models by id', function() {
-            $httpBackend.expectGET(VideoModel.$urlBase).respond(200, [{id: 5, title:'Video title'},{id: 6, title:'Video title'}]);
+            $httpBackend.expectGET(VideoModel.$settings.url).respond(200, [{id: 5, title:'Video title'},{id: 6, title:'Video title'}]);
 
             var promise = VideoRepository.getAll();
 
@@ -98,7 +98,7 @@ describe('Model Repository: VideoRepository', function () {
         });
 
         it('should handle rejects', function() {
-            $httpBackend.expectGET(VideoModel.$urlBase).respond(404, 'No such thang!');
+            $httpBackend.expectGET(VideoModel.$settings.url).respond(404, 'No such thang!');
 
             var promise = VideoRepository.getAll(5),
                 success = jasmine.createSpy('success'),
@@ -156,10 +156,10 @@ describe('Model Repository: VideoRepository', function () {
         });
     });
 
-    describe('_cache', function () {
+    describe('cache', function () {
         it('should return a reference to the pool', function() {
             var newVideo = {id:19, title:'Yeah!'};
-            VideoRepository._cache[19] = newVideo;
+            VideoRepository.cache[19] = newVideo;
 
             var Video;
             VideoRepository.getById(19).then(function (response) {

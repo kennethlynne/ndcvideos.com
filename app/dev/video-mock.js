@@ -2,7 +2,7 @@ angular.module('ndc')
     .run(function (Config, $httpBackend, $log, APIBaseUrl, regexEscape, guid) {
         if(!Config.API.useMocks) return;
 
-        var collectionUrl = APIBaseUrl + 'video';
+        var collectionUrl = APIBaseUrl + 'videos';
         var IdRegExp = /[\d\w-_]+$/.toString().slice(1, -1);
 
         console.log('Stubbing video API - ' + collectionUrl);

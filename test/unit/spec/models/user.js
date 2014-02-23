@@ -2,7 +2,7 @@
 
 describe('Model: UserModel', function () {
 
-    var UserModel, $httpBackend, $rootScope, APIBaseUrl, UserRepository, collectionUrl = 'user';
+    var UserModel, $httpBackend, $rootScope, APIBaseUrl, UserRepository, collectionUrl = 'users';
 
     beforeEach(function () {
 
@@ -28,7 +28,7 @@ describe('Model: UserModel', function () {
     });
 
     it('should have the $urlBase property set', function() {
-        expect(UserModel.$urlBase).toBe(APIBaseUrl + collectionUrl);
+        expect(UserModel.$settings.url).toBe(APIBaseUrl + collectionUrl);
     });
 
     describe('$save', function () {

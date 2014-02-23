@@ -22,7 +22,7 @@ describe('Model Repository: UserRepository', function () {
 
     describe('getById', function () {
         it('should return models by id', function() {
-            $httpBackend.expectGET(UserModel.$urlBase + '/5').respond(200, {id: 5, title:'User title'});
+            $httpBackend.expectGET(UserModel.$settings.url + '/5').respond(200, {id: 5, title:'User title'});
 
             var promise = UserRepository.getById(5);
 
@@ -39,7 +39,7 @@ describe('Model Repository: UserRepository', function () {
         });
 
         it('should not do subsequent calls if model already exits in pool', function() {
-            $httpBackend.expectGET(UserModel.$urlBase + '/5').respond(200, {id: 5, title:'User title'});
+            $httpBackend.expectGET(UserModel.$settings.url + '/5').respond(200, {id: 5, title:'User title'});
             UserRepository.getById(5);
             $httpBackend.flush();
 
@@ -58,7 +58,7 @@ describe('Model Repository: UserRepository', function () {
         });
 
         it('should handle rejects', function() {
-            $httpBackend.expectGET(UserModel.$urlBase + '/5').respond(404, 'No such thang!');
+            $httpBackend.expectGET(UserModel.$settings.url + '/5').respond(404, 'No such thang!');
 
             var promise = UserRepository.getById(5),
                 response,
@@ -76,7 +76,7 @@ describe('Model Repository: UserRepository', function () {
 
     describe('getAll', function () {
         it('should return models by id', function() {
-            $httpBackend.expectGET(UserModel.$urlBase).respond(200, [{id: 5, title:'User title'},{id: 6, title:'User title'}]);
+            $httpBackend.expectGET(UserModel.$settings.url).respond(200, [{id: 5, title:'User title'},{id: 6, title:'User title'}]);
 
             var promise = UserRepository.getAll();
 
@@ -98,7 +98,7 @@ describe('Model Repository: UserRepository', function () {
         });
 
         it('should handle rejects', function() {
-            $httpBackend.expectGET(UserModel.$urlBase).respond(404, 'No such thang!');
+            $httpBackend.expectGET(UserModel.$settings.url).respond(404, 'No such thang!');
 
             var promise = UserRepository.getAll(5),
                 success = jasmine.createSpy('success'),
@@ -159,7 +159,7 @@ describe('Model Repository: UserRepository', function () {
     describe('_pool', function () {
         it('should return a reference to the pool', function() {
             var newUser = {id:19, title:'Yeah!'};
-            UserRepository._pool[19] = newUser;
+            UserRepository.cache[19] = newUser;
 
             var User;
             UserRepository.getById(19).then(function (response) {
