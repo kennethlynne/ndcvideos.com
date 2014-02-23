@@ -1,33 +1,14 @@
 'use strict';
 
 angular.module('ndc')
-    .config(function ($stateProvider, stateFactory) { $stateProvider.state('login', stateFactory('Login', {url:'/login', templateUrl: 'pages/login/index/main-view.html'})) })
-    .service('LoginCtrlInit', function ($q, $log) {
-
-        var _prepare = function () {
-            $log.log("LoginCtrl loading");
-
-            return $q.all([]).then(function (data) {
-                $log.log("LoginCtrl loaded!");
-
-                var init = {};
-
-                return init;
-            });
-        };
-
-        return {
-            prepare: _prepare
-        }
-
+    .config(function ($stateProvider, stateFactory) {
+        $stateProvider.state('login', stateFactory('Login', {url:'/login', templateUrl: 'pages/login/index/main-view.html'}))
     })
-    .controller('LoginCtrl', function ($scope, init, authentication, $state) {
+    .controller('LoginCtrl', function ($scope, authentication, $state) {
 
         if (authentication.isAuthenticated()) {
             $state.go('index');
         }
-
-        $scope.data = init;
 
         $scope.login = function (username, password) {
             $scope.working = true;
@@ -44,6 +25,7 @@ angular.module('ndc')
                 })
         };
 
+        //TODO: Refactor into directive or something
         setEyecatcherFullHeight();
         $( window ).resize(function() {
             setEyecatcherFullHeight();

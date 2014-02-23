@@ -24,7 +24,6 @@ describe('Controller(/login): LoginCtrl', function () {
             $q = _$q_;
             LoginCtrl = $controller('LoginCtrl', {
                 $scope: scope,
-                init: 'DATA',
                 $state: $state
             });
 
@@ -35,10 +34,6 @@ describe('Controller(/login): LoginCtrl', function () {
 
     it('should redirect if the user is already logged in', function() {
         expect($state.go).toHaveBeenCalled();
-    });
-
-    it('should attach init data to scope', function () {
-        expect(scope.data).toEqual('DATA');
     });
 
     it('should trigger a login', function() {

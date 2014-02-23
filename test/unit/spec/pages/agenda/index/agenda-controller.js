@@ -18,30 +18,6 @@ describe('Controller(/agenda): AgendaCtrl', function () {
     });
 
     it('should attach init data to scope', function () {
-        expect(scope.data).toEqual('DATA');
+        
     });
-});
-
-describe('Service(/agenda): AgendaCtrlInit', function () {
-
-    var AgendaCtrlInit;
-
-    beforeEach(function () {
-
-        module('ndc');
-
-        inject(function (_AgendaCtrlInit_) {
-            AgendaCtrlInit = _AgendaCtrlInit_;
-        });
-
-    });
-
-    it('should have a prepare function', function () {
-        expect(typeof AgendaCtrlInit.prepare).toEqual('function');
-    });
-
-    it('should return a promise', function () {
-        expect(typeof AgendaCtrlInit.prepare().then).toEqual('function');
-    });
-
 });
