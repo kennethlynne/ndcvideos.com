@@ -9,7 +9,6 @@ angular.module('ndc')
     })
     .controller('FavouritesCtrl', function ($scope, $log, CurrentUser) {
 
-        console.log(CurrentUser.get());
         $scope.favourites = CurrentUser.get().favourites;
 
     });
