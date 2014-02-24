@@ -2,40 +2,42 @@
 
 describe('Controller(/favourites): FavouritesCtrl', function () {
 
-    var FavouritesCtrl, scope, favourites, deferred, $q, promise, $rootScope, CurrentUser;
+    var FavouritesCtrl, scope, favourites, deferred, $q, promise, $rootScope, CurrentUser, checkIfEmpty;
 
     beforeEach(function () {
 
         module('ndc');
 
+//        checkIfEmpty = jasmine.createSpy("checkIfEmpty");
 
-        CurrentUser = {
-            get:function ()
-            {
-                return {favourites:[1, 2, 3]};
-            }};
+        inject(function ($controller, _$rootScope_, _$q_, UserModel) {
 
-        inject(function ($controller, _$rootScope_, _$q_) {
+            CurrentUser = {
+                get:jasmine.createSpy("CurrentUser.get").andCallFake(function ()
+                {
+                    return new UserModel({userName:'balle', favourites:[1, 2, 3]});;
+                })};
+
             scope = _$rootScope_.$new();
             $q = _$q_;
             deferred = $q.defer();
-
             promise = deferred.promise;
             $rootScope = _$rootScope_;
+
             FavouritesCtrl = $controller('FavouritesCtrl', {
                 $scope: scope,
                 $log:null,
-                CurrentUser:CurrentUser
+                CurrentUser:CurrentUser,
+                UserModel:UserModel
             });
         });
     });
 
     it('should attach favourites to scope', function () {
-
         deferred.resolve(favourites);
         $rootScope.$digest();
         expect(scope.favourites.length).toBe(3);
-
     });
 
+    
 });

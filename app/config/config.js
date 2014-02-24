@@ -17,7 +17,7 @@ angular.module('ndc')
             return 'components/' + componentSnakeName + '/' + componentSnakeName + '.html';
         })
 
-        //OMG NONO REMOVE BE$ PROUDUCITON
+        //TODO: OMG NONO REMOVE BE$ PROUDUCITON
         $sceDelegateProvider.resourceUrlWhitelist([
             'self',
             '**'

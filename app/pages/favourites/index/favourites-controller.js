@@ -7,8 +7,30 @@ angular.module('ndc')
             templateUrl: 'pages/favourites/index/main-view.html'
         }));
     })
-    .controller('FavouritesCtrl', function ($scope, $log, CurrentUser) {
+    .controller('FavouritesCtrl', function ($scope, $log, CurrentUser, UserModel) {
 
-        $scope.favourites = CurrentUser.get().favourites;
+        $scope.checkIfEmpty = function ()
+        {
+            console.log('balle');
+            if(!$scope.favourites || $scope.favourites.length < 1)
+            {
+                $scope.errormsg = 'No favourites yet! Try adding some :)';
+            }
+        };
+
+        var user = CurrentUser.get();
+        if(!(user instanceof UserModel))
+        {
+            $scope.$watch(function () { return CurrentUser.get(); }, function (newUser)
+            {
+                $scope.favourites = newUser.favourites;
+                $scope.checkIfEmpty();
+            });
+        }
+        else
+        {
+            $scope.favourites = user.favourites;
+            $scope.checkIfEmpty();
+        }
 
     });
