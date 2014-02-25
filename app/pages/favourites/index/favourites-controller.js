@@ -11,7 +11,7 @@ angular.module('ndc')
 
         $scope.checkIfEmpty = function ()
         {
-            if(!$scope.favourites || $scope.favourites.length < 1)
+            if(!!$scope.favourites == false || $scope.favourites.length < 1)
             {
                 $scope.errormsg = 'No favourites yet! Try adding some :)';
             }

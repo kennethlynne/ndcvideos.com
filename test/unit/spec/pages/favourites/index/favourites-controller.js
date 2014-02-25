@@ -39,5 +39,13 @@ describe('Controller(/favourites): FavouritesCtrl', function () {
         expect(scope.favourites.length).toBe(3);
     });
 
-    
+    it('should check if favourites are empty', function () {
+        deferred.resolve(favourites);
+        $rootScope.$digest();
+
+        scope.checkIfEmpty();
+
+        expect(scope.errormsg).toBeFalsy();
+    });
+
 });
