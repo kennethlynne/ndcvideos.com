@@ -1,4 +1,4 @@
-<aside class="leftnav" ng-show="isAuthenticated()">
+<aside class="navbar-component" ng-show="isAuthenticated()">
 
     <header class="actionbar">
         <button ng-show="isAuthenticated()" ng-click="signout()" class="has-tooltip" data-toggle="tooltip" data-placement="bottom" title="Logout">
@@ -19,7 +19,7 @@
         <!-- <button class="mute-button has-tooltip" data-toggle="tooltip" data-placement="bottom" title="Mute"><i class="fa fa-volume-up"></i></button> -->
     </header>
 
-    <div ng-include="navbar.templateSrc"></div>
+    <div ng-include="navbar.templateSrc" class="view-change-animation"></div>
 
     <navbar-mini-player-component></navbar-mini-player-component>
 
