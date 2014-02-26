@@ -10,10 +10,58 @@ angular.module('ndc')
 
         var VideoRepo = {};
         VideoRepo.data = [
-            {id: 1, title: 'In The Open: Ellie Goulding - Guns And Horses', description: 'Having listened to Ellie Gouldings debut album, Lights, I was always curious as to how it would translate acoustically since most of the album is more electronic driven. After a long drive from Portland, Oregon Ellie made it to San Francisco with just enough time to meet up.', duration: 1234, videoId: 23919731, type:'vimeo'},
-            {id: 2, title: 'Elom Musk - SpaceX', description: 'Elom musk er helt tullete. Her viser han skillz.', duration: 12324, videoId: "8NNSXiLNKkM", type:'youtube'},
-            {id: 3, title: 'Visitor pattern in Ruby', description: 'Explaining the Visitor pattern in  Ruby', duration: 123224, videoId: 85096027, type:'vimeo'},
-            {id: 4, title: 'Ruby 2.0', description: 'First look at prepending a module.', duration: 121324, videoId: 60572321, type:'vimeo'}
+            {
+                id: 1,
+                title: 'In The Open: Ellie Goulding - Guns And Horses',
+                description: 'Having listened to Ellie Gouldings debut album, Lights, I was always curious as to how it would translate acoustically since most of the album is more electronic driven. After a long drive from Portland, Oregon Ellie made it to San Francisco with just enough time to meet up.',
+                duration: 1234,
+                videoId: 23919731,
+                type:'vimeo',
+                tags:[{
+                        title: 'music'
+                    },
+                    {
+                        title: 'guns'
+                    }
+                ]
+            },
+
+            {
+                id: 2,
+                title: 'Elom Musk - SpaceX',
+                description: 'Elom musk er helt tullete. Her viser han skillz.',
+                duration: 12324,
+                videoId: "8NNSXiLNKkM",
+                type:'youtube',
+                tags:[
+                    {
+                        title:'space'
+                    },
+                    {
+                        title:'space exploration'
+                    }
+                ]
+            },
+
+            {
+                id: 3,
+                title: 'Visitor pattern in Ruby',
+                description: 'Explaining the Visitor pattern in  Ruby',
+                duration: 123224,
+                videoId: 85096027,
+                type:'vimeo',
+                tags:[{
+                    title:'guns'
+                }]
+            },
+
+            {
+                id: 4,
+                title: 'Ruby 2.0',
+                description: 'First look at prepending a module.',
+                duration: 121324,
+                videoId: 60572321,
+                type:'vimeo'}
         ];
         VideoRepo.index = {};
 
