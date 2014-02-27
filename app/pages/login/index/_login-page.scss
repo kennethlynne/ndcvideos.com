@@ -33,6 +33,10 @@
                 font-size: 40px;
                 color: #fff;
 
+                @include media($tablet) {
+                    font-size: 20px;
+                }
+
                 small {
                     color: $green;
                     display: block;
@@ -62,6 +66,10 @@
         background: #fff;
         border-radius: 10px;
         text-align: left;
+
+        @include media($tablet) {
+            border-radius: 0 0 0 0;
+        }
 
         h2 {
             margin-top: 5px;

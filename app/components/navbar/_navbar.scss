@@ -18,18 +18,18 @@ aside {
 
 		@include media($tablet) {
 			position: relative;
-			height: 60px;
+			// height: 60px;
 			overflow: hidden;
 			width: 100%;
-			padding-bottom: 0;
+			padding-bottom: 35px;
 		}
 
 		@include media($phone) {
 			position: relative;
-			height: 60px;
+			// height: 60px;
 			overflow: hidden;
 			width: 100%;
-			padding-bottom: 0;
+			padding-bottom: 35px;
 		}
 
 		h2 {
@@ -37,6 +37,45 @@ aside {
 			font-size: 11px;
 			color: #fff;
 			text-transform: uppercase;
+		}
+
+		.responsive-toggler {
+			display: none;
+		}
+
+		.responsive-wrapper {
+			&,
+			&.open {
+				display: block;
+			}
+		}
+
+		@include media($tablet) {
+			.responsive-toggler-wrapper {
+				@include row;
+
+				.responsive-toggler {
+					display: block;
+					height: 40px;
+					width: 40px;
+					background: #13283d;
+					border: none;
+					box-shadow: none;
+					color: #fff;
+					font-size: 1em;
+					position: relative;
+					float: right;
+				}
+			}
+
+			.responsive-wrapper {
+				display: none;
+
+				&.open {
+					display: block;
+					margin-top: 20px;
+				}
+			}
 		}
 
 		.toggle-wrapper {
@@ -101,9 +140,38 @@ aside {
 				font-size: 1em;
 				position: relative;
 
+				@include media($tablet) {
+					width: 25%;
+					height: 60px;
+					margin: 0px !important;
+				}
+
+				span.responsive-text {
+					display: none;
+
+					@include media($tablet) {
+						display: block;
+						font-size: 11px;
+						margin-top: 5px;
+						opacity: 0.6;
+					}
+				}
+
 				&.active {
+					@include media($tablet) {
+						background: $green;
+
+						span.responsive-text {
+							opacity: 1;
+						}
+					}
+
 					i {
 						color: $green;
+
+						@include media($tablet) {
+							color: #fff;
+						}
 					}
 				}
 
@@ -118,12 +186,24 @@ aside {
 					text-align: center;
 					height: 18px;
 					width: 18px;
+
+					@include media($tablet) {
+						bottom: auto;
+						top: 11px;
+						right: auto;
+						left: 50%;
+						margin-left: 15px;
+					}
 				}
 			}
 
 			.pull-right {
 				button {
 					margin: 0 0 0 10px;
+				}
+
+				@include media($tablet) {
+					float: none;
 				}
 			}
 		}
