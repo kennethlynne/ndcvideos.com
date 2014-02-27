@@ -6,6 +6,7 @@ angular.module('ndc.components')
         $scope.openModal = function () {
 
             var modalInstance = $modal.open({
+                backdrop: 'static',
                 templateUrl: 'components/video-list-item/modal/video-list-item-modal.html',
                 controller: 'VideoListItemModalCtrl',
                 resolve: {
