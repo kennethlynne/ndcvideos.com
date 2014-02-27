@@ -1,85 +1,27 @@
-<aside class="leftnav" ng-show="isAuthenticated()">
+<aside class="navbar-component" ng-show="isAuthenticated()">
 
     <header class="actionbar">
         <button ng-show="isAuthenticated()" ng-click="signout()" class="has-tooltip" data-toggle="tooltip" data-placement="bottom" title="Logout">
             <i class="fa fa-power-off"></i>
         </button>
         <div class="pull-right">
-            <button class="has-tooltip toggle toggle-navigation active" data-toggle="tooltip" data-placement="bottom" title="Menu">
+            <button class="toggle toggle-navigation" ng-class="{'active': navbar.isActive('navigation')}" data-toggle="tooltip" data-placement="bottom" title="Menu" ng-click="navbar.setState('navigation')">
                 <i class="fa fa-bars"></i>
             </button>
-            <button class="has-tooltip toggle toggle-notifications" data-toggle="tooltip" data-placement="bottom" title="Notifications">
+            <button class="toggle toggle-notifications" ng-class="{'active': navbar.isActive('notifications')}" data-toggle="tooltip" data-placement="bottom" title="Notifications" ng-click="navbar.setState('notifications')">
                 <span class="notification-count">2</span>
                 <i class="fa fa-bell"></i>
             </button>
-            <button class="has-tooltip toggle toggle-settings" data-toggle="tooltip" data-placement="bottom" title="Settings">
+            <button class="toggle toggle-settings" ng-class="{'active': navbar.isActive('settings')}" data-toggle="tooltip" data-placement="bottom" title="Settings" ng-click="navbar.setState('settings')">
                 <i class="fa fa-gear"></i>
             </button>
         </div>
         <!-- <button class="mute-button has-tooltip" data-toggle="tooltip" data-placement="bottom" title="Mute"><i class="fa fa-volume-up"></i></button> -->
     </header>
 
-    <div class="toggle-wrapper navigation-wrapper">
-        <!-- <h1>NDC 
-            <small>Norwegian Developer Conference</small>
-        </h1> -->
+    <div ng-include="navbar.templateSrc"></div>
+    <!-- <div ng-include="navbar.templateSrc" class="view-change-animation"></div> -->
 
-        <ul class="navigation">
-            <li ng-class="getClass('/')"><a ui-sref="index">All videos</a></li>
-            <li ng-class="getClass('/favourites')"><a ui-sref="favourites">Your favourites</a></li>
-            <li ng-class="getClass('/agenda')"><a ui-sref="agenda">NDC 2014 Agenda</a></li>
-        </ul>
-
-        <h2>Search</h2>
-        <input type="text" class="search" placeholder="Add tags to filter videos ..">
-
-        <ul class="tags">
-            <li>Angular <a href="#" class="close">&times;</a></li>
-            <li>Firebase <a href="#" class="close">&times;</a></li>
-        </ul>
-    </div>
-
-    <div class="toggle-wrapper settings-wrapper">
-        <h2>Account</h2>
-        <input type="text" value="ali@g.com">
-
-        <h2>Password</h2>
-        <input type="password" value="123456">   
-
-        <button class="button">Save changes</button>     
-    </div>
-
-    <div class="toggle-wrapper notifications-wrapper">
-        <ol class="notifications">
-            <li>
-                <p>
-                    Lorem ipsum <a href="#">dolor sit amet</a>, consectetur adipisicing elit. Expedita, amet. 
-                    <small>4 hours ago</small>
-                </p>
-            </li>
-            <li>
-                <p>
-                    Lorem ipsum <a href="#">dolor</a> sit.
-                    <small>Yesterday</small>
-                </p>
-            </li>
-            <li>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. a <a href="#">sequi consequatur</a> rem? Nobis!
-                    <small>3 days ago</small>
-                </p>
-            </li>
-        </ol>
-    </div>
-
-    <div class="mini-player">
-        <button class="fullscreen-trigger has-tooltip" data-toggle="tooltip" data-placement="left" title="Fullscreen"><i class="fa fa-expand"></i></button>
-        <div class="video"><img src="assets/images/video-placeholder.png" alt=""></div>
-        <div class="controls">
-            <button class="has-tooltip" data-toggle="tooltip" data-placement="top" title="From the start"><i class="fa fa-step-backward"></i></button>
-            <button class="play-pause-button has-tooltip" data-toggle="tooltip" data-placement="top" title="Start"><i class="fa fa-play"></i></button>
-            <button class="has-tooltip" data-toggle="tooltip" data-placement="top" title="Next video"><i class="fa fa-step-forward"></i></button>
-        </div>
-    </div>
+    <navbar-mini-player-component></navbar-mini-player-component>
 
 </aside>

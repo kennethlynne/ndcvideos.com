@@ -14,10 +14,6 @@ body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
   background: #2f6193;
-
-  @include media($tablet) {
-	background: red !important;
-  }
 }
 
 a {
@@ -78,6 +74,10 @@ button {
   color: #fff;
 
   @include media($tablet) {
+	margin-left: 0;
+  }
+
+  @include media($phone) {
 	margin-left: 0;
   }
 

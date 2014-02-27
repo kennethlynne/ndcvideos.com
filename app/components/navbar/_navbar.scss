@@ -3,7 +3,7 @@ aside {
 		position: relative;	
 	}
 
-	&.leftnav {
+	&.navbar-component {
 		position: fixed;
 		padding: $content-gutter;
 		color: #fff;
@@ -40,7 +40,6 @@ aside {
 		}
 
 		.toggle-wrapper {
-			display: none;
 
 			&.navigation-wrapper {
 				display: block;
@@ -238,62 +237,6 @@ aside {
 			padding: 10px 10px;
 			font-size: 0.9em;
 			margin-bottom: $content-gutter;
-		}
-
-		.mini-player {
-			position: fixed;
-			left: 0;
-			bottom: 0;
-			width: $leftnav-width;
-			z-index: 10;
-
-			@include media($tablet) {
-				display: none;
-			}
-
-			.fullscreen-trigger {
-				height: 40px;
-				width: 40px;
-				margin-bottom: -40px;
-				float: right;
-				background: rgba(0, 0, 0, 0.6);
-				box-shadow: none;
-				border: none;
-				color: #fff;
-				position: relative;
-				z-index: 13;
-			}
-
-			.video {
-				height: ($leftnav-width / 16) * 9;
-				width: $leftnav-width;
-				background: rgba(0, 0, 0, 0.2);
-				position: relative;
-				z-index: 11;
-
-				img {
-					width: 100%;
-					height: auto;
-				}
-			}
-
-			.controls {
-				height: 60px;
-				width: $leftnav-width;
-				background: rgba(0, 0, 0, 0.5);
-				text-align: center;
-				padding: 15px;
-
-				button {
-					height: 30px;
-					width: 30px;
-					background: rgba(0, 0, 0, 0.5);
-					margin: 0 5px;
-					border: none;
-					box-shadow: none;
-					color: #fff;
-				}
-			}
 		}
 	}
 }

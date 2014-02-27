@@ -36,6 +36,19 @@
             }
         }
 
+        @include media($phone) {
+            @include span-columns(4);   
+            padding: $content-gutter / 2;
+
+            &:nth-child(4) {
+                @include omega;
+            }
+
+            &:last-child {
+                @include omega;
+            }
+        }
+
         .video-info {
             position: absolute;
             bottom: 0;
