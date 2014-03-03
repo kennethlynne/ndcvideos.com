@@ -1,6 +1,6 @@
-describe('Model Repository: TagsRepository', function () {
+describe('Model Repository: TagRepository', function () {
 
-    var TagsRepository, $httpBackend, Model, $rootScope, BaseRepository;
+    var TagRepository, $httpBackend, Model, $rootScope, BaseRepository;
 
     beforeEach(function () {
 
@@ -13,11 +13,11 @@ describe('Model Repository: TagsRepository', function () {
         };
 
         module('ndc', function ($provide) {
-            $provide.value('TagsModel', Model);
+            $provide.value('TagModel', Model);
         });
 
-        inject(function (_TagsRepository_, _$httpBackend_, _$rootScope_, $injector) {
-            TagsRepository = _TagsRepository_;
+        inject(function (_TagRepository_, _$httpBackend_, _$rootScope_, $injector) {
+            TagRepository = _TagRepository_;
             $httpBackend = _$httpBackend_;
             BaseRepository = $injector.get('BaseRepository');
             $rootScope = _$rootScope_;
@@ -31,14 +31,14 @@ describe('Model Repository: TagsRepository', function () {
     });
 
     it('should be an instance of BaseRepository', function() {
-        expect(TagsRepository instanceof BaseRepository).toBeTruthy();
+        expect(TagRepository instanceof BaseRepository).toBeTruthy();
     });
 
     describe('getById', function () {
         it('should return models by id', function() {
             $httpBackend.expectGET(Model.$settings.url + '/5').respond(200, {id: 5});
 
-            var promise = TagsRepository.getById(5);
+            var promise = TagRepository.getById(5);
 
             var response;
             promise.then(function (r) {
@@ -53,10 +53,10 @@ describe('Model Repository: TagsRepository', function () {
 
         it('should not do subsequent calls if model already exits in pool', function() {
             $httpBackend.expectGET(Model.$settings.url + '/5').respond(200, {id: 5});
-            TagsRepository.getById(5);
+            TagRepository.getById(5);
             $httpBackend.flush();
 
-            var promise = TagsRepository.getById(5);
+            var promise = TagRepository.getById(5);
 
             var response;
             promise.then(function (r) {
@@ -72,7 +72,7 @@ describe('Model Repository: TagsRepository', function () {
         it('should handle rejects', function() {
             $httpBackend.expectGET(Model.$settings.url + '/5').respond(404, 'No such thang!');
 
-            var promise = TagsRepository.getById(5),
+            var promise = TagRepository.getById(5),
                 response,
                 success = jasmine.createSpy('success'),
                 error = jasmine.createSpy('error');
@@ -90,27 +90,27 @@ describe('Model Repository: TagsRepository', function () {
         it('should return models by id', function() {
             $httpBackend.expectGET(Model.$settings.url).respond(200, [{id: 5},{id: 6}]);
 
-            var promise = TagsRepository.getAll();
+            var promise = TagRepository.getAll();
 
-            var Tags5, Tags6;
+            var Tag5, Tag6;
             promise.then(function (r) {
-                Tags5 = r[0];
-                Tags6 = r[1];
+                Tag5 = r[0];
+                Tag6 = r[1];
             });
 
             $httpBackend.flush();
 
-            expect(Tags5 instanceof Model).toBeTruthy();
-            expect(Tags5.id).toEqual(5);
+            expect(Tag5 instanceof Model).toBeTruthy();
+            expect(Tag5.id).toEqual(5);
 
-            expect(Tags6 instanceof Model).toBeTruthy();
-            expect(Tags6.id).toEqual(6);
+            expect(Tag6 instanceof Model).toBeTruthy();
+            expect(Tag6.id).toEqual(6);
         });
 
         it('should handle rejects', function() {
             $httpBackend.expectGET(Model.$settings.url).respond(404, 'No such thang!');
 
-            var promise = TagsRepository.getAll(5),
+            var promise = TagRepository.getAll(5),
                 success = jasmine.createSpy('success'),
                 error = jasmine.createSpy('error');
 
@@ -127,47 +127,47 @@ describe('Model Repository: TagsRepository', function () {
 
         it('should throw if trying to attach a model that is not of valid type', function() {
             function wrapper() {
-                TagsRepository.attach({fails: true});
+                TagRepository.attach({fails: true});
             }
             expect(wrapper).toThrow();
         });
 
         it('should return the attached model on subsequent requests', function() {
 
-            TagsRepository.attach(new Model({id: 5}));
+            TagRepository.attach(new Model({id: 5}));
 
-            var Tags;
+            var Tag;
 
-            TagsRepository.getById(5).then(function (response) {
-                Tags = response;
+            TagRepository.getById(5).then(function (response) {
+                Tag = response;
             });
 
             $rootScope.$digest();
 
-            expect(Tags instanceof Model).toBeTruthy();
-            expect(Tags.id).toEqual(5);
+            expect(Tag instanceof Model).toBeTruthy();
+            expect(Tag.id).toEqual(5);
         });
     });
 
     describe('create', function () {
-        it('should return a newed up instance of the Tags Model', function() {
-            var Tags = TagsRepository.create({title:'New title'});
-            expect(Tags instanceof Model).toBeTruthy();
+        it('should return a newed up instance of the Tag Model', function() {
+            var Tag = TagRepository.create({title:'New title'});
+            expect(Tag instanceof Model).toBeTruthy();
         });
     });
 
     describe('cache', function () {
         it('should return a reference to the pool', function() {
-            var newTags = {id:19};
-            TagsRepository.cache[19] = newTags;
+            var newTag = {id:19};
+            TagRepository.cache[19] = newTag;
 
-            var Tags;
-            TagsRepository.getById(19).then(function (response) {
-                Tags = response;
+            var Tag;
+            TagRepository.getById(19).then(function (response) {
+                Tag = response;
             });
             $rootScope.$digest();
 
-            expect(Tags).toBe(newTags);
+            expect(Tag).toBe(newTag);
         });
     });
 

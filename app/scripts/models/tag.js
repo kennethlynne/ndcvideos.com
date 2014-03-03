@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('ndc')
-    .factory('TagsModel', function ($q, $http, $rootScope, BaseModel, APIBaseUrl, $injector) {
+    .factory('TagModel', function ($q, $http, $rootScope, BaseModel, APIBaseUrl, $injector) {
 
-        var url = APIBaseUrl + 'Tags';
+        var url = APIBaseUrl + 'tags';
 
         function Model(data) {
             data = data || {};
@@ -19,7 +19,7 @@ angular.module('ndc')
         Model.prototype.$save = function () {
             var self = this;
             return _$save.apply(this, arguments).then(function (response) {
-                var Repository = $injector.get('TagsRepository');
+                var Repository = $injector.get('TagRepository');
                 Repository.attach(self);
                 return response;
             });

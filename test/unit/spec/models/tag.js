@@ -1,20 +1,20 @@
 'use strict';
 
-describe('Model: TagsModel', function () {
+describe('Model: TagModel', function () {
 
-    var TagsModel, $httpBackend, $rootScope, APIBaseUrl, TagsRepository, collectionUrl = 'Tags';
+    var TagModel, $httpBackend, $rootScope, APIBaseUrl, TagRepository, collectionUrl = 'tags';
 
     beforeEach(function () {
 
-        TagsRepository = jasmine.createSpy('TagsRepository');
-        TagsRepository.attach = jasmine.createSpy('TagsRepository.attach');
+        TagRepository = jasmine.createSpy('TagRepository');
+        TagRepository.attach = jasmine.createSpy('TagRepository.attach');
 
         module('ndc', function ($provide) {
-            $provide.value('TagsRepository', TagsRepository);
+            $provide.value('TagRepository', TagRepository);
         });
 
-        inject(function (_TagsModel_, _$httpBackend_, _$rootScope_, _APIBaseUrl_) {
-            TagsModel = _TagsModel_;
+        inject(function (_TagModel_, _$httpBackend_, _$rootScope_, _APIBaseUrl_) {
+            TagModel = _TagModel_;
             $httpBackend = _$httpBackend_;
             $rootScope = _$rootScope_;
             APIBaseUrl = _APIBaseUrl_;
@@ -28,13 +28,13 @@ describe('Model: TagsModel', function () {
     });
 
     it('should have the url property set', function() {
-        expect(TagsModel.$settings.url).toBe(APIBaseUrl + collectionUrl);
+        expect(TagModel.$settings.url).toBe(APIBaseUrl + collectionUrl);
     });
 
     describe('$save', function () {
         it('should PUT its data on $save when it has an ID (update existing)', function() {
             $httpBackend.expectPUT( APIBaseUrl + collectionUrl + '/5', {title:'New title', id:5} ).respond(200, {id: 5, title:'New title from server'});
-            var model = new TagsModel({title: 'New title', id: 5});
+            var model = new TagModel({title: 'New title', id: 5});
 
             var promise = model.$save();
             $httpBackend.flush();
@@ -45,7 +45,7 @@ describe('Model: TagsModel', function () {
 
         it('should POST its data on $save if does not have an ID (new)', function() {
             $httpBackend.expectPOST( APIBaseUrl + collectionUrl, {title:'New title'} ).respond(200, {id: 5, title:'New title from server'});
-            var model = new TagsModel({title: 'New title'});
+            var model = new TagModel({title: 'New title'});
 
             var promise = model.$save();
             $httpBackend.flush();
@@ -56,26 +56,26 @@ describe('Model: TagsModel', function () {
 
         it('should attach itself to the Repository on save', function() {
             $httpBackend.expectPUT( APIBaseUrl + collectionUrl + '/5', {title:'New title', id:5}).respond(200, {id: 5, title:'New title from server'});
-            var model = new TagsModel({title: 'New title', id: 5});
-            expect(TagsRepository.attach).not.toHaveBeenCalled();
+            var model = new TagModel({title: 'New title', id: 5});
+            expect(TagRepository.attach).not.toHaveBeenCalled();
             var promise = model.$save();
             $httpBackend.flush();
-            expect(TagsRepository.attach).toHaveBeenCalledWith(model);
+            expect(TagRepository.attach).toHaveBeenCalledWith(model);
         });
     });
 
     describe('$set', function () {
         it('should load instance and override with new data', function() {
-            var model = new TagsModel({title: 'New title', id: 5});
+            var model = new TagModel({title: 'New title', id: 5});
 
             model.$set({id:1});
 
             expect(model.id).toBe(1);
-            expect(model instanceof TagsModel).toBeTruthy();
+            expect(model instanceof TagModel).toBeTruthy();
         });
 
         it('should remove properties missing in new object', function() {
-            var model = new TagsModel();
+            var model = new TagModel();
 
             model.title = 'New title';
             model.id = 5;
@@ -91,7 +91,7 @@ describe('Model: TagsModel', function () {
         it('should delete on $delete', function() {
             $httpBackend.expectDELETE( APIBaseUrl + collectionUrl + '/5').respond(200, {});
 
-            var model = new TagsModel();
+            var model = new TagModel();
             model.id = 5;
 
             var promise = model.$delete();
@@ -103,19 +103,19 @@ describe('Model: TagsModel', function () {
 
     describe('$isDirty', function () {
         it('should return false if object is not changed since last save or delete ', function() {
-            var model = new TagsModel({id:1});
+            var model = new TagModel({id:1});
             expect(model.$isDirty).toBeFalsy();
         });
 
         it('should not be dirty initially', function() {
-            var model = new TagsModel({id:5});
+            var model = new TagModel({id:5});
             expect(model.$isDirty).toBeFalsy();
             $rootScope.$digest();
             expect(model.$isDirty).toBeFalsy();
         });
 
         it('should be dirty on change', function() {
-            var model = new TagsModel({id:5});
+            var model = new TagModel({id:5});
             $rootScope.$digest();
             model.thing = 'Data';
             $rootScope.$digest();
@@ -123,7 +123,7 @@ describe('Model: TagsModel', function () {
         });
 
         it('should not be dirty after save', function() {
-            var model = new TagsModel({id:5});
+            var model = new TagModel({id:5});
             $rootScope.$digest();
             model.thing = 'Data';
 
@@ -139,7 +139,7 @@ describe('Model: TagsModel', function () {
         it('should call all registered callbacks on change', function() {
             var cb = jasmine.createSpy('callback1');
 
-            var model = new TagsModel({id:5});
+            var model = new TagModel({id:5});
             model.$onChange(cb);
             $rootScope.$digest();
             expect(cb).not.toHaveBeenCalled();
