@@ -1,5 +1,5 @@
 'use strict';
-
+//TODO: Add water and unit tests!
 angular.module('ndc.components')
     .controller('navbarComponentCtrl', function ($scope, $element, authentication, $location, navbar) {
         $scope.signout = function () {
@@ -14,7 +14,7 @@ angular.module('ndc.components')
             return authentication.isAuthenticated();
         };
 
-        // TODO 
+        // TODO
         $(".responsive-toggler").click(function() {
             $(".responsive-wrapper").toggleClass("open");
             $(this).find("i").toggleClass("fa-bars");
