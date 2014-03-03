@@ -3,8 +3,7 @@
 angular.module('ndc.components')
     .controller('navbarComponentCtrl', function ($scope, $element, authentication, $location, navbar) {
         $scope.signout = function () {
-            var confirmed = confirm('Are you sure you want to log out?');
-            if (confirmed == true) {
+            if (confirm('Are you sure you want to log out?') == true) {
                 authentication.logout();
                 $location.path('/login');
             }
