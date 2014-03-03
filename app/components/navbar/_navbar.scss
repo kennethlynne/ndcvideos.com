@@ -21,7 +21,7 @@ aside {
 			// height: 60px;
 			overflow: hidden;
 			width: 100%;
-			padding-bottom: 35px;
+			padding-bottom: 25px;
 		}
 
 		@include media($phone) {
@@ -29,7 +29,7 @@ aside {
 			// height: 60px;
 			overflow: hidden;
 			width: 100%;
-			padding-bottom: 35px;
+			padding-bottom: 25px;
 		}
 
 		h2 {
@@ -58,7 +58,7 @@ aside {
 					display: block;
 					height: 40px;
 					width: 40px;
-					background: #13283d;
+					background: $dark-color;
 					border: none;
 					box-shadow: none;
 					color: #fff;
@@ -74,6 +74,7 @@ aside {
 				&.open {
 					display: block;
 					margin-top: 20px;
+					padding-bottom: 15px;
 				}
 			}
 		}
@@ -132,7 +133,7 @@ aside {
 				float: left;
 				height: 40px;
 				width: 40px;
-				background: #13283d;
+				background: $dark-color;
 				margin: 0 10px 0 0;
 				border: none;
 				box-shadow: none;
@@ -297,7 +298,7 @@ aside {
 				margin-right: 5px;
 
 				.close {
-					color: #13283d;
+					color: $dark-color;
 					padding: 5px 10px 5px 5px;
 					text-decoration: none;
 

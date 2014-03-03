@@ -16,7 +16,7 @@ $iconWhiteSpritePath:     "../assets/images/glyphicons-halflings-white.png" !def
 
 $grid-columns: 12;
 $smalldesktop: new-breakpoint(max-width 1200px 12);
-$tablet: new-breakpoint(max-width 1000px 4);
+$tablet: new-breakpoint(max-width 1100px 4);
 $phone: new-breakpoint(max-width 480px 4);
 
 $leftnav-width: 260px;
@@ -33,5 +33,7 @@ $red: #FF4136;
 $purple: #6a2a78;
 $orange: #f8aa45;
 $blue: #66c2e7;
+
+$dark-color: #13283d;
 
 $primary-color: $green;

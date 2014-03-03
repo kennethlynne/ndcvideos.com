@@ -1,46 +1,92 @@
 .agenda-page  {
 	@include clearfix;
-  	padding: 0 $content-gutter;
+  	padding: 0 $content-gutter 0 $content-gutter;
 
-	h2 {
-		font-size: 16px;
-		float: none;
-		padding: 0;
+  	h2 {
+  		margin: $content-gutter 0;
+  		padding: 0;
+  		font-size: 30px;
+  		text-transform: uppercase;
+  		font-weight: bold;
+
+  		small {
+			color: $leftnav-background;
+			margin-bottom: 5px;
+			opacity: 1;
+			font-size: 0.7em;
+		}
+  	}
+
+	h3 {
+		font-size: 18px;
+		padding: ($content-gutter / 2) 0 $content-gutter/2 0;
 		margin: ($content-gutter / 2) 0 ($content-gutter / 2) 0;
+		// color: $dark-color;
+		border-top: 2px solid rgba(255, 255, 255, 0.1);
+		border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+		@include span-columns(12);
+
+		i.fa {
+			color: $primary-color;
+			margin-right: 2px;
+		}
 	}
 
 	.track-wrapper {
-		width: 100%;
-		height: 190px;
-		background: $leftnav-background;
-		margin: 0 0 $content-gutter 0;
-		padding: $content-gutter;
-		overflow-x: auto !important;
-		overflow-y: hidden;
-		white-space: nowrap;
+		@include span-columns(2);
+		@include clearfix;
+		// background: $leftnav-background;
+		// margin: ($content-gutter/2) ($content-gutter/2) ($content-gutter/2) 0;
+		padding: ($content-gutter / 2) $content-gutter $content-gutter 0;
+		// overflow-x: auto !important;
+		// overflow-y: hidden;
+		// white-space: nowrap;
+
+		@include media($tablet) {
+			@include span-columns(4 of 12);
+			@include omega(3);
+		}
+
+		@include media($phone) {
+			@include span-columns(2);
+			@include omega(2);
+		}
+
+		a {
+			color: inherit;
+			text-decoration: none;
+		}
 
 		.element {
-			display: inline-block;
-			vertical-align: top;
-			height: 150px;
-			background: red;
-			margin-right: 10px;
 
-			img {
-				height: 100%;
-				width: auto;
+			&.inactive {
+				opacity: 0.3;
+				cursor: not-allowed;
 			}
 
-			&.time {
-				background: #fff;
-				color: $leftnav-background;
-				width: 200px;
+			img {
+				width: 100%;
+				height: auto;
+				background: $leftnav-background;
+				margin-bottom: $content-gutter / 2;
+			}
 
-				h3 {
-					padding: 40px 0;
-					font-size: 25px;
-					text-align: center;
+			h4 {
+				padding: 0 0 0 0;
+				margin: 0;
+				font-size: 12px;
+				text-transform: uppercase;
+
+				small {
+					color: $leftnav-background;
+					display: block;
+					margin-bottom: 5px;
 				}
+			}
+
+			p {
+				margin: 0;
+				font-size: 13px;
 			}
 		}
 	}
