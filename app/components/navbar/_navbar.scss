@@ -165,30 +165,6 @@
 		}	
 	}
 
-	ul.tags {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-
-		li {
-			display: inline-block;
-			background: $green;
-			font-size: 13px;
-			padding: 7px 0 7px 10px;
-			margin-right: 5px;
-
-			.close {
-				color: #13283d;
-				padding: 5px 10px 5px 5px;
-				text-decoration: none;
-
-				&:hover {
-					color: #fff;
-				}
-			}
-		}
-	}
-
 	input[type="text"],
 	input[type="password"] {
 		width: 100%;

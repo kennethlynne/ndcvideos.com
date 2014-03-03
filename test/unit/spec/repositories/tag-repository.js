@@ -6,6 +6,7 @@ describe('Model Repository: TagRepository', function () {
 
         Model = function (p) {
             this.id = p.id;
+            this.text = p.text;
         };
 
         Model.$settings = {
@@ -173,5 +174,43 @@ describe('Model Repository: TagRepository', function () {
 
     describe('saveChanges', function () {
        it('should save all changes in current Repository to the server');
+    });
+
+
+    describe('search', function () {
+        it('should search by tag name', function() {
+            $httpBackend.expectGET(Model.$settings.url + '/search?q=test').respond(200, [{id: 5, text:'Test1'},{id: 6, text:'Test2'}]);
+
+            var promise = TagRepository.search('test');
+
+            var Tag5, Tag6;
+            promise.then(function (r) {
+                Tag5 = r[0];
+                Tag6 = r[1];
+            });
+
+            $httpBackend.flush();
+
+            expect(Tag5 instanceof Model).toBeTruthy();
+            expect(Tag5.text).toEqual('Test1');
+
+            expect(Tag6 instanceof Model).toBeTruthy();
+            expect(Tag6.text).toEqual('Test2');
+        });
+
+        it('should handle rejects', function() {
+            $httpBackend.expectGET(Model.$settings.url).respond(404, 'No such thang!');
+
+            var promise = TagRepository.getAll(5),
+                success = jasmine.createSpy('success'),
+                error = jasmine.createSpy('error');
+
+            promise.then(success).catch(error);
+
+            $httpBackend.flush();
+
+            expect(success).not.toHaveBeenCalled();
+            expect(error).toHaveBeenCalled();
+        });
     });
 });

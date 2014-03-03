@@ -4,12 +4,20 @@ angular.module('ndc')
 
         var collectionUrl = APIBaseUrl + 'tags';
         var IdRegExp = /[\d\w-_]+$/.toString().slice(1, -1);
+        var QueryRegExp = /[\d\w-_\.\s]*$/.toString().slice(1, -1);
 
         console.log('Stubbing tag API - ' + collectionUrl);
         console.log('************');
 
         var TagRepo = {};
-        TagRepo.data = [{id: guid(), text:'Hello World'}];
+        TagRepo.data = [
+            {id: 1, text:'Javascript'},
+            {id: 2, text:'Angular'},
+            {id: 3, text:'.NET'},
+            {id: 4, text:'Java'},
+            {id: 5, text:'Firebase'},
+            {id: 6, text:'Ember'}
+        ];
         TagRepo.index = {};
 
         angular.forEach(TagRepo.data, function(item, key) {
@@ -34,11 +42,16 @@ angular.module('ndc')
             return [200, Tag, {/*headers*/}];
         });
 
-        //GET tag/id
-        $httpBackend.whenGET( new RegExp(regexEscape(collectionUrl + '/') + IdRegExp ) ).respond(function(method, url, data, headers) {
-            $log.log('Intercepted GET to tag');
-            var id = url.match( new RegExp(IdRegExp) )[0];
-            return [TagRepo.index[id]?200:404, TagRepo.index[id] || null, {/*headers*/}];
+        //GET tag/search?q=<query>
+        $httpBackend.whenGET( new RegExp(regexEscape(collectionUrl + '/search?q=') + QueryRegExp ) ).respond(function(method, url, data, headers) {
+            $log.log('Intercepted GET to tag/search');
+            var term = url.match( new RegExp(QueryRegExp) )[0] || '';
+
+            var hits = TagRepo.data.filter(function (tag) {
+                return tag && typeof tag.text == 'string' && tag.text.toLowerCase().indexOf(term.toLowerCase()) >= 0;
+            });
+
+            return [200, hits, {/*headers*/}];
         });
 
         //PUT tag/id
