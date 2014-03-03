@@ -1,7 +1,8 @@
 {
     "javascript": {
-        "external" : [
+        "external": [
             "bower_components/jquery/jquery.js",
+            "bower_components/select2/select2.js",
             "bower_components/angular/angular.js",
             "bower_components/angular-mocks/angular-mocks.js",
             "bower_components/lodash/dist/lodash.js",
@@ -27,9 +28,10 @@
             "bower_components/ng-symbiosis-model/ng-symbiosis-model.src.js",
             "bower_components/ng-symbiosis-repository/ng-symbiosis-repository.src.js",
             "bower_components/ng-symbiosis-routeprovider/ng-symbiosis-routeprovider.src.js",
-            "bower_components/lodash/dist/lodash.js"
+            "bower_components/lodash/dist/lodash.js",
+            "bower_components/angular-ui-select2/src/select2.js"
         ],
-        "app" : [
+        "app": [
             "scripts/module.js",
             "config/*.js",
             "scripts/framework/**/*.js",

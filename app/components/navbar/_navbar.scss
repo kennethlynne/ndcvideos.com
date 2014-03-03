@@ -1,323 +1,324 @@
 aside {
-	@include media($tablet) {
-		position: relative;	
-	}
+  @include media($tablet) {
+    position: relative;
+  }
 
-	&.navbar-component {
-		position: fixed;
-		padding: $content-gutter;
-		color: #fff;
-		overflow-y: auto !important;
-		overflow-x: hidden;
-		width: $leftnav-width;
-		background: $leftnav-background;
-		left: 0;
-		top: 0;
-		bottom: 0;
-		padding-bottom: (($leftnav-width / 16) * 9) + 60;
+  &.navbar-component {
+    position: fixed;
+    padding: $content-gutter;
+    color: #fff;
+    overflow-y: auto !important;
+    overflow-x: hidden;
+    width: $leftnav-width;
+    background: $leftnav-background;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    padding-bottom: (($leftnav-width / 16) * 9) + 60;
 
-		@include media($tablet) {
-			position: relative;
-			// height: 60px;
-			overflow: hidden;
-			width: 100%;
-			padding-bottom: 25px;
-		}
+    @include media($tablet) {
+      position: relative;
+      // height: 60px;
+      overflow: hidden;
+      width: 100%;
+      padding-bottom: 25px;
+    }
 
-		@include media($phone) {
-			position: relative;
-			// height: 60px;
-			overflow: hidden;
-			width: 100%;
-			padding-bottom: 25px;
-		}
+    @include media($phone) {
+      position: relative;
+      // height: 60px;
+      overflow: hidden;
+      width: 100%;
+      padding-bottom: 25px;
+    }
 
-		h2 {
-			margin: 10px 0 5px 0;
-			font-size: 11px;
-			color: #fff;
-			text-transform: uppercase;
-		}
+    h2 {
+      margin: 10px 0 5px 0;
+      font-size: 11px;
+      color: #fff;
+      text-transform: uppercase;
+    }
 
-		.responsive-toggler {
-			display: none;
-		}
+    .responsive-toggler {
+      display: none;
+    }
 
-		.responsive-wrapper {
-			&,
-			&.open {
-				display: block;
-			}
-		}
+    .responsive-wrapper {
+      &,
+      &.open {
+        display: block;
+      }
+    }
 
-		@include media($tablet) {
-			.responsive-toggler-wrapper {
-				@include row;
+    @include media($tablet) {
+      .responsive-toggler-wrapper {
+        @include row;
 
-				.responsive-toggler {
-					display: block;
-					height: 40px;
-					width: 40px;
-					background: $dark-color;
-					border: none;
-					box-shadow: none;
-					color: #fff;
-					font-size: 1em;
-					position: relative;
-					float: right;
-				}
-			}
+        .responsive-toggler {
+          display: block;
+          height: 40px;
+          width: 40px;
+          background: $dark-color;
+          border: none;
+          box-shadow: none;
+          color: #fff;
+          font-size: 1em;
+          position: relative;
+          float: right;
+        }
+      }
 
-			.responsive-wrapper {
-				display: none;
+      .responsive-wrapper {
+        display: none;
 
-				&.open {
-					display: block;
-					margin-top: 20px;
-					padding-bottom: 15px;
-				}
-			}
-		}
+        &.open {
+          display: block;
+          margin-top: 20px;
+          padding-bottom: 15px;
+        }
+      }
+    }
 
-		.toggle-wrapper {
+    .toggle-wrapper {
 
-			&.navigation-wrapper {
-				display: block;
-			}
+      &.navigation-wrapper {
+        display: block;
+      }
 
-			&.notifications-wrapper {
-				.notifications {
-					list-style: none;
-					padding: 0;
+      &.notifications-wrapper {
+        .notifications {
+          list-style: none;
+          padding: 0;
 
-					li {
-						padding-bottom: $content-gutter;
-						margin-bottom: $content-gutter;
-						border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+          li {
+            padding-bottom: $content-gutter;
+            margin-bottom: $content-gutter;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 
-						&:last-child {
-							border-bottom: 0;
-							margin-bottom: 0;
-							padding-bottom: 0;
-						}
+            &:last-child {
+              border-bottom: 0;
+              margin-bottom: 0;
+              padding-bottom: 0;
+            }
 
-						p {
-							font-size: 0.8em;
-							margin: 0;
+            p {
+              font-size: 0.8em;
+              margin: 0;
 
-							small {
-								display: block;
-								opacity: 0.6;
-								margin-top: 4px;
-							}
-						}
-					}
-				}
-			}
+              small {
+                display: block;
+                opacity: 0.6;
+                margin-top: 4px;
+              }
+            }
+          }
+        }
+      }
 
-			&.settings-wrapper {
-				h2 {
-					margin-top: 0px;
-				}
-			}
-		}
+      &.settings-wrapper {
+        h2 {
+          margin-top: 0px;
+        }
+      }
+    }
 
-		header.actionbar {
-			@include row;
-			// right: $rightnav-width;
-			margin: 0 0 ($content-gutter * 2) 0;
-			border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-			padding-bottom: $content-gutter;
+    header.actionbar {
+      @include row;
+      // right: $rightnav-width;
+      margin: 0 0 ($content-gutter * 2) 0;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: $content-gutter;
 
-			button {
-				float: left;
-				height: 40px;
-				width: 40px;
-				background: $dark-color;
-				margin: 0 10px 0 0;
-				border: none;
-				box-shadow: none;
-				color: #fff;
-				font-size: 1em;
-				position: relative;
+      button {
+        float: left;
+        height: 40px;
+        width: 40px;
+        background: $dark-color;
+        margin: 0 10px 0 0;
+        border: none;
+        box-shadow: none;
+        color: #fff;
+        font-size: 1em;
+        position: relative;
 
-				@include media($tablet) {
-					width: 25%;
-					height: 60px;
-					margin: 0px !important;
-				}
+        @include media($tablet) {
+          width: 25%;
+          height: 60px;
+          margin: 0px !important;
+        }
 
-				span.responsive-text {
-					display: none;
+        span.responsive-text {
+          display: none;
 
-					@include media($tablet) {
-						display: block;
-						font-size: 11px;
-						margin-top: 5px;
-						opacity: 0.6;
-					}
-				}
+          @include media($tablet) {
+            display: block;
+            font-size: 11px;
+            margin-top: 5px;
+            opacity: 0.6;
+          }
+        }
 
-				&.active {
-					@include media($tablet) {
-						background: $green;
+        &.active {
+          @include media($tablet) {
+            background: $green;
 
-						span.responsive-text {
-							opacity: 1;
-						}
-					}
+            span.responsive-text {
+              opacity: 1;
+            }
+          }
 
-					i {
-						color: $green;
+          i {
+            color: $green;
 
-						@include media($tablet) {
-							color: #fff;
-						}
-					}
-				}
+            @include media($tablet) {
+              color: #fff;
+            }
+          }
+        }
 
-				.notification-count {
-					position: absolute;
-					bottom: -4px;
-					right: -4px;
-					border-radius: 50%;
-					background: $red;
-					font-size: 12px;
-					padding: 2px 0;
-					text-align: center;
-					height: 18px;
-					width: 18px;
+        .notification-count {
+          position: absolute;
+          bottom: -4px;
+          right: -4px;
+          border-radius: 50%;
+          background: $red;
+          font-size: 12px;
+          padding: 2px 0;
+          text-align: center;
+          height: 18px;
+          width: 18px;
 
-					@include media($tablet) {
-						bottom: auto;
-						top: 11px;
-						right: auto;
-						left: 50%;
-						margin-left: 15px;
-					}
-				}
-			}
+          @include media($tablet) {
+            bottom: auto;
+            top: 11px;
+            right: auto;
+            left: 50%;
+            margin-left: 15px;
+          }
+        }
+      }
 
-			.pull-right {
-				button {
-					margin: 0 0 0 10px;
-				}
+      .pull-right {
+        button {
+          margin: 0 0 0 10px;
+        }
 
-				@include media($tablet) {
-					float: none;
-				}
-			}
-		}
+        @include media($tablet) {
+          float: none;
+        }
+      }
+    }
 
-		h1 {
-			font-size: 50px;
-			margin: 0;
-			line-height: 30px;
-			margin-top: $content-gutter / 2;
-			margin-bottom: $content-gutter + 5;
+    h1 {
+      font-size: 50px;
+      margin: 0;
+      line-height: 30px;
+      margin-top: $content-gutter / 2;
+      margin-bottom: $content-gutter + 5;
 
-			small {
-				font-size: 13px;
-				line-height: 16px;
-				display: block;
-				margin-left: 3px;
-				margin-top: 15px;
-				// margin-bottom: $content-gutter + 5;
-				text-transform: uppercase;
-				color: rgba(255, 255, 255, 0.7);
-				font-weight: normal;
-				// border-bottom: 2px solid rgba(255, 255, 255, 0.6);
-				// padding-bottom: $content-gutter / 2;
-			}
+      small {
+        font-size: 13px;
+        line-height: 16px;
+        display: block;
+        margin-left: 3px;
+        margin-top: 15px;
+        // margin-bottom: $content-gutter + 5;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.7);
+        font-weight: normal;
+        // border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+        // padding-bottom: $content-gutter / 2;
+      }
 
-			@include media($tablet) {
-				h1 {
-					opacity: 0.7;
-					margin-left: -3px;
-					border: none;
-					padding-top: 0;
+      @include media($tablet) {
+        h1 {
+          opacity: 0.7;
+          margin-left: -3px;
+          border: none;
+          padding-top: 0;
 
-					small {
-						border: none;
-						padding-bottom: 0;
-					}
-				}
-			}
-		}
+          small {
+            border: none;
+            padding-bottom: 0;
+          }
+        }
+      }
+    }
 
-		.logo {
-			width: 100%;
-			margin-bottom: $content-gutter;
+    .logo {
+      width: 100%;
+      margin-bottom: $content-gutter;
 
-			img {
-				width: 100%;
-				height: auto;
-			}
-		}
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
 
-		ul.navigation {
-			list-style: none;
-			padding: 0;
-			margin: 1em 0 2.5em 0;
+    ul.navigation {
+      list-style: none;
+      padding: 0;
+      margin: 1em 0 2.5em 0;
 
-			li {
-				margin-bottom: 4px;
+      li {
+        margin-bottom: 4px;
 
-				a {
-					color: #fff;
-					text-decoration: none;
-					text-transform: uppercase;
-					font-size: 16px;
-					font-weight: bold;
-				}
+        a {
+          color: #fff;
+          text-decoration: none;
+          text-transform: uppercase;
+          font-size: 16px;
+          font-weight: bold;
+        }
 
-				&:hover {
-					a {
-						color: $primary-color;
-					}
-				}
+        &:hover {
+          a {
+            color: $primary-color;
+          }
+        }
 
-				&.active {
-					a {
-						color: $primary-color;
-					}
-				}
-			}	
-		}
+        &.active {
+          a {
+            color: $primary-color;
+          }
+        }
+      }
+    }
 
-		ul.tags {
-			margin: 0;
-			padding: 0;
-			list-style: none;
+    ul.tags {
+      margin: 0;
+      padding: 0;
+      list-style: none;
 
-			li {
-				display: inline-block;
-				background: $green;
-				font-size: 13px;
-				padding: 7px 0 7px 10px;
-				margin-right: 5px;
+      li {
+        display: inline-block;
+        background: $green;
+        font-size: 13px;
+        padding: 7px 0 7px 10px;
+        margin-right: 5px;
 
-				.close {
-					color: $dark-color;
-					padding: 5px 10px 5px 5px;
-					text-decoration: none;
+        .close {
+          color: $dark-color;
+          padding: 5px 10px 5px 5px;
+          text-decoration: none;
 
-					&:hover {
-						color: #fff;
-					}
-				}
-			}
-		}
+          &:hover {
+            color: #fff;
+          }
+        }
+      }
+    }
 
-		input[type="text"],
-		input[type="password"] {
-			width: 100%;
-			box-shadow: none;
-			outline: none;
-			border: none;
-			padding: 10px 10px;
-			font-size: 0.9em;
-			margin-bottom: $content-gutter;
-		}
-	}
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      box-shadow: none;
+      outline: none;
+      border: none;
+      padding: 10px 10px;
+      font-size: 0.9em;
+      margin-bottom: $content-gutter;
+    }
+
+  }
 }

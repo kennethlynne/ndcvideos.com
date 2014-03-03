@@ -1,4 +1,4 @@
-<div class="toggle-wrapper navigation-wrapper">
+<div class="toggle-wrapper navigation-wrapper" ng-controller="navbarNavigationPanelCtrl">
 
     <ul class="navigation">
         <li ui-sref-active="active"><a ui-sref="index">All videos</a></li>
@@ -7,10 +7,5 @@
     </ul>
 
     <h2>Search</h2>
-    <input type="text" class="search" placeholder="Add tags to filter videos ..">
-
-    <ul class="tags">
-        <li>Angular <a href="#" class="close">&times;</a></li>
-        <li>Firebase <a href="#" class="close">&times;</a></li>
-    </ul>
+    <input type="hidden" class="search" ui-select2="select2Options" ng-model="tags" placeholder="Add tags to filter videos ..">
 </div>
