@@ -6,7 +6,7 @@ angular.module('ndc')
         $stateProvider.state("videoDetails",
             {
                 url: "/videos/{id}",
-                onEnter: ['$stateParams', '$state', '$modal', 'VideoRepository', function ($stateParams, $state, $modal, VideoRepository) {
+                onEnter: ['$stateParams', '$state', '$modal', 'VideoRepository', '$window', function ($stateParams, $state, $modal, VideoRepository, $window) {
                     $modal
                         .open({
                             backdrop: 'static',
@@ -19,10 +19,12 @@ angular.module('ndc')
                             }
                         })
                         .result.then(function (result) {
-                            //TODO: Store progress information
-                            return $state.transitionTo("index");
+                            $window.history.back();
                         });
-                }]
+                }],
+                onExit: function () {
+                    //TODO: Store progress information
+                }
             }
         );
     })
