@@ -1,7 +1,7 @@
 <div class="content-wrapper">
 	<div class="favourites-page container">
 
-        <h1 ng-if="errormsg">No favourites yet! Try adding some!</h1>
+        <h1 ng-if="!favourites.length">No favourites yet! Try adding some!</h1>
 	    <div class="videos">
 	        <video-list-item-component ng-repeat="video in favourites" video="video"></video-list-item-component>
 	    </div>

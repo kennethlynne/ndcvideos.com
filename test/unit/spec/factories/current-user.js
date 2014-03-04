@@ -14,7 +14,7 @@ describe('Service: CurrentUser', function () {
             $provide.value('$log', $log);
         });
 
-        data = {id:1, userName:"balle"};
+        data = {id:5, userName:"Root"};
 
         inject(function (_CurrentUser_) {
             CurrentUser = _CurrentUser_;
@@ -29,7 +29,7 @@ describe('Service: CurrentUser', function () {
 
     it('should set and get the correct data', function () {
         CurrentUser.set(data);
-        expect(CurrentUser.get()).toBe(data);
+        expect(CurrentUser.get()).toEqual(data);
     });
     
     it('should not set data if data not defined', function () {

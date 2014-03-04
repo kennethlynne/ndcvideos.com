@@ -9,7 +9,7 @@ angular.module('ndc')
         var _set = function (user) {
                 if(!user) $log.error("No data defined when initializing CurrentUser");
                 if(!(user instanceof UserModel)) $log.error("Expected UserModel when initializing CurrentUser");
-                _user = user;
+                angular.copy(user, _user);
             },
             _get = function ()
             {
