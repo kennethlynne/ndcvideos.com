@@ -5,7 +5,7 @@ angular.module('ndc')
         var BaseRepository = $injector.get('BaseRepository');
 
         function TagRepository() {
-            BaseRepository.apply(this, arguments);
+            BaseRepository.call(this, {name: 'TagRepository', model: TagModel});
         }
         TagRepository.prototype = Object.create(BaseRepository.prototype);
 
@@ -27,5 +27,5 @@ angular.module('ndc')
             });
         };
 
-        return new TagRepository({name: 'TagRepository', model: TagModel});
+        return new TagRepository();
     });

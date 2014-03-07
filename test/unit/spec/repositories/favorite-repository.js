@@ -112,7 +112,7 @@ describe('Model Repository: FavoriteRepository', function () {
             $rootScope.$digest();
 
             expect(Favorite instanceof Model).toBeTruthy();
-            expect(Favorite.id).toEqual(5);
+            expect(Favorite.id).toEqual(3);
         });
     });
 
@@ -126,11 +126,13 @@ describe('Model Repository: FavoriteRepository', function () {
     describe('cache', function () {
         it('should return a reference to the pool', function() {
             var newFavorite = {id:19};
-            FavoriteRepository.cache[19] = newFavorite;
+            FavoriteRepository.cache[5] = {
+                '19': newFavorite
+            };
 
             var Favorite;
-            FavoriteRepository.getAllByUserId(19).then(function (response) {
-                Favorite = response;
+            FavoriteRepository.getAllByUserId(5).then(function (response) {
+                Favorite = response[0];
             });
             $rootScope.$digest();
 

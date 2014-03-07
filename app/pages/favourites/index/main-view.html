@@ -1,8 +1,7 @@
 <div class="content-wrapper">
-	<div class="favourites-page container">
+	<div class="favourites-page container" cg-busy="'FavoriteRepository.getAllByUserId'">
 
-		<p ng-if="!favourites.length">No favourites yet! Try adding some!</p>
-
+        <h1 ng-if="noFavorites">No favourites yet! Try adding some!</h1>
 	    <div class="videos">
 	        <video-list-item-component ng-repeat="video in favourites" video="video"></video-list-item-component>
 	    </div>

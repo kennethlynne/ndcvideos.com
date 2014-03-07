@@ -21,27 +21,3 @@ describe('Controller(/admin): AdminCtrl', function () {
         expect(scope.data).toEqual('DATA');
     });
 });
-
-describe('Service(/admin): AdminCtrlInit', function () {
-
-    var AdminCtrlInit;
-
-    beforeEach(function () {
-
-        module('ndc');
-
-        inject(function (_AdminCtrlInit_) {
-            AdminCtrlInit = _AdminCtrlInit_;
-        });
-
-    });
-
-    it('should have a prepare function', function () {
-        expect(typeof AdminCtrlInit.prepare).toEqual('function');
-    });
-
-    it('should return a promise', function () {
-        expect(typeof AdminCtrlInit.prepare().then).toEqual('function');
-    });
-
-});

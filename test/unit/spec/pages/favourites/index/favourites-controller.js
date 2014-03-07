@@ -2,13 +2,21 @@
 
 describe('Controller(/favourites): FavouritesCtrl', function () {
 
-    var FavouritesCtrl, scope, favourites, deferred, $q, promise, $rootScope, CurrentUser, checkIfEmpty;
+    var FavouritesCtrl, scope, deferred, $q, promise, $rootScope, CurrentUser, FavoriteRepository;
 
     beforeEach(function () {
 
         module('ndc');
 
         inject(function ($controller, _$rootScope_, _$q_, UserModel) {
+
+            function getPromise() {
+                return promise;
+            }
+
+            FavoriteRepository = {
+                getAllByUserId: jasmine.createSpy('FavoriteRepository.getAllByUserId').andCallFake(getPromise)
+            };
 
             CurrentUser = {
                 get: jasmine.createSpy("CurrentUser.get").andCallFake(function () {
@@ -25,13 +33,14 @@ describe('Controller(/favourites): FavouritesCtrl', function () {
 
             FavouritesCtrl = $controller('FavouritesCtrl', {
                 $scope: scope,
-                CurrentUser: CurrentUser
+                CurrentUser: CurrentUser,
+                FavoriteRepository: FavoriteRepository
             });
         });
     });
 
     it('should attach favourites to scope', function () {
-        deferred.resolve(favourites);
+        deferred.resolve([1,2,3]);
         $rootScope.$digest();
         expect(scope.favourites.length).toBe(3);
     });

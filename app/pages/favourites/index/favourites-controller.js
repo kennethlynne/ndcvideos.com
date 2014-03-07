@@ -7,7 +7,17 @@ angular.module('ndc')
             templateUrl: 'pages/favourites/index/main-view.html'
         }));
     })
-    .controller('FavouritesCtrl', function ($scope, $log, CurrentUser) {
+    .controller('FavouritesCtrl', function ($scope, $log, CurrentUser, FavoriteRepository) {
         var user = CurrentUser.get();
-        $scope.favourites = user.favourites;
+
+        //TODO: Get by actual user ID
+        FavoriteRepository.getAllByUserId(1).then(function (favourites) {
+            if (favourites.length > 0) {
+                $scope.favourites = favourites;
+            }
+            else
+            {
+                $scope.noFavorites = true;
+            }
+        });
     });
