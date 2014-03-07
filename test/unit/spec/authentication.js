@@ -2,14 +2,27 @@
 
 describe('Service: authentication', function () {
 
-    var authentication, $httpBackend, BaseUrl, $http, loginSuccessfullResponse, loginFailedResponse, logIn, $localStorage, CurrentUser;
+    var authentication, $httpBackend, $rootScope, BaseUrl, $http, loginSuccessfullResponse, loginFailedResponse, logIn, $localStorage, CurrentUser, UserRepository, promise, deferred;
 
     beforeEach(function () {
 
         $localStorage = {};
 
+        function getPromise() {
+            return promise;
+        }
+
+        UserRepository = {
+            getById: jasmine.createSpy('UserRepository.getById').andCallFake(getPromise)
+        };
+
         module('ndc', function ($provide) {
             $provide.value('$localStorage', $localStorage);
+            $provide.value('UserRepository', UserRepository);
+            $provide.decorator('CurrentUser', function ($delegate) {
+                spyOn($delegate,'unset').andCallThrough();
+                return $delegate;
+            });
         });
 
         logIn = function logIn() {
@@ -32,11 +45,7 @@ describe('Service: authentication', function () {
             ".expires":"Mon, 28 Oct 2013 06:53:32 GMT",
             "user": {
                 "id":1,
-                "userName":"Ali",
-                "favourites":[
-                    {id: 1, title: 'In The Open: Ellie Goulding - Guns And Horses', description: 'Having listened to Ellie Gouldings debut album, Lights, I was always curious as to how it would translate acoustically since most of the album is more electronic driven.Portland, Oregon Ellie made it to San Francisco with just enough time to meet up.', duration: 1234, videoId: 23919731, type:'vimeo'},
-                    {id: 2, title: 'Tootys Wedding', description: 'Some long description about a movie and stuff', duration: 1234, videoId: 25799594, type:'vimeo'}
-                ]
+                "userName":"Ali"
             }
         };
 
@@ -44,12 +53,15 @@ describe('Service: authentication', function () {
             message: 'Not authorized.'
         };
 
-        inject(function (_authentication_, _$httpBackend_, _BaseUrl_, _$http_, _CurrentUser_) {
+        inject(function (_authentication_, _$httpBackend_, _BaseUrl_, _$http_, _CurrentUser_, $q, _$rootScope_) {
+            deferred = $q.defer();
+            promise = deferred.promise;
             authentication = _authentication_;
             $httpBackend = _$httpBackend_;
             BaseUrl = _BaseUrl_;
             $http = _$http_;
             CurrentUser = _CurrentUser_;
+            $rootScope = _$rootScope_;
         });
 
     });
@@ -133,13 +145,17 @@ describe('Service: authentication', function () {
     });
 
     it('should set the current user on login', function () {
-        expect(CurrentUser.get().id).toBe(undefined);
         logIn();
-        expect(CurrentUser.get().id).toBe(1);
+        deferred.resolve({
+            roles: ['role']
+        });
+        $rootScope.$digest();
+        expect(CurrentUser.is('role')).toBeTruthy();
     });
 
-    xit('should remove the current user on logout', function () {
-
+    it('should remove the current user on logout', function () {
+        authentication.logout();
+        expect(CurrentUser.unset).toHaveBeenCalled();
     });
 
 });

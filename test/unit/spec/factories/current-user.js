@@ -32,9 +32,14 @@ describe('Service: CurrentUser', function () {
         expect(CurrentUser.get()).toEqual(data);
     });
     
-    it('should not set data if data not defined', function () {
-        CurrentUser.set(null);
-        expect($log.error).toHaveBeenCalled();
+    it('should unset all data', function () {
+        CurrentUser.setPermissions(['troll']);
+        CurrentUser.setRoles(['admin', 'god']);
+        CurrentUser.set({name:'User'});
+        CurrentUser.unset();
+        expect(CurrentUser.getPermissions()).toEqual([]);
+        expect(CurrentUser.getRoles()).toEqual([]);
+        expect(CurrentUser.get().name).toBeUndefined();
     });
 
     it('should set the users permissions', function() {
@@ -47,6 +52,19 @@ describe('Service: CurrentUser', function () {
         CurrentUser.setPermissions(['roll', 'eat', 'sleep']);
         expect(CurrentUser.can('wear socks')).toBeFalsy();
         expect(CurrentUser.can('sleep')).toBeTruthy();
+    });
+
+    it('should set the users roles', function() {
+        CurrentUser.setRoles(['admin', 'god']);
+        CurrentUser.setRoles(['superadmin', 'god', 'washingmachine']);
+        expect(CurrentUser.getRoles()).toEqual(['superadmin', 'god', 'washingmachine']);
+    });
+
+    it('should return the users role', function() {
+        CurrentUser.setRoles(['superadmin', 'user']);
+        expect(CurrentUser.is('god')).toBeFalsy();
+        expect(CurrentUser.is('superadmin')).toBeTruthy();
+        expect(CurrentUser.is('user')).toBeTruthy();
     });
     
 });

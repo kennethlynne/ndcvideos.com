@@ -16,11 +16,10 @@ angular.module('ndc')
             };
         });
     })
-    .factory('authentication', function ($http, BaseUrl, $localStorage, $log, $q, UserModel, CurrentUser) {
+    .factory('authentication', function ($http, BaseUrl, $localStorage, $log, $q, UserRepository, CurrentUser) {
 
         var _logout = function () {
-                CurrentUser.set({});
-                delete $localStorage.currentUserId;
+                CurrentUser.unset();
                 delete $localStorage.token;
             },
             _getToken = function () {
@@ -43,22 +42,19 @@ angular.module('ndc')
                         $localStorage.token = data.access_token;
                         deferred.resolve(true);
 
-                        var user = new UserModel(data.user);
-                        CurrentUser.set(user);
-                        $localStorage.currentUserId = user.id;
+                        UserRepository.getById(data.user.id).then(CurrentUser.set);
                     }
-                    else
-                    {
+                    else {
                         deferred.reject('No data received');
                     }
                 })
-                .catch(function (response) {
-                    var message = (response && response.data && response.data.message) ? response.data.message : '';
-                    deferred.reject('Could not log you in. ' + message);
-                })
-                .finally(function () {
-                    $log.log('Log in request finished.');
-                });
+                    .catch(function (response) {
+                        var message = (response && response.data && response.data.message) ? response.data.message : '';
+                        deferred.reject('Could not log you in. ' + message);
+                    })
+                    .finally(function () {
+                        $log.log('Log in request finished.');
+                    });
 
                 return deferred.promise;
 
@@ -74,23 +70,45 @@ angular.module('ndc')
             logout: _logout
         }
     })
-    .run(function($rootScope, $urlRouter, authentication, $state, $location) {
-        $rootScope.$on('$locationChangeSuccess', function(e) {
+    .run(function ($rootScope, $urlRouter, authentication, $state, $location, CurrentUser, $log, _) {
+        $rootScope.$on('$locationChangeSuccess', function (e) {
             e.preventDefault();
 
             var path = $location.path().substr(1);
 
-            //List of pages you can visit without being authotized
+            //List of pages you can visit without being authorized
             var allowAnonymous = [
                 'login',
                 'error'
             ];
 
+            var requireRole = {
+                //page: [required roles...]
+                'admin': ['administrator']
+            };
+
             if (allowAnonymous.indexOf(path) >= 0 || authentication.isAuthenticated()) {
-                $urlRouter.sync();
+
+                var index = _.chain(requireRole).keys().indexOf(path).value();
+                var userHasAllRequiredRoles = function () {
+                    return _.every(requireRole[index], function (role) {
+                        if (!CurrentUser.is(role)) {
+                            $log.error('User does not have required role ' + role);
+                            return false;
+                        }
+                        return true;
+                    });
+                };
+
+                if (index == -1 || userHasAllRequiredRoles()) {
+                    $urlRouter.sync();
+                }
+                else {
+                    $log.error('User is not authorized to access ' + path);
+                    $state.go('login');
+                }
             }
-            else
-            {
+            else {
                 $state.go('login');
             }
         });
