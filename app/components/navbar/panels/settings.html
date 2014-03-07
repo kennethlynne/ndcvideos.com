@@ -1,4 +1,9 @@
 <div class="toggle-wrapper settings-wrapper">
+
+	<button ng-show="isAuthenticated()" ng-click="signout()" class="has-tooltip signout hidden-on-small" data-toggle="tooltip" data-placement="bottom" title="Logout">
+        <i class="fa fa-power-off"></i> Sign out
+    </button>
+
     <h2>Account</h2>
     <input type="text" value="ali@g.com">
 

@@ -1,3 +1,5 @@
+@import 'animations';
+
 aside {
   @include media($tablet) {
     position: relative;
@@ -5,7 +7,7 @@ aside {
 
   &.navbar-component {
     position: fixed;
-    padding: $content-gutter;
+    // padding: $content-gutter;
     color: #fff;
     overflow-y: auto !important;
     overflow-x: hidden;
@@ -53,6 +55,7 @@ aside {
     @include media($tablet) {
       .responsive-toggler-wrapper {
         @include row;
+        padding: $content-gutter $content-gutter 0 $content-gutter;
 
         .responsive-toggler {
           display: block;
@@ -80,7 +83,7 @@ aside {
     }
 
     .toggle-wrapper {
-
+      padding: 0 $content-gutter;
       &.navigation-wrapper {
         display: block;
       }
@@ -89,6 +92,7 @@ aside {
         .notifications {
           list-style: none;
           padding: 0;
+          margin: 0;
 
           li {
             padding-bottom: $content-gutter;
@@ -116,6 +120,26 @@ aside {
       }
 
       &.settings-wrapper {
+        button.signout {
+          // float: left;
+          // height: 30px;
+          // width: 40px;
+          background: $dark-color;
+          margin: 0 0 30px 0;
+          border: none;
+          box-shadow: none;
+          color: #fff;
+          font-size: 12px;
+          position: relative;
+          vertical-align: top;
+          padding: 10px;
+
+          i {
+            margin-right: 5px;
+            color: $primary-color;
+          }
+        }
+
         h2 {
           margin-top: 0px;
         }
@@ -126,14 +150,16 @@ aside {
       @include row;
       // right: $rightnav-width;
       margin: 0 0 ($content-gutter * 2) 0;
-      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-      padding-bottom: $content-gutter;
+      // border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+      padding: $content-gutter;
+      background: $dark-color;
 
       button {
         float: left;
-        height: 40px;
+        height: 30px;
         width: 40px;
         background: $dark-color;
+        background: none;
         margin: 0 10px 0 0;
         border: none;
         box-shadow: none;
@@ -178,8 +204,8 @@ aside {
 
         .notification-count {
           position: absolute;
-          bottom: -4px;
-          right: -4px;
+          bottom: 0px;
+          right: -2px;
           border-radius: 50%;
           background: $red;
           font-size: 12px;
@@ -258,7 +284,7 @@ aside {
     ul.navigation {
       list-style: none;
       padding: 0;
-      margin: 1em 0 2.5em 0;
+      margin: 0 0 2.5em 0;
 
       li {
         margin-bottom: 4px;
@@ -309,8 +335,74 @@ aside {
       }
     }
 
+    .select2-container,
+    .select2-container-active,
+    .select2-container-multi.select2-container-active .select2-choices {
+      width: 100%;
+      border: none !important;
+    }
+
+    .select2-container {
+      padding-top: 40px;
+      position: relative;
+
+      * {
+        box-shadow: none !important;
+      }
+    }
+
+    .select2-container-multi .select2-choices .select2-search-field input {
+      font-family: inherit;
+      font-size: 14px;
+    }
+
+    .select2-search-field {
+      position: absolute;
+      background: #fff !important;
+      top: -40px !important;
+      width: 220px !important;
+      min-width: 100% !important;
+
+      @include media($tablet) {
+          width: 100% !important;
+      }
+
+      input {
+        width: 100% !important;
+      }
+
+    }
+
+    .select2-choices {
+      border: none;
+      // padding: 3px 7px 3px 7px;
+      padding: 0;
+      overflow: visible;
+      background: none;
+
+      .select2-search-choice {
+        display: inline-block;
+        background: $primary-color;
+        font-size: 13px;
+        padding: 7px 10px 7px 25px;
+        margin: 2px 5px 3px 0;
+        border: none !important;
+        box-shadow: none !important;
+
+        .select2-search-choice-close {
+          color: $dark-color;
+          padding: 5px 10px 5px 5px;
+          text-decoration: none;
+          background-position: right -11px;
+          left: 5px !important;
+          top: 6px !important;
+        }
+      }
+    }
+
     input[type="text"],
-    input[type="password"] {
+    input[type="password"],
+    .select2-search-field input {
       width: 100%;
       box-shadow: none;
       outline: none;
@@ -320,5 +412,15 @@ aside {
       margin-bottom: $content-gutter;
     }
 
+  }
+}
+
+.select2-drop,
+.select2-drop-active {
+  border: none !important;
+  margin-top: -40px;
+
+  * {
+    box-shadow: none !important;
   }
 }

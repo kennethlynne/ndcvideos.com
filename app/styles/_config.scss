@@ -15,15 +15,14 @@ $iconSpritePath:          "../assets/images/glyphicons-halflings.png" !default;
 $iconWhiteSpritePath:     "../assets/images/glyphicons-halflings-white.png" !default;
 
 $grid-columns: 12;
+$bigdesktop: new-breakpoint(min-width 1600px);
+$desktop: new-breakpoint(min-width 1100px);
 $smalldesktop: new-breakpoint(max-height 550px);
 $tablet: new-breakpoint(max-width 1100px 4);
 $phone: new-breakpoint(max-width 480px 4);
 
 $leftnav-width: 260px;
-$leftnav-background: #1c3a58;
-
-$rightnav-width: 230px;
-$rightnav-background: rgba(0, 0, 0, 0.4);
+$leftnav-background: #3a3a3a;
 
 $content-gutter: 20px;
 
@@ -34,6 +33,6 @@ $purple: #6a2a78;
 $orange: #f8aa45;
 $blue: #66c2e7;
 
-$dark-color: #13283d;
+$dark-color: #303030;
 
 $primary-color: $green;

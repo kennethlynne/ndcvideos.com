@@ -10,10 +10,30 @@
   font-family: 'Roboto', sans-serif;
 }
 
+.hidden-on-small {
+	display: block;
+
+	@include media($tablet) {
+		display: none;
+	}
+}
+
+.hidden-on-large {
+	display: none;
+
+	@include media($tablet) {
+		display: block;
+	}
+}
+
+#root {
+	position: relative;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
-  background: #2f6193;
+  background: #d0d0d0;
 }
 
 a {
@@ -71,7 +91,7 @@ button {
   // margin-right: $rightnav-width;
   padding-bottom: $content-gutter;
   padding-top: $content-gutter / 2;
-  color: #fff;
+  color: $dark-color;
 
   @include media($tablet) {
 	margin-left: 0;

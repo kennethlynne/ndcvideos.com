@@ -9,10 +9,6 @@
     <div class="responsive-wrapper">
 
         <header class="actionbar">
-            <button ng-show="isAuthenticated()" ng-click="signout()" class="has-tooltip" data-toggle="tooltip" data-placement="bottom" title="Logout">
-                <i class="fa fa-power-off"></i>
-                <span class="responsive-text">Sign out</span>
-            </button>
             <div class="pull-right">
                 <button class="toggle toggle-navigation" ng-class="{'active': navbar.isActive('navigation')}" data-toggle="tooltip" data-placement="bottom" title="Menu" ng-click="navbar.setState('navigation')">
                     <i class="fa fa-bars"></i>
@@ -27,11 +23,17 @@
                     <i class="fa fa-gear"></i>
                     <span class="responsive-text">Settings</span>
                 </button>
+                <button ng-show="isAuthenticated()" ng-click="signout()" class="has-tooltip hidden-on-large" data-toggle="tooltip" data-placement="bottom" title="Logout">
+                    <i class="fa fa-power-off"></i>
+                    <span class="responsive-text">Sign out</span>
+                </button>
             </div>
             <!-- <button class="mute-button has-tooltip" data-toggle="tooltip" data-placement="bottom" title="Mute"><i class="fa fa-volume-up"></i></button> -->
         </header>
 
-        <div ng-include="navbar.templateSrc" class="view-change-animation"></div>
+        <div style="position: relative;">
+            <div ng-include="navbar.templateSrc" class="view-change-animation"></div>
+        </div>
 
         <navbar-mini-player-component></navbar-mini-player-component>
 
