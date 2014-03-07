@@ -34,7 +34,6 @@ aside {
       padding-bottom: 25px;
     }
 
-
     .ng-enter, .ng-leave {
       .navigation {
         li {
@@ -48,6 +47,27 @@ aside {
               transition: transform ease $duration, opacity $duration;
             }
           }
+        }
+      }
+    }
+
+    .powered {
+      height: 45px;
+      width: $leftnav-width;
+      background: $dark-color;
+      text-align: center;
+      padding: 8px 15px;
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      z-index: 10;
+
+      p {
+        font-size: 11px;
+        color: #777;
+
+        a {
+          color: #aaa;
         }
       }
     }

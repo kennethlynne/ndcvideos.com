@@ -4,7 +4,7 @@
   .mini-player {
     position: fixed;
     left: 0;
-    bottom: 0;
+    bottom: 45px; // .powered height
     width: $leftnav-width;
     z-index: 10;
 
