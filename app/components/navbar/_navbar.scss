@@ -34,6 +34,24 @@ aside {
       padding-bottom: 25px;
     }
 
+
+    .ng-enter, .ng-leave {
+      .navigation {
+        li {
+          &.active {
+            &:after {
+              $duration: 1000;
+              -webkit-transition: -webkit-transform ease $duration, opacity $duration;
+              -moz-transition: -moz-transform ease $duration, opacity $duration;
+              -ms-transition: -ms-transform ease $duration, opacity $duration;
+              -o-transition: -o-transform ease $duration, opacity $duration;
+              transition: transform ease $duration, opacity $duration;
+            }
+          }
+        }
+      }
+    }
+
     h2 {
       margin: 10px 0 5px 0;
       font-size: 11px;
@@ -133,6 +151,7 @@ aside {
           position: relative;
           vertical-align: top;
           padding: 10px;
+          width: 100%;
 
           i {
             margin-right: 5px;
@@ -288,6 +307,7 @@ aside {
 
       li {
         margin-bottom: 4px;
+        position: relative;
 
         a {
           color: #fff;
@@ -304,6 +324,15 @@ aside {
         }
 
         &.active {
+          @include media($desktop) {
+            &:after {
+              @include triangle(20px, $body-background, left);
+              content: "";
+              position: absolute;
+              top: -1px;
+            }
+          }          
+
           a {
             color: $primary-color;
           }
@@ -413,6 +442,24 @@ aside {
     }
 
   }
+
+  ul.navigation li.active:after {
+    -webkit-transition: -webkit-transform ease 400ms, left 400ms;
+     -moz-transition: -moz-transform ease 400ms, left 400ms;
+     -ms-transition: -ms-transform ease 400ms, left 400ms;
+     -o-transition: -o-transform ease 400ms, left 400ms;
+     transition: transform ease 400ms, left 400ms;
+     left: $leftnav-width - ($content-gutter * 2);
+  }
+
+  .ng-enter ul.navigation li.active:after {
+    left: $leftnav-width;
+  }
+
+  .ng-enter.ng-enter-active ul.navigation li.active:after {
+    left: $leftnav-width - ($content-gutter * 2);
+  }
+
 }
 
 .select2-drop,

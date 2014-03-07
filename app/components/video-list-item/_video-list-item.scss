@@ -1,5 +1,4 @@
 .video-list-item-component {
-	.video-wrapper {
     padding: $content-gutter / 2;
     position: relative;
 
@@ -11,21 +10,6 @@
     @include media($bigdesktop) {
         @include span-columns(3); 
         @include omega(4);
-    }
-
-    &:before {
-        content: "";
-        position: absolute;
-        bottom: $content-gutter / 2;
-        left: $content-gutter / 2;
-        right: $content-gutter / 2;
-        background: url(/assets/images/content-gradient.png) top left repeat-x;
-        min-height: 100px;
-        z-index: 60;
-    }
-
-    &:last-child {
-        @include omega;
     }
 
     @include media($tablet) {
@@ -54,86 +38,105 @@
         }
     }
 
-    .video-info {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        padding: 15px;
-        right: 50px;
-        color: #fff;
-        z-index: 70;
+	.video-wrapper {
+        padding-top: 5px;
 
-        h3 {
-            margin: $content-gutter 0 0 0;
-            font-size: 16px;
-        }
-
-        p {
-            margin: 2px 0 0 0;
-            font-size: 13px;
-        }
-    }
-
-    button {
-        padding: 10px;
-        background: rgba(0, 0, 0, 0.5);
-        border: none;
-        box-shadow: none;
-        color: #fff;
-        position: absolute;
-        font-size: 14px;
-        outline: none;
-        text-align: center;
-        z-index: 80;
-      
-        &.favorite {
-            right: $content-gutter / 2 - 1;
-            bottom: $content-gutter / 2 - 1;
-        }
-
-        &.info {
+        &:before {
+            content: "";
+            position: absolute;
             bottom: $content-gutter / 2;
-            right: 40px;
+            left: $content-gutter / 2;
+            right: $content-gutter / 2;
+            background: url(/assets/images/content-gradient.png) top left repeat-x;
+            min-height: 100px;
+            z-index: 60;
         }
 
-        &:hover {
-            i {
-                color: #fff;
+        &:last-child {
+            @include omega;
+        }
+
+        .video-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 15px;
+            right: 50px;
+            color: #fff;
+            z-index: 70;
+
+            h3 {
+                margin: $content-gutter 0 0 0;
+                font-size: 16px;
+            }
+
+            p {
+                margin: 2px 0 0 0;
+                font-size: 13px;
             }
         }
 
-        i.fa-star {
-            color: $primary-color;
+        button {
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            box-shadow: none;
+            color: #fff;
+            position: absolute;
+            font-size: 14px;
+            outline: none;
+            text-align: center;
+            z-index: 80;
+          
+            &.favorite {
+                right: $content-gutter / 2 - 1;
+                bottom: $content-gutter / 2 - 1;
+            }
+
+            &.info {
+                bottom: $content-gutter / 2;
+                right: 40px;
+            }
+
+            &:hover {
+                i {
+                    color: #fff;
+                }
+            }
+
+            i.fa-star {
+                color: $primary-color;
+            }
         }
-    }
 
-    .progress-wrapper {
-        height: 5px;
-        position: absolute;
-        top: $content-gutter / 2;
-        left: $content-gutter / 2;
-        right: $content-gutter / 2;
-        background: rgba(255, 255, 255, 1);
-        z-index: 100;
-
-        .progress-bar {
+        .progress-wrapper {
             height: 5px;
             position: absolute;
-            top: 0;
-            left: 0px;
-            background: $primary-color;
+            top: $content-gutter / 2;
+            left: $content-gutter / 2;
+            right: $content-gutter / 2;
+            background: rgba(255, 255, 255, 1);
+            z-index: 100;
+
+            .progress-bar {
+                height: 5px;
+                position: absolute;
+                top: 0;
+                left: 0px;
+                background: $primary-color;
+            }
         }
-    }
 
-    .video {
-        background: rgba(0, 0, 0, 0.4);
-        position: relative;
-
-        img {
+        .video {
+            background: rgba(0, 0, 0, 0.4);
+            position: relative;
             width: 100%;
-            height: auto;
-            z-index: 50;
+
+            img {
+                width: 100%;
+                height: auto;
+                z-index: 50;
+            }
         }
     }
-  }
 }

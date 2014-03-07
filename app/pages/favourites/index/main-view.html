@@ -1,7 +1,8 @@
 <div class="content-wrapper">
 	<div class="favourites-page container">
 
-        <h1 ng-if="!favourites.length">No favourites yet! Try adding some!</h1>
+		<p ng-if="!favourites.length">No favourites yet! Try adding some!</p>
+
 	    <div class="videos">
 	        <video-list-item-component ng-repeat="video in favourites" video="video"></video-list-item-component>
 	    </div>
