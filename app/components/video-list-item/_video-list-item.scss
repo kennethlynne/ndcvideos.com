@@ -1,6 +1,7 @@
 .video-list-item-component {
     padding: $content-gutter / 2;
     position: relative;
+    display: inline-block;
 
     @include media($desktop) {
         @include span-columns(4); 
@@ -40,6 +41,7 @@
 
 	.video-wrapper {
         padding-top: 5px;
+        width: 100%;
 
         &:before {
             content: "";
