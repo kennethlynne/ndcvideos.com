@@ -9,6 +9,19 @@ angular.module('ndc')
     })
     .controller('AdminCtrl', function ($scope, UserRepository, VideoRepository, vimeoAPI) {
 
+        $(".tabs-navigation li").eq(0).addClass("active");
+        $(".tabs-content li").eq(0).addClass("active");
+
+        $(".tabs-navigation li").click(function () {
+            var id = $(this).attr("id");
+
+            $(".tabs-navigation li").removeClass("active");
+            $(this).addClass("active");
+
+            $(".tabs-content li").removeClass("active");
+            $(".tabs-content li#" + id + "-content").addClass("active");
+        });
+
         $scope.users = [];
         UserRepository.getAll().then(function (users) {
             $scope.users = users;
@@ -20,9 +33,8 @@ angular.module('ndc')
         });
 
         $scope.vimeoVideos = [];
-        vimeoAPI.getVideos().then(function (videos)
-        {
-           $scope.vimeoVideos = videos;
+        vimeoAPI.getVideos().then(function (videos) {
+            $scope.vimeoVideos = videos;
         });
 
         $scope.createUser = function () {
