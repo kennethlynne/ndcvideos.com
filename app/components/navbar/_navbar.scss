@@ -25,6 +25,8 @@ aside {
       overflow: hidden;
       width: 100%;
       padding-bottom: 25px;
+      box-shadow: none;
+      background: $dark-color;
     }
 
     @include media($phone) {
@@ -288,6 +290,11 @@ aside {
           font-size: 24px;
       }
 
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
       small {
         font-size: 13px;
         line-height: 16px;
@@ -398,84 +405,6 @@ aside {
         }
       }
     }
-
-    .select2-container,
-    .select2-container-active,
-    .select2-container-multi.select2-container-active .select2-choices {
-      width: 100%;
-      border: none !important;
-    }
-
-    .select2-container {
-      padding-top: 40px;
-      position: relative;
-
-      * {
-        box-shadow: none !important;
-      }
-    }
-
-    .select2-container-multi .select2-choices .select2-search-field input {
-      font-family: inherit;
-      font-size: 14px;
-    }
-
-    .select2-search-field {
-      position: absolute;
-      background: #fff !important;
-      top: -40px !important;
-      width: 220px !important;
-      min-width: 100% !important;
-
-      @include media($tablet) {
-          width: 100% !important;
-      }
-
-      input {
-        width: 100% !important;
-      }
-
-    }
-
-    .select2-choices {
-      border: none;
-      // padding: 3px 7px 3px 7px;
-      padding: 0;
-      overflow: visible;
-      background: none;
-
-      .select2-search-choice {
-        display: inline-block;
-        background: $primary-color;
-        font-size: 13px;
-        padding: 7px 10px 7px 25px;
-        margin: 2px 5px 3px 0;
-        border: none !important;
-        box-shadow: none !important;
-
-        .select2-search-choice-close {
-          color: $dark-color;
-          padding: 5px 10px 5px 5px;
-          text-decoration: none;
-          background-position: right -11px;
-          left: 5px !important;
-          top: 6px !important;
-        }
-      }
-    }
-
-    input[type="text"],
-    input[type="password"],
-    .select2-search-field input {
-      width: 100%;
-      box-shadow: none;
-      outline: none;
-      border: none;
-      padding: 10px 10px;
-      font-size: 0.9em;
-      margin-bottom: $content-gutter;
-    }
-
   }
 
   ul.navigation li.active:after {
