@@ -25,11 +25,19 @@
 
         <h1>Videos</h1>
         <hr/>
+        <h2>Publiserte videoer</h2>
         <ul>
-            <li ng-repeat="video in videos">
+            <li ng-repeat="video in existingVideos">
                 {{video.id}} - {{video.title}} - {{video.description}}
             </li>
         </ul>
+        <h2>Videoer fra Vimeo</h2>
+        <ul>
+            <li ng-repeat="video in vimeoVideos">
+                {{video.id}} - {{video.title}} - {{video.description}}
+            </li>
+        </ul>
+
 
     </div>
 </div>

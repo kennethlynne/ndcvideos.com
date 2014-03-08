@@ -65,8 +65,16 @@ angular.module('ndc')
         ];
         VideoRepo.index = {};
 
+
         angular.forEach(VideoRepo.data, function(item, key) {
             VideoRepo.index[item.id] = item;
+        });
+
+        //TODO: Preliminary for Vimeo
+        //GET vimeo/
+        $httpBackend.whenGET('http://vimeo.com/api/v2/ndcoslo/videos.json').respond(function(method, url, data, headers) {
+            $log.debug('Intercepted GET to `' + 'http://vimeo.com/api/v2/ndcoslo/videos.json' + '`', data);
+            return [200, VideoRepo.data, {/*headers*/}];
         });
 
         //GET video/

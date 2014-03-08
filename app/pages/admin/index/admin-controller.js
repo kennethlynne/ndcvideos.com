@@ -7,16 +7,22 @@ angular.module('ndc')
             templateUrl: 'pages/admin/index/main-view.html'
         }));
     })
-    .controller('AdminCtrl', function ($scope, UserRepository, VideoRepository) {
+    .controller('AdminCtrl', function ($scope, UserRepository, VideoRepository, vimeoAPI) {
 
         $scope.users = [];
         UserRepository.getAll().then(function (users) {
             $scope.users = users;
         });
 
-        $scope.videos = [];
+        $scope.existingVideos = [];
         VideoRepository.getAll().then(function (videos) {
-            $scope.videos = videos;
+            $scope.existingVideos = videos;
+        });
+
+        $scope.vimeoVideos = [];
+        vimeoAPI.getVideos().then(function (videos)
+        {
+           $scope.vimeoVideos = videos;
         });
 
         $scope.createUser = function () {

@@ -11,7 +11,7 @@ angular.module('ndc')
             path: '/api',
             fakeDelay: 800
         },
-        vimeoAPIUrl:'http://vimeo.com/api/v2/ndcoslo'
+        vimeoAPIUrl:'http://vimeo.com/api/v2/ndcoslo/'
     })
     .config(function (componentFactoryProvider, $sceDelegateProvider) {
         componentFactoryProvider.setViewPath(function (componentSnakeName, componentName) {
