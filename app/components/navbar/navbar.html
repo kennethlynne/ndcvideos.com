@@ -1,13 +1,13 @@
 <aside class="navbar-component" ng-show="isAuthenticated()">
 
-    <div class="responsive-toggler-wrapper">
+    <div class="responsive-toggler-wrapper" ng-click="menuOpen=!menuOpen">
         <h1 class="hidden-on-large">NDC</h1>
         <button class="responsive-toggler">
-            <i class="fa fa-bars"></i>
+            <i class="fa" ng-class="{'fa-bars':!menuOpen, 'fa-times':menuOpen}"></i>
         </button>
     </div>
 
-    <div class="responsive-wrapper">
+    <div class="responsive-wrapper" ng-class="{'open':menuOpen}">
     
         <header class="actionbar">
             <h1 class="hidden-on-small">NDC</h1>

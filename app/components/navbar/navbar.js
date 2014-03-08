@@ -13,13 +13,6 @@ angular.module('ndc.components')
             return authentication.isAuthenticated();
         };
 
-        // TODO
-        $(".responsive-toggler").click(function() {
-            $(".responsive-wrapper").toggleClass("open");
-            $(this).find("i").toggleClass("fa-bars");
-            $(this).find("i").toggleClass("fa-times");
-        });
-
         $scope.navbar = navbar;
 
     })
