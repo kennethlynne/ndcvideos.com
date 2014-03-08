@@ -12,9 +12,9 @@ angular.module('ndc')
         VideoRepo.data = [
             {
                 id: 1,
-                title: 'In The Open: Ellie Goulding - Guns And Horses',
-                description: 'Having listened to Ellie Gouldings debut album, Lights, I was always curious as to how it would translate acoustically since most of the album is more electronic driven. After a long drive from Portland, Oregon Ellie made it to San Francisco with just enough time to meet up.',
-                duration: 1234,
+                title: 'NDCOslo Trailer',
+                description: 'A festival for developers! Oslo Spektrum, Norway 2-6 June 2014',
+                duration: 134,
                 videoId: 86603468,
                 type:'vimeo',
                 tags:[{
@@ -27,16 +27,16 @@ angular.module('ndc')
                 upload_date: "2014-02-13 08:04:18",
                 thumbnail_small: "http://b.vimeocdn.com/ts/464/338/464338254_100.jpg",
                 thumbnail_medium: "http://b.vimeocdn.com/ts/464/338/464338254_200.jpg",
-                thumbnail_large: "http://b.vimeocdn.com/ts/464/338/464338254_640.jpg",
+                thumbnail_large: "http://b.vimeocdn.com/ts/464/338/464338254_640.jpg"
             },
 
             {
                 id: 2,
-                title: 'Elom Musk - SpaceX',
-                description: 'Elom musk er helt tullete. Her viser han skillz.',
-                duration: 12324,
-                videoId: "86396740",
-                type:'youtube',
+                title: 'Keynote with Dan North - Jackstones: the Journey to Mastery',
+                description: "It takes time to become really good at something. Time, commitment and a genuine passion. If you're not having fun the learning is a chore, if you are then it hardly feels like learning at all, at least not like the thing they made you do in school. Craftsmanship is about making that commitment and then figuring out how to see it through. Using examples of mastery from various fields and a thirty year paper-folding habit, Dan describes some of the many facets of craftsmanship and tries to figure out exactly what the craft is that we programmers do.",
+                duration: 3216,
+                videoId: 86396740,
+                type:'vimeo',
                 tags:[
                     {
                         title:'space'
@@ -48,7 +48,7 @@ angular.module('ndc')
                 upload_date: "2014-02-11 04:25:00",
                 thumbnail_small: "http://b.vimeocdn.com/ts/464/052/464052168_100.jpg",
                 thumbnail_medium: "http://b.vimeocdn.com/ts/464/052/464052168_200.jpg",
-                thumbnail_large: "http://b.vimeocdn.com/ts/464/052/464052168_640.jpg",
+                thumbnail_large: "http://b.vimeocdn.com/ts/464/052/464052168_640.jpg"
             },
 
             {
