@@ -3,10 +3,13 @@
 angular.module('ndc')
     .config(function ($stateProvider, stateFactory) {
         $stateProvider.state('index', stateFactory('Index', {
-            url:'/?tags'
+            url:'/?tags',
+            reloadOnSearch:false
         }));
     })
-    .controller('IndexCtrl', function ($scope, CurrentUser, TagRepository, VideoRepository, $stateParams, _) {
+    .controller('IndexCtrl', function ($scope, CurrentUser, TagRepository, VideoRepository, $stateParams, $location, _, TagModel) {
+
+
 
         $scope.tags = []; //This variable holds selected tags
 
@@ -23,8 +26,10 @@ angular.module('ndc')
 
         if($stateParams.tags != null)
         {
-            VideoRepository.getByTags($stateParams.tags).then(function (videos) {
-                $scope.videos = videos;
+            filterVideosByTags($stateParams.tags);
+            $scope.tags = _.map($stateParams.tags.split(','),function (item)
+            {
+                return new TagModel({text:item});
             });
         }
         else
@@ -34,4 +39,33 @@ angular.module('ndc')
             });
         }
 
+        $scope.filter = function ()
+        {
+           if($scope.tags.length > 0)
+           {
+
+               var tags = _.map($scope.tags, function (item)
+               {
+                   return item.text;
+               }).join(',');
+
+               $location.search('tags', tags);
+               filterVideosByTags(tags);
+           }
+            else
+           {
+               $location.url($location.path());
+               VideoRepository.getAll().then(function (videos) {
+                   $scope.videos = videos;
+               });
+           }
+        }
+
+
+        function filterVideosByTags(tags)
+        {
+            VideoRepository.getByTags(tags).then(function (videos) {
+                $scope.videos = videos;
+            });
+        };
     });
