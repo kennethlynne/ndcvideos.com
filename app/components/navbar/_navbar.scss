@@ -57,7 +57,7 @@ aside {
       width: $leftnav-width;
       background: $dark-color;
       text-align: center;
-      padding: 8px 15px;
+      padding: 7px 15px;
       position: fixed;
       left: 0;
       bottom: 0;
@@ -132,6 +132,7 @@ aside {
           list-style: none;
           padding: 0;
           margin: 0;
+          color: #fff;
 
           li {
             padding-bottom: $content-gutter;
@@ -276,11 +277,16 @@ aside {
     }
 
     h1 {
-      font-size: 50px;
-      margin: 0;
-      line-height: 30px;
-      margin-top: $content-gutter / 2;
-      margin-bottom: $content-gutter + 5;
+      font-size: 20px;
+      margin: 3px 0 0 0;
+      float: left;
+
+      @include media($tablet) {
+          float: none;
+          position: absolute;
+          top: 25px;
+          font-size: 24px;
+      }
 
       small {
         font-size: 13px;
@@ -334,8 +340,16 @@ aside {
           color: #fff;
           text-decoration: none;
           text-transform: uppercase;
-          font-size: 16px;
+          font-size: 14px;
           font-weight: bold;
+
+          @include media($tablet) {
+            background: $dark-color;
+            padding: 8px;
+            margin-bottom: 5px;
+            width: 100%;
+            display: block;
+          }          
         }
 
         &:hover {
