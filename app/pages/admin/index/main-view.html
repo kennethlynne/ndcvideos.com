@@ -3,8 +3,137 @@
         
         <h1 class="page-header">
             Admin
-            <small>Lorem ipsum dolor sit.</small>
+            <small>Area for administrators to manage videos and users.</small>
         </h1>
+
+        <div class="tabs-wrapper">
+        	<ul class="tabs-navigation">
+        		<li id="videos">Videos</li>
+        		<li id="users">Users</li>
+        	</ul>
+        	<ul class="tabs-content">
+
+        		<li id="videos-content">
+        			<h2>Add videos from Vimeo</h2>
+        			<p>Import videos from Vimeo and add additional metadata to each element.</p>
+        			<table>
+        				<thead class="hidden-on-small">
+        					<tr>
+        						<th width="110">Vimeo ID</th>
+        						<th>Video name</th>
+        						<th width="100">Video length</th>
+        						<th width="140">Actions</th>
+        					</tr>
+        				</thead>
+        				<tbody>
+        					<tr>
+        						<td><span class="hidden-on-large">Vimeo ID: </span>49274657</td> <!-- ID -->
+        						<td><span class="hidden-on-large">Name: </span>In The Open: Ellie Goulding - Guns And Horses</td> <!-- Video name -->
+        						<td><span class="hidden-on-large">Length: </span>11:36</td> <!-- Video length -->
+        						<td><span class="hidden-on-large">Actions: </span> <!-- Actions -->
+        							<button>Import and edit</button>
+        						</td>
+        					</tr>
+        					<tr>
+        						<td><span class="hidden-on-large">Vimeo ID: </span>91745654</td> <!-- ID -->
+        						<td><span class="hidden-on-large">Name: </span>Elom Musk - SpaceX</td> <!-- Video name -->
+        						<td><span class="hidden-on-large">Length: </span>4:14</td> <!-- Video length -->
+        						<td><span class="hidden-on-large">Actions: </span> <!-- Actions -->
+        							<button>Import and edit</button>
+        						</td>
+        					</tr>
+        				</tbody>	
+        			</table>
+
+        			<h2>All videos</h2>
+        			<p>Manage imported videos.</p>
+        			<table>
+        				<thead class="hidden-on-small">
+        					<tr>
+        						<th width="110">Vimeo ID</th>
+        						<th>Video name</th>
+        						<th>Tags</th>
+        						<th width="100">Video length</th>
+        						<th width="140">Actions</th>
+        					</tr>
+        				</thead>
+        				<tbody>
+        					<tr>
+        						<td><span class="hidden-on-large">Vimeo ID: </span>92758374</td> <!-- ID -->
+        						<td><span class="hidden-on-large">Name: </span>Visitor pattern in Ruby</td>
+        						<td><span class="hidden-on-large">Tags: </span>
+        							<ul class="tags">
+        								<li>Nice</li>
+        								<li>Awesome</li>
+        								<li>Neat</li>
+        							</ul>
+        						</td>
+        						<td><span class="hidden-on-large">Length: </span>24:58</td>
+        						<td><span class="hidden-on-large">Actions: </span>
+        							<button>Edit</button>
+        							<button>Delete</button>
+        						</td>
+        					</tr>
+        					<tr>
+        						<td><span class="hidden-on-large">Vimeo ID: </span>19457236</td> <!-- ID -->
+        						<td><span class="hidden-on-large">Name: </span>Ruby 2.0</td>
+        						<td><span class="hidden-on-large">Tags: </span>
+        							<ul class="tags">
+        								<li>Sweet</li>
+        								<li>Kewl</li>
+        								<li>Dandy</li>
+        								<li>Handsome</li>
+        							</ul>
+        						</td>
+        						<td><span class="hidden-on-large">Length: </span>42:07</td>
+        						<td><span class="hidden-on-large">Actions: </span>
+        							<button>Edit</button>
+        							<button>Delete</button>
+        						</td>
+        					</tr>
+        				</tbody>	
+        			</table>
+
+        		</li>
+
+        		<li id="users-content">
+        			<h2>Invite user</h2>
+        			<p>Invite new users to the platform by email.</p>
+					<div class="invite">
+						<input type="text" placeholder="User's email ..">
+						<button>Send invite</button>
+						<p class="error">Invalid email format.</p>
+						<p class="success">Your invitation has been sent!</p>
+					</div>
+
+        			<h2>All users</h2>
+        			<p>Manage all invited users.</p>
+        			<table>
+        				<thead class="hidden-on-small">
+        					<tr>
+        						<th>ID</th>
+        						<th>Email</th>
+        						<th>Account activated</th>
+        						<th>Actions</th>
+        					</tr>
+        				</thead>
+        				<tbody>
+        					<tr>
+        						<td><span class="hidden-on-large">ID: </span>1</td>
+        						<td><span class="hidden-on-large">Email: </span>test@test.com</td>
+        						<td><span class="hidden-on-large">Account activated: </span>Yes</td>
+        						<td><span class="hidden-on-large">Actions: </span>
+        							<button>Reset password</button>
+        							<button>Delete</button>
+        						</td>
+        					</tr>
+        				</tbody>	
+        			</table>
+        		</li>
+
+        	</ul>
+        </div>
+
 
         <h1>Brukere</h1>
         <hr/>
@@ -38,7 +167,6 @@
                 {{video.id}} - {{video.title}} - {{video.description}}
             </li>
         </ul>
-
 
     </div>
 </div>
