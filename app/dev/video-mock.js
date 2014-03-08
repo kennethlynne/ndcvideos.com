@@ -20,10 +20,10 @@ angular.module('ndc')
                 type: 'vimeo',
                 tags: [
                     {
-                        title: 'music'
+                        title: '.NET'
                     },
                     {
-                        title: 'guns'
+                        title: 'Javascript'
                     }
                 ],
                 upload_date: "2014-02-13 08:04:18",
@@ -41,10 +41,10 @@ angular.module('ndc')
                 type: 'vimeo',
                 tags: [
                     {
-                        title: 'space'
+                        title: 'Angular'
                     },
                     {
-                        title: 'space exploration'
+                        title: 'Javascript'
                     }
                 ],
                 upload_date: "2014-02-11 04:25:00",
