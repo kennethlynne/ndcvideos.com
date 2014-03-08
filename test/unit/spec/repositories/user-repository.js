@@ -1,15 +1,25 @@
 describe('Model Repository: UserRepository', function () {
 
-    var UserRepository, $httpBackend, UserModel, $rootScope;
+    var UserRepository, $httpBackend, Model, $rootScope, BaseRepository;
 
     beforeEach(function () {
 
-        module('ndc');
+        Model = function (p) {
+            this.id = p.id;
+        };
 
-        inject(function (_UserRepository_, _$httpBackend_, _UserModel_, _$rootScope_) {
+        Model.$settings = {
+            url: 'URL'
+        };
+
+        module('ndc', function ($provide) {
+            $provide.value('UserModel', Model);
+        });
+
+        inject(function (_UserRepository_, _$httpBackend_, _$rootScope_, $injector) {
             UserRepository = _UserRepository_;
             $httpBackend = _$httpBackend_;
-            UserModel = _UserModel_;
+            BaseRepository = $injector.get('BaseRepository');
             $rootScope = _$rootScope_;
         });
 
@@ -20,9 +30,13 @@ describe('Model Repository: UserRepository', function () {
         $httpBackend.verifyNoOutstandingRequest();
     });
 
+    it('should be an instance of BaseRepository', function() {
+        expect(UserRepository instanceof BaseRepository).toBeTruthy();
+    });
+
     describe('getById', function () {
         it('should return models by id', function() {
-            $httpBackend.expectGET(UserModel.$settings.url + '/5').respond(200, {id: 5, title:'User title'});
+            $httpBackend.expectGET(Model.$settings.url + '/5').respond(200, {id: 5});
 
             var promise = UserRepository.getById(5);
 
@@ -33,13 +47,12 @@ describe('Model Repository: UserRepository', function () {
 
             $httpBackend.flush();
 
-            expect(response instanceof UserModel).toBe(true);
+            expect(response instanceof Model).toBeTruthy();
             expect(response.id).toEqual(5);
-            expect(response.title).toEqual('User title');
         });
 
         it('should not do subsequent calls if model already exits in pool', function() {
-            $httpBackend.expectGET(UserModel.$settings.url + '/5').respond(200, {id: 5, title:'User title'});
+            $httpBackend.expectGET(Model.$settings.url + '/5').respond(200, {id: 5});
             UserRepository.getById(5);
             $httpBackend.flush();
 
@@ -52,13 +65,12 @@ describe('Model Repository: UserRepository', function () {
 
             $rootScope.$digest();
 
-            expect(response instanceof UserModel).toBe(true);
+            expect(response instanceof Model).toBeTruthy();
             expect(response.id).toEqual(5);
-            expect(response.title).toEqual('User title');
         });
 
         it('should handle rejects', function() {
-            $httpBackend.expectGET(UserModel.$settings.url + '/5').respond(404, 'No such thang!');
+            $httpBackend.expectGET(Model.$settings.url + '/5').respond(404, 'No such thang!');
 
             var promise = UserRepository.getById(5),
                 response,
@@ -76,7 +88,7 @@ describe('Model Repository: UserRepository', function () {
 
     describe('getAll', function () {
         it('should return models by id', function() {
-            $httpBackend.expectGET(UserModel.$settings.url).respond(200, [{id: 5, title:'User title'},{id: 6, title:'User title'}]);
+            $httpBackend.expectGET(Model.$settings.url).respond(200, [{id: 5},{id: 6}]);
 
             var promise = UserRepository.getAll();
 
@@ -88,17 +100,15 @@ describe('Model Repository: UserRepository', function () {
 
             $httpBackend.flush();
 
-            expect(User5 instanceof UserModel).toBe(true);
+            expect(User5 instanceof Model).toBeTruthy();
             expect(User5.id).toEqual(5);
-            expect(User5.title).toEqual('User title');
 
-            expect(User6 instanceof UserModel).toBe(true);
+            expect(User6 instanceof Model).toBeTruthy();
             expect(User6.id).toEqual(6);
-            expect(User6.title).toEqual('User title');
         });
 
         it('should handle rejects', function() {
-            $httpBackend.expectGET(UserModel.$settings.url).respond(404, 'No such thang!');
+            $httpBackend.expectGET(Model.$settings.url).respond(404, 'No such thang!');
 
             var promise = UserRepository.getAll(5),
                 success = jasmine.createSpy('success'),
@@ -115,14 +125,6 @@ describe('Model Repository: UserRepository', function () {
 
     describe('attach', function () {
 
-        var UserModel;
-
-        beforeEach(function () {
-            inject(function (_UserModel_) {
-                UserModel = _UserModel_;
-            });
-        });
-
         it('should throw if trying to attach a model that is not of valid type', function() {
             function wrapper() {
                 UserRepository.attach({fails: true});
@@ -132,7 +134,7 @@ describe('Model Repository: UserRepository', function () {
 
         it('should return the attached model on subsequent requests', function() {
 
-            UserRepository.attach(new UserModel({id: 5, title:'User title'}));
+            UserRepository.attach(new Model({id: 5}));
 
             var User;
 
@@ -142,23 +144,21 @@ describe('Model Repository: UserRepository', function () {
 
             $rootScope.$digest();
 
-            expect(User instanceof UserModel).toBe(true);
+            expect(User instanceof Model).toBeTruthy();
             expect(User.id).toEqual(5);
-            expect(User.title).toEqual('User title');
         });
     });
 
     describe('create', function () {
         it('should return a newed up instance of the User Model', function() {
             var User = UserRepository.create({title:'New title'});
-            expect(User instanceof UserModel).toBe(true);
-            expect(User.title).toEqual('New title');
+            expect(User instanceof Model).toBeTruthy();
         });
     });
 
-    describe('_pool', function () {
+    describe('cache', function () {
         it('should return a reference to the pool', function() {
-            var newUser = {id:19, title:'Yeah!'};
+            var newUser = {id:19};
             UserRepository.cache[19] = newUser;
 
             var User;

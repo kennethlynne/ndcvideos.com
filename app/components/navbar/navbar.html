@@ -1,7 +1,7 @@
 <aside class="navbar-component" ng-show="isAuthenticated()">
 
     <div class="responsive-toggler-wrapper">
-        <h1 class="hidden-on-large">NDC</h1>
+        <h1 class="hidden-on-large"><a href="#">NDC</a></h1>
         <button class="responsive-toggler">
             <i class="fa fa-bars"></i>
         </button>
@@ -10,7 +10,7 @@
     <div class="responsive-wrapper">
     
         <header class="actionbar">
-            <h1 class="hidden-on-small">NDC</h1>
+            <h1 class="hidden-on-small"><a href="#">NDC</a></h1>
             <div class="pull-right">
                 <button class="toggle toggle-navigation" ng-class="{'active': navbar.isActive('navigation')}" data-toggle="tooltip" data-placement="bottom" title="Menu" ng-click="navbar.setState('navigation')">
                     <i class="fa fa-bars"></i>
@@ -34,7 +34,7 @@
         </header>
 
         <div style="position: relative;">
-            <div ng-include="navbar.templateSrc" class="view-change-animation"></div>
+            <div ng-include="navbar.templateSrc" class="nav-change-animation"></div>
         </div>
 
         <!-- <navbar-mini-player-component></navbar-mini-player-component> -->

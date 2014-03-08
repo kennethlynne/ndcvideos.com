@@ -2,6 +2,12 @@
 	<div class="index-index-page">
 
 	    <div class="videos">
+
+	    	<div class="search-wrapper">
+	    		<!-- <input type="text" class="search-tags" placeholder="Filter videos by tags .."> -->
+	    		<input type="hidden" class="search" ui-select2="select2Options" ng-model="tags" placeholder="Add tags to filter videos ..">
+	    	</div>
+	    	
 	        <video-list-item-component ng-repeat="video in videos" video="video"></video-list-item-component>
 	    </div>
 

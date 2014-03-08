@@ -10,10 +10,10 @@
 #loading-bar-spinner {
   pointer-events: none;
   -webkit-pointer-events: none;
-  -webkit-transition: 0.5s linear all;
-  -moz-transition: 0.5s linear all;
-  -o-transition: 0.5s linear all;
-  transition: 0.5s linear all;
+  -webkit-transition: 0.4s linear all;
+  -moz-transition: 0.4s linear all;
+  -o-transition: 0.4s linear all;
+  transition: 0.4s linear all;
 }
 
 #loading-bar.ng-enter,
@@ -36,7 +36,7 @@
   -o-transition: width 350ms;
   transition: width 350ms;
 
-  background: #29d;
+  background: $primary-color;
   position: fixed;
   z-index: 2000;
   top: 0;
@@ -52,7 +52,7 @@
   right: 0px;
   width: 100px;
   height: 100%;
-  box-shadow: 0 0 10px #29d, 0 0 5px #29d;
+  box-shadow: 0 0 10px $primary-color, 0 0 5px $primary-color;
   opacity: 1.0;
 
   -webkit-transform: rotate(3deg) translate(0px, -4px);
@@ -67,7 +67,15 @@
   position: fixed;
   z-index: 100;
   top: 10px;
-  left: 10px;
+  left: 0;
+  padding: 17px 25px;
+  background: $dark-color;
+
+  @include media($tablet) {
+    top: 17px;
+    left: 0;
+    padding: 17px 50px 17px 25px;
+  }
 }
 
 #loading-bar-spinner .spinner-icon {
@@ -75,8 +83,8 @@
   height: 14px;
 
   border:  solid 2px transparent;
-  border-top-color:  #29d;
-  border-left-color: #29d;
+  border-top-color:  $primary-color;
+  border-left-color: $primary-color;
   border-radius: 10px;
 
   -webkit-animation: loading-bar-spinner 400ms linear infinite;
