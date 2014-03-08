@@ -8,7 +8,7 @@ angular.module('ndc')
             parent: 'admin'
         }));
     })
-    .controller('AdminVideosCtrl', function ($scope, VideoRepository, vimeoAPI) {
+    .controller('AdminVideosCtrl', function ($scope, VideoRepository, vimeoAPI, $modal) {
 
         $scope.existingVideos = [];
 
