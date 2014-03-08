@@ -1,15 +1,15 @@
 'use strict';
 
-describe('Service: vimeoApi', function () {
+describe('Service: vimeoAPI', function () {
 
-    var vimeoApi, $httpBackend, Config, VideoModel;
+    var vimeoAPI, $httpBackend, Config, VideoModel;
 
     beforeEach(function () {
 
         module('ndc');
 
-        inject(function (_vimeoApi_, _$httpBackend_, _Config_, _VideoModel_) {
-            vimeoApi = _vimeoApi_;
+        inject(function (_vimeoAPI_, _$httpBackend_, _Config_, _VideoModel_) {
+            vimeoAPI = _vimeoAPI_;
             $httpBackend = _$httpBackend_;
             Config = _Config_;
             VideoModel = _VideoModel_;
@@ -26,7 +26,7 @@ describe('Service: vimeoApi', function () {
     it('should return a list of videos', function () {
       $httpBackend.expectGET(Config.vimeoAPIUrl + 'videos.json').respond(200, [ {id: 5, name:'balle'}, {id: 6, name:'bruno'} ]);
 
-        vimeoApi.getVideos().then(function (response)
+        vimeoAPI.getVideos().then(function (response)
         {
             var videos = response;
 

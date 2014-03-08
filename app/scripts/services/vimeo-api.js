@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ndc')
-    .service('vimeoApi', function vimeoApi(Config, $http, VideoModel, _) {
+    .service('vimeoAPI', function vimeoAPI(Config, $http, VideoModel, _) {
 
         var _apiUrl = Config.vimeoAPIUrl;
 
