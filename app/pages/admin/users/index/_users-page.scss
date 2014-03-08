@@ -1,0 +1,26 @@
+.admin-users-partial  {
+  .invite {
+    margin-bottom: 30px;
+
+    input {
+      padding: 5px 10px;
+      box-shadow: none;
+      outline: none;
+      border: 1px solid #ccc;
+    }
+
+    p {
+      margin: 10px 0 0 0;
+      padding: 0;
+      font-size: 12px;
+
+      &.error {
+        color: #ff3333;
+      }
+
+      &.success {
+        color: $primary-color;
+      }
+    }
+  }
+}

@@ -1,217 +1,188 @@
-.admin-page  {
-	@include clearfix;
-	width: 100%;
-	padding: ($content-gutter/2) ($content-gutter);
+.admin-page {
+  @include clearfix;
+  width: 100%;
+  padding: ($content-gutter/2) ($content-gutter);
 
-	.tabs-wrapper {
-		@include row;
-		width: 100%;
+  .tabs-wrapper {
+    @include row;
+    width: 100%;
 
-		ul {
-			list-style: none;
-			margin: 0;
-			padding: 0;
-			width: 100%;
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      width: 100%;
 
-			li {
-				margin: 0;
-				padding: 0;
-			}
+      li {
+        margin: 0;
+        padding: 0;
+      }
 
-			&.tabs-navigation {
-				li {
-					display: inline-block;
-					padding: ($content-gutter/2) $content-gutter;
-					cursor: pointer;
-					background: #ddd;
-					margin-right: 3px;
-					font-size: 12px;
-					font-weight: 700;
-					text-transform: uppercase;
+      &.tabs-navigation {
+        li {
+          display: inline-block;
+          padding: ($content-gutter/2) $content-gutter;
+          cursor: pointer;
+          background: #ddd;
+          margin-right: 3px;
+          font-size: 12px;
+          font-weight: 700;
+          text-transform: uppercase;
 
-					&.active {
-						background: $primary-color;
-						border-color: $primary-color;
-						color: #fff;
-					}
-				}
-			}
+          &.active {
+            background: $primary-color;
+            border-color: $primary-color;
+            color: #fff;
+          }
+        }
+      }
+    }
 
-			&.tabs-content {
-				li {
-					display: none;
-					padding: $content-gutter;
-					width: 100%;
-					background: #fff;
+    #nested-view {
+      position: relative;
+      padding: $content-gutter;
+      width: 100%;
+      background: #fff;
 
-					&.active { display: block; }
+      h2 {
+        margin: 0;
+        padding: 0;
+        font-size: 18px;
+        margin-top: 10px;
+        margin-bottom: 5px;
 
-					h2 {
-						margin: 0;
-						padding: 0;
-						font-size: 18px;
-						margin-top: 10px;
-						margin-bottom: 5px;
+        @include media($tablet) {
+          &:not(:first-child) {
+            padding-top: 30px;
+            border-top: 1px solid #ccc;
+          }
+        }
+      }
 
-						@include media($tablet) {
-							&:not(:first-child) {
-								padding-top: 30px;
-								border-top: 1px solid #ccc;
-							}
-						}
-					}
+      button {
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        background: #eee;
+        box-shadow: none;
+        outline: none;
+      }
 
-					button {
-						padding: 5px 10px;
-						border: 1px solid #ccc;
-						background: #eee;
-						box-shadow: none;
-						outline: none;	
-					}
+      ul.tags {
+        margin: 0;
+        padding: 0;
+        list-style: none;
 
-					.invite {
-						margin-bottom: 30px;
+        li {
+          display: inline-block;
+          background: $green;
+          color: #fff;
+          width: auto !important;
+          font-size: 13px;
+          padding: 7px 10px 7px 10px;
+          margin-right: 5px;
+          margin-top: 2px;
+          margin-bottom: 2px;
 
-						input {
-							padding: 5px 10px;
-							box-shadow: none;
-							outline: none;
-							border: 1px solid #ccc;
-						}
+          @include media($tablet) {
+            padding: 0;
+            margin: 0;
+            background: none;
+            color: #222;
 
-						p {
-							margin: 10px 0 0 0;
-							padding: 0;
-							font-size: 12px;
+            &:not(:last-child):after {
+              content: ", ";
+            }
+          }
 
-							&.error {
-								color: #ff3333;
-							}
+          .close {
+            color: $dark-color;
+            padding: 5px 10px 5px 5px;
+            text-decoration: none;
 
-							&.success {
-								color: $primary-color;
-							}
-						}
-					}
+            &:hover {
+              color: #fff;
+            }
+          }
+        }
+      }
 
-					ul.tags {
-				      margin: 0;
-				      padding: 0;
-				      list-style: none;
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+        text-align: left;
+        margin-top: 20px;
+        margin-bottom: 30px;
 
-				      li {
-				        display: inline-block;
-				        background: $green;
-				        color: #fff;
-				        width: auto !important;
-				        font-size: 13px;
-				        padding: 7px 10px 7px 10px;
-				        margin-right: 5px;
-				        margin-top: 2px;
-				        margin-bottom: 2px;
+        @include media($tablet) {
+          margin-bottom: 0px;
+        }
 
-				        @include media($tablet) {
-							padding: 0;
-							margin: 0;
-							background: none;
-							color: #222;
+        tr {
+          @include media($tablet) {
+            width: 100% !important;
+            border: none !important;
+            display: block;
+            margin-bottom: 20px !important;
+          }
 
-							&:not(:last-child):after {
-								content: ", ";
-							}
-				        }
+          td, th {
+            padding: 7px;
 
-				        .close {
-				          color: $dark-color;
-				          padding: 5px 10px 5px 5px;
-				          text-decoration: none;
+            @include media($tablet) {
+              width: 100% !important;
+              border: none !important;
+              display: block;
+              padding: 2px 0;
 
-				          &:hover {
-				            color: #fff;
-				          }
-				        }
-				      }
-				    }
+              span.hidden-on-large {
+                display: inline-block;
+                font-weight: bold;
+                margin-right: 5px;
+              }
+            }
+          }
+        }
 
-					table {
-						border-collapse: collapse;
-  						border-spacing: 0;
-						width: 100%;
-						text-align: left;
-						margin-top: 20px;
-						margin-bottom: 30px;
+        thead {
+          tr {
+            th {
+              border-bottom: 2px solid #777;
+              border-left: 1px solid #ddd;
 
-						@include media($tablet) { 
-							margin-bottom: 0px;
-						}
+              &:first-child {
+                border-left: none;
+              }
+            }
+          }
+        }
 
-						tr {
-							@include media($tablet) {
-								width: 100% !important;
-								border: none !important;	
-								display: block;
-								margin-bottom: 20px !important;
-							}
+        tbody {
+          tr {
+            border-top: 1px solid #ddd;
 
-							td, th {
-								padding: 7px;
+            &:first-child {
+              border-top: none;
+            }
 
-								@include media($tablet) {
-									width: 100% !important;
-									border: none !important;	
-									display: block;
-									padding: 2px 0;
+            &:hover {
+              background: #f7f7f7;
 
-									span.hidden-on-large {
-										display: inline-block;
-										font-weight: bold;
-										margin-right: 5px;
-									}
-								}
-							}
-						}
+              @include media($tablet) {
+                background: none;
+              }
+            }
 
-						thead {
-							tr {
-								th {
-									border-bottom: 2px solid #777;
-									border-left: 1px solid #ddd;
+            td {
+              border-left: 1px solid #ddd;
 
-									&:first-child {
-										border-left: none;
-									}
-								}
-							}
-						}
-
-						tbody {
-							tr {
-								border-top: 1px solid #ddd;
-
-								&:first-child {
-									border-top: none;
-								}
-
-								&:hover {
-									background: #f7f7f7;
-
-									@include media($tablet) {
-										background: none;
-									}
-								}
-
-								td {
-									border-left: 1px solid #ddd;
-
-									&:first-child {
-										border-left: none;
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+              &:first-child {
+                border-left: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

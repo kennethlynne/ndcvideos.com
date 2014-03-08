@@ -8,30 +8,12 @@
 
         <div class="tabs-wrapper">
         	<ul class="tabs-navigation">
-        		<li id="videos">Videos</li>
-        		<li id="users">Users</li>
+        		<li id="videos" ui-sref-active="active"><a ui-sref="administrateVideos">Videos</a></li>
+        		<li id="users" ui-sref-active="active"><a ui-sref="administrateUsers">Users</a></li>
         	</ul>
-        	<ul class="tabs-content">
 
-        		<div ui-view="admin" class="view-change-animation"></div>
-
-        	</ul>
+       		<div id="nested-view" ui-view class="_view-change-animation"></div>
         </div>
-
-        <h1>Videos</h1>
-        <hr/>
-        <h2>Publiserte videoer</h2>
-        <ul>
-            <li ng-repeat="video in existingVideos">
-                {{video.id}} - {{video.title}} - {{video.description}}
-            </li>
-        </ul>
-        <h2>Videoer fra Vimeo</h2>
-        <ul>
-            <li ng-repeat="video in vimeoVideos">
-                {{video.id}} - {{video.title}} - {{video.description}}
-            </li>
-        </ul>
 
     </div>
 </div>
