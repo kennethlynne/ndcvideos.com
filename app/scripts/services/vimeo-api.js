@@ -11,7 +11,6 @@ angular.module('ndc')
             return $http.get(_apiUrl + "videos.json").then(function (response)
             {
                 return _.map(response.data, function (item) {
-                    console.log(item);
                     return new VideoModel(item);
                 });
             });
