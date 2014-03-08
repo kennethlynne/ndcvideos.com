@@ -6,5 +6,30 @@
             <small>Lorem ipsum dolor sit.</small>
         </h1>
 
+        <h1>Brukere</h1>
+        <hr/>
+        <ul>
+            <li ng-repeat="user in users">
+                {{user.userName}}
+                <button>Rediger (ikke implementert)</button>
+            </li>
+            <li ng-show="isCreatingNewUser">
+                <form novalidate name="newUserForm">
+                    <input type="email" name="userName" ng-model="newUser.userName" required/>
+                    <button ng-click="saveUser(newUser)" ng-disabled="newUserForm.userName.$invalid">Send invitasjon</button>
+                    <button ng-click="resetNewUser()">Avbryt</button>
+                </form>
+            </li>
+        </ul>
+        <button ng-click="createUser()">Opprett bruker</button>
+
+        <h1>Videos</h1>
+        <hr/>
+        <ul>
+            <li ng-repeat="video in videos">
+                {{video.id}} - {{video.title}} - {{video.description}}
+            </li>
+        </ul>
+
     </div>
 </div>
