@@ -23,6 +23,7 @@ angular.module('ndc')
                 ],
                 permissions: [
                 ],
+                verified: true,
                 roles: [
                     'administrator'
                 ]
