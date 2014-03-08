@@ -15,27 +15,23 @@
 }
 
 h1.page-header {
-	font-family: "museo-slab", serif;
 	margin: 0;
-	font-size: 25px;
+	font-size: 30px;
 	text-transform: uppercase;
-	color: $primary-color;
+	// color: $primary-color;
 	font-weight: 700;
 
 	small {
-		// font-family: "adobe-garamond-pro";
 		display: block;
 		text-transform: none;
-		margin-bottom: 18px;
+		margin-bottom: 25px;
 		color: #666;
-		font-size: 20px;
-		// font-weight: normal;
+		font-size: 16px;
+		font-weight: normal;
 	}
 }
 
 .hidden-on-small {
-	display: block;
-
 	@include media($tablet) {
 		display: none;
 	}
@@ -43,7 +39,6 @@ h1.page-header {
 
 .hidden-on-large {
 	display: none;
-
 	@include media($tablet) {
 		display: block;
 	}

@@ -1,31 +1,12 @@
 .modal {
   .modal-dialog {
 	@include clearfix;
-	position: absolute;
-	top: 50%;
-	margin-top: -200px;
-	left: 50%;
-	margin-left: -450px;
-	// width: 100%;
-	// margin-top: 50px;
-	background: rgba(0, 0, 0, 0.1);
-	box-shadow: 0px 0px 150px rgba(0, 0, 0, 0.7);
 
-	@include media($tablet) {
-		position: static;
-		top: 0;
-		width: 100%;
-		margin: 0;
-		margin-top: 50px;
-  	}
-
-  	@include media($phone) {
-		position: static;
-		top: 0;
-		width: 100%;
-		margin: 0;
-		margin-top: 50px;
-  	}
+	position: static;
+	top: 0;
+	width: 100%;
+	margin: 0;
+	margin-top: 70px;
 
 	.modal-body {
 	  margin: 0 auto;
@@ -34,7 +15,7 @@
 	.close {
 	  position: absolute;
 	  top: -50px;
-	  right: 0;
+	  right: 10px;
 	  font-size: 40px;
 	  background: none;
 	  box-shadow: none;
@@ -43,41 +24,32 @@
 	}
 
 	.modal-video {
-	  @include span-columns(6 of 10);
+	  // @include span-columns(6 of 10);
 
-	  @include media($tablet) {
+	  // @include media($tablet) {
 		@include span-columns(20 of 20);
-	  }
-
-	  @include media($phone) {
-		@include span-columns(20 of 20);
-	  }
+	  // }
 	}
 
 	.modal-video-info {
-	  @include span-columns(4 of 10);
+	  // @include span-columns(4 of 10);
 	  color: #fff;
-	  padding: $content-gutter;
+	  padding: $content-gutter 0;
 
-	  @include media($tablet) {
+	  // @include media($tablet) {
 		@include span-columns(20 of 20);
-	  }
-
-	  @include media($phone) {
-		@include span-columns(20 of 20);
-	  }
+	  // }
 
 	  h2 {
 		margin-top: 0;
 	  }
 	}
 
-	.modal-video-actions {
-	  padding: 0 $content-gutter;
-	  @include span-columns(4 of 10);
-
-	  button {
+	button.favorite {
 		float: left;
+		vertical-align: top;
+		margin-right: 10px;
+		margin-top: -5px;
 		background: none;
 		border: none;
 		box-shadow: none;
@@ -88,7 +60,6 @@
 		i.fa-star {
 		  color: $primary-color;
 		}
-	  }
 	}
   }
 }
