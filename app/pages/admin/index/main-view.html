@@ -12,6 +12,7 @@
             <li ng-repeat="user in users">
                 {{user.userName}}
                 <button>Rediger (ikke implementert)</button>
+                <button ng-click="deleteUser(user)">Slett</button>
             </li>
             <li ng-show="isCreatingNewUser">
                 <form novalidate name="newUserForm">

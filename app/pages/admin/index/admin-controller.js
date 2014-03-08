@@ -28,6 +28,12 @@ angular.module('ndc')
             $scope.newUser = {};
         };
 
+        $scope.deleteUser = function (user) {
+            user.$delete().then(function () {
+                $scope.users.splice($scope.users.indexOf(user), 1);
+            });
+        };
+
         $scope.saveUser = function (user) {
             $scope.isCreatingNewUser = false;
 

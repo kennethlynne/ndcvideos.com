@@ -1,16 +1,12 @@
 angular.module('ndc')
     .run(function (Config, $httpBackend, $log, APIBaseUrl, regexEscape, guid) {
-
-        //Only load mocks if config says so
-        if(!Config.API.useMocks)
-            return;
+        if(!Config.API.useMocks) return;
 
         var collectionUrl = APIBaseUrl + 'users';
-
         var IdRegExp = /[\d\w-_]+$/.toString().slice(1, -1);
 
-        console.log('Stubbing user API - ' + collectionUrl);
-        console.log('************');
+        $log.log('Overriding all calls to `' + collectionUrl + '` with mocks defined in *dev/user-mocks.js*');
+        $log.log('*******************************************************************************************************************************************************');
 
         var UserRepo = {};
         UserRepo.data = [
@@ -32,18 +28,18 @@ angular.module('ndc')
         UserRepo.index = {};
 
         angular.forEach(UserRepo.data, function(item, key) {
-            UserRepo.index[item.id] = item; //Index messages to be able to do efficient lookups on id
+            UserRepo.index[item.id] = item;
         });
 
-        //GET user/ should return a list og messages
+        //GET users/
         $httpBackend.whenGET(collectionUrl).respond(function(method, url, data, headers) {
-            $log.log('Intercepted GET to user', data);
+            $log.debug('Intercepted GET to `' + collectionUrl + '`', data);
             return [200, UserRepo.data, {/*headers*/}];
         });
 
-        //POST user/ should save a message and return the message with an id
+        //POST users/
         $httpBackend.whenPOST(collectionUrl).respond(function(method, url, data, headers) {
-            $log.log('Intercepted POST to user', data);
+            $log.debug('Intercepted POST to `' + collectionUrl + '`', data);
             var User = angular.fromJson(data);
 
             User.id = guid();
@@ -53,12 +49,42 @@ angular.module('ndc')
             return [200, User, {/*headers*/}];
         });
 
-        //GET user/id should return a message
+        //GET users/id
         $httpBackend.whenGET( new RegExp(regexEscape(collectionUrl + '/') + IdRegExp ) ).respond(function(method, url, data, headers) {
-            $log.log('Intercepted GET to user');
+            $log.debug('Intercepted GET to `' + collectionUrl + '`');
             var id = url.match( new RegExp(IdRegExp) )[0];
-            return [200, UserRepo.index[id] || null, {/*headers*/}];
+            return [UserRepo.index[id]?200:404, UserRepo.index[id] || null, {/*headers*/}];
         });
+
+        //PUT users/id
+        $httpBackend.whenPUT( new RegExp(regexEscape(collectionUrl + '/') + IdRegExp ) ).respond(function(method, url, data, headers) {
+            $log.debug('Intercepted PUT to `' + collectionUrl + '`');
+            var id = url.match( new RegExp(IdRegExp) )[0];
+
+            if (!UserRepo.index[id]) {
+                return [404, {} , {/*headers*/}];
+            }
+
+            var User = UserRepo.index[id] = angular.fromJson(data);
+
+            return [200, User, {/*headers*/}];
+        });
+
+        //DELETE users/id
+        $httpBackend.whenDELETE( new RegExp(regexEscape(collectionUrl + '/') + IdRegExp ) ).respond(function(method, url, data, headers) {
+            $log.debug('Intercepted DELETE to `' + collectionUrl + '`');
+            var id = url.match( new RegExp(IdRegExp) )[0];
+
+            var User = UserRepo.index[id];
+            if (!User) {
+                return [404, {} , {/*headers*/}];
+            }
+            delete UserRepo.index[User.id];
+            var index = UserRepo.data.indexOf(User);
+            UserRepo.data.splice(index, 1);
+            return [200, User , {/*headers*/}];
+        });
+
     });
 
 

@@ -27,7 +27,7 @@ describe('Model: UserModel', function () {
         $httpBackend.verifyNoOutstandingRequest();
     });
 
-    it('should have the $urlBase property set', function() {
+    it('should have the url property set', function() {
         expect(UserModel.$settings.url).toBe(APIBaseUrl + collectionUrl);
     });
 

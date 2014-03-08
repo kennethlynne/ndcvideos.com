@@ -11,7 +11,8 @@ describe('Controller(/admin): AdminCtrl', function () {
         }
 
         userModel = {
-            $save: jasmine.createSpy('userModel.$save').andCallFake(getPromise)
+            $save: jasmine.createSpy('userModel.$save').andCallFake(getPromise),
+            $delete: jasmine.createSpy('userModel.$delete').andCallFake(getPromise)
         };
 
         UserRepository = {
@@ -99,6 +100,19 @@ describe('Controller(/admin): AdminCtrl', function () {
         scope.resetNewUser();
         expect(scope.isCreatingNewUser).toBeFalsy();
         expect(scope.newUser).toEqual({});
+    });
+
+    it('should delete user', function() {
+        scope.deleteUser(userModel);
+        expect(userModel.$delete).toHaveBeenCalled();
+    });
+
+    it('should remove user on successful delete', function() {
+        scope.users.push(userModel);
+        scope.deleteUser(userModel);
+        deferred.resolve([]);
+        $rootScope.$digest();
+        expect(scope.users.length).toBe(0);
     });
 
 });
