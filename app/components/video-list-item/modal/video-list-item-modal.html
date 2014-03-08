@@ -4,12 +4,12 @@
         <media-player-component ng-if="video" video="video"></media-player-component>
     </div>
     <div class="modal-video-info">
-        <h2>{{video.title}}</h2>
+        <h2>
+            {{video.title}}
+            <button class="favorite has-tooltip" data-toggle="tooltip" data-placement="bottom" title="Set favorite">
+                <i class="fa fa-star-o"></i>
+            </button>
+        </h2>
         <p>{{video.description}}</p>
-    </div>
-    <div class="modal-video-actions">
-        <button class="favorite has-tooltip" data-toggle="tooltip" data-placement="bottom" title="Set favorite">
-            <i class="fa fa-star-o"></i>
-        </button>
     </div>
 </div>
