@@ -15,7 +15,7 @@ angular.module('ndc')
                 title: 'In The Open: Ellie Goulding - Guns And Horses',
                 description: 'Having listened to Ellie Gouldings debut album, Lights, I was always curious as to how it would translate acoustically since most of the album is more electronic driven. After a long drive from Portland, Oregon Ellie made it to San Francisco with just enough time to meet up.',
                 duration: 1234,
-                videoId: 23919731,
+                videoId: 86603468,
                 type:'vimeo',
                 tags:[{
                         title: 'music'
@@ -23,7 +23,11 @@ angular.module('ndc')
                     {
                         title: 'guns'
                     }
-                ]
+                ],
+                upload_date: "2014-02-13 08:04:18",
+                thumbnail_small: "http://b.vimeocdn.com/ts/464/338/464338254_100.jpg",
+                thumbnail_medium: "http://b.vimeocdn.com/ts/464/338/464338254_200.jpg",
+                thumbnail_large: "http://b.vimeocdn.com/ts/464/338/464338254_640.jpg",
             },
 
             {
@@ -31,7 +35,7 @@ angular.module('ndc')
                 title: 'Elom Musk - SpaceX',
                 description: 'Elom musk er helt tullete. Her viser han skillz.',
                 duration: 12324,
-                videoId: "8NNSXiLNKkM",
+                videoId: "86396740",
                 type:'youtube',
                 tags:[
                     {
@@ -40,7 +44,11 @@ angular.module('ndc')
                     {
                         title:'space exploration'
                     }
-                ]
+                ],
+                upload_date: "2014-02-11 04:25:00",
+                thumbnail_small: "http://b.vimeocdn.com/ts/464/052/464052168_100.jpg",
+                thumbnail_medium: "http://b.vimeocdn.com/ts/464/052/464052168_200.jpg",
+                thumbnail_large: "http://b.vimeocdn.com/ts/464/052/464052168_640.jpg",
             },
 
             {
@@ -70,12 +78,6 @@ angular.module('ndc')
             VideoRepo.index[item.id] = item;
         });
 
-        //TODO: Preliminary for Vimeo
-        //GET vimeo/
-        $httpBackend.whenGET('http://vimeo.com/api/v2/ndcoslo/videos.json').respond(function(method, url, data, headers) {
-            $log.debug('Intercepted GET to `' + 'http://vimeo.com/api/v2/ndcoslo/videos.json' + '`', data);
-            return [200, VideoRepo.data, {/*headers*/}];
-        });
 
         //GET video/
         $httpBackend.whenGET(collectionUrl).respond(function(method, url, data, headers) {

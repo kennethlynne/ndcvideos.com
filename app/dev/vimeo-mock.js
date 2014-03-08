@@ -14,7 +14,7 @@ angular.module('ndc')
             {
                 id: 86603468,
                 title: "NDCOslo Trailer",
-                description: 'A festival for developers! Oslo Spektrum, Norway 2-6 June 2014'
+                description: 'A festival for developers! Oslo Spektrum, Norway 2-6 June 2014',
                 url: "http://vimeo.com/86603468",
                 upload_date: "2014-02-13 08:04:18",
                 mobile_url: "http://vimeo.com/m/86603468",
