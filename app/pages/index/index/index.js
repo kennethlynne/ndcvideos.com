@@ -11,20 +11,9 @@ angular.module('ndc')
 
         if($stateParams.tags != null)
         {
-            //TODO:
-            //VideosRepository.getAllByTags();
-            var tags = $stateParams.tags.split(',');
-            var tagArray = [];
-            for(var i = 0;i < tags.length;i++)
-            {
-                tagArray[i] = {title:tags[i]};
-            }
-
-            VideoRepository.getAll().then(function (videos) {
-                console.log(videos);
-                $scope.videos = _.where(videos, {tags:tagArray});
+            VideoRepository.getByTags($stateParams.tags).then(function (videos) {
+                $scope.videos = videos;
             });
-
         }
         else
         {
