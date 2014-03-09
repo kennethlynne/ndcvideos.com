@@ -2,7 +2,7 @@
 
 describe('Controller: IndexCtrl', function () {
 
-    var IndexCtrl, scope,$controller, VideoRepository, deffered, $q, promise, deferred, $rootScope, $stateParams = {};
+    var IndexCtrl, scope,$controller, VideoRepository, defered, $q, promise, deferred, $rootScope, $stateParams = {};
 
     beforeEach(function () {
         module('ndc');

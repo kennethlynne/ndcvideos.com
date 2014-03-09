@@ -26,7 +26,7 @@ angular.module('ndc')
 
         if($stateParams.tags != null)
         {
-            filterVideosByTags($stateParams.tags);
+            setVideosByTags($stateParams.tags);
             $scope.tags = _.map($stateParams.tags.split(','),function (item)
             {
                 return new TagModel({text:item});
@@ -34,35 +34,38 @@ angular.module('ndc')
         }
         else
         {
-            VideoRepository.getAll().then(function (videos) {
-                $scope.videos = videos;
-            });
+            setAllVideos();
         }
 
         $scope.filter = function ()
         {
            if($scope.tags.length > 0)
            {
-
                var tags = _.map($scope.tags, function (item)
                {
                    return item.text;
                }).join(',');
 
                $location.search('tags', tags);
-               filterVideosByTags(tags);
+               setVideosByTags(tags);
            }
             else
            {
-               $location.url($location.path());
-               VideoRepository.getAll().then(function (videos) {
-                   $scope.videos = videos;
-               });
+               //To reset the URL params
+               delete $location.$$search.tags;
+               $location.$$compose();
+               setAllVideos();
            }
         }
 
+        function setAllVideos(){
+            VideoRepository.getAll().then(function (videos) {
+                $scope.videos = videos;
+            });
+        };
 
-        function filterVideosByTags(tags)
+
+        function setVideosByTags(tags)
         {
             VideoRepository.getByTags(tags).then(function (videos) {
                 $scope.videos = videos;
