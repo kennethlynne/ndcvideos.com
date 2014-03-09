@@ -23,7 +23,6 @@
     "commit": "f8063b44858dd3dba2a904afdc477da0324ef6e9"
   },
   "_source": "git://github.com/ngSymbiosis/ngSymbiosis.repository.git",
-  "_target": "~0.0.2",
-  "_originalSource": "ng-symbiosis-repository",
-  "_direct": true
+  "_target": "~0.0.0",
+  "_originalSource": "ng-symbiosis-repository"
 }

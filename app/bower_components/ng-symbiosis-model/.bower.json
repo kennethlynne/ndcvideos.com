@@ -22,7 +22,6 @@
     "commit": "290d5b0f52fdad4747cd72ce677f4d61d0d7e027"
   },
   "_source": "git://github.com/ngSymbiosis/ngSymbiosis.model.git",
-  "_target": "~0.0.1",
-  "_originalSource": "ng-symbiosis-model",
-  "_direct": true
+  "_target": "~0.0.0",
+  "_originalSource": "ng-symbiosis-model"
 }
