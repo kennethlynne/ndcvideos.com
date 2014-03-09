@@ -5,9 +5,12 @@
     <div class="invite">
         <form novalidate name="newUserForm">
             <input type="email" name="userName" ng-model="newUser.userName" placeholder="User's email .." required/>
-            <button ng-click="saveUser(newUser)" ng-disabled="newUserForm.userName.$invalid">Send invitasjon</button>
-            <p class="error">Invalid email format.</p>
-            <p class="success">Your invitation has been sent!</p>
+            <button ng-click="saveUser(newUser)" ng-disabled="newUserForm.userName.$invalid">Send invite</button>
+            
+            <!--  TODO: Add error messages-->
+            <!-- <p class="error">Invalid email format.</p>
+            <p class="success">Your invitation has been sent!</p> -->
+            
         </form>
     </div>
 
@@ -29,7 +32,7 @@
             <td><span class="hidden-on-large">Account activated: </span>Yes</td>
             <td><span class="hidden-on-large">Actions: </span>
                 <button>Reset password</button>
-                <button ng-click="deleteUser(user)">Slett</button>
+                <button ng-click="deleteUser(user)">Delete</button>
             </td>
         </tr>
         </tbody>

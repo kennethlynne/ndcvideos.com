@@ -1,3 +1,20 @@
-.error-index-page
-{
+.error-index-page{
+	padding: 30px;
+	text-align: center;
+
+	h1 {
+		font-size: 40px;
+
+		small {
+			font-size: 0.6em;
+			color: #888;
+			display: block;
+			margin-bottom: 50px;
+			margin-top: 10px;
+		}
+	}
+
+	img {
+		max-width: 300px;
+	}
 }
