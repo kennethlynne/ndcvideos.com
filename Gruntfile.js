@@ -1,4 +1,4 @@
-// Generated on 2014-02-12 using generator-angular-xl 0.2.17
+// Generated on 2014-03-09 using generator-angular-xl 0.2.21
 'use strict';
 var path = require('path');
 
@@ -221,8 +221,8 @@ module.exports = function (grunt) {
                     src: [
                         '*.{ico,png,txt}',
                         '.htaccess',
-                        'images/**/*.{gif,webp}',
-                        'fonts/*',
+                        'assets/images/**/*.{gif,webp}',
+                        'assets/fonts/**/*',
                         'CNAME',
                         'package.json'
                     ]
@@ -291,7 +291,7 @@ module.exports = function (grunt) {
             dist: {
                 files: [{
                     expand: true,
-                    src: appJs,
+                    src: appJs.concat(['!<%= yeoman.dist %>/config/local.js']),
                     dest: '.tmp/app_js/'
                 }]
             }
@@ -306,7 +306,7 @@ module.exports = function (grunt) {
                 }
             },
             js: {
-                src: externalJsMin.concat(['.tmp/scripts/app.js']),
+                src: externalJsMin.concat(['.tmp/scripts/app.js', '!bower_components/angular-mocks/angular-mocks.js']),
                 dest: '<%= yeoman.dist %>/scripts/scripts.js'
             },
             css: {
@@ -429,11 +429,6 @@ module.exports = function (grunt) {
                 versionFile: 'package.json'
             }
         },
-        "ddescribe-iit": {
-            files: [
-                'test/**/*.js'
-            ]
-        },
 
         autoprefixer: {
             options: {
@@ -449,14 +444,14 @@ module.exports = function (grunt) {
             }
         },
 
-        //The manifest file must be served with the MIME type text/cache-manifest.
+        //TODO: The manifest file must be served with the MIME type text/cache-manifest.
         manifest: {
             generate: {
                 options: {
                     basePath: '/',
                     cache: ['/scripts/scripts.js', '/styles/main.css'],
                     network: ['*', 'http://*', 'https://*'],
-                    fallback: ['/ /offline.html'],
+                    fallback: ['/ /offline.html'], //TODO: Add an offline fallback page
                     exclude: ['js/jquery.min.js'],
                     preferOnline: true,
                     verbose: true,
@@ -469,8 +464,8 @@ module.exports = function (grunt) {
                     '/scripts/**/*.js',
                     '/styles/**/*.css',
                     '*.{ico,png,txt}',
-                    'images/**/*',
-                    'fonts/*'
+                    'assets/images/**/*',
+                    'assets/fonts/**/*'
                 ],
                 dest: 'manifest.appcache'
             }
@@ -494,6 +489,7 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('test', [
+        //'jshint',
         'karma'
     ]);
 
@@ -529,7 +525,6 @@ module.exports = function (grunt) {
         {
             console.log('Building using production profile');
             grunt.task.run([
-                'ddescribe-iit',
                 'test-e2e',
                 'test',
                 'clean',
