@@ -9,6 +9,7 @@ var app = angular.module('ndc', [
     'ngSymbiosis.repository',
     'ngSymbiosis.model',
     'ngSymbiosis.routeProvider',
+    'ngSymbiosis.accessControl',
     'ndc.components',
     'ngAnimate',
     'ajoslin.promise-tracker',

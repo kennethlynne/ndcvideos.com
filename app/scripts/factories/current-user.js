@@ -1,13 +1,10 @@
 'use strict';
 
 angular.module('ndc')
-    .factory('CurrentUser', function ($log, UserModel, _, $localStorage, UserRepository) {
+    .factory('CurrentUser', function ($log, UserModel, _, $localStorage, UserRepository, accessControl) {
 
         var storage = $localStorage['CurrentUser'] = $localStorage['CurrentUser'] || {};
-
         var _user = storage.user = storage.user || {};
-        var _permissions = storage.permissions = storage.permissions || [];
-        var _roles = storage.roles = storage.roles || [];
 
         if(_user.id)
         {
@@ -24,8 +21,7 @@ angular.module('ndc')
                 angular.copy(user, _user);
             },
             _unset = function () {
-                _setRoles([]);
-                _setPermissions([]);
+                accessControl.unset();
                 angular.copy({}, _user);
             },
             _get = function ()
@@ -33,22 +29,22 @@ angular.module('ndc')
                 return _user;
             },
             _is = function (role) {
-                return _.indexOf(_roles, role) >= 0;
+                return accessControl.is(role);
             },
             _setRoles = function (roles) {
-                angular.copy(roles, _roles);
+                accessControl.setRoles(roles);
             },
             _getRoles = function () {
-                return angular.copy(_roles);
+                return accessControl.getRoles();
             },
             _setPermissions = function (permissions) {
-                angular.copy(permissions, _permissions);
+                accessControl.setPermissions(permissions);
             },
             _getPermissions = function () {
-                return angular.copy(_permissions);
+                return accessControl.getPermissions();
             },
             _can = function (thing) {
-                return _.indexOf(_permissions, thing) >= 0;
+                return accessControl.can(thing);
             };
 
         return {
