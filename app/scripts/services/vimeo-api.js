@@ -8,7 +8,7 @@ angular.module('ndc')
         this.getVideos = function () {
 
             //Should return a list of videos from the Vimeo API
-            return $http.get(_apiUrl + "videos.json").then(function (response)
+            return $http.get(_apiUrl + "videos.json", {tracker: 'vimeoAPI.getVideos'}).then(function (response)
             {
                 return _.map(response.data, function (item) {
                     return new VideoModel(item);
