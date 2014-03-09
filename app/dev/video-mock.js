@@ -6,8 +6,9 @@ angular.module('ndc')
         var IdRegExp = /[\d\w-_]+$/.toString().slice(1, -1);
         var QueryRegExp = /[\d\w-_\.\s,]*$/.toString().slice(1, -1);
 
-        console.log('Stubbing video API - ' + collectionUrl);
-        console.log('************');
+        $log.log('***************************************************************************************************************');
+        $log.log('Overriding all calls to `' + collectionUrl + '` with mocks defined in *dev/video-mock.js*');
+        $log.log('***************************************************************************************************************');
 
         var VideoRepo = {};
         VideoRepo.data = [
@@ -85,13 +86,13 @@ angular.module('ndc')
 
         //GET video/
         $httpBackend.whenGET(collectionUrl).respond(function (method, url, data, headers) {
-            $log.log('Intercepted GET to video', data);
+            $log.log('Intercepted GET to `' + url + '`', data);
             return [200, VideoRepo.data, {/*headers*/}];
         });
 
         //POST videos/
         $httpBackend.whenPOST(collectionUrl).respond(function (method, url, data, headers) {
-            $log.log('Intercepted POST to video', data);
+            $log.log('Intercepted POST to `' + url + '`', data);
             var Video = angular.fromJson(data);
 
             Video.id = guid();
@@ -103,14 +104,14 @@ angular.module('ndc')
 
         //GET videos/id
         $httpBackend.whenGET(new RegExp(regexEscape(collectionUrl + '/') + IdRegExp)).respond(function (method, url, data, headers) {
-            $log.log('Intercepted GET to video');
+            $log.log('Intercepted GET to `' + url + '`');
             var id = url.match(new RegExp(IdRegExp))[0];
             return [VideoRepo.index[id] ? 200 : 404, VideoRepo.index[id] || null, {/*headers*/}];
         });
 
         //GET videos/search?tags=<tags>
         $httpBackend.whenGET(new RegExp(regexEscape(collectionUrl + '/search?tags=') + QueryRegExp)).respond(function (method, url, data, headers) {
-            $log.log('Intercepted GET to video');
+            $log.log('Intercepted GET to `' + url + '`');
             var query = url.match(new RegExp(QueryRegExp))[0];
 
             var tags = query.split(',');
@@ -127,7 +128,7 @@ angular.module('ndc')
 
         //PUT videos/id
         $httpBackend.whenPUT(new RegExp(regexEscape(collectionUrl + '/') + IdRegExp)).respond(function (method, url, data, headers) {
-            $log.log('Intercepted PUT to video');
+            $log.log('Intercepted PUT to `' + url + '`');
             var id = url.match(new RegExp(IdRegExp))[0];
 
             if (!VideoRepo.index[id]) {
@@ -141,7 +142,7 @@ angular.module('ndc')
 
         //DELETE videos/id
         $httpBackend.whenDELETE(new RegExp(regexEscape(collectionUrl + '/') + IdRegExp)).respond(function (method, url, data, headers) {
-            $log.log('Intercepted DELETE to video');
+            $log.log('Intercepted DELETE to `' + url + '`');
             var id = url.match(new RegExp(IdRegExp))[0];
 
             var Video = VideoRepo.index[id];

@@ -6,8 +6,9 @@ angular.module('ndc')
         var IdRegExp = /[\d\w-_]+$/.toString().slice(1, -1);
         var QueryRegExp = /[\d\w-_\.\s]*$/.toString().slice(1, -1);
 
-        console.log('Stubbing tag API - ' + collectionUrl);
-        console.log('************');
+        $log.log('***************************************************************************************************************');
+        $log.log('Overriding all calls to `' + collectionUrl + '` with mocks defined in *dev/tag-mock.js*');
+        $log.log('***************************************************************************************************************');
 
         var TagRepo = {};
         TagRepo.data = [
@@ -26,13 +27,13 @@ angular.module('ndc')
 
         //GET tag/
         $httpBackend.whenGET(collectionUrl).respond(function(method, url, data, headers) {
-            $log.log('Intercepted GET to tag', data);
+            $log.log('Intercepted GET to `' + url + '`', data);
             return [200, TagRepo.data, {/*headers*/}];
         });
 
         //POST tag/
         $httpBackend.whenPOST(collectionUrl).respond(function(method, url, data, headers) {
-            $log.log('Intercepted POST to tag', data);
+            $log.log('Intercepted POST to `' + url + '`', data);
             var Tag = angular.fromJson(data);
 
             Tag.id = guid();
@@ -44,7 +45,7 @@ angular.module('ndc')
 
         //GET tag/search?q=<query>
         $httpBackend.whenGET( new RegExp(regexEscape(collectionUrl + '/search?q=') + QueryRegExp ) ).respond(function(method, url, data, headers) {
-            $log.log('Intercepted GET to tag/search');
+            $log.log('Intercepted GET to `' + url + '`');
             var term = url.match( new RegExp(QueryRegExp) )[0] || '';
 
             var hits = TagRepo.data.filter(function (tag) {
@@ -56,7 +57,7 @@ angular.module('ndc')
 
         //PUT tag/id
         $httpBackend.whenPUT( new RegExp(regexEscape(collectionUrl + '/') + IdRegExp ) ).respond(function(method, url, data, headers) {
-            $log.log('Intercepted PUT to tag');
+            $log.log('Intercepted PUT to `' + url + '`');
             var id = url.match( new RegExp(IdRegExp) )[0];
 
             if (!TagRepo.index[id]) {
@@ -70,7 +71,7 @@ angular.module('ndc')
 
         //DELETE tag/id
         $httpBackend.whenDELETE( new RegExp(regexEscape(collectionUrl + '/') + IdRegExp ) ).respond(function(method, url, data, headers) {
-            $log.log('Intercepted DELETE to tag');
+            $log.log('Intercepted DELETE to `' + url + '`');
             var id = url.match( new RegExp(IdRegExp) )[0];
 
             var Tag = TagRepo.index[id];

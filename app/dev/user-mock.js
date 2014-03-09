@@ -5,8 +5,9 @@ angular.module('ndc')
         var collectionUrl = APIBaseUrl + 'users';
         var IdRegExp = /[\d\w-_]+$/.toString().slice(1, -1);
 
+        $log.log('***************************************************************************************************************');
         $log.log('Overriding all calls to `' + collectionUrl + '` with mocks defined in *dev/user-mocks.js*');
-        $log.log('*******************************************************************************************************************************************************');
+        $log.log('***************************************************************************************************************');
 
         var UserRepo = {};
         UserRepo.data = [
@@ -33,13 +34,13 @@ angular.module('ndc')
 
         //GET users/
         $httpBackend.whenGET(collectionUrl).respond(function(method, url, data, headers) {
-            $log.debug('Intercepted GET to `' + collectionUrl + '`', data);
+            $log.debug('Intercepted GET to `' + url + '`', data);
             return [200, UserRepo.data, {/*headers*/}];
         });
 
         //POST users/
         $httpBackend.whenPOST(collectionUrl).respond(function(method, url, data, headers) {
-            $log.debug('Intercepted POST to `' + collectionUrl + '`', data);
+            $log.debug('Intercepted POST to `' + url + '`', data);
             var User = angular.fromJson(data);
 
             User.id = guid();
@@ -51,14 +52,14 @@ angular.module('ndc')
 
         //GET users/id
         $httpBackend.whenGET( new RegExp(regexEscape(collectionUrl + '/') + IdRegExp ) ).respond(function(method, url, data, headers) {
-            $log.debug('Intercepted GET to `' + collectionUrl + '`');
+            $log.debug('Intercepted GET to `' + url + '`');
             var id = url.match( new RegExp(IdRegExp) )[0];
             return [UserRepo.index[id]?200:404, UserRepo.index[id] || null, {/*headers*/}];
         });
 
         //PUT users/id
         $httpBackend.whenPUT( new RegExp(regexEscape(collectionUrl + '/') + IdRegExp ) ).respond(function(method, url, data, headers) {
-            $log.debug('Intercepted PUT to `' + collectionUrl + '`');
+            $log.debug('Intercepted PUT to `' + url + '`');
             var id = url.match( new RegExp(IdRegExp) )[0];
 
             if (!UserRepo.index[id]) {
@@ -72,7 +73,7 @@ angular.module('ndc')
 
         //DELETE users/id
         $httpBackend.whenDELETE( new RegExp(regexEscape(collectionUrl + '/') + IdRegExp ) ).respond(function(method, url, data, headers) {
-            $log.debug('Intercepted DELETE to `' + collectionUrl + '`');
+            $log.debug('Intercepted DELETE to `' + url + '`');
             var id = url.match( new RegExp(IdRegExp) )[0];
 
             var User = UserRepo.index[id];

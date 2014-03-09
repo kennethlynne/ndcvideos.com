@@ -20,7 +20,7 @@ angular.module('ndc')
 
         //POST token/ should save a message and return the message with an id
         $httpBackend.whenPOST(baseUrl).respond(function (method, url, data, headers) {
-            $log.log('Intercepted POST to token', data);
+            $log.log('Intercepted POST to `' + url + '`', data);
 
             //data == 'grant_type=password&username=ali@g.com&password=pw' && headers['Accept'] == 'application/json, text/plain, */*'
             if (true) {
