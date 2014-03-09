@@ -377,14 +377,21 @@ aside {
           }
         }
 
+        &:after {
+          @include triangle(20px, $body-background, left);
+          opacity: 0;
+          content: "";
+          position: absolute;
+          top: -1px;
+        }
+
         &.active {
           @include media($desktop) {
+
             &:after {
-              @include triangle(20px, $body-background, left);
-              content: "";
-              position: absolute;
-              top: -1px;
+              opacity: 1;
             }
+
           }          
 
           a {
@@ -420,11 +427,12 @@ aside {
   }
 
   ul.navigation li.active:after {
-    -webkit-transition: -webkit-transform ease 400ms, left 400ms;
-     -moz-transition: -moz-transform ease 400ms, left 400ms;
-     -ms-transition: -ms-transform ease 400ms, left 400ms;
-     -o-transition: -o-transform ease 400ms, left 400ms;
-     transition: transform ease 400ms, left 400ms;
+    $duration: 1000ms;
+    -webkit-transition: -webkit-transform ease $duration, left $duration;
+     -moz-transition: -moz-transform ease $duration, left $duration;
+     -ms-transition: -ms-transform ease $duration, left $duration;
+     -o-transition: -o-transform ease $duration, left $duration;
+     transition: transform ease $duration, left $duration;
      left: $leftnav-width - ($content-gutter * 2);
   }
 
@@ -436,6 +444,24 @@ aside {
     left: $leftnav-width - ($content-gutter * 2);
   }
 
+  .ng-leave ul.navigation li.active:after
+  {
+    $duration: 200ms;
+    -webkit-transition: -webkit-transform ease $duration;
+    -moz-transition: -moz-transform ease $duration;
+    -ms-transition: -ms-transform ease $duration;
+    -o-transition: -o-transform ease $duration;
+    transition: transform ease $duration;
+  }
+
+  .ng-leave.ng-leave-active ul.navigation li.active:after {
+    -webkit-transform: translateX(50px);
+    -moz-transform: translateX(50px);
+    -ms-transform: translateX(50px);
+    -o-transform: translateX(50px);
+    transform: translateX(50px);
+  }
+
 }
 
 .select2-drop,
@@ -445,5 +471,70 @@ aside {
 
   * {
     box-shadow: none !important;
+  }
+}
+
+
+.nav-change-animation {
+  @include media($desktop) {
+    &.ng-enter, &.ng-leave {
+      $duration: 400ms;
+      -webkit-transition: -webkit-transform ease $duration, opacity $duration;
+      -moz-transition: -moz-transform ease $duration, opacity $duration;
+      -ms-transition: -ms-transform ease $duration, opacity $duration;
+      -o-transition: -o-transform ease $duration, opacity $duration;
+      transition: transform ease $duration, opacity $duration;
+
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+    }
+
+    &.ng-leave
+    {
+      $duration: 100ms;
+      -webkit-transition: -webkit-transform ease $duration, opacity $duration;
+      -moz-transition: -moz-transform ease $duration, opacity $duration;
+      -ms-transition: -ms-transform ease $duration, opacity $duration;
+      -o-transition: -o-transform ease $duration, opacity $duration;
+      transition: transform ease $duration, opacity $duration;
+    }
+
+    &.ng-enter {
+      -webkit-transform: translateX(20px);
+      -moz-transform: translateX(20px);
+      -ms-transform: translateX(20px);
+      -o-transform: translateX(20px);
+      transform: translateX(20px);
+      opacity: 0;
+
+      &.ng-enter-active {
+        -webkit-transform: translateX(0px);
+        -moz-transform: translateX(0px);
+        -ms-transform: translateX(0px);
+        -o-transform: translateX(0px);
+        transform: translateX(0px);
+        opacity: 1;
+      }
+    }
+
+    &.ng-leave {
+      opacity: 1;
+      -webkit-transform: translateX(0px);
+      -moz-transform: translateX(0px);
+      -ms-transform: translateX(0px);
+      -o-transform: translateX(0px);
+      transform: translateX(0px);
+
+      &.ng-leave-active {
+        opacity: 0;
+        -webkit-transform: translateX(-20px);
+        -moz-transform: translateX(-20px);
+        -ms-transform: translateX(-20px);
+        -o-transform: translateX(-20px);
+        transform: translateX(-20px);
+      }
+    }
   }
 }
