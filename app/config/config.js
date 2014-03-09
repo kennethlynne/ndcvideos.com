@@ -24,8 +24,10 @@ angular.module('ndc')
             host:               window.location.hostname,
             port:               String(window.location.port || 80),
             path:               '/api'
-        }
-    }, angular._localConfig || {}))
+        },
+        vimeoAPIUrl:'http://vimeo.com/api/v2/ndcoslo/'
+
+}, angular._localConfig || {}))
     .config(function (componentFactoryProvider) { componentFactoryProvider.setViewPath(function (componentSnakeName, componentName) {
         return 'components/' + componentSnakeName + '/' + componentSnakeName + '.html';
     })})
