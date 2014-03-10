@@ -1,7 +1,8 @@
 {
-    "version": "0.0.1",
+    "version": "0.0.2",
     "name": "ng-symbiosis-model",
     "description": "AngularJS model",
+    "author": "Kenneth Lynne <kenneth.lynne@gmail.com>",
     "license": "MIT",
     "ignore": [
         "**/.*",

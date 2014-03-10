@@ -32,5 +32,6 @@
     "commit": "d92da8aaadc85c84ea214fc4f4a0687db1c8180f"
   },
   "_source": "git://github.com/adamschwartz/log.git",
-  "_target": "~0.1.2"
+  "_target": "~0.1.2",
+  "_originalSource": "log"
 }

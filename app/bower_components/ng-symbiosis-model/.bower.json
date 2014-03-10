@@ -1,7 +1,8 @@
 {
-  "version": "0.0.1",
+  "version": "0.0.2",
   "name": "ng-symbiosis-model",
   "description": "AngularJS model",
+  "author": "Kenneth Lynne <kenneth.lynne@gmail.com>",
   "license": "MIT",
   "ignore": [
     "**/.*",
@@ -15,11 +16,11 @@
     "angular-mocks": "~1.2.7"
   },
   "homepage": "https://github.com/ngSymbiosis/ngSymbiosis.model",
-  "_release": "0.0.1",
+  "_release": "0.0.2",
   "_resolution": {
     "type": "version",
-    "tag": "v0.0.1",
-    "commit": "290d5b0f52fdad4747cd72ce677f4d61d0d7e027"
+    "tag": "v0.0.2",
+    "commit": "8f760d188e812a249b22d2a27b72ad955a3a255f"
   },
   "_source": "git://github.com/ngSymbiosis/ngSymbiosis.model.git",
   "_target": "~0.0.0",
