@@ -1,0 +1,41 @@
+<div class="admin-users-partial container">
+
+    <h2>Invite user</h2>
+    <p>Invite new users to the platform by email.</p>
+    <div class="invite">
+        <form novalidate name="newUserForm">
+            <input type="email" name="userName" ng-model="newUser.userName" placeholder="User's email .." required/>
+            <button ng-click="saveUser(newUser)" ng-disabled="newUserForm.userName.$invalid">Send invite</button>
+            
+            <!--  TODO: Add error messages-->
+            <!-- <p class="error">Invalid email format.</p>
+            <p class="success">Your invitation has been sent!</p> -->
+            
+        </form>
+    </div>
+
+    <h2>All users</h2>
+    <p>Manage all invited users.</p>
+    <table cg-busy="'UserRepository.getAll'">
+        <thead class="hidden-on-small">
+        <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Account activated</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in users">
+            <td><span class="hidden-on-large">ID: </span>1</td>
+            <td><span class="hidden-on-large">Email: </span>{{user.userName}}</td>
+            <td><span class="hidden-on-large">Account activated: </span>Yes</td>
+            <td><span class="hidden-on-large">Actions: </span>
+                <button>Reset password</button>
+                <button ng-click="deleteUser(user)">Delete</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>

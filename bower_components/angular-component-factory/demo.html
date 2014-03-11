@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angualar component factory demo</title>
+</head>
+<body ng-app="DemoApp">
+
+
+<unicorn-test-component></unicorn-test-component>
+<partial-thing-component></partial-thing-component>
+
+<script src="bower_components/angular/angular.js"></script>
+<script src="angular-component-factory.js"></script>
+
+<script>
+    var demo = angular.module('DemoApp', []);
+
+    angular.componentFactory.moduleDecorator(demo);
+
+    demo.run(function ($templateCache) {
+        $templateCache.put('views/components/unicorn-test/unicorn-test.html', "<p>{{message}}</p>");
+        $templateCache.put('views/components/partial-thing/partial-thing.html', "<p>This is a empty component with a template</p>");
+    });
+
+    demo.component('unicornTest', function ($log) {
+        $log.log('Demo component says hi!')
+
+        return {
+            link: function (scope) {
+                scope.message = "I'm a unicorn component!";
+            }
+        }
+    });
+
+    demo.component('partialThing');
+
+</script>
+
+</body>
+</html>

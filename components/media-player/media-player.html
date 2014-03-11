@@ -1,0 +1,6 @@
+<div class="media-player-component" height="281" width="500">
+    <div class="error" ng-show="errorMsg">
+        {{errorMsg}}
+    </div>
+    <iframe ng-if="!errorMsg" ng-src="{{videoUrl}}" width="config.width" height="config.height"></iframe>
+</div>

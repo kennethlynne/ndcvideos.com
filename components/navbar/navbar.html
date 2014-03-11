@@ -1,0 +1,45 @@
+<aside class="navbar-component" ng-show="isAuthenticated()">
+
+    <div class="responsive-toggler-wrapper" ng-click="menuOpen=!menuOpen">
+        <h1 class="hidden-on-large"><a href="#">NDC</a></h1>
+        <button class="responsive-toggler">
+            <i class="fa" ng-class="{'fa-bars':!menuOpen, 'fa-times':menuOpen}"></i>
+        </button>
+    </div>
+
+    <div class="responsive-wrapper" ng-class="{'open':menuOpen}">
+    
+        <header class="actionbar">
+            <h1 class="hidden-on-small"><a href="#">NDC</a></h1>
+            <div class="pull-right">
+                <button class="toggle toggle-navigation" ng-class="{'active': navbar.isActive('navigation')}" data-toggle="tooltip" data-placement="bottom" title="Menu" ng-click="navbar.setState('navigation')">
+                    <i class="fa fa-bars"></i>
+                    <span class="responsive-text">Navigation</span>
+                </button>
+                <button class="toggle toggle-notifications" ng-class="{'active': navbar.isActive('notifications')}" data-toggle="tooltip" data-placement="bottom" title="Notifications" ng-click="navbar.setState('notifications')">
+                    <span class="notification-count">2</span>
+                    <i class="fa fa-bell"></i>
+                    <span class="responsive-text">Notifications</span>
+                </button>
+                <button class="toggle toggle-settings" ng-class="{'active': navbar.isActive('settings')}" data-toggle="tooltip" data-placement="bottom" title="Settings" ng-click="navbar.setState('settings')">
+                    <i class="fa fa-gear"></i>
+                    <span class="responsive-text">Settings</span>
+                </button>
+                <button ng-show="isAuthenticated()" ng-click="signout()" class="has-tooltip hidden-on-large" data-toggle="tooltip" data-placement="bottom" title="Logout">
+                    <i class="fa fa-power-off"></i>
+                    <span class="responsive-text">Sign out</span>
+                </button>
+            </div>
+            <!-- <button class="mute-button has-tooltip" data-toggle="tooltip" data-placement="bottom" title="Mute"><i class="fa fa-volume-up"></i></button> -->
+        </header>
+
+        <div style="position: relative;">
+            <div ng-include="navbar.templateSrc" class="nav-change-animation"></div>
+        </div>
+
+        <!-- <navbar-mini-player-component></navbar-mini-player-component> -->
+        <div class="powered"><p>Powered by <a href="#" target="_blank">Sockless Development</a></p></div>
+
+    </div>
+
+</aside>
