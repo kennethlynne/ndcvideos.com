@@ -1,8 +1,8 @@
 'use strict';
 
-describe('Controller(/admin/videos/import-controller): AdminImportVideoCtrl', function () {
+describe('Controller(/admin/videos/import): ImportCtrl', function () {
 
-    var Ctrl, scope;
+    var ImportCtrl, scope;
 
     beforeEach(function () {
 
@@ -10,15 +10,13 @@ describe('Controller(/admin/videos/import-controller): AdminImportVideoCtrl', fu
 
         inject(function ($controller, $rootScope) {
             scope = $rootScope.$new();
-            Ctrl = $controller('AdminImportVideoCtrl', {
-                $scope: scope,
-                $modal: {},
-                $modalInstance: {}
+            ImportCtrl = $controller('ImportCtrl', {
+                $scope: scope
             });
         });
     });
 
     it('should attach init data to scope', function () {
-
+        expect(scope.foo).toEqual('bar');
     });
 });
