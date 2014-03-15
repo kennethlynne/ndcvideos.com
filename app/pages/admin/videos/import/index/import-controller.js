@@ -5,9 +5,10 @@ angular.module('ndc')
         $stateProvider.state('administrateVideos.import', stateFactory('Import', {
             url: '/videos/import',
             templateUrl: 'pages/admin/videos/import/index/main-view.html',
-            parent: 'admin'
+            parent: 'admin',
+            controller: 'AdminImportVideoCtrl'
         }));
     })
-    .controller('ImportCtrl', function ($scope) {
+    .controller('AdminImportVideoCtrl', function ($scope) {
         $scope.foo = 'bar';
     });
