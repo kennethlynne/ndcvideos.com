@@ -24,13 +24,15 @@ describe('ng-symbiosis-model', function () {
     describe('$save', function () {
         it('should PUT its data on $save when it has an ID (update existing)', function() {
             $httpBackend.expectPUT('test-url/5', {title:'New title', id:5}).respond(200, {id: 5, title:'New title from server'});
-            var model = new BaseModel({url:'test-url'});
+            var model = new BaseModel({url:'test-url'}, {tracker:'Tracker'});
 
             model.title = 'New title';
             model.id = 5;
 
             var promise = model.$save();
+            expect(model.$isSaving).toBeTruthy();
             $httpBackend.flush();
+            expect(model.$isSaving).toBeFalsy();
 
             expect(model.title).toBe('New title from server');
             expect(typeof promise.then).toBe('function');
@@ -38,7 +40,7 @@ describe('ng-symbiosis-model', function () {
 
         it('should POST its data on $save if does not have an ID (new)', function() {
             $httpBackend.expectPOST('test-url', {title:'New title'}).respond(200, {id: 5, title:'New title from server'});
-            var model = new BaseModel({url:'test-url'});
+            var model = new BaseModel({url:'test-url'}, {tracker:'Tracker'});
             model.title = 'New title';
 
             var promise = model.$save();
@@ -81,10 +83,12 @@ describe('ng-symbiosis-model', function () {
         it('should delete on $delete', function() {
             $httpBackend.expectDELETE('test-url/5').respond(200, {});
 
-            var model = new BaseModel({url:'test-url', id: 5});
+            var model = new BaseModel({url:'test-url', id: 5}, {tracker:'Tracker'});
 
             var promise = model.$delete();
+            expect(model.$isDeleting).toBeTruthy();
             $httpBackend.flush();
+            expect(model.$isDeleting).toBeFalsy();
 
             expect(typeof promise.then).toBe('function');
         });
