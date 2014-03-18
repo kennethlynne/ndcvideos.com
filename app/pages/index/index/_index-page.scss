@@ -48,11 +48,12 @@
       border-radius: 20px;
       box-shadow: none;
       float: left;
-      border: 1px solid #aaa;
+      // border: 1px solid #aaa;
+      border: none;
       font-size: 14px;
       outline: none;
       width: 100% !important;
-      background: none;
+      background: #fff;
       color: $dark-color;
       //   	-webkit-transition: 0.1s linear all;
       // -moz-transition: 0.1s linear all;

@@ -10,5 +10,9 @@ angular.module('ndc')
         }));
     })
     .controller('AdminImportVideoCtrl', function ($scope) {
-        $scope.foo = 'bar';
+        
+        $scope.select2Options = {
+            tags:["red", "green", "blue"]
+        };
+
     });

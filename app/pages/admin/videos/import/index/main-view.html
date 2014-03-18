@@ -1,19 +1,18 @@
-<div class="import-page container">
+<div class="import-page">
 
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="page-header">
-                <h1 id="container">Container - <small>admin/videos/import</small></h1>
-            </div>
-            <div class="bs-example">
-                <div class="jumbotron">
-                    <h1>Jumbotron {{data.message1}}</h1>
-                    <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                    <p>{{data.message2}}</p>
-                    <p><a class="btn btn-primary btn-lg">Learn more</a></p>
-                </div>
-            </div>
-        </div>
+    <h2>Video title</h2>
+    <input type="text" value="This is the title taken from Vimeo">
+
+    <h2>Video description</h2>
+    <input type="text" value="This is the description taken from Vimeo">
+
+    <h2>Add tags to your video</h2>
+    <div class="tags-wrapper">
+        <!-- <input type="text" class="search-tags" placeholder="Filter videos by tags .."> -->
+        <input type="hidden" class="search" ng-change="filter()" ui-select2="select2Options" ng-model="tags" placeholder="Add tags to filter videos ..">
     </div>
+
+    <button class="button">Cancel</button>
+    <button class="button">Publish video</button>
 
 </div>

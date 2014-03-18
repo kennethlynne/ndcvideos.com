@@ -1,3 +1,99 @@
 .import-page  {
 
+	input[type="text"] {
+		padding: 10px;
+		box-shadow: none;
+		border: 1px solid #aaa;
+		outline: none;
+		font: inherit;
+		width: 100%;
+		margin-bottom: 10px;
+	}
+
+	.button {
+		background: $green !important;
+		color: #fff !important;
+		border: none !important;
+		margin-top: 20px;
+	}
+
+	.tags-wrapper {
+  	@include clearfix;
+  	width: 100%;
+  	padding: 0;
+  	margin-bottom: 10px;
+  	position: relative;
+
+      .select2-search-field {
+          input {
+              &,
+              &:focus,
+              &.active,
+              &.select2-focused,
+              &.select2-active {
+                  background: none !important;
+                  background-image: none !important;
+                  background-color: transparent !important;
+                  border: none !important;
+                  box-shadow: none !important;    
+                  width: auto !important;
+              }
+          }
+      }
+
+  	.select2-container {
+  		width: 100% !important;
+  	}
+
+  	.select2-choices {
+    	padding: 7px 12px;
+    	box-shadow: none;
+    	float: left;
+    	border: 1px solid #aaa;
+    	font-size: 14px;
+    	outline: none;
+    	width: 100% !important;
+    	background: #fff !important;
+    	color: $dark-color;
+  //   	-webkit-transition: 0.1s linear all;
+		// -moz-transition: 0.1s linear all;
+		// -o-transition: 0.1s linear all;
+		// transition: 0.1s linear all;
+
+    	@include media($tablet) {
+    		width: 100%;
+    		margin-top: 10px;
+    		border-color: #fff;
+    		background: #fff;
+    	}
+
+    	input {
+    		background: none !important;
+    		border: none !important;
+    		box-shadow: none !important;
+        width: auto !important;
+    	}
+
+    	.select2-search-choice {
+	        display: inline-block;
+	        background: $primary-color;
+	        font-size: 13px;
+	        padding: 7px 10px 7px 25px;
+	        margin: 2px 5px 3px 0;
+	        border: none !important;
+	        box-shadow: none !important;
+	        border-radius: 5px;
+
+	        .select2-search-choice-close {
+	          color: $dark-color;
+	          padding: 5px 10px 5px 5px;
+	          text-decoration: none;
+	          background-position: right -11px;
+	          left: 5px !important;
+	          top: 6px !important;
+	        }
+	      }
+    }
+  }
+
 }

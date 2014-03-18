@@ -51,11 +51,11 @@
 	    	border-radius: 20px;
 	    	box-shadow: none;
 	    	float: left;
-	    	border: 1px solid #aaa;
+	    	border: none !important;
 	    	font-size: 14px;
 	    	outline: none;
 	    	width: 100% !important;
-	    	background: none;
+	    	background: #fff !important;
 	    	color: $dark-color;
 	  //   	-webkit-transition: 0.1s linear all;
 			// -moz-transition: 0.1s linear all;
