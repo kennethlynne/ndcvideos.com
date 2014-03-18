@@ -8,10 +8,10 @@
         @include omega(3);
     }
 
-    // @include media($bigdesktop) {
-    //     @include span-columns(3); 
-    //     @include omega(4);
-    // }
+    @include media($bigdesktop) {
+        @include span-columns(3); 
+        @include omega(4);
+    }
 
     @include media($tablet) {
         @include span-columns(2);   

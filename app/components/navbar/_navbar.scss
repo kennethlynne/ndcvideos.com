@@ -65,12 +65,17 @@ aside {
       bottom: 0;
       z-index: 10;
 
+      @include media($tablet) {
+        display: none;
+      }
+
       p {
         font-size: 11px;
         color: #777;
 
         a {
           color: #aaa;
+          text-decoration: none;
         }
       }
     }
@@ -209,6 +214,11 @@ aside {
       padding: $content-gutter;
       background: $dark-color;
 
+      @include media($tablet) {
+        background: $leftnav-background;
+        padding: 0;
+      }
+
       button {
         float: left;
         height: 30px;
@@ -224,8 +234,9 @@ aside {
 
         @include media($tablet) {
           width: 25%;
-          height: 60px;
+          height: 70px;
           margin: 0px !important;
+          padding: $content-gutter 0;
         }
 
         span.responsive-text {
