@@ -508,8 +508,6 @@ angular.module('ndc')
 
 
             });
-            console.log(videos);
-
 
             return [200, videos, {/*headers*/}];
         });
