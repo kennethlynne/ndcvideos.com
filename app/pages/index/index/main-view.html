@@ -5,9 +5,11 @@
 
 	    	<div class="search-wrapper">
 	    		<!-- <input type="text" class="search-tags" placeholder="Filter videos by tags .."> -->
-	    		<input type="hidden" class="search" ng-change="filter()" ui-select2="select2Options" ng-model="tags" placeholder="Add tags to filter videos ..">
-	    	</div>
-	    	
+                <form ng-submit="search(query)">
+                    <input type="text" class="searchfield" ng-model="query" ng-change="search(query)" placeholder="Search for videos..">
+                </form>
+            </div>
+	    	<div ng-show="errormsg"><h1>{{errormsg}}</h1></div>
 	        <video-list-item-component ng-repeat="video in videos" video="video"></video-list-item-component>
 	    </div>
 
