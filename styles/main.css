@@ -363,7 +363,24 @@ a.editable-empty:focus {
   }
 
   line {
-    font-family: \0000313;
+    font-family: \0000317;
+  }
+}
+
+:-webkit-full-screen-ancestor .navbar-component,
+:-webkit-full-screen-ancestor .modal-backdrop,
+:-webkit-full-screen-ancestor .powered,
+:-webkit-full-screen-ancestor .content-wrapper {
+  display: none !important;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_globals\.scss;
+  }
+
+  line {
+    font-family: \0000322;
   }
 }
 
@@ -377,7 +394,7 @@ a.editable-empty:focus {
   }
 
   line {
-    font-family: \0000317;
+    font-family: \0000326;
   }
 }
 
@@ -394,7 +411,7 @@ h1.page-header {
   }
 
   line {
-    font-family: \0000324;
+    font-family: \0000333;
   }
 }
 
@@ -414,7 +431,7 @@ h1.page-header small {
     }
 
     line {
-      font-family: \0000334;
+      font-family: \0000343;
     }
 }
 
@@ -429,7 +446,7 @@ h1.page-header small {
   }
 
   line {
-    font-family: \0000340;
+    font-family: \0000349;
   }
 }
 
@@ -444,7 +461,7 @@ h1.page-header small {
     }
 
     line {
-      font-family: \0000340;
+      font-family: \0000349;
     }
 }
 
@@ -459,7 +476,7 @@ h1.page-header small {
   }
 
   line {
-    font-family: \0000347;
+    font-family: \0000356;
   }
 }
 
@@ -473,7 +490,7 @@ h1.page-header small {
   }
 
   line {
-    font-family: \0000351;
+    font-family: \0000360;
   }
 }
 
@@ -489,7 +506,7 @@ body {
   }
 
   line {
-    font-family: \0000357;
+    font-family: \0000366;
   }
 }
 
@@ -504,7 +521,7 @@ a {
   }
 
   line {
-    font-family: \0000362;
+    font-family: \0000371;
   }
 }
 
@@ -518,7 +535,7 @@ button {
   }
 
   line {
-    font-family: \0000365;
+    font-family: \0000374;
   }
 }
 
@@ -532,7 +549,7 @@ button:focus {
   }
 
   line {
-    font-family: \0000370;
+    font-family: \0000379;
   }
 }
 
@@ -546,7 +563,7 @@ button:hover i {
   }
 
   line {
-    font-family: \0000376;
+    font-family: \0000385;
   }
 }
 
@@ -565,7 +582,7 @@ button:hover i {
   }
 
   line {
-    font-family: \0000385;
+    font-family: \0000394;
   }
 }
 
@@ -580,7 +597,7 @@ button:hover i {
   }
 
   line {
-    font-family: \0000389;
+    font-family: \0000398;
   }
 }
 
@@ -596,7 +613,7 @@ button:hover i {
   }
 
   line {
-    font-family: \0000395;
+    font-family: \00003104;
   }
 }
 
@@ -616,7 +633,7 @@ button:hover i {
   }
 
   line {
-    font-family: \00003106;
+    font-family: \00003115;
   }
 }
 
@@ -665,7 +682,7 @@ button:hover i {
     }
 
     line {
-      font-family: \00003106;
+      font-family: \00003115;
     }
 }
 
@@ -681,7 +698,7 @@ button:hover i {
     }
 
     line {
-      font-family: \00003106;
+      font-family: \00003115;
     }
 }
 
@@ -696,7 +713,7 @@ button:hover i {
   }
 
   line {
-    font-family: \00003122;
+    font-family: \00003131;
   }
 }
 
@@ -734,7 +751,7 @@ button:hover i {
   }
 
   line {
-    font-family: \00003134;
+    font-family: \00003143;
   }
 }
 
@@ -769,7 +786,7 @@ button:hover i {
   }
 
   line {
-    font-family: \00003141;
+    font-family: \00003150;
   }
 }
 
@@ -783,7 +800,7 @@ button:hover i {
   }
 
   line {
-    font-family: \00003145;
+    font-family: \00003154;
   }
 }
 
@@ -1484,1357 +1501,6 @@ button:hover i {
   }
 }
 
-/*
-Version: 3.4.5 Timestamp: Mon Nov  4 08:22:42 PST 2013
-*/
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \000034;
-  }
-}
-
-.select2-container {
-  margin: 0;
-  position: relative;
-  display: inline-block;
-  /* inline-block for ie7 */
-  zoom: 1;
-  *display: inline;
-  vertical-align: middle;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \0000317;
-  }
-}
-
-.select2-container,
-.select2-drop,
-.select2-search,
-.select2-search input {
-  /*
-    Force border-box so that % widths fit the parent
-    container without overlap because of margin/padding.
-
-    More Info : http://www.quirksmode.org/css/box.html
-  */
-  /* webkit */
-  -moz-box-sizing: border-box;
-  /* firefox */
-  box-sizing: border-box;
-  /* css3 */
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \0000329;
-  }
-}
-
-.select2-container .select2-choice {
-  display: block;
-  height: 26px;
-  padding: 0 0 0 8px;
-  overflow: hidden;
-  position: relative;
-  border: 1px solid #aaa;
-  white-space: nowrap;
-  line-height: 26px;
-  color: #444;
-  text-decoration: none;
-  border-radius: 4px;
-  background-clip: padding-box;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  background-color: #fff;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#ffffff', endColorstr = '#eeeeee', GradientType = 0);
-  background-image: linear, top, white 0%, #eeeeee 50%;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \0000360;
-  }
-}
-
-.select2-container.select2-drop-above .select2-choice {
-  border-bottom-color: #aaa;
-  display: inline-block;
-  background: #1bb776;
-  font-size: 13px;
-  padding: 7px 0 7px 10px;
-  margin-right: 5px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \0000371;
-  }
-}
-
-.select2-container.select2-allowclear .select2-choice .select2-chosen {
-  margin-right: 42px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \0000375;
-  }
-}
-
-.select2-container .select2-choice > .select2-chosen {
-  margin-right: 26px;
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \0000385;
-  }
-}
-
-.select2-container .select2-choice abbr {
-  display: none;
-  width: 12px;
-  height: 12px;
-  position: absolute;
-  right: 24px;
-  top: 8px;
-  font-size: 1px;
-  text-decoration: none;
-  border: 0;
-  background: url("../assets/images/select2.png") right top no-repeat;
-  cursor: pointer;
-  outline: 0;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003102;
-  }
-}
-
-.select2-container.select2-allowclear .select2-choice abbr {
-  display: inline-block;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003106;
-  }
-}
-
-.select2-container .select2-choice abbr:hover {
-  background-position: right -11px;
-  cursor: pointer;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003111;
-  }
-}
-
-.select2-drop-mask {
-  border: 0;
-  margin: 0;
-  padding: 0;
-  position: fixed;
-  left: 0;
-  top: 0;
-  min-height: 100%;
-  min-width: 100%;
-  height: auto;
-  width: auto;
-  opacity: 0;
-  z-index: 9998;
-  /* styles required for IE to work */
-  background-color: #fff;
-  filter: alpha(opacity=0);
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003129;
-  }
-}
-
-.select2-drop {
-  width: 100%;
-  margin-top: -1px;
-  position: absolute;
-  z-index: 9999;
-  top: 100%;
-  background: #fff;
-  color: #000;
-  border: 1px solid #aaa;
-  border-top: 0;
-  border-radius: 0 0 4px 4px;
-  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003147;
-  }
-}
-
-.select2-drop-auto-width {
-  border-top: 1px solid #aaa;
-  width: auto;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003152;
-  }
-}
-
-.select2-drop-auto-width .select2-search {
-  padding-top: 4px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003156;
-  }
-}
-
-.select2-drop.select2-drop-above {
-  margin-top: 1px;
-  border-top: 1px solid #aaa;
-  border-bottom: 0;
-  border-radius: 4px 4px 0 0;
-  box-shadow: 0 -4px 5px rgba(0, 0, 0, 0.15);
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003167;
-  }
-}
-
-.select2-drop-active {
-  border: 1px solid #5897fb;
-  border-top: none;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003172;
-  }
-}
-
-.select2-drop.select2-drop-above.select2-drop-active {
-  border-top: 1px solid #5897fb;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003176;
-  }
-}
-
-.select2-container .select2-choice .select2-arrow {
-  display: inline-block;
-  width: 18px;
-  height: 100%;
-  position: absolute;
-  right: 0;
-  top: 0;
-  border-left: 1px solid #aaa;
-  border-radius: 0 4px 4px 0;
-  background-clip: padding-box;
-  background: #1bb776;
-  font-size: 13px;
-  padding: 7px 0 7px 10px;
-  margin-right: 5px;
-  background-image: linear, top, #cccccc 0%, #eeeeee 60%;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003197;
-  }
-}
-
-.select2-container .select2-choice .select2-arrow b {
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: url("../assets/images/select2.png") no-repeat 0 1px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003204;
-  }
-}
-
-.select2-search {
-  display: inline-block;
-  width: 100%;
-  min-height: 26px;
-  margin: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-  position: relative;
-  z-index: 10000;
-  white-space: nowrap;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003218;
-  }
-}
-
-.select2-search input {
-  width: 100%;
-  height: auto !important;
-  min-height: 26px;
-  padding: 4px 20px 4px 5px;
-  margin: 0;
-  outline: 0;
-  font-family: sans-serif;
-  font-size: 1em;
-  border: 1px solid #aaa;
-  border-radius: 0;
-  box-shadow: none;
-  background: white url("../assets/images/select2.png") no-repeat 100% -22px;
-  background: url("../assets/images/select2.png") no-repeat 100% -22px, linear, top, white 85%, #eeeeee 99%;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003242;
-  }
-}
-
-.select2-drop.select2-drop-above .select2-search input {
-  margin-top: 4px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003246;
-  }
-}
-
-.select2-search input.select2-active {
-  background: white url("../assets/images/select2-spinner.gif") no-repeat 100%;
-  background: url("../assets/images/select2-spinner.gif") no-repeat 100%, linear, top, white 85%, #eeeeee 99%;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003255;
-  }
-}
-
-.select2-container-active .select2-choice,
-.select2-container-active .select2-choices {
-  border: 1px solid #5897fb;
-  outline: none;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003263;
-  }
-}
-
-.select2-dropdown-open .select2-choice {
-  border-bottom-color: transparent;
-  box-shadow: 0 1px 0 #fff inset;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  background-color: #eee;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#ffffff', GradientType=0);
-  background-image: linear, top, white 0%, #eeeeee 50%;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003280;
-  }
-}
-
-.select2-dropdown-open.select2-drop-above .select2-choice,
-.select2-dropdown-open.select2-drop-above .select2-choices {
-  border: 1px solid #5897fb;
-  border-top-color: transparent;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#ffffff', GradientType=0);
-  background-image: linear, bottom, white 0%, #eeeeee 50%;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003291;
-  }
-}
-
-.select2-dropdown-open .select2-choice .select2-arrow {
-  background: transparent;
-  border-left: none;
-  -webkit-filter: none;
-  filter: none;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003296;
-  }
-}
-
-.select2-dropdown-open .select2-choice .select2-arrow b {
-  background-position: -18px 1px;
-}
-
-/* results */
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003301;
-  }
-}
-
-.select2-results {
-  max-height: 200px;
-  padding: 0 0 0 4px;
-  margin: 4px 4px 4px 0;
-  position: relative;
-  overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003311;
-  }
-}
-
-.select2-results ul.select2-result-sub {
-  margin: 0;
-  padding-left: 0;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003316;
-  }
-}
-
-.select2-results ul.select2-result-sub > li .select2-result-label {
-  padding-left: 20px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003317;
-  }
-}
-
-.select2-results ul.select2-result-sub ul.select2-result-sub > li .select2-result-label {
-  padding-left: 40px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003318;
-  }
-}
-
-.select2-results ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub > li .select2-result-label {
-  padding-left: 60px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003319;
-  }
-}
-
-.select2-results ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub > li .select2-result-label {
-  padding-left: 80px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003320;
-  }
-}
-
-.select2-results ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub > li .select2-result-label {
-  padding-left: 100px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003321;
-  }
-}
-
-.select2-results ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub > li .select2-result-label {
-  padding-left: 110px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003322;
-  }
-}
-
-.select2-results ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub > li .select2-result-label {
-  padding-left: 120px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003324;
-  }
-}
-
-.select2-results li {
-  list-style: none;
-  display: list-item;
-  background-image: none;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003330;
-  }
-}
-
-.select2-results li.select2-result-with-children > .select2-result-label {
-  font-weight: bold;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003334;
-  }
-}
-
-.select2-results .select2-result-label {
-  padding: 3px 7px 4px;
-  margin: 0;
-  cursor: pointer;
-  min-height: 1em;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003348;
-  }
-}
-
-.select2-results .select2-highlighted {
-  background: #3875d7;
-  color: #fff;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003353;
-  }
-}
-
-.select2-results li em {
-  background: #feffde;
-  font-style: normal;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003358;
-  }
-}
-
-.select2-results .select2-highlighted em {
-  background: transparent;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003362;
-  }
-}
-
-.select2-results .select2-highlighted ul {
-  background: #fff;
-  color: #000;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003370;
-  }
-}
-
-.select2-results .select2-no-results,
-.select2-results .select2-searching,
-.select2-results .select2-selection-limit {
-  background: #f4f4f4;
-  display: list-item;
-}
-
-/*
-disabled look for disabled choices in the results dropdown
-*/
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003378;
-  }
-}
-
-.select2-results .select2-disabled.select2-highlighted {
-  color: #666;
-  background: #f4f4f4;
-  display: list-item;
-  cursor: default;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003384;
-  }
-}
-
-.select2-results .select2-disabled {
-  background: #f4f4f4;
-  display: list-item;
-  cursor: default;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003390;
-  }
-}
-
-.select2-results .select2-selected {
-  display: none;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003394;
-  }
-}
-
-.select2-more-results.select2-active {
-  background: #f4f4f4 url("../assets/images/select2-spinner.gif") no-repeat 100%;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003398;
-  }
-}
-
-.select2-more-results {
-  background: #f4f4f4;
-  display: list-item;
-}
-
-/* disabled styles */
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003405;
-  }
-}
-
-.select2-container.select2-container-disabled .select2-choice {
-  background-color: #f4f4f4;
-  background-image: none;
-  border: 1px solid #ddd;
-  cursor: default;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003412;
-  }
-}
-
-.select2-container.select2-container-disabled .select2-choice .select2-arrow {
-  background-color: #f4f4f4;
-  background-image: none;
-  border-left: 0;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003418;
-  }
-}
-
-.select2-container.select2-container-disabled .select2-choice abbr {
-  display: none;
-}
-
-/* multiselect */
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003425;
-  }
-}
-
-.select2-container-multi .select2-choices {
-  height: auto !important;
-  height: 1%;
-  margin: 0;
-  padding: 0;
-  position: relative;
-  border: 1px solid #aaa;
-  cursor: text;
-  overflow: hidden;
-  background-color: #fff;
-  background-image: linear, top, #eeeeee 1%, white 15%;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003443;
-  }
-}
-
-.select2-locked {
-  padding: 3px 5px 3px 5px !important;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003447;
-  }
-}
-
-.select2-container-multi .select2-choices {
-  min-height: 26px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003451;
-  }
-}
-
-.select2-container-multi.select2-container-active .select2-choices {
-  border: 1px solid #5897fb;
-  outline: none;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003458;
-  }
-}
-
-.select2-container-multi .select2-choices li {
-  float: left;
-  list-style: none;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003462;
-  }
-}
-
-.select2-container-multi .select2-choices .select2-search-field {
-  margin: 0;
-  padding: 0;
-  white-space: nowrap;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003468;
-  }
-}
-
-.select2-container-multi .select2-choices .select2-search-field input {
-  padding: 5px;
-  margin: 1px 0;
-  font-family: sans-serif;
-  font-size: 100%;
-  color: #666;
-  outline: 0;
-  border: 0;
-  box-shadow: none;
-  background: transparent !important;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003482;
-  }
-}
-
-.select2-container-multi .select2-choices .select2-search-field input.select2-active {
-  background: white url("../assets/images/select2-spinner.gif") no-repeat 100% !important;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003486;
-  }
-}
-
-.select2-default {
-  color: #999 !important;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003490;
-  }
-}
-
-.select2-container-multi .select2-choices .select2-search-choice {
-  padding: 5px 8px 5px 20px;
-  margin: 3px 0 3px 5px;
-  position: relative;
-  line-height: 13px;
-  color: white;
-  cursor: default;
-  box-shadow: 0 0 2px white inset, 0 1px 0 rgba(0, 0, 0, 0.05);
-  background-clip: padding-box;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  background: #1bb776;
-  font-size: 13px;
-  margin-right: 5px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003516;
-  }
-}
-
-.select2-container-multi .select2-choices .select2-search-choice .select2-chosen {
-  cursor: default;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003519;
-  }
-}
-
-.select2-container-multi .select2-choices .select2-search-choice-focus {
-  background: #d4d4d4;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003523;
-  }
-}
-
-.select2-search-choice-close {
-  display: block;
-  width: 12px;
-  height: 13px;
-  position: absolute;
-  right: 3px;
-  top: 4px;
-  font-size: 1px;
-  outline: none;
-  background: url("../assets/images/select2.png") right top no-repeat;
-  color: #13283d;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003537;
-  }
-}
-
-.select2-container-multi .select2-search-choice-close {
-  left: 3px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003541;
-  }
-}
-
-.select2-container-multi .select2-choices .select2-search-choice .select2-search-choice-close:hover {
-  background-position: right -11px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003544;
-  }
-}
-
-.select2-container-multi .select2-choices .select2-search-choice-focus .select2-search-choice-close {
-  background-position: right -11px;
-}
-
-/* disabled styles */
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003549;
-  }
-}
-
-.select2-container-multi.select2-container-disabled .select2-choices {
-  background-color: #f4f4f4;
-  background-image: none;
-  border: 1px solid #ddd;
-  cursor: default;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003556;
-  }
-}
-
-.select2-container-multi.select2-container-disabled .select2-choices .select2-search-choice {
-  padding: 3px 5px 3px 5px;
-  border: 1px solid #ddd;
-  background-image: none;
-  background-color: #f4f4f4;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003563;
-  }
-}
-
-.select2-container-multi.select2-container-disabled .select2-choices .select2-search-choice .select2-search-choice-close {
-  display: none;
-  background: none;
-}
-
-/* end multiselect */
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003570;
-  }
-}
-
-.select2-result-selectable .select2-match,
-.select2-result-unselectable .select2-match {
-  text-decoration: underline;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003574;
-  }
-}
-
-.select2-offscreen,
-.select2-offscreen:focus {
-  clip: rect(0 0 0 0) !important;
-  width: 1px !important;
-  height: 1px !important;
-  border: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow: hidden !important;
-  position: absolute !important;
-  outline: 0 !important;
-  left: 0px !important;
-  top: 0px !important;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003588;
-  }
-}
-
-.select2-display-none {
-  display: none;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-  }
-
-  line {
-    font-family: \00003592;
-  }
-}
-
-.select2-measure-scrollbar {
-  position: absolute;
-  top: -10000px;
-  left: -10000px;
-  width: 100px;
-  height: 100px;
-  overflow: scroll;
-}
-
-/* Retina-ize icons */
-
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
-@media -sass-debug-info {
-    filename {
-      font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-    }
-
-    line {
-      font-family: \00003603;
-    }
-}
-
-  .select2-search input,
-  .select2-search-choice-close,
-  .select2-container .select2-choice abbr,
-  .select2-container .select2-choice .select2-arrow b {
-    background-image: url("../assets/images/select2x2.png") !important;
-    background-repeat: no-repeat !important;
-    background-size: 60px 40px !important;
-  }
-
-@media -sass-debug-info {
-    filename {
-      font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_select2\.scss;
-    }
-
-    line {
-      font-family: \00003608;
-    }
-}
-
-  .select2-search input {
-    background-position: 100% -21px !important;
-  }
-}
-
 @media screen and (min-width: 1100px) {
 @media -sass-debug-info {
     filename {
@@ -3038,13 +1704,29 @@ aside.navbar-component .powered {
   z-index: 10;
 }
 
+@media screen and (max-width: 1100px) {
+@media -sass-debug-info {
+    filename {
+      font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/components\/navbar\/_navbar\.scss;
+    }
+
+    line {
+      font-family: \0000357;
+    }
+}
+
+  aside.navbar-component .powered {
+    display: none;
+  }
+}
+
 @media -sass-debug-info {
   filename {
     font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/components\/navbar\/_navbar\.scss;
   }
 
   line {
-    font-family: \0000368;
+    font-family: \0000372;
   }
 }
 
@@ -3059,12 +1741,13 @@ aside.navbar-component .powered p {
   }
 
   line {
-    font-family: \0000372;
+    font-family: \0000376;
   }
 }
 
 aside.navbar-component .powered p a {
   color: #aaa;
+  text-decoration: none;
 }
 
 @media -sass-debug-info {
@@ -3073,7 +1756,7 @@ aside.navbar-component .powered p a {
   }
 
   line {
-    font-family: \0000378;
+    font-family: \0000383;
   }
 }
 
@@ -3090,7 +1773,7 @@ aside.navbar-component h2 {
   }
 
   line {
-    font-family: \0000385;
+    font-family: \0000390;
   }
 }
 
@@ -3104,7 +1787,7 @@ aside.navbar-component .responsive-toggler {
   }
 
   line {
-    font-family: \0000391;
+    font-family: \0000396;
   }
 }
 
@@ -3120,7 +1803,7 @@ aside.navbar-component .responsive-wrapper.open {
     }
 
     line {
-      font-family: \0000397;
+      font-family: \00003102;
     }
 }
 
@@ -3166,7 +1849,7 @@ aside.navbar-component .responsive-wrapper.open {
     }
 
     line {
-      font-family: \00003101;
+      font-family: \00003106;
     }
 }
 
@@ -3189,7 +1872,7 @@ aside.navbar-component .responsive-wrapper.open {
     }
 
     line {
-      font-family: \00003115;
+      font-family: \00003120;
     }
 }
 
@@ -3203,7 +1886,7 @@ aside.navbar-component .responsive-wrapper.open {
     }
 
     line {
-      font-family: \00003118;
+      font-family: \00003123;
     }
 }
 
@@ -3220,7 +1903,7 @@ aside.navbar-component .responsive-wrapper.open {
   }
 
   line {
-    font-family: \00003126;
+    font-family: \00003131;
   }
 }
 
@@ -3234,7 +1917,7 @@ aside.navbar-component .toggle-wrapper {
   }
 
   line {
-    font-family: \00003128;
+    font-family: \00003133;
   }
 }
 
@@ -3248,7 +1931,7 @@ aside.navbar-component .toggle-wrapper.navigation-wrapper {
   }
 
   line {
-    font-family: \00003133;
+    font-family: \00003138;
   }
 }
 
@@ -3265,7 +1948,7 @@ aside.navbar-component .toggle-wrapper.notifications-wrapper .notifications {
   }
 
   line {
-    font-family: \00003139;
+    font-family: \00003144;
   }
 }
 
@@ -3281,7 +1964,7 @@ aside.navbar-component .toggle-wrapper.notifications-wrapper .notifications li {
   }
 
   line {
-    font-family: \00003144;
+    font-family: \00003149;
   }
 }
 
@@ -3297,7 +1980,7 @@ aside.navbar-component .toggle-wrapper.notifications-wrapper .notifications li:l
   }
 
   line {
-    font-family: \00003150;
+    font-family: \00003155;
   }
 }
 
@@ -3312,7 +1995,7 @@ aside.navbar-component .toggle-wrapper.notifications-wrapper .notifications li p
   }
 
   line {
-    font-family: \00003154;
+    font-family: \00003159;
   }
 }
 
@@ -3328,7 +2011,7 @@ aside.navbar-component .toggle-wrapper.notifications-wrapper .notifications li p
   }
 
   line {
-    font-family: \00003165;
+    font-family: \00003170;
   }
 }
 
@@ -3351,7 +2034,7 @@ aside.navbar-component .toggle-wrapper.settings-wrapper button.signout {
   }
 
   line {
-    font-family: \00003180;
+    font-family: \00003185;
   }
 }
 
@@ -3366,7 +2049,7 @@ aside.navbar-component .toggle-wrapper.settings-wrapper button.signout i {
   }
 
   line {
-    font-family: \00003187;
+    font-family: \00003192;
   }
 }
 
@@ -3388,7 +2071,7 @@ aside.navbar-component .toggle-wrapper.settings-wrapper input[type="password"] {
   }
 
   line {
-    font-family: \00003198;
+    font-family: \00003203;
   }
 }
 
@@ -3402,7 +2085,7 @@ aside.navbar-component .toggle-wrapper.settings-wrapper h2 {
   }
 
   line {
-    font-family: \00003204;
+    font-family: \00003209;
   }
 }
 
@@ -3444,13 +2127,30 @@ aside.navbar-component header.actionbar:after {
   clear: both;
 }
 
+@media screen and (max-width: 1100px) {
+@media -sass-debug-info {
+    filename {
+      font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/components\/navbar\/_navbar\.scss;
+    }
+
+    line {
+      font-family: \00003209;
+    }
+}
+
+  aside.navbar-component header.actionbar {
+    background: #3a3a3a;
+    padding: 0;
+  }
+}
+
 @media -sass-debug-info {
   filename {
     font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/components\/navbar\/_navbar\.scss;
   }
 
   line {
-    font-family: \00003212;
+    font-family: \00003222;
   }
 }
 
@@ -3475,14 +2175,15 @@ aside.navbar-component header.actionbar button {
     }
 
     line {
-      font-family: \00003212;
+      font-family: \00003222;
     }
 }
 
   aside.navbar-component header.actionbar button {
     width: 25%;
-    height: 60px;
+    height: 70px;
     margin: 0px !important;
+    padding: 20px 0;
   }
 }
 
@@ -3492,7 +2193,7 @@ aside.navbar-component header.actionbar button {
   }
 
   line {
-    font-family: \00003231;
+    font-family: \00003242;
   }
 }
 
@@ -3507,7 +2208,7 @@ aside.navbar-component header.actionbar button span.responsive-text {
     }
 
     line {
-      font-family: \00003231;
+      font-family: \00003242;
     }
 }
 
@@ -3526,7 +2227,7 @@ aside.navbar-component header.actionbar button span.responsive-text {
     }
 
     line {
-      font-family: \00003242;
+      font-family: \00003253;
     }
 }
 
@@ -3540,7 +2241,7 @@ aside.navbar-component header.actionbar button span.responsive-text {
     }
 
     line {
-      font-family: \00003246;
+      font-family: \00003257;
     }
 }
 
@@ -3555,7 +2256,7 @@ aside.navbar-component header.actionbar button span.responsive-text {
   }
 
   line {
-    font-family: \00003251;
+    font-family: \00003262;
   }
 }
 
@@ -3570,7 +2271,7 @@ aside.navbar-component header.actionbar button.active i {
     }
 
     line {
-      font-family: \00003251;
+      font-family: \00003262;
     }
 }
 
@@ -3585,7 +2286,7 @@ aside.navbar-component header.actionbar button.active i {
   }
 
   line {
-    font-family: \00003260;
+    font-family: \00003271;
   }
 }
 
@@ -3609,7 +2310,7 @@ aside.navbar-component header.actionbar button .notification-count {
     }
 
     line {
-      font-family: \00003260;
+      font-family: \00003271;
     }
 }
 
@@ -3628,7 +2329,7 @@ aside.navbar-component header.actionbar button .notification-count {
   }
 
   line {
-    font-family: \00003283;
+    font-family: \00003294;
   }
 }
 
@@ -3643,7 +2344,7 @@ aside.navbar-component header.actionbar .pull-right button {
     }
 
     line {
-      font-family: \00003282;
+      font-family: \00003293;
     }
 }
 
@@ -3658,7 +2359,7 @@ aside.navbar-component header.actionbar .pull-right button {
   }
 
   line {
-    font-family: \00003293;
+    font-family: \00003304;
   }
 }
 
@@ -3675,7 +2376,7 @@ aside.navbar-component h1 {
     }
 
     line {
-      font-family: \00003293;
+      font-family: \00003304;
     }
 }
 
@@ -3693,7 +2394,7 @@ aside.navbar-component h1 {
   }
 
   line {
-    font-family: \00003305;
+    font-family: \00003316;
   }
 }
 
@@ -3708,7 +2409,7 @@ aside.navbar-component h1 a {
   }
 
   line {
-    font-family: \00003310;
+    font-family: \00003321;
   }
 }
 
@@ -3730,7 +2431,7 @@ aside.navbar-component h1 small {
     }
 
     line {
-      font-family: \00003325;
+      font-family: \00003336;
     }
 }
 
@@ -3747,7 +2448,7 @@ aside.navbar-component h1 small {
     }
 
     line {
-      font-family: \00003331;
+      font-family: \00003342;
     }
 }
 
@@ -3763,7 +2464,7 @@ aside.navbar-component h1 small {
   }
 
   line {
-    font-family: \00003339;
+    font-family: \00003350;
   }
 }
 
@@ -3778,7 +2479,7 @@ aside.navbar-component .logo {
   }
 
   line {
-    font-family: \00003343;
+    font-family: \00003354;
   }
 }
 
@@ -3793,7 +2494,7 @@ aside.navbar-component .logo img {
   }
 
   line {
-    font-family: \00003349;
+    font-family: \00003360;
   }
 }
 
@@ -3809,7 +2510,7 @@ aside.navbar-component ul.navigation {
   }
 
   line {
-    font-family: \00003354;
+    font-family: \00003365;
   }
 }
 
@@ -3824,7 +2525,7 @@ aside.navbar-component ul.navigation li {
   }
 
   line {
-    font-family: \00003358;
+    font-family: \00003369;
   }
 }
 
@@ -3843,7 +2544,7 @@ aside.navbar-component ul.navigation li a {
     }
 
     line {
-      font-family: \00003358;
+      font-family: \00003369;
     }
 }
 
@@ -3862,7 +2563,7 @@ aside.navbar-component ul.navigation li a {
   }
 
   line {
-    font-family: \00003375;
+    font-family: \00003386;
   }
 }
 
@@ -3876,7 +2577,7 @@ aside.navbar-component ul.navigation li:hover a {
   }
 
   line {
-    font-family: \00003380;
+    font-family: \00003391;
   }
 }
 
@@ -3900,7 +2601,7 @@ aside.navbar-component ul.navigation li:after {
     }
 
     line {
-      font-family: \00003391;
+      font-family: \00003402;
     }
 }
 
@@ -3915,7 +2616,7 @@ aside.navbar-component ul.navigation li:after {
   }
 
   line {
-    font-family: \00003397;
+    font-family: \00003408;
   }
 }
 
@@ -3929,7 +2630,7 @@ aside.navbar-component ul.navigation li.active a {
   }
 
   line {
-    font-family: \00003404;
+    font-family: \00003415;
   }
 }
 
@@ -3945,7 +2646,7 @@ aside.navbar-component ul.tags {
   }
 
   line {
-    font-family: \00003409;
+    font-family: \00003420;
   }
 }
 
@@ -3963,7 +2664,7 @@ aside.navbar-component ul.tags li {
   }
 
   line {
-    font-family: \00003416;
+    font-family: \00003427;
   }
 }
 
@@ -3979,7 +2680,7 @@ aside.navbar-component ul.tags li .close {
   }
 
   line {
-    font-family: \00003421;
+    font-family: \00003432;
   }
 }
 
@@ -3993,7 +2694,7 @@ aside.navbar-component ul.tags li .close:hover {
   }
 
   line {
-    font-family: \00003429;
+    font-family: \00003440;
   }
 }
 
@@ -4008,7 +2709,7 @@ aside ul.navigation li.active:after {
   }
 
   line {
-    font-family: \00003439;
+    font-family: \00003450;
   }
 }
 
@@ -4022,7 +2723,7 @@ aside .ng-enter ul.navigation li.active:after {
   }
 
   line {
-    font-family: \00003443;
+    font-family: \00003454;
   }
 }
 
@@ -4036,7 +2737,7 @@ aside .ng-enter.ng-enter-active ul.navigation li.active:after {
   }
 
   line {
-    font-family: \00003448;
+    font-family: \00003459;
   }
 }
 
@@ -4050,7 +2751,7 @@ aside .ng-leave ul.navigation li.active:after {
   }
 
   line {
-    font-family: \00003457;
+    font-family: \00003468;
   }
 }
 
@@ -4065,7 +2766,7 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
   }
 
   line {
-    font-family: \00003468;
+    font-family: \00003479;
   }
 }
 
@@ -4081,7 +2782,7 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
   }
 
   line {
-    font-family: \00003472;
+    font-family: \00003483;
   }
 }
 
@@ -4097,7 +2798,7 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
     }
 
     line {
-      font-family: \00003480;
+      font-family: \00003491;
     }
 }
 
@@ -4116,7 +2817,7 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
     }
 
     line {
-      font-family: \00003495;
+      font-family: \00003506;
     }
 }
 
@@ -4130,7 +2831,7 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
     }
 
     line {
-      font-family: \00003504;
+      font-family: \00003515;
     }
 }
 
@@ -4146,7 +2847,7 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
     }
 
     line {
-      font-family: \00003512;
+      font-family: \00003523;
     }
 }
 
@@ -4162,7 +2863,7 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
     }
 
     line {
-      font-family: \00003522;
+      font-family: \00003533;
     }
 }
 
@@ -4178,7 +2879,7 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
     }
 
     line {
-      font-family: \00003530;
+      font-family: \00003541;
     }
 }
 
@@ -4296,6 +2997,67 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
 }
 
   .video-list-item-component:nth-child(3+1) {
+    clear: left;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+@media -sass-debug-info {
+    filename {
+      font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/components\/video-list-item\/_video-list-item\.scss;
+    }
+
+    line {
+      font-family: \000031;
+    }
+}
+
+  .video-list-item-component {
+    float: left;
+    display: block;
+    margin-right: 0%;
+    width: 25%;
+  }
+
+@media -sass-debug-info {
+    filename {
+      font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/bower_components\/neat\/app\/assets\/stylesheets\/grid\/_span-columns\.scss;
+    }
+
+    line {
+      font-family: \0000340;
+    }
+}
+
+  .video-list-item-component:last-child {
+    margin-right: 0;
+  }
+
+@media -sass-debug-info {
+    filename {
+      font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/bower_components\/neat\/app\/assets\/stylesheets\/grid\/_omega\.scss;
+    }
+
+    line {
+      font-family: \0000370;
+    }
+}
+
+  .video-list-item-component:nth-child(4) {
+    margin-right: 0;
+  }
+
+@media -sass-debug-info {
+    filename {
+      font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/bower_components\/neat\/app\/assets\/stylesheets\/grid\/_omega\.scss;
+    }
+
+    line {
+      font-family: \0000375;
+    }
+}
+
+  .video-list-item-component:nth-child(4+1) {
     clear: left;
   }
 }
@@ -4452,7 +3214,7 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
 .video-list-item-component .video-wrapper:before {
   content: "";
   position: absolute;
-  bottom: 10px;
+  bottom: 14px;
   left: 10px;
   right: 10px;
   background: url(/assets/images/content-gradient.png) top left repeat-x;
@@ -4507,6 +3269,7 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
 .video-list-item-component .video-wrapper .video-info h3 {
   margin: 20px 0 0 0;
   font-size: 16px;
+  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.4);
 }
 
 @media -sass-debug-info {
@@ -4515,7 +3278,7 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
   }
 
   line {
-    font-family: \0000375;
+    font-family: \0000376;
   }
 }
 
@@ -4530,7 +3293,7 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
   }
 
   line {
-    font-family: \0000381;
+    font-family: \0000382;
   }
 }
 
@@ -4553,7 +3316,7 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
   }
 
   line {
-    font-family: \0000393;
+    font-family: \0000394;
   }
 }
 
@@ -4568,7 +3331,7 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
   }
 
   line {
-    font-family: \0000398;
+    font-family: \0000399;
   }
 }
 
@@ -4583,7 +3346,7 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
   }
 
   line {
-    font-family: \00003104;
+    font-family: \00003105;
   }
 }
 
@@ -4597,7 +3360,7 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
   }
 
   line {
-    font-family: \00003109;
+    font-family: \00003110;
   }
 }
 
@@ -4611,7 +3374,7 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
   }
 
   line {
-    font-family: \00003114;
+    font-family: \00003115;
   }
 }
 
@@ -4631,7 +3394,7 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
   }
 
   line {
-    font-family: \00003123;
+    font-family: \00003124;
   }
 }
 
@@ -4649,12 +3412,11 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
   }
 
   line {
-    font-family: \00003132;
+    font-family: \00003133;
   }
 }
 
 .video-list-item-component .video-wrapper .video {
-  background: rgba(0, 0, 0, 0.4);
   position: relative;
   width: 100%;
 }
@@ -4673,219 +3435,6 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
   width: 100%;
   height: auto;
   z-index: 50;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/components\/video-list-item\/modal\/_video-list-item-modal\.scss;
-  }
-
-  line {
-    font-family: \000032;
-  }
-}
-
-.modal .modal-dialog {
-  *zoom: 1;
-  position: static;
-  top: 0;
-  width: 100%;
-  margin: 0;
-  margin-top: 70px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/bower_components\/bourbon\/app\/assets\/stylesheets\/addons\/_clearfix\.scss;
-  }
-
-  line {
-    font-family: \0000318;
-  }
-}
-
-.modal .modal-dialog:before,
-.modal .modal-dialog:after {
-  content: " ";
-  display: table;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/bower_components\/bourbon\/app\/assets\/stylesheets\/addons\/_clearfix\.scss;
-  }
-
-  line {
-    font-family: \0000323;
-  }
-}
-
-.modal .modal-dialog:after {
-  clear: both;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/components\/video-list-item\/modal\/_video-list-item-modal\.scss;
-  }
-
-  line {
-    font-family: \0000311;
-  }
-}
-
-.modal .modal-dialog .modal-body {
-  margin: 0 auto;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/components\/video-list-item\/modal\/_video-list-item-modal\.scss;
-  }
-
-  line {
-    font-family: \0000315;
-  }
-}
-
-.modal .modal-dialog .close {
-  position: absolute;
-  top: -50px;
-  right: 10px;
-  font-size: 40px;
-  background: none;
-  box-shadow: none;
-  border: none;
-  color: #fff;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/components\/video-list-item\/modal\/_video-list-item-modal\.scss;
-  }
-
-  line {
-    font-family: \0000326;
-  }
-}
-
-.modal .modal-dialog .modal-video {
-  float: left;
-  display: block;
-  margin-right: 0%;
-  width: 100%;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/bower_components\/neat\/app\/assets\/stylesheets\/grid\/_span-columns\.scss;
-  }
-
-  line {
-    font-family: \0000340;
-  }
-}
-
-.modal .modal-dialog .modal-video:last-child {
-  margin-right: 0;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/components\/video-list-item\/modal\/_video-list-item-modal\.scss;
-  }
-
-  line {
-    font-family: \0000334;
-  }
-}
-
-.modal .modal-dialog .modal-video-info {
-  color: #fff;
-  padding: 20px 0;
-  float: left;
-  display: block;
-  margin-right: 0%;
-  width: 100%;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/bower_components\/neat\/app\/assets\/stylesheets\/grid\/_span-columns\.scss;
-  }
-
-  line {
-    font-family: \0000340;
-  }
-}
-
-.modal .modal-dialog .modal-video-info:last-child {
-  margin-right: 0;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/components\/video-list-item\/modal\/_video-list-item-modal\.scss;
-  }
-
-  line {
-    font-family: \0000343;
-  }
-}
-
-.modal .modal-dialog .modal-video-info h2 {
-  margin-top: 0;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/components\/video-list-item\/modal\/_video-list-item-modal\.scss;
-  }
-
-  line {
-    font-family: \0000348;
-  }
-}
-
-.modal .modal-dialog button.favorite {
-  float: left;
-  vertical-align: top;
-  margin-right: 10px;
-  margin-top: -5px;
-  background: none;
-  border: none;
-  box-shadow: none;
-  color: #fff;
-  font-size: 30px;
-  padding: 0;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/components\/video-list-item\/modal\/_video-list-item-modal\.scss;
-  }
-
-  line {
-    font-family: \0000360;
-  }
-}
-
-.modal .modal-dialog button.favorite i.fa-star {
-  color: #1bb776;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/components\/video-list-item\/modal\/_video-list-item-modal\.scss;
-  }
-
-  line {
-    font-family: \0000367;
-  }
-}
-
-.modal-backdrop {
-  opacity: 0.8 !important;
 }
 
 @media -sass-debug-info {
@@ -5115,14 +3664,14 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
   }
 
   line {
-    font-family: \000037;
+    font-family: \000032;
   }
 }
 
-.select2-drop,
-.select2-drop-active {
-  margin-top: 10px !important;
-  border-radius: 10px;
+.index-page .no-videos-message {
+  padding: 10px;
+  margin-top: 20px;
+  color: #666;
 }
 
 @media -sass-debug-info {
@@ -5131,7 +3680,7 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
   }
 
   line {
-    font-family: \0000312;
+    font-family: \000039;
   }
 }
 
@@ -5177,7 +3726,7 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
   }
 
   line {
-    font-family: \0000317;
+    font-family: \0000314;
   }
 }
 
@@ -5226,21 +3775,17 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
   }
 
   line {
-    font-family: \0000331;
+    font-family: \0000322;
   }
 }
 
-.videos .search-wrapper .select2-search-field input,
-.videos .search-wrapper .select2-search-field input:focus,
-.videos .search-wrapper .select2-search-field input.active,
-.videos .search-wrapper .select2-search-field input.select2-focused,
-.videos .search-wrapper .select2-search-field input.select2-active {
-  background: none !important;
-  background-image: none !important;
-  background-color: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  width: auto !important;
+.videos .search-wrapper input {
+  font-size: 16px;
+  width: 100%;
+  border: none;
+  background: #fff;
+  padding: 10px 15px;
+  border-radius: 15px;
 }
 
 @media -sass-debug-info {
@@ -5249,111 +3794,16 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
   }
 
   line {
-    font-family: \0000342;
+    font-family: \0000333;
   }
 }
 
-.videos .search-wrapper .select2-container {
-  width: 100% !important;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/index\/index\/_index-page\.scss;
-  }
-
-  line {
-    font-family: \0000346;
-  }
-}
-
-.videos .search-wrapper .select2-choices {
-  padding: 7px 17px;
-  border-radius: 20px;
+.videos .search-wrapper input,
+.videos .search-wrapper input:focus,
+.videos .search-wrapper input.active,
+.videos .search-wrapper input:active {
   box-shadow: none;
-  float: left;
-  border: 1px solid #aaa;
-  font-size: 14px;
   outline: none;
-  width: 100% !important;
-  background: none;
-  color: #303030;
-}
-
-@media screen and (max-width: 1100px) {
-@media -sass-debug-info {
-    filename {
-      font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/index\/index\/_index-page\.scss;
-    }
-
-    line {
-      font-family: \0000346;
-    }
-}
-
-  .videos .search-wrapper .select2-choices {
-    width: 100%;
-    margin-top: 10px;
-    border-color: #fff;
-    background: #fff;
-  }
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/index\/index\/_index-page\.scss;
-  }
-
-  line {
-    font-family: \0000369;
-  }
-}
-
-.videos .search-wrapper .select2-choices input {
-  background: none !important;
-  border: none !important;
-  box-shadow: none !important;
-  width: auto !important;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/index\/index\/_index-page\.scss;
-  }
-
-  line {
-    font-family: \0000376;
-  }
-}
-
-.videos .search-wrapper .select2-choices .select2-search-choice {
-  display: inline-block;
-  background: #1bb776;
-  font-size: 13px;
-  padding: 7px 10px 7px 25px;
-  margin: 2px 5px 3px 0;
-  border: none !important;
-  box-shadow: none !important;
-  border-radius: 5px;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/index\/index\/_index-page\.scss;
-  }
-
-  line {
-    font-family: \0000386;
-  }
-}
-
-.videos .search-wrapper .select2-choices .select2-search-choice .select2-search-choice-close {
-  color: #303030;
-  padding: 5px 10px 5px 5px;
-  text-decoration: none;
-  background-position: right -11px;
-  left: 5px !important;
-  top: 6px !important;
 }
 
 @media -sass-debug-info {
@@ -6795,6 +5245,916 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
 }
 
 .admin-users-partial .invite p.success {
+  color: #1bb776;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/admin\/videos\/import\/index\/_import-page\.scss;
+  }
+
+  line {
+    font-family: \000033;
+  }
+}
+
+.import-page input[type="text"] {
+  padding: 10px;
+  box-shadow: none;
+  border: 1px solid #aaa;
+  outline: none;
+  font: inherit;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/admin\/videos\/import\/index\/_import-page\.scss;
+  }
+
+  line {
+    font-family: \0000313;
+  }
+}
+
+.import-page .button {
+  background: #1bb776 !important;
+  color: #fff !important;
+  border: none !important;
+  margin-top: 20px;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/admin\/videos\/import\/index\/_import-page\.scss;
+  }
+
+  line {
+    font-family: \0000320;
+  }
+}
+
+.import-page .tags-wrapper {
+  *zoom: 1;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/bower_components\/bourbon\/app\/assets\/stylesheets\/addons\/_clearfix\.scss;
+  }
+
+  line {
+    font-family: \0000318;
+  }
+}
+
+.import-page .tags-wrapper:before,
+.import-page .tags-wrapper:after {
+  content: " ";
+  display: table;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/bower_components\/bourbon\/app\/assets\/stylesheets\/addons\/_clearfix\.scss;
+  }
+
+  line {
+    font-family: \0000323;
+  }
+}
+
+.import-page .tags-wrapper:after {
+  clear: both;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/admin\/videos\/import\/index\/_import-page\.scss;
+  }
+
+  line {
+    font-family: \0000333;
+  }
+}
+
+.import-page .tags-wrapper .select2-search-field input,
+.import-page .tags-wrapper .select2-search-field input:focus,
+.import-page .tags-wrapper .select2-search-field input.active,
+.import-page .tags-wrapper .select2-search-field input.select2-focused,
+.import-page .tags-wrapper .select2-search-field input.select2-active {
+  background: none !important;
+  background-image: none !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  width: auto !important;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/admin\/videos\/import\/index\/_import-page\.scss;
+  }
+
+  line {
+    font-family: \0000344;
+  }
+}
+
+.import-page .tags-wrapper .select2-container {
+  width: 100% !important;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/admin\/videos\/import\/index\/_import-page\.scss;
+  }
+
+  line {
+    font-family: \0000348;
+  }
+}
+
+.import-page .tags-wrapper .select2-choices {
+  padding: 7px 12px;
+  box-shadow: none;
+  float: left;
+  border: 1px solid #aaa;
+  font-size: 14px;
+  outline: none;
+  width: 100% !important;
+  background: #fff !important;
+  color: #303030;
+}
+
+@media screen and (max-width: 1100px) {
+@media -sass-debug-info {
+    filename {
+      font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/admin\/videos\/import\/index\/_import-page\.scss;
+    }
+
+    line {
+      font-family: \0000348;
+    }
+}
+
+  .import-page .tags-wrapper .select2-choices {
+    width: 100%;
+    margin-top: 10px;
+    border-color: #fff;
+    background: #fff;
+  }
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/admin\/videos\/import\/index\/_import-page\.scss;
+  }
+
+  line {
+    font-family: \0000370;
+  }
+}
+
+.import-page .tags-wrapper .select2-choices input {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  width: auto !important;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/admin\/videos\/import\/index\/_import-page\.scss;
+  }
+
+  line {
+    font-family: \0000377;
+  }
+}
+
+.import-page .tags-wrapper .select2-choices .select2-search-choice {
+  display: inline-block;
+  background: #1bb776;
+  font-size: 13px;
+  padding: 7px 10px 7px 25px;
+  margin: 2px 5px 3px 0;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 5px;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/admin\/videos\/import\/index\/_import-page\.scss;
+  }
+
+  line {
+    font-family: \0000387;
+  }
+}
+
+.import-page .tags-wrapper .select2-choices .select2-search-choice .select2-search-choice-close {
+  color: #303030;
+  padding: 5px 10px 5px 5px;
+  text-decoration: none;
+  background-position: right -11px;
+  left: 5px !important;
+  top: 6px !important;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/admin\/videos\/import\/index\/_import-page\.scss;
+  }
+
+  line {
+    font-family: \000033;
+  }
+}
+
+.import-page input[type="text"] {
+  padding: 10px;
+  box-shadow: none;
+  border: 1px solid #aaa;
+  outline: none;
+  font: inherit;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/admin\/videos\/import\/index\/_import-page\.scss;
+  }
+
+  line {
+    font-family: \0000313;
+  }
+}
+
+.import-page .button {
+  background: #1bb776 !important;
+  color: #fff !important;
+  border: none !important;
+  margin-top: 20px;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/admin\/videos\/import\/index\/_import-page\.scss;
+  }
+
+  line {
+    font-family: \0000320;
+  }
+}
+
+.import-page .tags-wrapper {
+  *zoom: 1;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/bower_components\/bourbon\/app\/assets\/stylesheets\/addons\/_clearfix\.scss;
+  }
+
+  line {
+    font-family: \0000318;
+  }
+}
+
+.import-page .tags-wrapper:before,
+.import-page .tags-wrapper:after {
+  content: " ";
+  display: table;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/bower_components\/bourbon\/app\/assets\/stylesheets\/addons\/_clearfix\.scss;
+  }
+
+  line {
+    font-family: \0000323;
+  }
+}
+
+.import-page .tags-wrapper:after {
+  clear: both;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/admin\/videos\/import\/index\/_import-page\.scss;
+  }
+
+  line {
+    font-family: \0000333;
+  }
+}
+
+.import-page .tags-wrapper .select2-search-field input,
+.import-page .tags-wrapper .select2-search-field input:focus,
+.import-page .tags-wrapper .select2-search-field input.active,
+.import-page .tags-wrapper .select2-search-field input.select2-focused,
+.import-page .tags-wrapper .select2-search-field input.select2-active {
+  background: none !important;
+  background-image: none !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  width: auto !important;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/admin\/videos\/import\/index\/_import-page\.scss;
+  }
+
+  line {
+    font-family: \0000344;
+  }
+}
+
+.import-page .tags-wrapper .select2-container {
+  width: 100% !important;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/admin\/videos\/import\/index\/_import-page\.scss;
+  }
+
+  line {
+    font-family: \0000348;
+  }
+}
+
+.import-page .tags-wrapper .select2-choices {
+  padding: 7px 12px;
+  box-shadow: none;
+  float: left;
+  border: 1px solid #aaa;
+  font-size: 14px;
+  outline: none;
+  width: 100% !important;
+  background: #fff !important;
+  color: #303030;
+}
+
+@media screen and (max-width: 1100px) {
+@media -sass-debug-info {
+    filename {
+      font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/admin\/videos\/import\/index\/_import-page\.scss;
+    }
+
+    line {
+      font-family: \0000348;
+    }
+}
+
+  .import-page .tags-wrapper .select2-choices {
+    width: 100%;
+    margin-top: 10px;
+    border-color: #fff;
+    background: #fff;
+  }
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/admin\/videos\/import\/index\/_import-page\.scss;
+  }
+
+  line {
+    font-family: \0000370;
+  }
+}
+
+.import-page .tags-wrapper .select2-choices input {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  width: auto !important;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/admin\/videos\/import\/index\/_import-page\.scss;
+  }
+
+  line {
+    font-family: \0000377;
+  }
+}
+
+.import-page .tags-wrapper .select2-choices .select2-search-choice {
+  display: inline-block;
+  background: #1bb776;
+  font-size: 13px;
+  padding: 7px 10px 7px 25px;
+  margin: 2px 5px 3px 0;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 5px;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/admin\/videos\/import\/index\/_import-page\.scss;
+  }
+
+  line {
+    font-family: \0000387;
+  }
+}
+
+.import-page .tags-wrapper .select2-choices .select2-search-choice .select2-search-choice-close {
+  color: #303030;
+  padding: 5px 10px 5px 5px;
+  text-decoration: none;
+  background-position: right -11px;
+  left: 5px !important;
+  top: 6px !important;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/video\/videoDetails\/_video-page\.scss;
+  }
+
+  line {
+    font-family: \000033;
+  }
+}
+
+.video-page.modal-backdrop {
+  opacity: 0.85 !important;
+  z-index: 99 !important;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/video\/videoDetails\/_video-page\.scss;
+  }
+
+  line {
+    font-family: \000038;
+  }
+}
+
+.video-page.modal {
+  width: 100%;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/video\/videoDetails\/_video-page\.scss;
+  }
+
+  line {
+    font-family: \0000311;
+  }
+}
+
+.video-page.modal.fade.in {
+  display: block;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/video\/videoDetails\/_video-page\.scss;
+  }
+
+  line {
+    font-family: \0000315;
+  }
+}
+
+.video-page.modal .modal-dialog {
+  *zoom: 1;
+  position: static;
+  top: 0;
+  width: 100%;
+  margin: 0;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/bower_components\/bourbon\/app\/assets\/stylesheets\/addons\/_clearfix\.scss;
+  }
+
+  line {
+    font-family: \0000318;
+  }
+}
+
+.video-page.modal .modal-dialog:before,
+.video-page.modal .modal-dialog:after {
+  content: " ";
+  display: table;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/bower_components\/bourbon\/app\/assets\/stylesheets\/addons\/_clearfix\.scss;
+  }
+
+  line {
+    font-family: \0000323;
+  }
+}
+
+.video-page.modal .modal-dialog:after {
+  clear: both;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/video\/videoDetails\/_video-page\.scss;
+  }
+
+  line {
+    font-family: \0000323;
+  }
+}
+
+.video-page.modal .modal-dialog .modal-body {
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media screen and (max-width: 1100px) {
+@media -sass-debug-info {
+    filename {
+      font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/video\/videoDetails\/_video-page\.scss;
+    }
+
+    line {
+      font-family: \0000323;
+    }
+}
+
+  .video-page.modal .modal-dialog .modal-body {
+    padding-top: 60px;
+  }
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/video\/videoDetails\/_video-page\.scss;
+  }
+
+  line {
+    font-family: \0000332;
+  }
+}
+
+.video-page.modal .modal-dialog .close {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  font-size: 40px;
+  background: none;
+  box-shadow: none;
+  border: none;
+  color: #1bb776;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/video\/videoDetails\/_video-page\.scss;
+  }
+
+  line {
+    font-family: \0000343;
+  }
+}
+
+.video-page.modal .modal-dialog .modal-video {
+  float: left;
+  display: block;
+  margin-right: 0%;
+  width: 60%;
+  padding: 0 10px;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/bower_components\/neat\/app\/assets\/stylesheets\/grid\/_span-columns\.scss;
+  }
+
+  line {
+    font-family: \0000340;
+  }
+}
+
+.video-page.modal .modal-dialog .modal-video:last-child {
+  margin-right: 0;
+}
+
+@media screen and (max-width: 1100px) {
+@media -sass-debug-info {
+    filename {
+      font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/video\/videoDetails\/_video-page\.scss;
+    }
+
+    line {
+      font-family: \0000343;
+    }
+}
+
+  .video-page.modal .modal-dialog .modal-video {
+    float: left;
+    display: block;
+    margin-right: 0%;
+    width: 100%;
+  }
+
+@media -sass-debug-info {
+    filename {
+      font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/bower_components\/neat\/app\/assets\/stylesheets\/grid\/_span-columns\.scss;
+    }
+
+    line {
+      font-family: \0000340;
+    }
+}
+
+  .video-page.modal .modal-dialog .modal-video:last-child {
+    margin-right: 0;
+  }
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/video\/videoDetails\/_video-page\.scss;
+  }
+
+  line {
+    font-family: \0000352;
+  }
+}
+
+.video-page.modal .modal-dialog .modal-video-info {
+  float: left;
+  display: block;
+  margin-right: 0%;
+  width: 40%;
+  color: #fff;
+  padding: 20px;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/bower_components\/neat\/app\/assets\/stylesheets\/grid\/_span-columns\.scss;
+  }
+
+  line {
+    font-family: \0000340;
+  }
+}
+
+.video-page.modal .modal-dialog .modal-video-info:last-child {
+  margin-right: 0;
+}
+
+@media screen and (max-width: 1100px) {
+@media -sass-debug-info {
+    filename {
+      font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/video\/videoDetails\/_video-page\.scss;
+    }
+
+    line {
+      font-family: \0000352;
+    }
+}
+
+  .video-page.modal .modal-dialog .modal-video-info {
+    float: left;
+    display: block;
+    margin-right: 0%;
+    width: 100%;
+    padding: 20px 20px 20px 0;
+  }
+
+@media -sass-debug-info {
+    filename {
+      font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/bower_components\/neat\/app\/assets\/stylesheets\/grid\/_span-columns\.scss;
+    }
+
+    line {
+      font-family: \0000340;
+    }
+}
+
+  .video-page.modal .modal-dialog .modal-video-info:last-child {
+    margin-right: 0;
+  }
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/video\/videoDetails\/_video-page\.scss;
+  }
+
+  line {
+    font-family: \0000362;
+  }
+}
+
+.video-page.modal .modal-dialog .modal-video-info h2 {
+  margin-top: 0;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/video\/videoDetails\/_video-page\.scss;
+  }
+
+  line {
+    font-family: \0000366;
+  }
+}
+
+.video-page.modal .modal-dialog .modal-video-info .favorite {
+  margin-top: 20px;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/video\/videoDetails\/_video-page\.scss;
+  }
+
+  line {
+    font-family: \0000371;
+  }
+}
+
+.video-page.modal .modal-dialog .modal-video-similar {
+  float: left;
+  display: block;
+  margin-right: 0%;
+  width: 100%;
+  color: #fff;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/bower_components\/neat\/app\/assets\/stylesheets\/grid\/_span-columns\.scss;
+  }
+
+  line {
+    font-family: \0000340;
+  }
+}
+
+.video-page.modal .modal-dialog .modal-video-similar:last-child {
+  margin-right: 0;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/video\/videoDetails\/_video-page\.scss;
+  }
+
+  line {
+    font-family: \0000375;
+  }
+}
+
+.video-page.modal .modal-dialog .modal-video-similar h3 {
+  margin: 0;
+  padding: 20px 0 0 10px;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/video\/videoDetails\/_video-page\.scss;
+  }
+
+  line {
+    font-family: \0000380;
+  }
+}
+
+.video-page.modal .modal-dialog .modal-video-similar ul.similar {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/video\/videoDetails\/_video-page\.scss;
+  }
+
+  line {
+    font-family: \0000386;
+  }
+}
+
+.video-page.modal .modal-dialog .modal-video-similar ul.similar li {
+  padding: 10px;
+  float: left;
+  display: block;
+  margin-right: 0%;
+  width: 25%;
+  display: inline-block;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/bower_components\/neat\/app\/assets\/stylesheets\/grid\/_span-columns\.scss;
+  }
+
+  line {
+    font-family: \0000340;
+  }
+}
+
+.video-page.modal .modal-dialog .modal-video-similar ul.similar li:last-child {
+  margin-right: 0;
+}
+
+@media screen and (max-width: 1100px) {
+@media -sass-debug-info {
+    filename {
+      font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/video\/videoDetails\/_video-page\.scss;
+    }
+
+    line {
+      font-family: \0000386;
+    }
+}
+
+  .video-page.modal .modal-dialog .modal-video-similar ul.similar li {
+    float: left;
+    display: block;
+    margin-right: 0%;
+    width: 50%;
+  }
+
+@media -sass-debug-info {
+    filename {
+      font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/bower_components\/neat\/app\/assets\/stylesheets\/grid\/_span-columns\.scss;
+    }
+
+    line {
+      font-family: \0000340;
+    }
+}
+
+  .video-page.modal .modal-dialog .modal-video-similar ul.similar li:last-child {
+    margin-right: 0;
+  }
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/video\/videoDetails\/_video-page\.scss;
+  }
+
+  line {
+    font-family: \0000398;
+  }
+}
+
+.video-page.modal .modal-dialog button.favorite {
+  float: left;
+  vertical-align: top;
+  margin-right: 10px;
+  margin-top: -5px;
+  background: none;
+  border: none;
+  box-shadow: none;
+  color: #fff;
+  font-size: 30px;
+  padding: 0;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/pages\/video\/videoDetails\/_video-page\.scss;
+  }
+
+  line {
+    font-family: \00003110;
+  }
+}
+
+.video-page.modal .modal-dialog button.favorite i.fa-star {
   color: #1bb776;
 }
 

@@ -47,6 +47,8 @@
   </head>
   <body>
 
+    <div ui-view="modal" class="view-change-animation"></div>
+
     <div class="site-loading" ng-show="false">
         <div class="spinner"></div>
     </div>
@@ -77,7 +79,6 @@
 
     <!--INJECT SCRIPTS-->
     <script src="bower_components/jquery/jquery.js"></script>
-    <script src="bower_components/select2/select2.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-mocks/angular-mocks.js"></script>
     <script src="bower_components/lodash/dist/lodash.js"></script>
@@ -96,8 +97,8 @@
     <script src="bower_components/ng-symbiosis-repository/ng-symbiosis-repository.src.js"></script>
     <script src="bower_components/ng-symbiosis-routeprovider/ng-symbiosis-routeprovider.src.js"></script>
     <script src="bower_components/ng-symbiosis-accesscontrol/ng-symbiosis-accesscontrol.src.js"></script>
-    <script src="bower_components/angular-ui-select2/src/select2.js"></script>
     <script src="bower_components/log/log.js"></script>
+    <script src="bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
     <script src="scripts/module.js"></script>
     <script src="dev/authentication-mock.js"></script>
     <script src="dev/favorite-mock.js"></script>
@@ -113,7 +114,6 @@
     <script src="components/navbar-mini-player/navbar-mini-player.js"></script>
     <script src="components/navbar/navbar.js"></script>
     <script src="components/navbar/panels/navigation-panel-controller.js"></script>
-    <script src="components/video-list-item/modal/video-list-item-modal.js"></script>
     <script src="components/video-list-item/video-list-item.js"></script>
     <script src="pages/admin/index/admin-controller.js"></script>
     <script src="pages/admin/users/index/users-controller.js"></script>
@@ -124,6 +124,7 @@
     <script src="pages/favourites/index/favourites-controller.js"></script>
     <script src="pages/index/index/index.js"></script>
     <script src="pages/login/index/login-controller.js"></script>
+    <script src="pages/video/videoDetails/video-controller.js"></script>
     <script src="scripts/authentication.js"></script>
     <script src="scripts/factories/current-user.js"></script>
     <script src="scripts/factories/lodash.js"></script>
@@ -137,8 +138,8 @@
     <script src="scripts/repositories/user-repository.js"></script>
     <script src="scripts/repositories/video-repository.js"></script>
     <script src="scripts/services/navbar.js"></script>
+    <script src="scripts/services/state-history.js"></script>
     <script src="scripts/services/vimeo-api.js"></script>
-    <script src="scripts/ui-bootstrap-tpls-custom.js"></script>
     <!--/INJECT SCRIPTS-->
 
     <script src="assets/bootstrap-tooltips/bootstrap-tooltips.js"></script>
