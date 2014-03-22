@@ -72,7 +72,7 @@ angular.module('ndc.components')
                 type:'vimeo',
                 playerRegExp: /(http:\/\/)vimeo\.com\/([A-Za-z0-9]+)/,
                 getEmbedUrl:function(id){
-                	return this.protocol + this.playerId + id;
+                	return this.protocol + this.playerId + id + "?title=0&;byline=0&;portrait=0&;color=1bb775";
                 }
                 
             }

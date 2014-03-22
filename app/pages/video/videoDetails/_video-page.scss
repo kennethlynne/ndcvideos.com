@@ -1,0 +1,117 @@
+.video-page {
+
+  &.modal-backdrop {
+    opacity: 0.85 !important;
+    z-index: 99 !important;
+  }
+
+  &.modal {
+    width: 100%;
+
+    &.fade.in {
+      display: block;
+    }
+
+    .modal-dialog {
+    @include clearfix;
+
+    position: static;
+    top: 0;
+    width: 100%;
+    margin: 0;
+
+    .modal-body {
+      margin: 0 auto;
+      width: 100%;
+
+      @include media($tablet) {
+      padding-top: 60px;
+      }
+    }
+
+    .close {
+      position: absolute;
+      top: 0;
+      right: $content-gutter;
+      font-size: 40px;
+      background: none;
+      box-shadow: none;
+      border: none;
+      color: $primary-color;
+    }
+
+    .modal-video {
+      @include span-columns(6 of 10);
+      padding: 0 $content-gutter/2;
+
+      @include media($tablet) {
+        @include span-columns(20 of 20);
+      }
+    }
+
+    .modal-video-info {
+      @include span-columns(4 of 10);
+      color: #fff;
+      padding: $content-gutter;
+
+      @include media($tablet) {
+        @include span-columns(20 of 20);
+        padding: $content-gutter $content-gutter $content-gutter 0;
+      }
+
+      h2 {
+      margin-top: 0;
+      }
+
+      .favorite {
+        margin-top: $content-gutter;
+      }
+    }
+
+    .modal-video-similar {
+      @include span-columns(10 of 10);
+      color: #fff;
+      
+      h3 {
+        margin: 0;
+        padding: $content-gutter 0 0 ($content-gutter / 2);
+      }
+
+      ul.similar {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+
+        li {
+          padding: $content-gutter / 2;
+          @include span-columns(3 of 12);       
+          display: inline-block;
+
+          @include media($tablet) {
+            @include span-columns(6 of 12);       
+            }
+        }
+      }
+    }
+
+    button.favorite {
+      float: left;
+      vertical-align: top;
+      margin-right: 10px;
+      margin-top: -5px;
+      background: none;
+      border: none;
+      box-shadow: none;
+      color: #fff;
+      font-size: 30px;
+      padding: 0;
+
+      i.fa-star {
+        color: $primary-color;
+      }
+    }
+    }
+  }
+
+}

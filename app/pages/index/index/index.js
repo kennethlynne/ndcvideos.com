@@ -9,7 +9,6 @@ angular.module('ndc')
     })
     .controller('IndexCtrl', function ($scope, CurrentUser, TagRepository, VideoRepository, $stateParams, $location, _, TagModel) {
 
-
         $scope.User = CurrentUser;
 
         $scope.search = _.throttle(function (query) {
