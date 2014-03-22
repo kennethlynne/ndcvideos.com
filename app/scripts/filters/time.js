@@ -7,7 +7,7 @@ angular.module('ndc')
                 var s = parseInt(input);
                 var h = Math.floor(s / 3600);
                 s %= 3600;
-                var m = Math.floor(s / 60)
+                var m = Math.floor(s / 60);
                 m = ((h > 0 && m < 10 ? '0' : '') + m).substring(0, 2);
                 s %= 60;
                 s = ((s < 10 ? '0' : '') + s).substring(0, 2);
