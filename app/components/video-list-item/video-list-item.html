@@ -7,7 +7,7 @@
         -->
         <div class="video">
             <a ui-sref="videoDetails({id: video.id})">
-                <img ng-src="{{video.thumbnailUrl || 'assets/images/video-placeholder.png'}}" alt="">
+                <img ng-src="{{video.thumbnail_large || 'assets/images/video-placeholder.png'}}" alt="">
                 <div class="video-info">
                     <h3>{{video.title}}</h3>
                     <p>{{video.description|limitTo:35}}...</p>
