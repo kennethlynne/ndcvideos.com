@@ -9,7 +9,7 @@ angular.module('ndc')
             controller: 'AdminImportVideoCtrl'
         }));
     })
-    .controller('AdminImportVideoCtrl', function ($scope, TagRepository) {
+    .controller('AdminImportVideoCtrl', function ($scope, TagRepository, $state) {
         
         $scope.tags = []; //This variable holds selected tags
 
@@ -22,5 +22,9 @@ angular.module('ndc')
             }
         };
 
-
+        $scope.cancel = function () {
+            if (!!confirm('Er du sikker på at du vil forkaste alle data?')) {
+                $state.go('administrateVideos');
+            }
+        }
     });
