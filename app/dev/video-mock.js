@@ -66,10 +66,10 @@ angular.module('ndc')
                         title: 'angular'
                     },
                     {
-                        title:'bootcamp'
+                        title: 'bootcamp'
                     },
                     {
-                        title:'javascript'
+                        title: 'javascript'
                     }
                 ],
                 thumbnail_small: "http://b.vimeocdn.com/ts/461/087/461087855_100.jpg",
@@ -88,10 +88,10 @@ angular.module('ndc')
                         title: 'data'
                     },
                     {
-                        title:'java'
+                        title: 'java'
                     },
                     {
-                        title:'machine learning'
+                        title: 'machine learning'
                     }
                 ],
                 type: 'vimeo',
@@ -101,17 +101,17 @@ angular.module('ndc')
 
             },
             {
-                id:5,
+                id: 5,
                 videoId: 74713138,
                 tags: [
                     {
                         title: 'data'
                     },
                     {
-                        title:'Hadoop'
+                        title: 'Hadoop'
                     },
                     {
-                        title:'Data'
+                        title: 'Data'
                     }
                 ],
                 title: "High Speed Continuous & Reliable Data Ingest into Hadoop",
@@ -120,54 +120,54 @@ angular.module('ndc')
                 thumbnail_medium: "http://b.vimeocdn.com/ts/449/147/449147320_200.jpg",
                 thumbnail_large: "http://b.vimeocdn.com/ts/449/147/449147320_640.jpg",
                 duration: 3826,
-                type:'vimeo'
+                type: 'vimeo'
             },
             {
                 id: 6,
                 title: "Hva har Tetris til felles med kompleksitet?",
                 description: "Tetris er et klassiskt spill hvor mye av utfordringen ligger i å holde kompleksiteten nede. For å lykkes med det, kan det være lurt å tenke litt fremover, og ikke bare neste brikke. Noen ganger kan det også være lurt å ta en pause, for å ta tilbake kontrollen. Mye av dette kan også relateres til softwareutvikling.",
-                videoId:74401305,
+                videoId: 74401305,
                 thumbnail_small: "http://b.vimeocdn.com/ts/448/750/448750980_100.jpg",
                 thumbnail_medium: "http://b.vimeocdn.com/ts/448/750/448750980_200.jpg",
                 thumbnail_large: "http://b.vimeocdn.com/ts/448/750/448750980_640.jpg",
-                duration:529,
+                duration: 529,
                 tags: [
                     {
                         title: 'Tetris'
                     },
                     {
-                        title:'kompleksitet'
+                        title: 'kompleksitet'
                     },
                     {
-                        title:'spill'
+                        title: 'spill'
                     }
                 ],
-                type:'vimeo'
+                type: 'vimeo'
             },
             {
                 id: 7,
                 title: "Improving Your Workflow with Yeoman by Brian Ford",
                 description: "Improving Your Workflow with Yeoman by Brian Ford gives a look at one of the hottest tools for front-end development, taken from Web Rebels 2013",
-                videoId:76233618,
+                videoId: 76233618,
                 thumbnail_small: "http://b.vimeocdn.com/ts/450/990/450990105_100.jpg",
                 thumbnail_medium: "http://b.vimeocdn.com/ts/450/990/450990105_200.jpg",
                 thumbnail_large: "http://b.vimeocdn.com/ts/450/990/450990105_640.jpg",
-                duration:529,
+                duration: 529,
                 tags: [
                     {
                         title: 'Yeoman'
                     },
                     {
-                        title:'Workflow'
+                        title: 'Workflow'
                     },
                     {
-                        title:'Front end'
+                        title: 'Front end'
                     }
                 ],
-                type:'vimeo'
+                type: 'vimeo'
             },
             {
-                id: 76319933,
+                id: 8,
                 videoId: 76319933,
                 title: "Streams, Events, and Data by Dominic Tarr",
                 description: "Streams, Events, and Data",
@@ -180,17 +180,17 @@ angular.module('ndc')
                         title: 'Streams'
                     },
                     {
-                        title:'Events'
+                        title: 'Events'
                     },
                     {
-                        title:'Data'
+                        title: 'Data'
                     }
                 ],
-                type:'vimeo'
+                type: 'vimeo'
             },
             {
-                id: 76165652,
-                videoId:76165652,
+                id: 9,
+                videoId: 76165652,
                 title: "The State of WebRTC by Rob Hawkes",
                 description: "The State of WebRTC by Rob Hawkes at Web Rebels 2013, WebRTC brings peer-to-peer networking to the browser. But what is it? How does it work? How do you use it? And what are others doing with it? In this talk, Rob covers the current state of WebRTC, outlines how to use it, and shows off some of the amazing things that it can do beyond video chat.",
                 url: "http://vimeo.com/76165652",
@@ -203,14 +203,222 @@ angular.module('ndc')
                         title: 'Webrtc'
                     },
                     {
-                        title:'Network'
+                        title: 'Network'
                     },
                     {
-                        title:'Data'
+                        title: 'Data'
                     }
                 ],
-                type:'vimeo'
-        }
+                type: 'vimeo'
+            },
+            {
+
+                id: 10,
+                videoId: 76153146,
+                title: "Gone in 60 frames per second by Addy Osmani",
+                description: "Gone in 60 frames per second by Addy Osmani, from Web Rebels 2013. What’s stopping your web pages from getting silky smooth scrolling, buttery animation and a user experience that’s snappy and fast? Jank-free rendering performance has been shown to positively affect user engagement and experience in many large sites, but remains an area many are unaware of how to diagnose or optimize.",
+                url: "http://vimeo.com/76153146",
+                upload_date: "2013-10-04 11:30:30",
+                thumbnail_small: "http://b.vimeocdn.com/ts/450/883/450883989_100.jpg",
+                thumbnail_medium: "http://b.vimeocdn.com/ts/450/883/450883989_200.jpg",
+                thumbnail_large: "http://b.vimeocdn.com/ts/450/883/450883989_640.jpg",
+                duration: 2828,
+                tags: [
+                    {
+                        title: 'Chrome'
+                    },
+                    {
+                        title: 'Front end'
+                    },
+                    {
+                        title: 'Google'
+                    }
+                ],
+                type: 'vimeo'
+            },
+            {
+                id: 11,
+                videoId: 43336762,
+                title: "Jake Archibald - Application Cache Douchebag",
+                description: "This video was filmed during The Web Rebels conference which took place on the 24-25th of May 2012 in Oslo, Norway. It is a non-profit conference for everyone who loves programming applications and services using web technology.",
+                upload_date: "2012-06-03 07:48:22",
+                mobile_url: "http://vimeo.com/m/43336762",
+                thumbnail_small: "http://b.vimeocdn.com/ts/300/849/300849345_100.jpg",
+                thumbnail_medium: "http://b.vimeocdn.com/ts/300/849/300849345_200.jpg",
+                thumbnail_large: "http://b.vimeocdn.com/ts/300/849/300849345_640.jpg",
+                duration: 2389,
+                tags: [
+                    {
+                        title: 'Cache'
+                    },
+                    {
+                        title: 'Front end'
+                    },
+                    {
+                        title: 'Web'
+                    }
+                ],
+                type: 'vimeo'
+            },
+            {
+                id: 12,
+                videoId: 76159530,
+                title: "What Every Hipster Should Know About Functional Programming by Bodil Stokke",
+                description: "Different programming paradigms serve different purposes. Systems programmers prefer tools that are dumb, imperative and close to the metal. Enterprise programmers prefer tools which foster complexity, increasing billable hours and the client's dependency on the developer.",
+                upload_date: "2013-10-04 12:44:51",
+                thumbnail_small: "http://b.vimeocdn.com/ts/450/892/450892975_100.jpg",
+                thumbnail_medium: "http://b.vimeocdn.com/ts/450/892/450892975_200.jpg",
+                thumbnail_large: "http://b.vimeocdn.com/ts/450/892/450892975_640.jpg",
+                duration: 2595,
+                tags: [
+                    {
+                        title: 'Hipster'
+                    },
+                    {
+                        title: 'Functional programming'
+                    },
+                    {
+                        title: 'Web'
+                    }
+                ],
+                type: 'vimeo'
+            },
+            {
+                id: 13,
+                videoId: 76141334,
+                title: "I have a good feeling about this - Why tooling is poised to make the jump to hyperspace by Reginald Braithwaite",
+                description: "The opening keynote was held by the amazing Reginald Braithwaite for Web Rebels 2013.",
+                thumbnail_small: "http://b.vimeocdn.com/ts/450/875/450875534_100.jpg",
+                thumbnail_medium: "http://b.vimeocdn.com/ts/450/875/450875534_200.jpg",
+                thumbnail_large: "http://b.vimeocdn.com/ts/450/875/450875534_640.jpg",
+                duration: 2595,
+                tags: [
+                    {
+                        title: 'Hipster'
+                    },
+                    {
+                        title: 'Functional programming'
+                    },
+                    {
+                        title: 'Web'
+                    }
+                ],
+                type: 'vimeo'
+            },
+            {
+                id: 14,
+                videoId: 76146296,
+                title: "AngularJS: teaching browsers new tricks by Pawel Kozlowski",
+                description: "Pawel Kozlowski from the AngularJS team held this talk at Web Rebels 2013",
+                upload_date: "2013-10-04 10:08:35",
+                thumbnail_small: "http://b.vimeocdn.com/ts/450/893/450893300_100.jpg",
+                thumbnail_medium: "http://b.vimeocdn.com/ts/450/893/450893300_200.jpg",
+                thumbnail_large: "http://b.vimeocdn.com/ts/450/893/450893300_640.jpg",
+                duration: 2254,
+                tags: [
+                    {
+                        title: 'AngularJS'
+                    },
+                    {
+                        title: 'Browser'
+                    },
+                    {
+                        title: 'Web'
+                    }
+                ],
+                type: 'vimeo'
+            },
+            {
+                id: 15,
+                videoId: 25606006,
+                title: "TXJS 2011 A1 - Douglas Crockford - JavaScript Programming Style and Your Brain",
+                description: "Computer programs are the most complicated stuff that people make. Computer programs must be perfect, and people are not good at that. JavaScript is one of our least perfect programming languages. But there are positive things that can reduce your error rate and enhance your beauty. This was the first talk on the A track of TXJS 2011. Visit http://2011.texasjavascript.com for more.",
+                thumbnail_small: "http://b.vimeocdn.com/ts/168/711/168711859_100.jpg",
+                thumbnail_medium: "http://b.vimeocdn.com/ts/168/711/168711859_200.jpg",
+                thumbnail_large: "http://b.vimeocdn.com/ts/168/711/168711859_640.jpg",
+                duration: 2543,
+                tags: [
+                    {
+                        title: 'Javascript'
+                    },
+                    {
+                        title: 'web'
+                    },
+                    {
+                        title: 'programming style'
+                    }
+                ],
+                type: 'vimeo'
+            },
+            {
+                id: 16,
+                videoId: 25698808,
+                title: "TXJS 2011 B1 - Adam J. Sontag - Fixing These jQuery: A Guide To Debugging",
+                description: "The road to jQuery success is paved with the guts of bugs slain along the way. At “Fixing These jQuery”, you’ll understand how to approach your jQuery and JavaScript problems methodologically, and we’ll cover many of the common caveats that every jQuery user encounters sooner or later. You’ll learn what you should do when your code doesn’t do what it should. Sure, docs and support can provide a quick leg up when you're in a pinch, but once you arm yourself with the right tools and knowledge, you can traverse the thorniest of thickets!",
+                upload_date: "2011-06-28 00:38:40",
+                thumbnail_small: "http://b.vimeocdn.com/ts/169/468/169468190_100.jpg",
+                thumbnail_medium: "http://b.vimeocdn.com/ts/169/468/169468190_200.jpg",
+                thumbnail_large: "http://b.vimeocdn.com/ts/169/468/169468190_640.jpg",
+                duration: 3082,
+                tags: [
+                    {
+                        title: 'Javascript'
+                    },
+                    {
+                        title: 'jquery'
+                    },
+                    {
+                        title: 'debugging'
+                    }
+                ],
+                type: 'vimeo'
+            },
+            {
+                id: 17,
+                videoId: 25762560,
+                title: "TXJS 2011 A2 - Ben Combee - The JavaScript Behind HP webOS: Enyo and Node.js",
+                description: "HP webOS is a platform powering devices as diverse as the world’s smallest smartphone, the HP Veer, to power dual-core HP TouchPad tablet. Underneath it all is WebKit, HTML, and JavaScript, powering both applications and system services. This talk will highlight our next-generation JS application framework, Enyo, and also look at how node.js is used to provide system services and background processing.",
+                upload_date: "2011-06-29 08:05:30",
+                thumbnail_small: "http://b.vimeocdn.com/ts/169/889/169889004_100.jpg",
+                thumbnail_medium: "http://b.vimeocdn.com/ts/169/889/169889004_200.jpg",
+                thumbnail_large: "http://b.vimeocdn.com/ts/169/889/169889004_640.jpg",
+                duration: 2361,
+                tags: [
+                    {
+                        title: 'Javascript'
+                    },
+                    {
+                        title: 'Nodejs'
+                    },
+                    {
+                        title: 'webos'
+                    }
+                ],
+                type: 'vimeo'
+            },
+            {
+                id: 18,
+                videoId: 25851636,
+                title: "TXJS 2011 B2 - Matthew Eernisse - Full-Stack JavaScript Fallacies",
+                description: "With the mainstreaming of server-side JavaScript, the possibility of full-stack JavaScript development finally seems to be coming to fruition. Writing once, and running the same code everywhere seems like the obvious big win, along with the ease of writing complex server-side applications in a simple, flexible language like JavaScript. Actually, full-stack JS is awesome, but these aren't necessarily the reasons why. This talk will bust some of the myths about full-stack JS development, and take a realistic look at the real benefits of ‘JS everywhere.",
+                upload_date: "2011-07-01 01:37:57",
+                thumbnail_small: "http://b.vimeocdn.com/ts/170/471/170471609_100.jpg",
+                thumbnail_medium: "http://b.vimeocdn.com/ts/170/471/170471609_200.jpg",
+                thumbnail_large: "http://b.vimeocdn.com/ts/170/471/170471609_640.jpg",
+                duration: 1274,
+                tags: [
+                    {
+                        title: 'Javascript'
+                    },
+                    {
+                        title: 'Nodejs'
+                    },
+                    {
+                        title: 'webos'
+                    }
+                ],
+                type: 'vimeo'
+            }
         ];
         VideoRepo.index = {};
 
@@ -279,9 +487,8 @@ angular.module('ndc')
                 return _.every(queryArray, function (q) {
                     console.log(videoTags);
 
-                    for(var i = 0;i < videoTags.length;i++)
-                    {
-                        if(videoTags[i].toLowerCase().indexOf(q) > -1)
+                    for (var i = 0; i < videoTags.length; i++) {
+                        if (videoTags[i].toLowerCase().indexOf(q) > -1)
                             return true;
                     }
 
@@ -289,7 +496,7 @@ angular.module('ndc')
 
                 //Find videos where query matches title, or tags.
 
-               //Checking if title matches
+                //Checking if title matches
 
 //                return ;
 
@@ -299,8 +506,6 @@ angular.module('ndc')
 //
 //
 //                });
-
-
 
 
             });
