@@ -21,6 +21,7 @@ angular.module('ndc')
 
         $scope.closeModal = function () {
             stateHistory.back();
+            console.log(123);
         }
 
     });

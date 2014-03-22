@@ -1,8 +1,15 @@
 .video-page {
 
+  &.modal-backdrop {
+    opacity: 0.8 !important;
+  }
+
   &.modal {
     width: 100%;
 
+    &.fade.in {
+      display: block;
+    }
 
     .modal-dialog {
     @include clearfix;
@@ -103,10 +110,6 @@
       }
     }
     }
-  }
-
-  .modal-backdrop {
-    opacity: 0.8 !important;
   }
 
 }
