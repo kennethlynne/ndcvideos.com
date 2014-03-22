@@ -19,8 +19,8 @@ angular.module('ndc')
         };
 
         this.back = function () {
-            this.history.pop();
-            var prevState = this.history.pop();
+            this.pop();
+            var prevState = this.pop();
             $state.go(prevState.name, prevState.params);
         };
 
