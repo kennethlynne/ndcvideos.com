@@ -12,7 +12,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="video in existingVideos">
+        <tr ng-repeat="video in vimeoVideos">
             <td><span class="hidden-on-large">Vimeo ID: </span>{{video.videoId}}</td> <!-- ID -->
             <td><span class="hidden-on-large">Name: </span>{{video.title}}</td> <!-- Video name -->
             <td><span class="hidden-on-large">Length: </span>{{video.duration | time}}</td> <!-- Video length -->
@@ -36,7 +36,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="video in vimeoVideos">
+        <tr ng-repeat="video in existingVideos">
             <td><span class="hidden-on-large">Vimeo ID: </span>{{video.id}}</td> <!-- ID -->
             <td><span class="hidden-on-large">Name: </span>{{video.title}}</td>
             <td><span class="hidden-on-large">Tags: </span>
