@@ -3,7 +3,7 @@
 angular.module('ndc')
     .config(function ($stateProvider, stateFactory) {
         $stateProvider.state('videoDetails', stateFactory('Video', {
-            url: '/video/{id}',
+            url: 'video/{id}',
             views: {
                 'modal@': {
                     templateUrl: 'pages/video/videoDetails/modal.html',
