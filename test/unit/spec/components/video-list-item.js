@@ -60,8 +60,10 @@ describe('Component: videoListItemComponent', function () {
             });
         });
 
-        xit('should attach a video to scope', function () {
-            expect(scope.video).toEqual(video);
+        it('should expose an add function to scope', function () {
+
+            expect(typeof scope.addFavorite).toBe('function');
+
         });
     });
 
