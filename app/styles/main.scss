@@ -1,8 +1,8 @@
 @import 'font';
-@import 'font-awesome/css/font-awesome.css';
-@import 'assets/bootstrap-tooltips/bootstrap-tooltips.css';
-@import 'assets/bootstrap-popovers/bootstrap-popovers.css';
-@import 'assets/bootstrap-modals/bootstrap-modals.css';
+@import 'font-awesome';
+@import 'tooltip';
+@import 'popover';
+@import 'modal';
 @import 'config';
 @import 'bourbon/app/assets/stylesheets/bourbon';
 @import 'neat/app/assets/stylesheets/neat';
