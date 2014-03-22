@@ -28,7 +28,8 @@
             "bower_components/ng-symbiosis-accesscontrol/ng-symbiosis-accesscontrol.src.js",
             "bower_components/lodash/dist/lodash.js",
             "bower_components/angular-ui-select2/src/select2.js",
-            "bower_components/log/log.js"
+            "bower_components/log/log.js",
+            "bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"
         ],
         "app": [
             "scripts/module.js",
