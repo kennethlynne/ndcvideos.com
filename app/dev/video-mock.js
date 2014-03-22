@@ -422,7 +422,6 @@ angular.module('ndc')
         ];
         VideoRepo.index = {};
 
-
         angular.forEach(VideoRepo.data, function (item, key) {
             VideoRepo.index[item.id] = item;
         });
