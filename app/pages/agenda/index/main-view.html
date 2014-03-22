@@ -12,7 +12,9 @@
 
         <div class="track-wrapper" ui-sref="videoDetails({id: videos[0].id})">
             <span class="element">
-                <img ng-src="{{videos[0].thumbnail_medium || assets/images/video-placeholder.png}}" alt="">
+                <span class="video" style="background-image: url({{videos[0].thumbnail_medium || assets/images/video-placeholder.png}});">
+                    <img src="/assets/images/16-9.jpg" alt="">
+                </span>
                 <h4><small>Track 1</small> {{videos[0].title}}</h4>
                 <p>{{videos[0].description|limitTo:35}}...</p>
 
@@ -21,7 +23,9 @@
 
         <div class="track-wrapper" ui-sref="videoDetails({id: videos[1].id})">
             <span class="element">
-                <img ng-src="{{videos[1].thumbnail_medium || assets/images/video-placeholder.png}}" alt="">
+                <span class="video" style="background-image: url({{videos[1].thumbnail_medium || assets/images/video-placeholder.png}});">
+                    <img src="/assets/images/16-9.jpg" alt="">
+                </span>
                 <h4><small>Track 1</small> {{videos[1].title}}</h4>
                 <p>{{videos[1].description|limitTo:35}}...</p>
 
@@ -30,7 +34,9 @@
 
         <div class="track-wrapper" ui-sref="videoDetails({id: videos[2].id})">
             <span class="element">
-                <img ng-src="{{videos[2].thumbnail_medium || assets/images/video-placeholder.png}}" alt="">
+                <span class="video" style="background-image: url({{videos[2].thumbnail_medium || assets/images/video-placeholder.png}});">
+                    <img src="/assets/images/16-9.jpg" alt="">
+                </span>
                 <h4><small>Track 1</small> {{videos[2].title}}</h4>
                 <p>{{videos[2].description|limitTo:35}}...</p>
 
@@ -39,7 +45,9 @@
 
         <div class="track-wrapper" ui-sref="videoDetails({id: videos[3].id})">
             <span class="element">
-                <img ng-src="{{videos[3].thumbnail_medium || assets/images/video-placeholder.png}}" alt="">
+                <span class="video" style="background-image: url({{videos[3].thumbnail_medium || assets/images/video-placeholder.png}});">
+                    <img src="/assets/images/16-9.jpg" alt="">
+                </span>
                 <h4><small>Track 1</small> {{videos[3].title}}</h4>
                 <p>{{videos[3].description|limitTo:35}}...</p>
 
@@ -48,7 +56,9 @@
 
         <div class="track-wrapper" ui-sref="videoDetails({id: videos[4].id})">
             <span class="element">
-                <img ng-src="{{videos[4].thumbnail_medium || assets/images/video-placeholder.png}}" alt="">
+                <span class="video" style="background-image: url({{videos[4].thumbnail_medium || assets/images/video-placeholder.png}});">
+                    <img src="/assets/images/16-9.jpg" alt="">
+                </span>
                 <h4><small>Track 1</small> {{videos[4].title}}</h4>
                 <p>{{videos[4].description|limitTo:35}}...</p>
 
@@ -58,7 +68,9 @@
         <div class="track-wrapper">            
             <a href="#">
                 <span class="element">
-                    <img src="assets/images/video-placeholder.png" alt="">
+                    <span class="video">
+                        <img src="assets/images/16-9.jpg" alt="">
+                    </span>
                     <h4><small>Track 6</small> Lorem ipsum dolor</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, sunt.</p>
                 </span>
@@ -70,7 +82,9 @@
         <div class="track-wrapper">            
             <a href="#">
                 <span class="element">
-                    <img src="assets/images/video-placeholder.png" alt="">
+                    <span class="video">
+                        <img src="assets/images/16-9.jpg" alt="">
+                    </span>
                     <h4><small>Track x</small> Lorem ipsum dolor</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, sunt.</p>
                 </span>
@@ -80,7 +94,9 @@
         <div class="track-wrapper">            
             <a href="#">
                 <span class="element">
-                    <img src="assets/images/video-placeholder.png" alt="">
+                    <span class="video">
+                        <img src="assets/images/16-9.jpg" alt="">
+                    </span>
                     <h4><small>Track x</small> Lorem ipsum dolor</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, sunt.</p>
                 </span>
@@ -89,7 +105,9 @@
 
         <div class="track-wrapper">            
             <div class="element inactive">
-                <img src="assets/images/video-placeholder.png" alt="">
+                <span class="video">
+                    <img src="assets/images/video-placeholder.png" alt="">
+                </span>
                 <h4><small>Track x</small> Lorem ipsum dolor</h4>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt, in.</p>
             </div>
@@ -98,7 +116,9 @@
         <div class="track-wrapper">            
             <a href="#">
                 <span class="element">
-                    <img src="assets/images/video-placeholder.png" alt="">
+                    <span class="video">
+                        <img src="assets/images/16-9.jpg" alt="">
+                    </span>
                     <h4><small>Track x</small> Lorem ipsum dolor</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, sunt.</p>
                 </span>
@@ -108,7 +128,9 @@
         <div class="track-wrapper">            
             <a href="#">
                 <span class="element">
-                    <img src="assets/images/video-placeholder.png" alt="">
+                    <span class="video">
+                        <img src="assets/images/16-9.jpg" alt="">
+                    </span>
                     <h4><small>Track x</small> Lorem ipsum dolor</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, sunt.</p>
                 </span>
@@ -118,7 +140,9 @@
         <div class="track-wrapper">            
             <a href="#">
                 <span class="element">
-                    <img src="assets/images/video-placeholder.png" alt="">
+                    <span class="video">
+                        <img src="assets/images/16-9.jpg" alt="">
+                    </span>
                     <h4><small>Track x</small> Lorem ipsum dolor</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, sunt.</p>
                 </span>
@@ -127,14 +151,16 @@
 
         <h3><i class="fa fa-clock-o"></i> 12:00</h3>
 
-        <p>Break.</p>
+        <p class="break">Break.</p>
 
         <h3><i class="fa fa-clock-o"></i> 12:30</h3>
 
         <div class="track-wrapper">            
             <a href="#">
                 <span class="element">
-                    <img src="assets/images/video-placeholder.png" alt="">
+                    <span class="video">
+                        <img src="assets/images/16-9.jpg" alt="">
+                    </span>
                     <h4><small>Track x</small> Lorem ipsum dolor</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, sunt.</p>
                 </span>
@@ -144,7 +170,9 @@
         <div class="track-wrapper">            
             <a href="#">
                 <span class="element">
-                    <img src="assets/images/video-placeholder.png" alt="">
+                    <span class="video">
+                        <img src="assets/images/16-9.jpg" alt="">
+                    </span>
                     <h4><small>Track x</small> Lorem ipsum dolor</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, sunt.</p>
                 </span>
@@ -154,7 +182,9 @@
         <div class="track-wrapper">            
             <a href="#">
                 <span class="element">
-                    <img src="assets/images/video-placeholder.png" alt="">
+                    <span class="video">
+                        <img src="assets/images/16-9.jpg" alt="">
+                    </span>
                     <h4><small>Track x</small> Lorem ipsum dolor</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, sunt.</p>
                 </span>
@@ -164,7 +194,9 @@
         <div class="track-wrapper">            
             <a href="#">
                 <span class="element">
-                    <img src="assets/images/video-placeholder.png" alt="">
+                    <span class="video">
+                        <img src="assets/images/16-9.jpg" alt="">
+                    </span>
                     <h4><small>Track x</small> Lorem ipsum dolor</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, sunt.</p>
                 </span>
@@ -173,7 +205,9 @@
 
         <div class="track-wrapper">            
             <div class="element inactive">
-                <img src="assets/images/video-placeholder.png" alt="">
+                <span class="video">
+                        <img src="assets/images/16-9.jpg" alt="">
+                    </span>
                 <h4><small>Track x</small> Lorem ipsum dolor</h4>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, sunt.</p>
             </div>
@@ -182,7 +216,9 @@
         <div class="track-wrapper">            
             <a href="#">
                 <span class="element">
-                    <img src="assets/images/video-placeholder.png" alt="">
+                    <span class="video">
+                        <img src="assets/images/16-9.jpg" alt="">
+                    </span>
                     <h4><small>Track x</small> Lorem ipsum dolor</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, sunt.</p>
                 </span>
@@ -194,7 +230,9 @@
         <div class="track-wrapper">            
             <a href="#">
                 <span class="element">
-                    <img src="assets/images/video-placeholder.png" alt="">
+                    <span class="video">
+                        <img src="assets/images/16-9.jpg" alt="">
+                    </span>
                     <h4><small>Track x</small> Lorem ipsum dolor</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, sunt.</p>
                 </span>
@@ -204,7 +242,9 @@
         <div class="track-wrapper">            
             <a href="#">
                 <span class="element">
-                    <img src="assets/images/video-placeholder.png" alt="">
+                    <span class="video">
+                        <img src="assets/images/16-9.jpg" alt="">
+                    </span>
                     <h4><small>Track x</small> Lorem ipsum dolor</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, sunt.</p>
                 </span>
@@ -214,7 +254,9 @@
         <div class="track-wrapper">            
             <a href="#">
                 <span class="element">
-                    <img src="assets/images/video-placeholder.png" alt="">
+                    <span class="video">
+                        <img src="assets/images/16-9.jpg" alt="">
+                    </span>
                     <h4><small>Track x</small> Lorem ipsum dolor</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, sunt.</p>
                 </span>
@@ -224,7 +266,9 @@
         <div class="track-wrapper">            
             <a href="#">
                 <span class="element">
-                    <img src="assets/images/video-placeholder.png" alt="">
+                    <span class="video">
+                        <img src="assets/images/16-9.jpg" alt="">
+                    </span>
                     <h4><small>Track x</small> Lorem ipsum dolor</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, sunt.</p>
                 </span>
@@ -234,7 +278,9 @@
         <div class="track-wrapper">            
             <a href="#">
                 <span class="element">
-                    <img src="assets/images/video-placeholder.png" alt="">
+                    <span class="video">
+                        <img src="assets/images/16-9.jpg" alt="">
+                    </span>
                     <h4><small>Track x</small> Lorem ipsum dolor</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, sunt.</p>
                 </span>
@@ -244,7 +290,9 @@
         <div class="track-wrapper">            
             <a href="#">
                 <span class="element">
-                    <img src="assets/images/video-placeholder.png" alt="">
+                    <span class="video">
+                        <img src="assets/images/16-9.jpg" alt="">
+                    </span>
                     <h4><small>Track x</small> Lorem ipsum dolor</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, sunt.</p>
                 </span>
