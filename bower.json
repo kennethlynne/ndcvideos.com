@@ -15,7 +15,7 @@
     "angular-loading-bar": "~0.1.1",
     "angular-animate": "~1.2.7",
     "log": "~0.1.2",
-    "angular-ui-router": "0.2.8-bowratic-tedium",
+    "angular-ui-router": "https://github.com/kennethlynne/ui-router.git#0.2.10-dev-2014-03-22",
     "angular-touch": "~1.2.7",
     "angular-ui-bootstrap-bower": "~0.9.0",
     "ngstorage": "~0.3.0",
