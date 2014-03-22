@@ -9,10 +9,18 @@ angular.module('ndc')
             controller: 'AdminImportVideoCtrl'
         }));
     })
-    .controller('AdminImportVideoCtrl', function ($scope) {
+    .controller('AdminImportVideoCtrl', function ($scope, TagRepository) {
         
+        $scope.tags = []; //This variable holds selected tags
+
         $scope.select2Options = {
-            tags:["red", "green", "blue"]
+            multiple: true,
+            query: function (query) {
+                TagRepository.search(query.term).then(function (data) {
+                    query.callback({results: data});
+                });
+            }
         };
+
 
     });
