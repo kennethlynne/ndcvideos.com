@@ -10,6 +10,15 @@
   font-family: 'Roboto', sans-serif;
 }
 
+:-webkit-full-screen-ancestor {
+  .navbar-component, 
+  .modal-backdrop, 
+  .powered, 
+  .content-wrapper {
+    display: none !important;
+  }
+}
+
 .typekit-badge {
 	display: none !important;
 }

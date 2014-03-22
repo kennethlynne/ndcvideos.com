@@ -47,6 +47,8 @@
   </head>
   <body>
 
+    <div ui-view="modal" class="view-change-animation"></div>
+
     <div class="site-loading" ng-show="false">
         <div class="spinner"></div>
     </div>
@@ -58,8 +60,6 @@
     </noscript>
 
     <div id="root" class="ng-cloak">
-
-        <div ui-view="modal" class="view-change-animation"></div>
 
         <navbar-component></navbar-component>
 
