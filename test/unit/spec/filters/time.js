@@ -28,7 +28,7 @@ describe('Filter: time', function () {
         expect(time('3682')).toBe('1:01:22');
         expect(time(String(60*10+15))).toBe('10:15');
         expect(time(String(60*60+15))).toBe('1:00:15');
-        expect(time(String(12*60*60+15))).toBe('12:00:15');
+        expect(time(String(12*60*60+60*12+15))).toBe('12:12:15');
         expect(time(String(123*60*60+15))).toBe('123:00:15');
         expect(time(123*60*60+15)).toBe('123:00:15');
     });
