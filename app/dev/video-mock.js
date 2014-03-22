@@ -126,6 +126,55 @@ angular.module('ndc')
             return [200, videos, {/*headers*/}];
         });
 
+
+        //GET videos/search?q=<query>
+        $httpBackend.whenGET(new RegExp(regexEscape(collectionUrl + '/search?q=') + QueryRegExp)).respond(function (method, url, data, headers) {
+            $log.log('Intercepted GET to `' + url + '`');
+            var query = url.match(new RegExp(QueryRegExp))[0];
+
+            query = query.toLowerCase();
+
+            var queryArray = query.split(' ');
+
+            var videos = _.filter(VideoRepo.data, function (item) {
+
+                var videoTags = _.pluck(item.tags, 'title');
+
+                return _.every(queryArray, function (q) {
+                    console.log(videoTags);
+
+                    for(var i = 0;i < videoTags.length;i++)
+                    {
+                        if(videoTags[i].toLowerCase().indexOf(q) > -1)
+                            return true;
+                    }
+
+                }) || item.title.toLowerCase().indexOf(query) > -1;
+
+                //Find videos where query matches title, or tags.
+
+               //Checking if title matches
+
+//                return ;
+
+//                return _.some(query, function(q){
+//
+//                    return item.title.toLowerCase().indexOf(q) > -1//;
+//
+//
+//                });
+
+
+
+
+            });
+            console.log(videos);
+
+
+            return [200, videos, {/*headers*/}];
+        });
+
+
         //PUT videos/id
         $httpBackend.whenPUT(new RegExp(regexEscape(collectionUrl + '/') + IdRegExp)).respond(function (method, url, data, headers) {
             $log.log('Intercepted PUT to `' + url + '`');
