@@ -57,10 +57,6 @@
 	    	width: 100% !important;
 	    	background: #fff !important;
 	    	color: $dark-color;
-	  //   	-webkit-transition: 0.1s linear all;
-			// -moz-transition: 0.1s linear all;
-			// -o-transition: 0.1s linear all;
-			// transition: 0.1s linear all;
 
 	    	@include media($tablet) {
 	    		width: 100%;
@@ -96,12 +92,5 @@
 		        }
 		      }
 	    }
-
-	    // .select2-container-active {
-	    // 	.select2-choices {
-	    // 		border-color: #fff;
-	    // 		background: #fff;
-	    // 	}
-	    // }
     }
 }
