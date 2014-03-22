@@ -1,1 +1,10 @@
-<div class=content-wrapper><div class="favourites-page container" cg-busy="'FavoriteRepository.getAllByUserId'"><h1 ng-if=noFavorites>No favourites yet! Try adding some!</h1><div class=videos><video-list-item-component ng-repeat="video in favourites" video=video></video-list-item-component></div></div></div>
+<div class="content-wrapper">
+	<div class="favourites-page container" cg-busy="'FavoriteRepository.getAllByUserId'">
+
+        <h1 ng-if="noFavorites">No favourites yet! Try adding some!</h1>
+	    <div class="videos">
+	        <video-list-item-component ng-repeat="video in favourites" video="video"></video-list-item-component>
+	    </div>
+
+	</div>
+</div>
