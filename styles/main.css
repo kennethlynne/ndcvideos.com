@@ -7028,20 +7028,6 @@ a.editable-empty:focus {
   }
 }
 
-.typekit-badge {
-  display: none !important;
-}
-
-@media -sass-debug-info {
-  filename {
-    font-family: file\:\/\/C\:\/GIT\/ndc-archive\/app\/styles\/_globals\.scss;
-  }
-
-  line {
-    font-family: \0000330;
-  }
-}
-
 h1.page-header {
   margin: 0;
   font-size: 30px;
@@ -7055,7 +7041,7 @@ h1.page-header {
   }
 
   line {
-    font-family: \0000337;
+    font-family: \0000333;
   }
 }
 
@@ -7075,7 +7061,7 @@ h1.page-header small {
     }
 
     line {
-      font-family: \0000347;
+      font-family: \0000343;
     }
 }
 
@@ -7090,7 +7076,7 @@ h1.page-header small {
   }
 
   line {
-    font-family: \0000353;
+    font-family: \0000349;
   }
 }
 
@@ -7105,7 +7091,7 @@ h1.page-header small {
     }
 
     line {
-      font-family: \0000353;
+      font-family: \0000349;
     }
 }
 
@@ -7120,7 +7106,7 @@ h1.page-header small {
   }
 
   line {
-    font-family: \0000360;
+    font-family: \0000356;
   }
 }
 
@@ -7134,7 +7120,7 @@ h1.page-header small {
   }
 
   line {
-    font-family: \0000364;
+    font-family: \0000360;
   }
 }
 
@@ -7150,7 +7136,7 @@ body {
   }
 
   line {
-    font-family: \0000370;
+    font-family: \0000366;
   }
 }
 
@@ -7165,7 +7151,7 @@ a {
   }
 
   line {
-    font-family: \0000375;
+    font-family: \0000371;
   }
 }
 
@@ -7179,7 +7165,7 @@ button {
   }
 
   line {
-    font-family: \0000378;
+    font-family: \0000374;
   }
 }
 
@@ -7193,7 +7179,7 @@ button:focus {
   }
 
   line {
-    font-family: \0000383;
+    font-family: \0000379;
   }
 }
 
@@ -7207,7 +7193,7 @@ button:hover i {
   }
 
   line {
-    font-family: \0000389;
+    font-family: \0000385;
   }
 }
 
@@ -7226,7 +7212,7 @@ button:hover i {
   }
 
   line {
-    font-family: \0000398;
+    font-family: \0000394;
   }
 }
 
@@ -7241,7 +7227,7 @@ button:hover i {
   }
 
   line {
-    font-family: \00003102;
+    font-family: \0000398;
   }
 }
 
@@ -7257,7 +7243,7 @@ button:hover i {
   }
 
   line {
-    font-family: \00003108;
+    font-family: \00003104;
   }
 }
 
@@ -7277,7 +7263,7 @@ button:hover i {
   }
 
   line {
-    font-family: \00003119;
+    font-family: \00003115;
   }
 }
 
@@ -7326,7 +7312,7 @@ button:hover i {
     }
 
     line {
-      font-family: \00003119;
+      font-family: \00003115;
     }
 }
 
@@ -7342,7 +7328,7 @@ button:hover i {
     }
 
     line {
-      font-family: \00003119;
+      font-family: \00003115;
     }
 }
 
@@ -7357,7 +7343,7 @@ button:hover i {
   }
 
   line {
-    font-family: \00003135;
+    font-family: \00003131;
   }
 }
 
@@ -7395,7 +7381,7 @@ button:hover i {
   }
 
   line {
-    font-family: \00003147;
+    font-family: \00003143;
   }
 }
 
@@ -7430,7 +7416,7 @@ button:hover i {
   }
 
   line {
-    font-family: \00003154;
+    font-family: \00003150;
   }
 }
 
@@ -7444,7 +7430,7 @@ button:hover i {
   }
 
   line {
-    font-family: \00003158;
+    font-family: \00003154;
   }
 }
 
@@ -9922,7 +9908,7 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
   bottom: 10px;
   left: 10px;
   right: 10px;
-  background: url(/assets/images/content-gradient.png) top left repeat-x;
+  background: url(../assets/images/content-gradient.png) top left repeat-x;
   min-height: 100px;
   z-index: 60;
 }
@@ -10125,7 +10111,7 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
 .video-list-item-component .video-wrapper .video {
   position: relative;
   width: 100%;
-  background: url(/assets/images/16-9.jpg) no-repeat center center;
+  background: url(../assets/images/16-9.jpg) no-repeat center center;
   background-size: cover;
 }
 
@@ -11272,7 +11258,7 @@ aside .ng-leave.ng-leave-active ul.navigation li.active:after {
 }
 
 .agenda-page .track-wrapper .element .video {
-  background: url(/assets/images/16-9.jpg) no-repeat center center;
+  background: url(../assets/images/16-9.jpg) no-repeat center center;
   background-size: cover;
   margin-bottom: 10px;
   display: inline-block;
