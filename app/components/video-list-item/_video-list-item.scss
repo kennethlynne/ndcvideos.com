@@ -46,7 +46,7 @@
         &:before {
             content: "";
             position: absolute;
-            bottom: $content-gutter / 2;
+            bottom: ($content-gutter / 2) + 4;
             left: $content-gutter / 2;
             right: $content-gutter / 2;
             background: url(/assets/images/content-gradient.png) top left repeat-x;
@@ -70,6 +70,7 @@
             h3 {
                 margin: $content-gutter 0 0 0;
                 font-size: 16px;
+                text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.4);
             }
 
             p {
@@ -130,7 +131,6 @@
         }
 
         .video {
-            background: rgba(0, 0, 0, 0.4);
             position: relative;
             width: 100%;
 
