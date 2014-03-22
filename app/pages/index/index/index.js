@@ -9,8 +9,6 @@ angular.module('ndc')
     })
     .controller('IndexCtrl', function ($scope, CurrentUser, TagRepository, VideoRepository, $stateParams, $location, _, TagModel) {
 
-
-
         $scope.tags = []; //This variable holds selected tags
 
         $scope.User = CurrentUser;

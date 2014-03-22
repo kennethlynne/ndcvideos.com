@@ -59,6 +59,8 @@
 
     <div id="root" class="ng-cloak">
 
+        <div ui-view="modal" class="view-change-animation"></div>
+
         <navbar-component></navbar-component>
 
         <div ui-view class="view-change-animation"></div>
@@ -113,7 +115,6 @@
     <script src="components/navbar-mini-player/navbar-mini-player.js"></script>
     <script src="components/navbar/navbar.js"></script>
     <script src="components/navbar/panels/navigation-panel-controller.js"></script>
-    <script src="components/video-list-item/modal/video-list-item-modal.js"></script>
     <script src="components/video-list-item/video-list-item.js"></script>
     <script src="pages/admin/index/admin-controller.js"></script>
     <script src="pages/admin/users/index/users-controller.js"></script>
@@ -124,6 +125,7 @@
     <script src="pages/favourites/index/favourites-controller.js"></script>
     <script src="pages/index/index/index.js"></script>
     <script src="pages/login/index/login-controller.js"></script>
+    <script src="pages/video/videoDetails/video-controller.js"></script>
     <script src="scripts/authentication.js"></script>
     <script src="scripts/factories/current-user.js"></script>
     <script src="scripts/factories/lodash.js"></script>
@@ -137,6 +139,7 @@
     <script src="scripts/repositories/user-repository.js"></script>
     <script src="scripts/repositories/video-repository.js"></script>
     <script src="scripts/services/navbar.js"></script>
+    <script src="scripts/services/state-history.js"></script>
     <script src="scripts/services/vimeo-api.js"></script>
     <script src="scripts/ui-bootstrap-tpls-custom.js"></script>
     <!--/INJECT SCRIPTS-->
