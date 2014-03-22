@@ -6,16 +6,21 @@ angular.module('ndc')
             url: '/video/{id}',
             views: {
                 'modal@': {
-                    templateUrl: 'pages/video/index/modal.html',
+                    templateUrl: 'pages/video/videoDetails/modal.html',
                     controller: 'VideoCtrl'
                 }
-            }
+            },
+            parent: 'index'
         }));
     })
-    .controller('VideoCtrl', function ($scope, $stateParams, VideoRepository) {
+    .controller('VideoCtrl', function ($scope, $stateParams, $state, VideoRepository, stateHistory) {
 
         VideoRepository.getById($stateParams.id).then(function (video) {
             $scope.video = video;
         });
+
+        $scope.closeModal = function () {
+            stateHistory.back();
+        }
 
     });
