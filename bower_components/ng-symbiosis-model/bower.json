@@ -1,0 +1,19 @@
+{
+    "version": "0.0.2",
+    "name": "ng-symbiosis-model",
+    "description": "AngularJS model",
+    "author": "Kenneth Lynne <kenneth.lynne@gmail.com>",
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components"
+    ],
+    "dependencies": {
+        "angular": "~1.2.7"
+    },
+    "devDependencies": {
+        "angular-mocks": "~1.2.7"
+    }
+}
+
