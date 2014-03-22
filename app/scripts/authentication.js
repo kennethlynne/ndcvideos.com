@@ -2,7 +2,7 @@
 
 angular.module('ndc')
     .config(function ($httpProvider) {
-        $httpProvider.interceptors.push(function ($q, $injector, BaseUrl) {
+        $httpProvider.interceptors.push(['$q', '$injector', 'BaseUrl', function ($q, $injector, BaseUrl) {
             return {
                 request: function (cfg) {
                     var token = $injector.get('authentication').getToken();
@@ -14,7 +14,7 @@ angular.module('ndc')
                     return cfg || $q.when(cfg);
                 }
             };
-        });
+        }]);
     })
     .factory('authentication', function ($http, BaseUrl, $localStorage, $log, $q, UserRepository, CurrentUser) {
 
