@@ -38,7 +38,7 @@
                 }
 
                 small {
-                    color: $green;
+                    color: $primary-color;
                     display: block;
                     margin-top: 5px;
                 }
@@ -99,7 +99,7 @@
             transition: border .25s linear, color .25s linear, background-color .25s linear;
             display: block;
             width: 100%;
-            background: $green;
+            background: $primary-color;
             color: #fff;
             font-weight: bold;
             text-decoration: none;
@@ -107,7 +107,7 @@
 
         .forgot {
             float: right;
-            color: $green;
+            color: $primary-color;
         }
 
         input[type="email"],

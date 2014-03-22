@@ -10,6 +10,15 @@
   font-family: 'Roboto', sans-serif;
 }
 
+:-webkit-full-screen-ancestor {
+  .navbar-component, 
+  .modal-backdrop, 
+  .powered, 
+  .content-wrapper {
+    display: none !important;
+  }
+}
+
 .typekit-badge {
 	display: none !important;
 }
@@ -55,7 +64,7 @@ body {
 }
 
 a {
-  color: $green;
+  color: $primary-color;
   cursor: pointer;
 }
 
@@ -74,7 +83,7 @@ button {
 } 
 
 .button {
-	background: $green;
+	background: $primary-color;
 	border: none;
 	font-size: 14px;
 	padding: 12px 15px;

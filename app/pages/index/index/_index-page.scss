@@ -1,12 +1,9 @@
-.index-page
-{
-}
-
-//TODO: This seems to be misplaced and should go into globals
-.select2-drop,
-.select2-drop-active {
-  margin-top: 10px !important;
-  border-radius: 10px;
+.index-page {
+  .no-videos-message {
+    padding: $content-gutter/2;
+    margin-top: $content-gutter;
+    color: #666;
+  }
 }
 
 .videos {
@@ -22,71 +19,20 @@
     margin-bottom: 10px;
     position: relative;
 
-    .select2-search-field {
-      input {
-        &,
-        &:focus,
-        &.active,
-        &.select2-focused,
-        &.select2-active {
-          background: none !important;
-          background-image: none !important;
-          background-color: transparent !important;
-          border: none !important;
-          box-shadow: none !important;
-          width: auto !important;
-        }
-      }
-    }
-
-    .select2-container {
-      width: 100% !important;
-    }
-
-    .select2-choices {
-      padding: 7px 17px;
-      border-radius: 20px;
-      box-shadow: none;
-      float: left;
+    input {
+      font-size: 16px;
+      width: 100%;
       border: none;
-      font-size: 14px;
-      outline: none;
-      width: 100% !important;
       background: #fff;
-      color: $dark-color;
+      padding: 10px 15px;
+      border-radius: 15px;
 
-      @include media($tablet) {
-        width: 100%;
-        margin-top: 10px;
-        border-color: #fff;
-        background: #fff;
-      }
-
-      input {
-        background: none !important;
-        border: none !important;
-        box-shadow: none !important;
-        width: auto !important;
-      }
-
-      .select2-search-choice {
-        display: inline-block;
-        background: $primary-color;
-        font-size: 13px;
-        padding: 7px 10px 7px 25px;
-        margin: 2px 5px 3px 0;
-        border: none !important;
-        box-shadow: none !important;
-        border-radius: 5px;
-
-        .select2-search-choice-close {
-          color: $dark-color;
-          padding: 5px 10px 5px 5px;
-          text-decoration: none;
-          background-position: right -11px;
-          left: 5px !important;
-          top: 6px !important;
-        }
+      &,
+      &:focus,
+      &.active,
+      &:active {
+        box-shadow: none;
+        outline: none;
       }
     }
 
