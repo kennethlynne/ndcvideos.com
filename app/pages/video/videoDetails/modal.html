@@ -1,0 +1,34 @@
+<div class="modal-backdrop modal fade in video-page">
+    <div class="modal-dialog">
+        <div class="modal-body modal-lg">
+            <button type="button" class="close" ng-click="closeModal()">×</button>
+            <div class="modal-video">
+                <media-player-component ng-if="video" video="video"></media-player-component>
+            </div>
+            <div class="modal-video-info">
+                <h2>{{video.title}}</h2>
+                <p>{{video.description}}</p>
+
+                <!--
+                <button class="favorite has-tooltip" data-toggle="tooltip" data-placement="bottom" title="Set favorite">
+                    <i class="fa fa-star-o"></i>
+                </button>
+                -->
+
+            </div>
+
+            <!--
+            <div class="modal-video-similar">
+                <h3>Similar videos</h3>
+                <ul class="similar">
+                    <li><media-player-component ng-if="video" video="video"></media-player-component></li>
+                    <li><media-player-component ng-if="video" video="video"></media-player-component></li>
+                    <li><media-player-component ng-if="video" video="video"></media-player-component></li>
+                    <li><media-player-component ng-if="video" video="video"></media-player-component></li>
+                </ul>
+            </div>
+            -->
+            
+        </div>
+    </div>
+</div>
