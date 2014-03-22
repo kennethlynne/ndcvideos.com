@@ -22,20 +22,19 @@
     margin-bottom: 10px;
     position: relative;
 
-    .select2-search-field {
-      input {
-        &,
-        &:focus,
-        &.active,
-        &.select2-focused,
-        &.select2-active {
-          background: none !important;
-          background-image: none !important;
-          background-color: transparent !important;
-          border: none !important;
-          box-shadow: none !important;
-          width: auto !important;
-        }
+    input {
+      font-size: 1.5em;
+
+      &,
+      &:focus,
+      &.active,
+      &:active {
+        background: none !important;
+        background-image: none !important;
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        width: auto !important;
       }
     }
 
