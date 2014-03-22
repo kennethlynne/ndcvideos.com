@@ -539,8 +539,7 @@ module.exports = function (grunt) {
                 'rev',
                 'copy:indexHTML',
                 'linkAssets-production',
-                'htmlmin',
-                'manifest'
+                'htmlmin' //,'manifest'
             ]);
         }
     });
