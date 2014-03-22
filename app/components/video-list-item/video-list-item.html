@@ -1,18 +1,16 @@
 <div class="video-list-item-component">
-    <div class="video-wrapper">
+    <div class="video-wrapper" ui-sref="videoDetails({id: video.id})">
         <!--
         <div class="progress-wrapper">
             <div class="progress-bar"style="width: 38%;"></div>
         </div>
         -->
-        <div class="video">
-            <a ui-sref="videoDetails({id: video.id})">
-                <img ng-src="{{video.thumbnail_large || 'assets/images/video-placeholder.png'}}" alt="">
-                <div class="video-info">
-                    <h3>{{video.title}}</h3>
-                    <p>{{video.description|limitTo:35}}...</p>
-                </div>
-            </a>
+        <div class="video" style="background-image: url({{video.thumbnail_large || 'assets/images/video-placeholder.png'}});">
+            <img ng-src="/assets/images/16-9.jpg" alt="">
+            <div class="video-info">
+                <h3>{{video.title}}</h3>
+                <p>{{video.description|limitTo:35}}...</p>
+            </div>
         </div>
 
         <!--
