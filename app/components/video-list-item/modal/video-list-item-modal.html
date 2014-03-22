@@ -4,12 +4,27 @@
         <media-player-component ng-if="video" video="video"></media-player-component>
     </div>
     <div class="modal-video-info">
-        <h2>
-            {{video.title}}
-            <button class="favorite has-tooltip" data-toggle="tooltip" data-placement="bottom" title="Set favorite">
-                <i class="fa fa-star-o"></i>
-            </button>
-        </h2>
+        <h2>{{video.title}}</h2>
         <p>{{video.description}}</p>
+
+        <!--
+        <button class="favorite has-tooltip" data-toggle="tooltip" data-placement="bottom" title="Set favorite">
+            <i class="fa fa-star-o"></i>
+        </button>
+        -->
+
     </div>
+
+    <!--
+    <div class="modal-video-similar">
+        <h3>Similar videos</h3>
+        <ul class="similar">
+            <li><media-player-component ng-if="video" video="video"></media-player-component></li>
+            <li><media-player-component ng-if="video" video="video"></media-player-component></li>
+            <li><media-player-component ng-if="video" video="video"></media-player-component></li>
+            <li><media-player-component ng-if="video" video="video"></media-player-component></li>
+        </ul>
+    </div>
+    -->
+    
 </div>
