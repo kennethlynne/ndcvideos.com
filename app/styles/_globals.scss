@@ -64,7 +64,7 @@ body {
 }
 
 a {
-  color: $green;
+  color: $primary-color;
   cursor: pointer;
 }
 
@@ -83,7 +83,7 @@ button {
 } 
 
 .button {
-	background: $green;
+	background: $primary-color;
 	border: none;
 	font-size: 14px;
 	padding: 12px 15px;

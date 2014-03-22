@@ -252,7 +252,7 @@ aside {
 
         &.active {
           @include media($tablet) {
-            background: $green;
+            background: $primary-color;
 
             span.responsive-text {
               opacity: 1;
@@ -260,7 +260,7 @@ aside {
           }
 
           i {
-            color: $green;
+            color: $primary-color;
 
             @include media($tablet) {
               color: #fff;
@@ -419,7 +419,7 @@ aside {
 
       li {
         display: inline-block;
-        background: $green;
+        background: $primary-color;
         font-size: 13px;
         padding: 7px 0 7px 10px;
         margin-right: 5px;
