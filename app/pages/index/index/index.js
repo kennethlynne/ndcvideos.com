@@ -22,7 +22,7 @@ angular.module('ndc')
 
         var getVideos = function (query) {
             VideoRepository.where(query).then(function (videos) {
-                $scope.errormsg = videos.length<1?'No videos :/':null;
+                $scope.errormsg = videos.length < 1 ? "Can't find any videos containing these search terms." : null;
 
                 $scope.videos = videos;
             });

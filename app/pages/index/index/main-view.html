@@ -9,7 +9,7 @@
                     <input type="text" class="searchfield" ng-model="query" ng-change="search(query)" placeholder="Search for videos..">
                 </form>
             </div>
-	    	<div ng-show="errormsg"><h1>{{errormsg}}</h1></div>
+	    	<div ng-show="errormsg"><p class="no-videos-message">{{errormsg}}</p></div>
 	        <video-list-item-component ng-repeat="video in videos" video="video"></video-list-item-component>
 	    </div>
 
