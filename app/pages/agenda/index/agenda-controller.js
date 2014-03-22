@@ -7,5 +7,15 @@ angular.module('ndc')
             templateUrl: 'pages/agenda/index/main-view.html'
         }));
     })
-    .controller('AgendaCtrl', function ($scope) {
+    .controller('AgendaCtrl', function ($scope, VideoRepository) {
+
+
+        VideoRepository.getAll().then(function(result){
+
+            $scope.videos = result;
+            console.log(result);
+
+        });
+
+
     });

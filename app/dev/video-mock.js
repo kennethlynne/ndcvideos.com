@@ -484,7 +484,6 @@ angular.module('ndc')
                 var videoTags = _.pluck(item.tags, 'title');
 
                 return _.every(queryArray, function (q) {
-                    console.log(videoTags);
 
                     for (var i = 0; i < videoTags.length; i++) {
                         if (videoTags[i].toLowerCase().indexOf(q) > -1)
@@ -508,8 +507,6 @@ angular.module('ndc')
 
 
             });
-            console.log(videos);
-
 
             return [200, videos, {/*headers*/}];
         });
