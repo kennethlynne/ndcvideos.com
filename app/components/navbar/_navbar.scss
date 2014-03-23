@@ -307,10 +307,10 @@ aside {
       float: left;
 
       @include media($tablet) {
-          float: none;
-          position: absolute;
-          top: 25px;
-          font-size: 24px;
+        float: none;
+        position: absolute;
+        top: 25px;
+        font-size: 24px;
       }
 
       a {
@@ -365,27 +365,22 @@ aside {
       li {
         margin-bottom: 4px;
         position: relative;
+        color: #fff;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 14px;
+        font-weight: bold;
 
-        a {
-          color: #fff;
-          text-decoration: none;
-          text-transform: uppercase;
-          font-size: 14px;
-          font-weight: bold;
-
-          @include media($tablet) {
-            background: $dark-color;
-            padding: 8px;
-            margin-bottom: 5px;
-            width: 100%;
-            display: block;
-          }          
+        @include media($tablet) {
+          background: $dark-color;
+          padding: 8px;
+          margin-bottom: 5px;
+          width: 100%;
+          display: block;
         }
 
         &:hover {
-          a {
-            color: $primary-color;
-          }
+          color: $primary-color;
         }
 
         &:after {
@@ -403,7 +398,7 @@ aside {
               opacity: 1;
             }
 
-          }          
+          }
 
           a {
             color: $primary-color;
@@ -440,11 +435,11 @@ aside {
   ul.navigation li.active:after {
     $duration: 1000ms;
     -webkit-transition: -webkit-transform ease $duration, left $duration;
-     -moz-transition: -moz-transform ease $duration, left $duration;
-     -ms-transition: -ms-transform ease $duration, left $duration;
-     -o-transition: -o-transform ease $duration, left $duration;
-     transition: transform ease $duration, left $duration;
-     left: $leftnav-width - ($content-gutter * 2);
+    -moz-transition: -moz-transform ease $duration, left $duration;
+    -ms-transition: -ms-transform ease $duration, left $duration;
+    -o-transition: -o-transform ease $duration, left $duration;
+    transition: transform ease $duration, left $duration;
+    left: $leftnav-width - ($content-gutter * 2);
   }
 
   .ng-enter ul.navigation li.active:after {
@@ -455,8 +450,7 @@ aside {
     left: $leftnav-width - ($content-gutter * 2);
   }
 
-  .ng-leave ul.navigation li.active:after
-  {
+  .ng-leave ul.navigation li.active:after {
     $duration: 200ms;
     -webkit-transition: -webkit-transform ease $duration;
     -moz-transition: -moz-transform ease $duration;
@@ -485,7 +479,6 @@ aside {
   }
 }
 
-
 .nav-change-animation {
   @include media($desktop) {
     &.ng-enter, &.ng-leave {
@@ -502,8 +495,7 @@ aside {
       display: block;
     }
 
-    &.ng-leave
-    {
+    &.ng-leave {
       $duration: 100ms;
       -webkit-transition: -webkit-transform ease $duration, opacity $duration;
       -moz-transition: -moz-transform ease $duration, opacity $duration;
