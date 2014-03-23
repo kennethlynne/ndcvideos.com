@@ -31,15 +31,6 @@
           window.qbaka||function(a,d){a.__qbaka_eh=a.onerror;a.onerror=function(){c._.push(["onerror",arguments]);if(a.__qbaka_eh)try{a.__qbaka_eh.apply(a,arguments)}catch(b){}};a.onerror.qbaka=1;var c=a.qbaka={_:[],log:function(){c._.push(["log",arguments])},report:function(){c._.push(["report",arguments,Error()])},exec:function(a){try{a()}catch(b){c.report(b)}}},b=d.createElement("script"),e=d.getElementsByTagName("script")[0],f=function(){e.parentNode.insertBefore(b,e)},g=typeof b.async;b.type="text/javascript";b.async=!0;b.src=("https:"==d.location.protocol?"https:":"http:")+"//cdn.qbaka.net/reporting.js";"undefined"==g&&d.addEventListener?d.addEventListener("DOMContentLoaded",f):f();qbaka.key="1ebdd99f8e67af47bac793c4aa1c7f78"}(window,document);qbaka.options={autoStacktrace:1,trackEvents:1};
       </script>
 
-    <script type="text/javascript" src="//use.typekit.net/cfo3zkv.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-
-    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
-
-    <link rel="stylesheet" href="assets/bootstrap-tooltips/bootstrap-tooltips.css">
-    <link rel="stylesheet" href="assets/bootstrap-popovers/bootstrap-popovers.css">
-    <link rel="stylesheet" href="assets/bootstrap-modals/bootstrap-modals.css">
-
     <!--INJECT STYLES-->
     <link rel="stylesheet" href="styles/main.css">
     <!--/INJECT STYLES-->
@@ -79,6 +70,7 @@
 
     <!--INJECT SCRIPTS-->
     <script src="bower_components/jquery/jquery.js"></script>
+    <script src="bower_components/select2/select2.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-mocks/angular-mocks.js"></script>
     <script src="bower_components/lodash/dist/lodash.js"></script>
@@ -98,6 +90,7 @@
     <script src="bower_components/ng-symbiosis-routeprovider/ng-symbiosis-routeprovider.src.js"></script>
     <script src="bower_components/ng-symbiosis-accesscontrol/ng-symbiosis-accesscontrol.src.js"></script>
     <script src="bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-ui-select2/src/select2.js"></script>
     <script src="bower_components/log/log.js"></script>
     <script src="scripts/module.js"></script>
     <script src="dev/authentication-mock.js"></script>
@@ -128,6 +121,7 @@
     <script src="scripts/authentication.js"></script>
     <script src="scripts/factories/current-user.js"></script>
     <script src="scripts/factories/lodash.js"></script>
+    <script src="scripts/filters/time.js"></script>
     <script src="scripts/log.js"></script>
     <script src="scripts/models/favorite.js"></script>
     <script src="scripts/models/tag.js"></script>

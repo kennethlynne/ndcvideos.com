@@ -149,7 +149,8 @@ module.exports = function (grunt) {
                 httpImagesPath: '/assets/images',
                 httpGeneratedImagesPath: '/assets/images/generated',
                 httpFontsPath: '/assets/fonts',
-                relativeAssets: false
+                relativeAssets: false,
+                trace:true
             },
             dist: {},
             server: {
@@ -163,7 +164,7 @@ module.exports = function (grunt) {
                 files: {
                     src: [
                         '<%= yeoman.dist %>/scripts/**/*.js',
-                        '<%= yeoman.dist %>/styles/**/*.css'//,'<%= yeoman.dist %>/assets/fonts/*'
+                        '<%= yeoman.dist %>/styles/**/*.css'//'<%= yeoman.dist %>/assets/fonts/*'
                     ]
                 }
             }

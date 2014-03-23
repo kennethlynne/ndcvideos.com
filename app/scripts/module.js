@@ -19,5 +19,6 @@ var app = angular.module('ndc', [
     'ui.bootstrap',
     'ngTouch',
     'ngStorage',
+    'ui.select2'
 ]);
 angular.componentFactory.moduleDecorator(app);

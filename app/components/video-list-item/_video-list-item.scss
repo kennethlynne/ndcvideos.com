@@ -54,7 +54,7 @@
             bottom: ($content-gutter / 2);
             left: $content-gutter / 2;
             right: $content-gutter / 2;
-            background: url(/assets/images/content-gradient.png) top left repeat-x;
+            background: url(../assets/images/content-gradient.png) top left repeat-x;
             min-height: 100px;
             z-index: 60;
         }
@@ -139,7 +139,7 @@
         .video {
             position: relative;
             width: 100%;
-            background: url(/assets/images/16-9.jpg) no-repeat center center; 
+            background: url(../assets/images/16-9.jpg) no-repeat center center;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
