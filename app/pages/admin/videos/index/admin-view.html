@@ -13,7 +13,7 @@
         </thead>
         <tbody>
         <tr ng-repeat="video in vimeoVideos">
-            <td><span class="hidden-on-large">Vimeo ID: </span>{{video.videoId}}</td> <!-- ID -->
+            <td><span class="hidden-on-large">Vimeo ID: </span>{{video.id}}</td> <!-- ID -->
             <td><span class="hidden-on-large">Name: </span>{{video.title}}</td> <!-- Video name -->
             <td><span class="hidden-on-large">Length: </span>{{video.duration | time}}</td> <!-- Video length -->
             <td><span class="hidden-on-large">Actions: </span> <!-- Actions -->
@@ -37,19 +37,17 @@
         </thead>
         <tbody>
         <tr ng-repeat="video in existingVideos">
-            <td><span class="hidden-on-large">Vimeo ID: </span>{{video.id}}</td> <!-- ID -->
+            <td><span class="hidden-on-large">Vimeo ID: </span>{{video.videoId}}</td> <!-- ID -->
             <td><span class="hidden-on-large">Name: </span>{{video.title}}</td>
             <td><span class="hidden-on-large">Tags: </span>
                 <ul class="tags">
-                    <li>Nice</li>
-                    <li>Awesome</li>
-                    <li>Neat</li>
+                    <li ng-repeat="tag in video.tags">{{tag.text}}</li>
                 </ul>
             </td>
             <td><span class="hidden-on-large">Length: </span>{{video.duration | time}}</td>
             <td><span class="hidden-on-large">Actions: </span>
-                <button>Edit</button>
-                <button>Delete</button>
+                <button ui-sref="administrateVideos.edit({id:video.id})">Edit</button>
+                <button ng-click="deleteVideo(video);">Delete</button>
             </td>
         </tr>
         </tbody>

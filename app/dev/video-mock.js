@@ -1,5 +1,5 @@
 angular.module('ndc')
-    .run(function (Config, $httpBackend, $log, APIBaseUrl, regexEscape, guid) {
+    .run(function (Config, $httpBackend, $log, APIBaseUrl, regexEscape, guid, _) {
         if (!Config.API.useMocks) return;
 
         var collectionUrl = APIBaseUrl + 'videos';
@@ -21,10 +21,10 @@ angular.module('ndc')
                 type: 'vimeo',
                 tags: [
                     {
-                        title: '.NET'
+                        text: '.NET'
                     },
                     {
-                        title: 'Javascript'
+                        text: 'Javascript'
                     }
                 ],
                 upload_date: "2014-02-13 08:04:18",
@@ -42,10 +42,10 @@ angular.module('ndc')
                 type: 'vimeo',
                 tags: [
                     {
-                        title: 'Angular'
+                        text: 'Angular'
                     },
                     {
-                        title: 'Javascript'
+                        text: 'Javascript'
                     }
                 ],
                 upload_date: "2014-02-11 04:25:00",
@@ -63,13 +63,13 @@ angular.module('ndc')
                 type: 'vimeo',
                 tags: [
                     {
-                        title: 'angular'
+                        text: 'angular'
                     },
                     {
-                        title: 'bootcamp'
+                        text: 'bootcamp'
                     },
                     {
-                        title: 'javascript'
+                        text: 'javascript'
                     }
                 ],
                 thumbnail_small: "http://b.vimeocdn.com/ts/461/087/461087855_100.jpg",
@@ -85,13 +85,13 @@ angular.module('ndc')
                 videoId: 74713139,
                 tags: [
                     {
-                        title: 'data'
+                        text: 'data'
                     },
                     {
-                        title: 'java'
+                        text: 'java'
                     },
                     {
-                        title: 'machine learning'
+                        text: 'machine learning'
                     }
                 ],
                 type: 'vimeo',
@@ -105,13 +105,13 @@ angular.module('ndc')
                 videoId: 74713138,
                 tags: [
                     {
-                        title: 'data'
+                        text: 'data'
                     },
                     {
-                        title: 'Hadoop'
+                        text: 'Hadoop'
                     },
                     {
-                        title: 'Data'
+                        text: 'Data'
                     }
                 ],
                 title: "High Speed Continuous & Reliable Data Ingest into Hadoop",
@@ -133,13 +133,13 @@ angular.module('ndc')
                 duration: 529,
                 tags: [
                     {
-                        title: 'Tetris'
+                        text: 'Tetris'
                     },
                     {
-                        title: 'kompleksitet'
+                        text: 'kompleksitet'
                     },
                     {
-                        title: 'spill'
+                        text: 'spill'
                     }
                 ],
                 type: 'vimeo'
@@ -155,13 +155,13 @@ angular.module('ndc')
                 duration: 529,
                 tags: [
                     {
-                        title: 'Yeoman'
+                        text: 'Yeoman'
                     },
                     {
-                        title: 'Workflow'
+                        text: 'Workflow'
                     },
                     {
-                        title: 'Front end'
+                        text: 'Front end'
                     }
                 ],
                 type: 'vimeo'
@@ -177,13 +177,13 @@ angular.module('ndc')
                 duration: 2204,
                 tags: [
                     {
-                        title: 'Streams'
+                        text: 'Streams'
                     },
                     {
-                        title: 'Events'
+                        text: 'Events'
                     },
                     {
-                        title: 'Data'
+                        text: 'Data'
                     }
                 ],
                 type: 'vimeo'
@@ -200,13 +200,13 @@ angular.module('ndc')
                 duration: 2620,
                 tags: [
                     {
-                        title: 'Webrtc'
+                        text: 'Webrtc'
                     },
                     {
-                        title: 'Network'
+                        text: 'Network'
                     },
                     {
-                        title: 'Data'
+                        text: 'Data'
                     }
                 ],
                 type: 'vimeo'
@@ -225,13 +225,13 @@ angular.module('ndc')
                 duration: 2828,
                 tags: [
                     {
-                        title: 'Chrome'
+                        text: 'Chrome'
                     },
                     {
-                        title: 'Front end'
+                        text: 'Front end'
                     },
                     {
-                        title: 'Google'
+                        text: 'Google'
                     }
                 ],
                 type: 'vimeo'
@@ -249,13 +249,13 @@ angular.module('ndc')
                 duration: 2389,
                 tags: [
                     {
-                        title: 'Cache'
+                        text: 'Cache'
                     },
                     {
-                        title: 'Front end'
+                        text: 'Front end'
                     },
                     {
-                        title: 'Web'
+                        text: 'Web'
                     }
                 ],
                 type: 'vimeo'
@@ -272,13 +272,13 @@ angular.module('ndc')
                 duration: 2595,
                 tags: [
                     {
-                        title: 'Hipster'
+                        text: 'Hipster'
                     },
                     {
-                        title: 'Functional programming'
+                        text: 'Functional programming'
                     },
                     {
-                        title: 'Web'
+                        text: 'Web'
                     }
                 ],
                 type: 'vimeo'
@@ -294,13 +294,13 @@ angular.module('ndc')
                 duration: 2595,
                 tags: [
                     {
-                        title: 'Hipster'
+                        text: 'Hipster'
                     },
                     {
-                        title: 'Functional programming'
+                        text: 'Functional programming'
                     },
                     {
-                        title: 'Web'
+                        text: 'Web'
                     }
                 ],
                 type: 'vimeo'
@@ -317,13 +317,13 @@ angular.module('ndc')
                 duration: 2254,
                 tags: [
                     {
-                        title: 'AngularJS'
+                        text: 'AngularJS'
                     },
                     {
-                        title: 'Browser'
+                        text: 'Browser'
                     },
                     {
-                        title: 'Web'
+                        text: 'Web'
                     }
                 ],
                 type: 'vimeo'
@@ -339,13 +339,13 @@ angular.module('ndc')
                 duration: 2543,
                 tags: [
                     {
-                        title: 'Javascript'
+                        text: 'Javascript'
                     },
                     {
-                        title: 'web'
+                        text: 'web'
                     },
                     {
-                        title: 'programming style'
+                        text: 'programming style'
                     }
                 ],
                 type: 'vimeo'
@@ -362,13 +362,13 @@ angular.module('ndc')
                 duration: 3082,
                 tags: [
                     {
-                        title: 'Javascript'
+                        text: 'Javascript'
                     },
                     {
-                        title: 'jquery'
+                        text: 'jquery'
                     },
                     {
-                        title: 'debugging'
+                        text: 'debugging'
                     }
                 ],
                 type: 'vimeo'
@@ -385,13 +385,13 @@ angular.module('ndc')
                 duration: 2361,
                 tags: [
                     {
-                        title: 'Javascript'
+                        text: 'Javascript'
                     },
                     {
-                        title: 'Nodejs'
+                        text: 'Nodejs'
                     },
                     {
-                        title: 'webos'
+                        text: 'webos'
                     }
                 ],
                 type: 'vimeo'
@@ -408,13 +408,13 @@ angular.module('ndc')
                 duration: 1274,
                 tags: [
                     {
-                        title: 'Javascript'
+                        text: 'Javascript'
                     },
                     {
-                        title: 'Nodejs'
+                        text: 'Nodejs'
                     },
                     {
-                        title: 'webos'
+                        text: 'webos'
                     }
                 ],
                 type: 'vimeo'

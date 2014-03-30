@@ -21,4 +21,21 @@ angular.module('ndc')
             $scope.vimeoVideos = videos;
         });
 
+
+        $scope.deleteVideo = function(video){
+
+            if(confirm('Are you sure you want to delete the video?'))
+            {
+                //Delete from array first, and then from rep?
+                video.$delete().then(function(result){
+
+                    var index = $scope.existingVideos.indexOf(video);
+
+                    $scope.existingVideos.splice(index, 1);
+
+                });
+            }
+        };
+
+
     });
