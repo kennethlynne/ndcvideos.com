@@ -363,12 +363,12 @@ aside {
       margin: 0 0 2.5em 0;
 
       li {
-        margin-bottom: 4px;
+        margin-bottom: 7px;
         position: relative;
         color: #fff;
         text-decoration: none;
         text-transform: uppercase;
-        font-size: 14px;
+        font-size: 16px;
         font-weight: bold;
 
         @include media($tablet) {
@@ -388,7 +388,7 @@ aside {
           opacity: 0;
           content: "";
           position: absolute;
-          top: -1px;
+          top: -2px;
         }
 
         &.active {

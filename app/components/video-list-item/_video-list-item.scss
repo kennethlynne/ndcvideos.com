@@ -1,5 +1,5 @@
 .video-list-item-component {
-    padding: $content-gutter / 2;
+    padding: 5px;
     position: relative;
     display: inline-block;  
 
@@ -9,7 +9,7 @@
     }
 
     @include media($bigdesktop) {
-        @include span-columns(3 of 15); 
+        @include span-columns(3 of 12); 
         @include omega(5);
     }
 
@@ -20,7 +20,7 @@
 
     @include media($tablet) {
         @include span-columns(2);   
-        padding: $content-gutter / 2;
+        padding: 5px;
 
         &:nth-child(4) {
             @include omega;
@@ -45,19 +45,10 @@
     }
 
 	.video-wrapper {
-        padding-top: 5px;
+        padding-top: 3px;
         width: 100%;
-
-        &:before {
-            content: "";
-            position: absolute;
-            bottom: ($content-gutter / 2);
-            left: $content-gutter / 2;
-            right: $content-gutter / 2;
-            background: url(../assets/images/content-gradient.png) top left repeat-x;
-            min-height: 100px;
-            z-index: 60;
-        }
+        border-radius: 3px;
+        overflow: hidden;
 
         &:last-child {
             @include omega;
@@ -65,23 +56,37 @@
 
         .video-info {
             position: absolute;
+            top: 0;
             bottom: 0;
             left: 0;
-            padding: 15px;
-            right: 50px;
+            right: 0;
+            padding: 30px 20px;
+            background: rgba(50, 50, 50, 0.9);
             color: #fff;
             z-index: 70;
 
             h3 {
-                margin: $content-gutter 0 0 0;
-                font-size: 16px;
-                text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.7);
+                font-family: "Roboto Slab";
+                margin: 0 0 0 0;
+                font-size: 15px;
+                font-weight: normal;
+                // color: $primary-color;
+                text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.4);
             }
 
             p {
-                margin: 2px 0 0 0;
-                font-size: 13px;
-                text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.7);
+                margin: 6px 0 0 0;
+                font-size: 12px;
+                opacity: 0.6;
+                text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.4);
+            }
+
+            .length {
+                position: absolute;
+                bottom: 15px;
+                left: 20px;
+                font-size: 12px;
+                color: $primary-color;
             }
         }
 
@@ -145,7 +150,7 @@
             -o-background-size: cover;
             background-size: cover;
 
-            img {
+            img.ratio {
                 width: 100%;
                 height: auto;
                 z-index: 50;

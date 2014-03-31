@@ -8,24 +8,38 @@
 
 .videos {
   @include clearfix;
-  padding: 0 ($content-gutter / 2);
+  padding: 0 ($content-gutter / 2 + 5);
   width: 100%;
 
   .search-wrapper {
     @include clearfix;
     width: 100%;
     float: left;
-    padding: 3px $content-gutter/2;
+    padding: 3px 5px;
     margin-bottom: 10px;
     position: relative;
+
+    @include media($tablet) {
+      margin-top: 10px;
+    }
+
+    &:before {
+      content: "";
+      width: 20px;
+      height: 20px;
+      background: url(/assets/images/search-icon.png) center center no-repeat;
+      position: absolute;
+      left: 22px;
+      top: 13px;
+    }
 
     input {
       font-size: 16px;
       width: 100%;
       border: none;
       background: #fff;
-      padding: 10px 15px;
-      border-radius: 15px;
+      padding: 11px 15px 10px 40px;
+      border-radius: 3px;
 
       &,
       &:focus,
