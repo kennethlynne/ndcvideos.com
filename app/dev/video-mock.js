@@ -481,7 +481,7 @@ angular.module('ndc')
 
             var videos = _.filter(VideoRepo.data, function (item) {
 
-                var videoTags = _.pluck(item.tags, 'title');
+                var videoTags = _.pluck(item.tags, 'text');
 
                 return _.every(queryArray, function (q) {
 
