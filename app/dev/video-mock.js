@@ -492,20 +492,6 @@ angular.module('ndc')
 
                 }) || item.title.toLowerCase().indexOf(query) > -1;
 
-                //Find videos where query matches title, or tags.
-
-                //Checking if title matches
-
-//                return ;
-
-//                return _.some(query, function(q){
-//
-//                    return item.title.toLowerCase().indexOf(q) > -1//;
-//
-//
-//                });
-
-
             });
 
             return [200, videos, {/*headers*/}];
