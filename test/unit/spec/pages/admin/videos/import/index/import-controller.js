@@ -16,8 +16,10 @@ describe('Controller(/admin/videos/import): AdminImportVideoCtrl', function () {
         });
     });
 
-    xit('should attach init data to scope', function () {
-        expect(scope.foo).toEqual('bar');
+    it('should publish a video', function () {
+        scope.publish();
+
+        expect().toEqual('bar');
     });
 
 });
