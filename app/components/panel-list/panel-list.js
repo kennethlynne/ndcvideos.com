@@ -6,7 +6,7 @@ angular.module('ndc.components')
       {
         title: 'Videos',
         uiSref: 'videos',
-        cssClass: ['glyphicon', 'glyphicon-search']
+        cssClass: ['glyphicon', 'glyphicon-play']
       },
       {
         title: 'Admin',

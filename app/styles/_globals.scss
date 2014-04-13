@@ -4,11 +4,16 @@ html {
 }
 
 body {
-  background: #121314;
+  background: #fff;
   color: #ddd;
-  font-family: 'Open Sans';
+  // font-family: 'Open Sans';
+  font-family: Helvetica, Arial, sans-serif;
   height: 100%;
-  font-weight: 300;
+  // font-weight: 300;
+}
+
+a {
+  color: $primary-color;
 }
 
 hr {
@@ -71,7 +76,7 @@ hr {
   font-family: 'Open Sans';
   font-weight: 300;
   font-size: 3.5em;
-  color: #ccc;
+  color: #444;
   border: none;
 }
 

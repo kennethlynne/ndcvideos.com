@@ -15,6 +15,11 @@
 
   &.active {
     background: lighten($sidebar-background, 5);
-    box-shadow: inset 3px 0 0 0 #D4FF00;
+    box-shadow: inset 3px 0 0 0 $primary-color;
+  }
+
+  .glyphicon {
+    font-size: 25px;
+    margin-bottom: 3px;
   }
 }
