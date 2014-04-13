@@ -16,7 +16,7 @@ angular.module('ngSymbiosis.routeProvider', [])
 
         var _defaults = {
             url: '/' + dasherize(classedName),
-            templateUrl: 'pages/' + dasherize(classedName) + '/index/main-view.html',
+            templateUrl: 'states/' + dasherize(classedName) + '/index/main-view.html',
             controller: classedName + 'Ctrl'
         };
 

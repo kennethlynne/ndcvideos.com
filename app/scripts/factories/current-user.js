@@ -1,16 +1,10 @@
 'use strict';
 
 angular.module('ndc')
-    .factory('CurrentUser', function ($log, UserModel, _, $localStorage, UserRepository, accessControl) {
+    .factory('CurrentUser', function ($log, UserModel, _, $localStorage, accessControl) {
 
         var storage = $localStorage['CurrentUser'] = $localStorage['CurrentUser'] || {};
         var _user = storage.user = storage.user || {};
-
-        if(_user.id)
-        {
-            //Update user on initialization
-            UserRepository.getById(_user.id).then(_set);
-        }
 
         var _set = function (user) {
                 if(!(user instanceof UserModel)) $log.error("Expected UserModel when initializing CurrentUser");

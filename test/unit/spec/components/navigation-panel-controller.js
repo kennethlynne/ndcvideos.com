@@ -2,24 +2,24 @@
 
 describe('Component: navbarNavigationPanelCtrl', function () {
 
-    describe('Controller: navbarNavigationPanelCtrl', function () {
+  describe('Controller: navbarNavigationPanelCtrl', function () {
 
-        var Ctrl, scope;
+    var Ctrl, scope;
 
-        beforeEach(function () {
+    beforeEach(function () {
 
-            module('ndc');
+      module('ndc');
 
-            inject(function ($controller, $rootScope) {
-                scope = $rootScope.$new();
-                Ctrl = $controller('navbarNavigationPanelCtrl', {
-                    $scope: scope
-                });
-            });
+      inject(function ($controller, $rootScope) {
+        scope = $rootScope.$new();
+        Ctrl = $controller('navbarNavigationPanelCtrl', {
+          $scope: scope
         });
-
-        it('should expose tags');
-
+      });
     });
+
+    it('should expose tags');
+
+  });
 
 });

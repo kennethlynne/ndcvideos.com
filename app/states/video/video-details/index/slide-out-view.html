@@ -1,0 +1,21 @@
+<div class="video-details-state slide-out-view animated fadeInRight">
+
+    <div class="container">
+        <div class="row row-xs-height">
+            <div class="col-xs-3 col-xs-height" ng-click="close()"></div>
+
+            <div class="col-xs-9 col-xs-height panel no-padding">
+                <media-player-component ng-if="video" video="video"></media-player-component>
+
+                <div class="add-padding">
+                    <h2>{{video.title}}</h2>
+                    <p>{{video.description}}</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <slideout-backdrop-component></slideout-backdrop-component>
+
+</div>

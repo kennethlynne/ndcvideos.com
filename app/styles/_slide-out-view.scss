@@ -1,0 +1,36 @@
+[ui-view="slideOut"]
+{
+  position: relative;
+
+  .slide-out-view
+  {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+
+    padding: {
+      right: $right-panel-width;
+      left: $sidebar-width;
+    }
+
+    > .container {
+      width: auto !important;
+      padding-right: 0;
+      height: 100%;
+      display: table;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+
+      .row {
+        height: 100%;
+      }
+    }
+  }
+}

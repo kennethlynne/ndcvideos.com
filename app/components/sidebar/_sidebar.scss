@@ -1,0 +1,30 @@
+.sidebar-component {
+  $logo-height: 60px;
+  $sticky-footer-height: 120px;
+
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: $sidebar-width;
+  height: 100%;
+  overflow: hidden;
+  background: $sidebar-background;
+  z-index: 1;
+
+  .wrapper {
+    min-height: 100%;
+    height: auto;
+
+    margin: 0;
+    margin: {
+      bottom: -$sticky-footer-height - $logo-height;
+    }
+    padding-bottom: $sticky-footer-height + $logo-height;
+  }
+
+  .bottom-fixed {
+    height: $sticky-footer-height;
+    text-align: center;
+  }
+
+}

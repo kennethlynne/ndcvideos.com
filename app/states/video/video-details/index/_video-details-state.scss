@@ -1,0 +1,25 @@
+.video-details-state {
+
+  .no-padding {
+    padding: {
+      left: 0;
+      right: 0;
+    }
+
+    .add-padding {
+      padding: {
+        left: 15px;
+        right: 15px;
+      }
+    }
+  }
+
+  .container {
+
+    .panel {
+      background: #1a1a1a;
+      border-radius: 0;
+    }
+
+  }
+}

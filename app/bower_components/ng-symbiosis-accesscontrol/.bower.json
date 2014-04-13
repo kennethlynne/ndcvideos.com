@@ -25,6 +25,5 @@
   },
   "_source": "git://github.com/ngSymbiosis/ngSymbiosis.accessControl.git",
   "_target": "~0.0.2",
-  "_originalSource": "ng-symbiosis-accesscontrol",
-  "_direct": true
+  "_originalSource": "ng-symbiosis-accesscontrol"
 }

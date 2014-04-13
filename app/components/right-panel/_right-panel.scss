@@ -1,0 +1,27 @@
+.right-panel-component {
+  position: fixed;
+  right: 0;
+  top: 0;
+  overflow: hidden;
+  background: #1c1c1f;
+  width: $right-panel-width;
+  height: 100%;
+  z-index: 10;
+  padding: {
+    left: 10px;
+    right: 10px;
+  }
+
+  .wrapper {
+    height: 50%;
+    margin: 0;
+  }
+
+  .bottom-fixed
+  {
+    border-top: 2px solid #333;
+    padding-top: 15px;
+    height: 50%;
+    overflow-y: auto;
+  }
+}

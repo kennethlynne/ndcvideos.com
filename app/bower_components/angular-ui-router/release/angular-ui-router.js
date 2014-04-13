@@ -1,6 +1,6 @@
 /**
  * State-based routing for AngularJS
- * @version v0.2.10-dev-2014-03-22
+ * @version v0.2.10
  * @link http://angular-ui.github.com/
  * @license MIT License, http://www.opensource.org/licenses/MIT
  */
@@ -653,7 +653,6 @@ angular.module('ui.router.util').service('$templateFactory', $TemplateFactory);
  * * `'/files/*path'` - ditto.
  *
  * @param {string} pattern  the pattern to compile into a matcher.
- * @param {bool} caseInsensitiveMatch true if url matching should be case insensitive, otherwise false, the default value (for backward compatibility) is false.
  *
  * @property {string} prefix  A static prefix of this pattern. The matcher guarantees that any
  *   URL matching this matcher (i.e. any string for which {@link ui.router.util.type:UrlMatcher#methods_exec exec()} returns
@@ -670,7 +669,7 @@ angular.module('ui.router.util').service('$templateFactory', $TemplateFactory);
  *
  * @returns {Object}  New UrlMatcher object
  */
-function UrlMatcher(pattern, caseInsensitiveMatch) {
+function UrlMatcher(pattern) {
 
   // Find all placeholders and create a compiled pattern, using either classic or curly syntax:
   //   '*' name
@@ -734,12 +733,7 @@ function UrlMatcher(pattern, caseInsensitiveMatch) {
 
   compiled += quoteRegExp(segment) + '$';
   segments.push(segment);
-  if(caseInsensitiveMatch){
-    this.regexp = new RegExp(compiled, 'i');
-  }else{
-    this.regexp = new RegExp(compiled);	
-  }
-  
+  this.regexp = new RegExp(compiled);
   this.prefix = segments[0];
 }
 
@@ -883,22 +877,6 @@ UrlMatcher.prototype.format = function (values) {
  */
 function $UrlMatcherFactory() {
 
-  var useCaseInsensitiveMatch = false;
-
-  /**
-   * @ngdoc function
-   * @name ui.router.util.$urlMatcherFactory#caseInsensitiveMatch
-   * @methodOf ui.router.util.$urlMatcherFactory
-   *
-   * @description
-   * Define if url matching should be case sensistive, the default behavior, or not.
-   *   
-   * @param {bool} value false to match URL in a case sensitive manner; otherwise true;
-   */
-  this.caseInsensitiveMatch = function(value){
-    useCaseInsensitiveMatch = value;
-  };
-
   /**
    * @ngdoc function
    * @name ui.router.util.$urlMatcherFactory#compile
@@ -911,7 +889,7 @@ function $UrlMatcherFactory() {
    * @returns {ui.router.util.type:UrlMatcher}  The UrlMatcher.
    */
   this.compile = function (pattern) {
-    return new UrlMatcher(pattern, useCaseInsensitiveMatch);
+    return new UrlMatcher(pattern);
   };
 
   /**
@@ -1767,71 +1745,6 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
       }
     }
 
-    // Handles the case where a state which is the target of a transition is not found, and the user
-    // can optionally retry or defer the transition
-    function handleRedirect(redirect, state, params, options) {
-      /**
-       * @ngdoc event
-       * @name ui.router.state.$state#$stateNotFound
-       * @eventOf ui.router.state.$state
-       * @eventType broadcast on root scope
-       * @description
-       * Fired when a requested state **cannot be found** using the provided state name during transition.
-       * The event is broadcast allowing any handlers a single chance to deal with the error (usually by
-       * lazy-loading the unfound state). A special `unfoundState` object is passed to the listener handler,
-       * you can see its three properties in the example. You can use `event.preventDefault()` to abort the
-       * transition and the promise returned from `go` will be rejected with a `'transition aborted'` value.
-       *
-       * @param {Object} event Event object.
-       * @param {Object} unfoundState Unfound State information. Contains: `to, toParams, options` properties.
-       * @param {State} fromState Current state object.
-       * @param {Object} fromParams Current state params.
-       *
-       * @example
-       *
-       * <pre>
-       * // somewhere, assume lazy.state has not been defined
-       * $state.go("lazy.state", {a:1, b:2}, {inherit:false});
-       *
-       * // somewhere else
-       * $scope.$on('$stateNotFound',
-       * function(event, unfoundState, fromState, fromParams){
-       *     console.log(unfoundState.to); // "lazy.state"
-       *     console.log(unfoundState.toParams); // {a:1, b:2}
-       *     console.log(unfoundState.options); // {inherit:false} + default options
-       * })
-       * </pre>
-       */
-      var evt = $rootScope.$broadcast('$stateNotFound', redirect, state, params);
-
-      if (evt.defaultPrevented) {
-        syncUrl();
-        return TransitionAborted;
-      }
-
-      if (!evt.retry) {
-        return null;
-      }
-
-      // Allow the handler to return a promise to defer state lookup retry
-      if (options.$retry) {
-        syncUrl();
-        return TransitionFailed;
-      }
-      var retryTransition = $state.transition = $q.when(evt.retry);
-
-      retryTransition.then(function() {
-        if (retryTransition !== $state.transition) return TransitionSuperseded;
-        redirect.options.$retry = true;
-        return $state.transitionTo(redirect.to, redirect.toParams, redirect.options);
-      }, function() {
-        return TransitionAborted;
-      });
-      syncUrl();
-
-      return retryTransition;
-    }
-
     root.locals = { resolve: null, globals: { $stateParams: {} } };
     $state = {
       params: {},
@@ -1989,11 +1902,63 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
       var evt, toState = findState(to, options.relative);
 
       if (!isDefined(toState)) {
+        // Broadcast not found event and abort the transition if prevented
         var redirect = { to: to, toParams: toParams, options: options };
-        var redirectResult = handleRedirect(redirect, from.self, fromParams, options);
 
-        if (redirectResult) {
-          return redirectResult;
+        /**
+         * @ngdoc event
+         * @name ui.router.state.$state#$stateNotFound
+         * @eventOf ui.router.state.$state
+         * @eventType broadcast on root scope
+         * @description
+         * Fired when a requested state **cannot be found** using the provided state name during transition.
+         * The event is broadcast allowing any handlers a single chance to deal with the error (usually by
+         * lazy-loading the unfound state). A special `unfoundState` object is passed to the listener handler,
+         * you can see its three properties in the example. You can use `event.preventDefault()` to abort the
+         * transition and the promise returned from `go` will be rejected with a `'transition aborted'` value.
+         *
+         * @param {Object} event Event object.
+         * @param {Object} unfoundState Unfound State information. Contains: `to, toParams, options` properties.
+         * @param {State} fromState Current state object.
+         * @param {Object} fromParams Current state params.
+         *
+         * @example
+         *
+         * <pre>
+         * // somewhere, assume lazy.state has not been defined
+         * $state.go("lazy.state", {a:1, b:2}, {inherit:false});
+         *
+         * // somewhere else
+         * $scope.$on('$stateNotFound',
+         * function(event, unfoundState, fromState, fromParams){
+         *     console.log(unfoundState.to); // "lazy.state"
+         *     console.log(unfoundState.toParams); // {a:1, b:2}
+         *     console.log(unfoundState.options); // {inherit:false} + default options
+         * })
+         * </pre>
+         */
+        evt = $rootScope.$broadcast('$stateNotFound', redirect, from.self, fromParams);
+        if (evt.defaultPrevented) {
+          syncUrl();
+          return TransitionAborted;
+        }
+
+        // Allow the handler to return a promise to defer state lookup retry
+        if (evt.retry) {
+          if (options.$retry) {
+            syncUrl();
+            return TransitionFailed;
+          }
+          var retryTransition = $state.transition = $q.when(evt.retry);
+          retryTransition.then(function() {
+            if (retryTransition !== $state.transition) return TransitionSuperseded;
+            redirect.options.$retry = true;
+            return $state.transitionTo(redirect.to, redirect.toParams, redirect.options);
+          }, function() {
+            return TransitionAborted;
+          });
+          syncUrl();
+          return retryTransition;
         }
 
         // Always retry once if the $stateNotFound was not prevented
@@ -2002,7 +1967,6 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
         toParams = redirect.toParams;
         options = redirect.options;
         toState = findState(to, options.relative);
-
         if (!isDefined(toState)) {
           if (options.relative) throw new Error("Could not resolve '" + to + "' from state '" + options.relative + "'");
           throw new Error("No such state '" + to + "'");
@@ -2015,14 +1979,11 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
       var toPath = to.path;
 
       // Starting from the root of the path, keep all levels that haven't changed
-      var keep = 0, state = toPath[keep], locals = root.locals, toLocals = [];
-
-      if (!options.reload) {
-        while (state && state === fromPath[keep] && equalForKeys(toParams, fromParams, state.ownParams)) {
-          locals = toLocals[keep] = state.locals;
-          keep++;
-          state = toPath[keep];
-        }
+      var keep, state, locals = root.locals, toLocals = [];
+      for (keep = 0, state = toPath[keep];
+           state && state === fromPath[keep] && equalForKeys(toParams, fromParams, state.ownParams) && !options.reload;
+           keep++, state = toPath[keep]) {
+        locals = toLocals[keep] = state.locals;
       }
 
       // If we're going to the same state and all locals are kept, we've got nothing to do.
@@ -2030,7 +1991,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
       // TODO: We may not want to bump 'transition' if we're called from a location change that we've initiated ourselves,
       // because we might accidentally abort a legitimate transition initiated from code?
       if (shouldTriggerReload(to, from, locals, options) ) {
-        if (to.self.reloadOnSearch !== false)
+        if ( to.self.reloadOnSearch !== false )
           syncUrl();
         $state.transition = null;
         return $q.when($state.current);
@@ -2068,7 +2029,8 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
          * })
          * </pre>
          */
-        if ($rootScope.$broadcast('$stateChangeStart', to.self, toParams, from.self, fromParams).defaultPrevented) {
+        evt = $rootScope.$broadcast('$stateChangeStart', to.self, toParams, from.self, fromParams);
+        if (evt.defaultPrevented) {
           syncUrl();
           return TransitionPrevented;
         }
@@ -2082,9 +2044,9 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
       // empty and gets filled asynchronously. We need to keep track of the promise for the
       // (fully resolved) current locals, and pass this down the chain.
       var resolved = $q.when(locals);
-      for (var l = keep; l < toPath.length; l++, state = toPath[l]) {
+      for (var l=keep; l<toPath.length; l++, state=toPath[l]) {
         locals = toLocals[l] = inherit(locals);
-        resolved = resolveState(state, toParams, state === to, resolved, locals);
+        resolved = resolveState(state, toParams, state===to, resolved, locals);
       }
 
       // Once everything is resolved, we are ready to perform the actual transition
@@ -2097,7 +2059,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
         if ($state.transition !== transition) return TransitionSuperseded;
 
         // Exit 'from' states not kept
-        for (l = fromPath.length - 1; l >= keep; l--) {
+        for (l=fromPath.length-1; l>=keep; l--) {
           exiting = fromPath[l];
           if (exiting.self.onExit) {
             $injector.invoke(exiting.self.onExit, exiting.self, exiting.locals.globals);
@@ -2106,7 +2068,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
         }
 
         // Enter 'to' states not kept
-        for (l = keep; l < toPath.length; l++) {
+        for (l=keep; l<toPath.length; l++) {
           entering = toPath[l];
           entering.locals = toLocals[l];
           if (entering.self.onEnter) {
@@ -2176,11 +2138,8 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
          * @param {Object} fromParams The params supplied to the `fromState`.
          * @param {Error} error The resolve error object.
          */
-        evt = $rootScope.$broadcast('$stateChangeError', to.self, toParams, from.self, fromParams, error);
-
-        if (!evt.defaultPrevented) {
-            syncUrl();
-        }
+        $rootScope.$broadcast('$stateChangeError', to.self, toParams, from.self, fromParams, error);
+        syncUrl();
 
         return $q.reject(error);
       });
@@ -2329,8 +2288,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
       var state = findState(stateOrName, options.relative);
       if (!isDefined(state)) return null;
 
-      if (options.inherit) params = inheritParams($stateParams, params || {}, $state.$current, state);
-      
+      params = inheritParams($stateParams, params || {}, $state.$current, state);
       var nav = (state && options.lossy) ? state.navigable : state;
       var url = (nav && nav.url) ? nav.url.format(normalize(state.params, params || {})) : null;
       if (!$locationProvider.html5Mode() && url) {
@@ -2399,7 +2357,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
       forEach(state.views, function (view, name) {
         var injectables = (view.resolve && view.resolve !== state.resolve ? view.resolve : {});
         injectables.$template = [ function () {
-          return $view.load(name, { view: view, locals: locals, params: $stateParams }) || '';
+          return $view.load(name, { view: view, locals: locals, params: $stateParams, notify: false }) || '';
         }];
 
         promises.push($resolve.resolve(injectables, locals, dst.resolve, state).then(function (result) {
@@ -2427,7 +2385,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
   }
 
   function shouldTriggerReload(to, from, locals, options) {
-    if (to === from && ((locals === from.locals && !options.reload) || (to.self.reloadOnSearch === false))) {
+    if ( to === from && ((locals === from.locals && !options.reload) || (to.self.reloadOnSearch === false)) ) {
       return true;
     }
   }
@@ -2853,10 +2811,8 @@ function $ViewDirectiveFill ($compile, $controller, $state) {
 angular.module('ui.router.state').directive('uiView', $ViewDirective);
 angular.module('ui.router.state').directive('uiView', $ViewDirectiveFill);
 
-function parseStateRef(ref, current) {
-  var preparsed = ref.match(/^\s*({[^}]*})\s*$/), parsed;
-  if (preparsed) ref = current + '(' + preparsed[1] + ')';
-  parsed = ref.replace(/\n/g, " ").match(/^([^(]+?)\s*(\((.*)\))?$/);
+function parseStateRef(ref) {
+  var parsed = ref.replace(/\n/g, " ").match(/^([^(]+?)\s*(\((.*)\))?$/);
   if (!parsed || parsed.length !== 4) throw new Error("Invalid state ref '" + ref + "'");
   return { state: parsed[1], paramExpr: parsed[3] || null };
 }
@@ -2900,7 +2856,7 @@ function stateContext(el) {
  * Here's an example of how you'd use ui-sref and how it would compile. If you have the 
  * following template:
  * <pre>
- * <a ui-sref="home">Home</a> | <a ui-sref="about">About</a> | <a ui-sref="{page: 2}">Next page</a>
+ * <a ui-sref="home">Home</a> | <a ui-sref="about">About</a>
  * 
  * <ul>
  *     <li ng-repeat="contact in contacts">
@@ -2909,9 +2865,9 @@ function stateContext(el) {
  * </ul>
  * </pre>
  * 
- * Then the compiled html would be (assuming Html5Mode is off and current state is contacts):
+ * Then the compiled html would be (assuming Html5Mode is off):
  * <pre>
- * <a href="#/home" ui-sref="home">Home</a> | <a href="#/about" ui-sref="about">About</a> | <a href="#/contacts?page=2" ui-sref="{page: 2}">Next page</a>
+ * <a href="#/home" ui-sref="home">Home</a> | <a href="#/about" ui-sref="about">About</a>
  * 
  * <ul>
  *     <li ng-repeat="contact in contacts">
@@ -2937,9 +2893,9 @@ function $StateRefDirective($state, $timeout) {
 
   return {
     restrict: 'A',
-    require: ['?^uiSrefActive', '?^uiSrefActiveEq'],
+    require: '?^uiSrefActive',
     link: function(scope, element, attrs, uiSrefActive) {
-      var ref = parseStateRef(attrs.uiSref, $state.current.name);
+      var ref = parseStateRef(attrs.uiSref);
       var params = null, url = null, base = stateContext(element) || $state.$current;
       var isForm = element[0].nodeName === "FORM";
       var attr = isForm ? "action" : "href", nav = true;
@@ -2960,9 +2916,8 @@ function $StateRefDirective($state, $timeout) {
 
         var newHref = $state.href(ref.state, params, options);
 
-        var activeDirective = uiSrefActive[1] || uiSrefActive[0];
-        if (activeDirective) {
-          activeDirective.$$setStateInfo(ref.state, params);
+        if (uiSrefActive) {
+          uiSrefActive.$$setStateInfo(ref.state, params);
         }
         if (!newHref) {
           nav = false;
@@ -2985,14 +2940,10 @@ function $StateRefDirective($state, $timeout) {
         var button = e.which || e.button;
         if ( !(button > 1 || e.ctrlKey || e.metaKey || e.shiftKey || element.attr('target')) ) {
           // HACK: This is to allow ng-clicks to be processed before the transition is initiated:
-          var transition = $timeout(function() {
+          $timeout(function() {
             $state.go(ref.state, params, options);
           });
           e.preventDefault();
-
-          e.preventDefault = function() {
-            $timeout.cancel(transition);
-          };
         }
       });
     }
@@ -3010,19 +2961,11 @@ function $StateRefDirective($state, $timeout) {
  * @restrict A
  *
  * @description
- * A directive working alongside ui-sref to add classes to an element when the
+ * A directive working alongside ui-sref to add classes to an element when the 
  * related ui-sref directive's state is active, and removing them when it is inactive.
- * The primary use-case is to simplify the special appearance of navigation menus
+ * The primary use-case is to simplify the special appearance of navigation menus 
  * relying on `ui-sref`, by having the "active" state's menu button appear different,
  * distinguishing it from the inactive menu items.
- *
- * ui-sref-active can live on the same element as ui-sref or on a parent element. The first
- * ui-sref-active found at the same level or above the ui-sref will be used.
- *
- * Will activate when the ui-sref's target state or any child state is active. If you
- * need to activate only when the ui-sref target state is active and *not* any of
- * it's children, then you will use
- * {@link ui.router.state.directive:ui-sref-active-eq ui-sref-active-eq}
  *
  * @example
  * Given the following template:
@@ -3033,9 +2976,8 @@ function $StateRefDirective($state, $timeout) {
  *   </li>
  * </ul>
  * </pre>
- *
- *
- * When the app state is "app.user" (or any children states), and contains the state parameter "user" with value "bilbobaggins",
+ * 
+ * When the app state is "app.user", and contains the state parameter "user" with value "bilbobaggins", 
  * the resulting HTML will appear as (note the 'active' class):
  * <pre>
  * <ul>
@@ -3044,10 +2986,10 @@ function $StateRefDirective($state, $timeout) {
  *   </li>
  * </ul>
  * </pre>
- *
- * The class name is interpolated **once** during the directives link time (any further changes to the
- * interpolated value are ignored).
- *
+ * 
+ * The class name is interpolated **once** during the directives link time (any further changes to the 
+ * interpolated value are ignored). 
+ * 
  * Multiple classes may be specified in a space-separated format:
  * <pre>
  * <ul>
@@ -3057,36 +2999,18 @@ function $StateRefDirective($state, $timeout) {
  * </ul>
  * </pre>
  */
-
-/**
- * @ngdoc directive
- * @name ui.router.state.directive:ui-sref-active-eq
- *
- * @requires ui.router.state.$state
- * @requires ui.router.state.$stateParams
- * @requires $interpolate
- *
- * @restrict A
- *
- * @description
- * The same as {@link ui.router.state.directive:ui-sref-active ui-sref-active} but will will only activate
- * when the exact target state used in the `ui-sref` is active; no child states.
- *
- */
-$StateRefActiveDirective.$inject = ['$state', '$stateParams', '$interpolate'];
-function $StateRefActiveDirective($state, $stateParams, $interpolate) {
-  return  {
+$StateActiveDirective.$inject = ['$state', '$stateParams', '$interpolate'];
+function $StateActiveDirective($state, $stateParams, $interpolate) {
+  return {
     restrict: "A",
-    controller: ['$scope', '$element', '$attrs', function ($scope, $element, $attrs) {
+    controller: ['$scope', '$element', '$attrs', function($scope, $element, $attrs) {
       var state, params, activeClass;
 
       // There probably isn't much point in $observing this
-      // uiSrefActive and uiSrefActiveEq share the same directive object with some
-      // slight difference in logic routing
-      activeClass = $interpolate($attrs.uiSrefActiveEq || $attrs.uiSrefActive || '', false)($scope);
+      activeClass = $interpolate($attrs.uiSrefActive || '', false)($scope);
 
-      // Allow uiSref to communicate with uiSrefActive[Equals]
-      this.$$setStateInfo = function (newState, newParams) {
+      // Allow uiSref to communicate with uiSrefActive
+      this.$$setStateInfo = function(newState, newParams) {
         state = $state.get(newState, stateContext($element));
         params = newParams;
         update();
@@ -3096,18 +3020,10 @@ function $StateRefActiveDirective($state, $stateParams, $interpolate) {
 
       // Update route state
       function update() {
-        if (isMatch()) {
+        if ($state.$current.self === state && matchesParams()) {
           $element.addClass(activeClass);
         } else {
           $element.removeClass(activeClass);
-        }
-      }
-
-      function isMatch() {
-        if (typeof $attrs.uiSrefActiveEq !== 'undefined') {
-          return $state.$current.self === state && matchesParams();
-        } else {
-          return $state.includes(state.name) && matchesParams();
         }
       }
 
@@ -3120,8 +3036,7 @@ function $StateRefActiveDirective($state, $stateParams, $interpolate) {
 
 angular.module('ui.router.state')
   .directive('uiSref', $StateRefDirective)
-  .directive('uiSrefActive', $StateRefActiveDirective)
-  .directive('uiSrefActiveEq', $StateRefActiveDirective);
+  .directive('uiSrefActive', $StateActiveDirective);
 
 /**
  * @ngdoc filter

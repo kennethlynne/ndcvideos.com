@@ -1,0 +1,20 @@
+.panel-list-item-component {
+  font-family: 'Open Sans';
+  font-weight: 100;
+  font-size: 1em;
+  color: #ddd;
+  margin-bottom: 15px;
+  padding: {
+    top: 7px;
+    bottom: 5px;
+  }
+
+  p.title {
+    margin: 0;
+  }
+
+  &.active {
+    background: lighten($sidebar-background, 5);
+    box-shadow: inset 3px 0 0 0 #D4FF00;
+  }
+}

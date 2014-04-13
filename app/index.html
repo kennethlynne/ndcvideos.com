@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>NDC | Norwegian Developer Conference</title>
+    <title>NDC | Norwegian Developers Conference</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
     <meta name="mobile-web-app-capable" content="yes">
@@ -13,11 +13,6 @@
     <!--<link rel="shortcut icon" sizes="196x196" href="assets/images/icon.png">-->
 
     <!-- TODO: Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!--<link rel="apple-touch-icon" href="images/custom_icon.png">-->
-    <!--<link rel="apple-touch-icon" href="images/touch-icon-iphone.png">-->
-    <!--<link rel="apple-touch-icon" sizes="76x76" href="images/touch-icon-ipad.png">-->
-    <!--<link rel="apple-touch-icon" sizes="120x120" href="images/touch-icon-iphone-retina.png">-->
-    <!--<link rel="apple-touch-icon" sizes="152x152" href="images/touch-icon-ipad-retina.png">-->
     <!--<link rel="apple-touch-icon" href="assets/images/custom_icon.png">-->
     <!--<link rel="apple-touch-icon" href="assets/images/touch-icon-iphone.png">-->
     <!--<link rel="apple-touch-icon" sizes="76x76" href="assets/images/touch-icon-ipad.png">-->
@@ -27,21 +22,15 @@
     <!-- TODO: Add startup image - On iPhone and iPod touch, the image must be 320 x 480 pixels and in portrait orientation.-->
     <!--<link rel="apple-touch-startup-image" href="images/startup.png">-->
 
-      <script type="text/javascript">
-          window.qbaka||function(a,d){a.__qbaka_eh=a.onerror;a.onerror=function(){c._.push(["onerror",arguments]);if(a.__qbaka_eh)try{a.__qbaka_eh.apply(a,arguments)}catch(b){}};a.onerror.qbaka=1;var c=a.qbaka={_:[],log:function(){c._.push(["log",arguments])},report:function(){c._.push(["report",arguments,Error()])},exec:function(a){try{a()}catch(b){c.report(b)}}},b=d.createElement("script"),e=d.getElementsByTagName("script")[0],f=function(){e.parentNode.insertBefore(b,e)},g=typeof b.async;b.type="text/javascript";b.async=!0;b.src=("https:"==d.location.protocol?"https:":"http:")+"//cdn.qbaka.net/reporting.js";"undefined"==g&&d.addEventListener?d.addEventListener("DOMContentLoaded",f):f();qbaka.key="1ebdd99f8e67af47bac793c4aa1c7f78"}(window,document);qbaka.options={autoStacktrace:1,trackEvents:1};
-      </script>
-
-    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
-
+    <!-- TODO: Insert Qbaka script-->
+    <!-- /Qbaka -->
 
     <!--INJECT STYLES-->
     <link rel="stylesheet" href="styles/main.css">
     <!--/INJECT STYLES-->
 
   </head>
-  <body>
-
-    <div ui-view="modal" class="view-change-animation"></div>
+  <body _oncontextmenu="return false;">
 
     <div class="site-loading" ng-show="false">
         <div class="spinner"></div>
@@ -55,9 +44,7 @@
 
     <div id="root" class="ng-cloak">
 
-        <navbar-component></navbar-component>
-
-        <div ui-view class="view-change-animation"></div>
+        <div ui-view=""></div>
 
     </div>
 
@@ -72,29 +59,28 @@
     </script>
 
     <!--INJECT SCRIPTS-->
-    <script src="bower_components/jquery/jquery.js"></script>
-    <script src="bower_components/select2/select2.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-mocks/angular-mocks.js"></script>
     <script src="bower_components/lodash/dist/lodash.js"></script>
-    <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-component-factory/angular-component-factory.js"></script>
     <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
     <script src="bower_components/angular-busy/dist/angular-busy.js"></script>
     <script src="bower_components/angular-promise-tracker/promise-tracker.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-ui-bootstrap-bower/ui-bootstrap.js"></script>
+    <script src="bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/ngstorage/ngStorage.js"></script>
     <script src="bower_components/ng-symbiosis-utils/ng-symbiosis-utils.src.js"></script>
-    <script src="bower_components/ng-symbiosis-model/ng-symbiosis-model.src.js"></script>
-    <script src="bower_components/ng-symbiosis-repository/ng-symbiosis-repository.src.js"></script>
     <script src="bower_components/ng-symbiosis-routeprovider/ng-symbiosis-routeprovider.src.js"></script>
-    <script src="bower_components/ng-symbiosis-accesscontrol/ng-symbiosis-accesscontrol.src.js"></script>
-    <script src="bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
-    <script src="bower_components/angular-ui-select2/src/select2.js"></script>
+    <script src="bower_components/ng-symbiosis-repository/ng-symbiosis-repository.src.js"></script>
+    <script src="bower_components/ng-symbiosis-model/ng-symbiosis-model.src.js"></script>
     <script src="bower_components/log/log.js"></script>
+    <script src="bower_components/angular-ui-select2/src/select2.js"></script>
+    <script src="bower_components/ng-symbiosis-accesscontrol/ng-symbiosis-accesscontrol.src.js"></script>
+    <script src="scripts/deepExtend.js"></script>
     <script src="scripts/module.js"></script>
     <script src="dev/authentication-mock.js"></script>
     <script src="dev/favorite-mock.js"></script>
@@ -106,24 +92,30 @@
     <script src="config/local.js"></script>
     <script src="config/config.js"></script>
     <script src="config/routes.js"></script>
+    <script src="components/current-user-sidebar-item/current-user-sidebar-item.js"></script>
     <script src="components/media-player/media-player.js"></script>
-    <script src="components/navbar-mini-player/navbar-mini-player.js"></script>
     <script src="components/navbar/navbar.js"></script>
-    <script src="components/navbar/panels/navigation-panel-controller.js"></script>
+    <script src="components/panel-list-item/panel-list-item.js"></script>
+    <script src="components/panel-list/panel-list.js"></script>
+    <script src="components/right-panel/right-panel.js"></script>
+    <script src="components/sidebar/sidebar.js"></script>
+    <script src="components/slideout-backdrop/slideout-backdrop.js"></script>
     <script src="components/video-list-item/video-list-item.js"></script>
-    <script src="pages/admin/index/admin-controller.js"></script>
-    <script src="pages/admin/users/index/users-controller.js"></script>
-    <script src="pages/admin/videos/edit/index/edit-video-controller.js"></script>
-    <script src="pages/admin/videos/import/index/import-controller.js"></script>
-    <script src="pages/admin/videos/index/videos-controller.js"></script>
-    <script src="pages/error/index/error.js"></script>
-    <script src="pages/favourites/index/favourites-controller.js"></script>
-    <script src="pages/index/index/index.js"></script>
-    <script src="pages/login/index/login-controller.js"></script>
-    <script src="pages/video/videoDetails/video-controller.js"></script>
-    <script src="scripts/authentication.js"></script>
+    <script src="components/video-list/video-list.js"></script>
+    <script src="states/admin/admin-controller.js"></script>
+    <script src="states/admin/administrate-users/index/administrate-users-controller.js"></script>
+    <script src="states/admin/administrate-videos/edit/index/edit-controller.js"></script>
+    <script src="states/admin/administrate-videos/import/index/import-controller.js"></script>
+    <script src="states/admin/administrate-videos/index/administrate-videos-controller.js"></script>
+    <script src="states/app.js"></script>
+    <script src="states/error/index/error.js"></script>
+    <script src="states/favorites/index/favorites-controller.js"></script>
+    <script src="states/index/index/index.js"></script>
+    <script src="states/login/index/login-controller.js"></script>
+    <script src="states/user/index/user-controller.js"></script>
+    <script src="states/video/index/video-controller.js"></script>
+    <script src="states/video/video-details/index/video-details-controller.js"></script>
     <script src="scripts/factories/current-user.js"></script>
-    <script src="scripts/factories/lodash.js"></script>
     <script src="scripts/filters/time.js"></script>
     <script src="scripts/log.js"></script>
     <script src="scripts/models/favorite.js"></script>
@@ -134,14 +126,12 @@
     <script src="scripts/repositories/tag-repository.js"></script>
     <script src="scripts/repositories/user-repository.js"></script>
     <script src="scripts/repositories/video-repository.js"></script>
+    <script src="scripts/services/authentication.js"></script>
     <script src="scripts/services/navbar.js"></script>
     <script src="scripts/services/state-history.js"></script>
     <script src="scripts/services/vimeo-api.js"></script>
+    <script src="scripts/utils/lodash.js"></script>
     <!--/INJECT SCRIPTS-->
-
-    <script src="assets/bootstrap-tooltips/bootstrap-tooltips.js"></script>
-    <script src="assets/bootstrap-popovers/bootstrap-popovers.js"></script>
-    <script src="assets/bootstrap-modals/bootstrap-modals.js"></script>
 
   </body>
 </html>

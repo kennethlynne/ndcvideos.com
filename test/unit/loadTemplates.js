@@ -1,3 +1,3 @@
-beforeEach(function() {
-    module('compiledTemplates');
+beforeEach(function () {
+  module('compiledTemplates');
 });

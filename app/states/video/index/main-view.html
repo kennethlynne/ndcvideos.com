@@ -1,0 +1,24 @@
+<div class="video-state container">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <form class="pull-right" ng-submit="search(query)">
+                <input type="text" class="searchfield" ng-model="query" ng-change="search(query)" placeholder="Search for videos..">
+            </form>
+
+            <h1 class="page-header">Browse videos</h1>
+
+            <div class="clearfix"></div>
+        </div>
+        <hr/>
+    </div>
+
+    <div class="row">
+
+
+
+        <video-list-item-component class="col-sm-6 col-md-4 col-lg-3" ng-repeat="video in videos" video="video"></video-list-item-component>
+
+    </div>
+
+</div>

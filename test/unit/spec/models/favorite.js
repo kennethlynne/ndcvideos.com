@@ -2,151 +2,151 @@
 
 describe('Model: FavoriteModel', function () {
 
-    var FavoriteModel, $httpBackend, $rootScope, APIBaseUrl, FavoriteRepository, collectionUrl = 'favorites';
+  var FavoriteModel, $httpBackend, $rootScope, APIBaseUrl, FavoriteRepository, collectionUrl = 'favorites';
 
-    beforeEach(function () {
+  beforeEach(function () {
 
-        FavoriteRepository = jasmine.createSpy('FavoriteRepository');
-        FavoriteRepository.attach = jasmine.createSpy('FavoriteRepository.attach');
+    FavoriteRepository = jasmine.createSpy('FavoriteRepository');
+    FavoriteRepository.attach = jasmine.createSpy('FavoriteRepository.attach');
 
-        module('ndc', function ($provide) {
-            $provide.value('FavoriteRepository', FavoriteRepository);
-        });
-
-        inject(function (_FavoriteModel_, _$httpBackend_, _$rootScope_, _APIBaseUrl_) {
-            FavoriteModel = _FavoriteModel_;
-            $httpBackend = _$httpBackend_;
-            $rootScope = _$rootScope_;
-            APIBaseUrl = _APIBaseUrl_;
-        });
-
+    module('ndc', function ($provide) {
+      $provide.value('FavoriteRepository', FavoriteRepository);
     });
 
-    afterEach(function() {
-        $httpBackend.verifyNoOutstandingExpectation();
-        $httpBackend.verifyNoOutstandingRequest();
+    inject(function (_FavoriteModel_, _$httpBackend_, _$rootScope_, _APIBaseUrl_) {
+      FavoriteModel = _FavoriteModel_;
+      $httpBackend = _$httpBackend_;
+      $rootScope = _$rootScope_;
+      APIBaseUrl = _APIBaseUrl_;
     });
 
-    it('should have the url property set', function() {
-        expect(FavoriteModel.$settings.url).toBe(APIBaseUrl + collectionUrl);
+  });
+
+  afterEach(function () {
+    $httpBackend.verifyNoOutstandingExpectation();
+    $httpBackend.verifyNoOutstandingRequest();
+  });
+
+  it('should have the url property set', function () {
+    expect(FavoriteModel.$settings.url).toBe(APIBaseUrl + collectionUrl);
+  });
+
+  describe('$save', function () {
+    it('should PUT its data on $save when it has an ID (update existing)', function () {
+      $httpBackend.expectPUT(APIBaseUrl + collectionUrl + '/5', {title: 'New title', id: 5}).respond(200, {id: 5, title: 'New title from server'});
+      var model = new FavoriteModel({title: 'New title', id: 5});
+
+      var promise = model.$save();
+      $httpBackend.flush();
+
+      expect(model.title).toBe('New title from server');
+      expect(typeof promise.then).toBe('function');
     });
 
-    describe('$save', function () {
-        it('should PUT its data on $save when it has an ID (update existing)', function() {
-            $httpBackend.expectPUT( APIBaseUrl + collectionUrl + '/5', {title:'New title', id:5} ).respond(200, {id: 5, title:'New title from server'});
-            var model = new FavoriteModel({title: 'New title', id: 5});
+    it('should POST its data on $save if does not have an ID (new)', function () {
+      $httpBackend.expectPOST(APIBaseUrl + collectionUrl, {title: 'New title'}).respond(200, {id: 5, title: 'New title from server'});
+      var model = new FavoriteModel({title: 'New title'});
 
-            var promise = model.$save();
-            $httpBackend.flush();
+      var promise = model.$save();
+      $httpBackend.flush();
 
-            expect(model.title).toBe('New title from server');
-            expect(typeof promise.then).toBe('function');
-        });
-
-        it('should POST its data on $save if does not have an ID (new)', function() {
-            $httpBackend.expectPOST( APIBaseUrl + collectionUrl, {title:'New title'} ).respond(200, {id: 5, title:'New title from server'});
-            var model = new FavoriteModel({title: 'New title'});
-
-            var promise = model.$save();
-            $httpBackend.flush();
-
-            expect(model.title).toBe('New title from server');
-            expect(typeof promise.then).toBe('function');
-        });
-
-        it('should attach itself to the Repository on save', function() {
-            $httpBackend.expectPUT( APIBaseUrl + collectionUrl + '/5', {title:'New title', id:5}).respond(200, {id: 5, title:'New title from server'});
-            var model = new FavoriteModel({title: 'New title', id: 5});
-            expect(FavoriteRepository.attach).not.toHaveBeenCalled();
-            var promise = model.$save();
-            $httpBackend.flush();
-            expect(FavoriteRepository.attach).toHaveBeenCalledWith(model);
-        });
+      expect(model.title).toBe('New title from server');
+      expect(typeof promise.then).toBe('function');
     });
 
-    describe('$set', function () {
-        it('should load instance and override with new data', function() {
-            var model = new FavoriteModel({title: 'New title', id: 5});
+    it('should attach itself to the Repository on save', function () {
+      $httpBackend.expectPUT(APIBaseUrl + collectionUrl + '/5', {title: 'New title', id: 5}).respond(200, {id: 5, title: 'New title from server'});
+      var model = new FavoriteModel({title: 'New title', id: 5});
+      expect(FavoriteRepository.attach).not.toHaveBeenCalled();
+      var promise = model.$save();
+      $httpBackend.flush();
+      expect(FavoriteRepository.attach).toHaveBeenCalledWith(model);
+    });
+  });
 
-            model.$set({id:1});
+  describe('$set', function () {
+    it('should load instance and override with new data', function () {
+      var model = new FavoriteModel({title: 'New title', id: 5});
 
-            expect(model.id).toBe(1);
-            expect(model instanceof FavoriteModel).toBeTruthy();
-        });
+      model.$set({id: 1});
 
-        it('should remove properties missing in new object', function() {
-            var model = new FavoriteModel();
-
-            model.title = 'New title';
-            model.id = 5;
-
-            model.$set({id:1});
-
-            expect(model.id).toBe(1);
-            expect(model.title).toBeUndefined();
-        });
+      expect(model.id).toBe(1);
+      expect(model instanceof FavoriteModel).toBeTruthy();
     });
 
-    describe('$delete', function () {
-        it('should delete on $delete', function() {
-            $httpBackend.expectDELETE( APIBaseUrl + collectionUrl + '/5').respond(200, {});
+    it('should remove properties missing in new object', function () {
+      var model = new FavoriteModel();
 
-            var model = new FavoriteModel();
-            model.id = 5;
+      model.title = 'New title';
+      model.id = 5;
 
-            var promise = model.$delete();
-            $httpBackend.flush();
+      model.$set({id: 1});
 
-            expect(typeof promise.then).toBe('function');
-        });
+      expect(model.id).toBe(1);
+      expect(model.title).toBeUndefined();
+    });
+  });
+
+  describe('$delete', function () {
+    it('should delete on $delete', function () {
+      $httpBackend.expectDELETE(APIBaseUrl + collectionUrl + '/5').respond(200, {});
+
+      var model = new FavoriteModel();
+      model.id = 5;
+
+      var promise = model.$delete();
+      $httpBackend.flush();
+
+      expect(typeof promise.then).toBe('function');
+    });
+  });
+
+  describe('$isDirty', function () {
+    it('should return false if object is not changed since last save or delete ', function () {
+      var model = new FavoriteModel({id: 1});
+      expect(model.$isDirty).toBeFalsy();
     });
 
-    describe('$isDirty', function () {
-        it('should return false if object is not changed since last save or delete ', function() {
-            var model = new FavoriteModel({id:1});
-            expect(model.$isDirty).toBeFalsy();
-        });
-
-        it('should not be dirty initially', function() {
-            var model = new FavoriteModel({id:5});
-            expect(model.$isDirty).toBeFalsy();
-            $rootScope.$digest();
-            expect(model.$isDirty).toBeFalsy();
-        });
-
-        it('should be dirty on change', function() {
-            var model = new FavoriteModel({id:5});
-            $rootScope.$digest();
-            model.thing = 'Data';
-            $rootScope.$digest();
-            expect(model.$isDirty).toBeTruthy();
-        });
-
-        it('should not be dirty after save', function() {
-            var model = new FavoriteModel({id:5});
-            $rootScope.$digest();
-            model.thing = 'Data';
-
-            $httpBackend.expectPUT( APIBaseUrl + collectionUrl + '/5', {thing:'Data', id:5}).respond(200, {id: 5, thing:'Data'});
-            model.$save();
-
-            $httpBackend.flush();
-            expect(model.$isDirty).toBeFalsy();
-        });
+    it('should not be dirty initially', function () {
+      var model = new FavoriteModel({id: 5});
+      expect(model.$isDirty).toBeFalsy();
+      $rootScope.$digest();
+      expect(model.$isDirty).toBeFalsy();
     });
 
-    describe('$onChange', function () {
-        it('should call all registered callbacks on change', function() {
-            var cb = jasmine.createSpy('callback1');
-
-            var model = new FavoriteModel({id:5});
-            model.$onChange(cb);
-            $rootScope.$digest();
-            expect(cb).not.toHaveBeenCalled();
-
-            model.thing = 'Data';
-            $rootScope.$digest();
-            expect(cb).toHaveBeenCalled();
-        });
+    it('should be dirty on change', function () {
+      var model = new FavoriteModel({id: 5});
+      $rootScope.$digest();
+      model.thing = 'Data';
+      $rootScope.$digest();
+      expect(model.$isDirty).toBeTruthy();
     });
+
+    it('should not be dirty after save', function () {
+      var model = new FavoriteModel({id: 5});
+      $rootScope.$digest();
+      model.thing = 'Data';
+
+      $httpBackend.expectPUT(APIBaseUrl + collectionUrl + '/5', {thing: 'Data', id: 5}).respond(200, {id: 5, thing: 'Data'});
+      model.$save();
+
+      $httpBackend.flush();
+      expect(model.$isDirty).toBeFalsy();
+    });
+  });
+
+  describe('$onChange', function () {
+    it('should call all registered callbacks on change', function () {
+      var cb = jasmine.createSpy('callback1');
+
+      var model = new FavoriteModel({id: 5});
+      model.$onChange(cb);
+      $rootScope.$digest();
+      expect(cb).not.toHaveBeenCalled();
+
+      model.thing = 'Data';
+      $rootScope.$digest();
+      expect(cb).toHaveBeenCalled();
+    });
+  });
 });

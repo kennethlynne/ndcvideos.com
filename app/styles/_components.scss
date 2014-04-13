@@ -1,7 +1,10 @@
-// TODO: Shoudn't need to include config and neat-helpers here - inheritance bug?
-@import 'config';
-@import 'neat/app/assets/stylesheets/neat-helpers';
 @import '../components/navbar/navbar';
 @import '../components/media-player/media-player';
+@import '../components/video-list/video-list';
 @import '../components/video-list-item/video-list-item';
-@import '../components/navbar-mini-player/navbar-mini-player';
+@import '../components/sidebar/sidebar';
+@import '../components/slideout-backdrop/slideout-backdrop';
+@import '../components/right-panel/right-panel';
+@import '../components/panel-list/panel-list';
+@import '../components/panel-list-item/panel-list-item';
+@import '../components/current-user-sidebar-item/current-user-sidebar-item';

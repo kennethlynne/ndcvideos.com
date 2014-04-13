@@ -19,7 +19,7 @@ describe('ng-symbiosis-routeprovider', function () {
 
         it('should register a default state', function () {
             expect(stateFactory('Example').url).toEqual('/example');
-            expect(stateFactory('Example').templateUrl).toEqual('pages/example/index/main-view.html');
+            expect(stateFactory('Example').templateUrl).toEqual('states/example/index/main-view.html');
             expect(stateFactory('Example').controller).toEqual('ExampleCtrl');
         });
 

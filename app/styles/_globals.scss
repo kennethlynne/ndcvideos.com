@@ -1,160 +1,157 @@
-// TODO: Shoudn't need to include config and neat-helpers here - inheritance bug?
-@import 'config';
-@import 'neat/app/assets/stylesheets/neat-helpers';
-
-/* --------------------------------
-	General
--------------------------------- */
-* {
-  box-sizing: border-box !important;
-  font-family: 'Roboto', sans-serif;
-}
-
-:-webkit-full-screen-ancestor {
-  .navbar-component, 
-  .modal-backdrop, 
-  .powered, 
-  .content-wrapper {
-    display: none !important;
-  }
-}
-
-[ui-sref] {
-    cursor: pointer;
-}
-
-h1.page-header {
-	margin: 0;
-	font-size: 30px;
-	text-transform: uppercase;
-	// color: $primary-color;
-	font-weight: 700;
-
-	small {
-		display: block;
-		text-transform: none;
-		margin-bottom: 25px;
-		color: #666;
-		font-size: 16px;
-		font-weight: normal;
-	}
-}
-
-.hidden-on-small {
-	@include media($tablet) {
-		display: none;
-	}
-}
-
-.hidden-on-large {
-	display: none;
-	@include media($tablet) {
-		display: block;
-	}
-}
-
-#root {
-	position: relative;
+html {
+  overflow-y: scroll;
+  height: 100%;
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
-  margin: 0;
-  background: $body-background;
+  background: #121314;
+  color: #ddd;
+  font-family: 'Open Sans';
+  height: 100%;
+  font-weight: 300;
 }
 
-a {
-  color: $primary-color;
-  cursor: pointer;
+hr {
+  border-top: 1px solid #333;
 }
 
-button {
-  cursor: pointer;
+#root {
+  position: relative; //View will be positioned absolute during animations
+  height: 100%;
+}
 
-  &:focus {
-	outline: none;
+#app {
+  position: relative; //View will be positioned absolute during animations
+  height: 100%;
+
+  > div[ng-view], > div[ui-view] {
+    margin: {
+      right: $right-panel-width;
+      left: $sidebar-width;
+    }
+
+    > .container {
+      width: auto !important;
+      max-width: 1170px;
+    }
   }
-
-  &:hover {
-	i {
-	  color: $primary-color;
-	}
-  }
-} 
-
-.button {
-	background: $primary-color;
-	border: none;
-	font-size: 14px;
-	padding: 12px 15px;
-	font-weight: bold;
-	color: #fff;
 }
 
-.popover {
+hr {
+  border-top: 1px solid #333;
+}
+
+.page-header-menu {
+  list-style: none;
+  font-family: 'Open Sans';
+  font-weight: 300;
+  margin-bottom: -9px;
+  padding-left: 10px;
+  text-transform: uppercase;
   font-size: 1em;
-  border-radius: 0;
 
-  h2 {
-	margin: 0;
-	padding: 0;
-	font-size: 1em;
-  }
+  li {
+    display: inline;
+    padding-left: 5px;
+    padding-right: 5px;
 
-  p {
-	margin: 0 0 5px 0;
-	padding: 0;
-	font-size: 0.8em;
-  }
-}
+    a {
+      color: #ccc;
+      text-decoration: none !important;
+    }
 
-
-/* --------------------------------
-	Wrappers
--------------------------------- */
-.content-wrapper {
-  @include clearfix;
-  padding-left: $leftnav-width + 5;
-  // margin-right: $rightnav-width;
-  padding-bottom: $content-gutter;
-  padding-top: $content-gutter / 2;
-  color: $dark-color;
-
-  @include media($tablet) {
-	padding-left: 0;
-  }
-
-  @include media($phone) {
-	padding-left: 0;
-  }
-
-  hr {
-	@include span-columns(12);
-	width: 100%;
-	display: block;
-	margin: $content-gutter 0 0 0;
-	height: 0px;
-	border: none;
-	border-top: 5px solid #333;
-	outline: none;
-
-  }
-
-  h2 {
-	padding: 0 ($content-gutter / 2);
-	margin: $content-gutter 0 ($content-gutter / 2) ($content-gutter / 2);
-	@include span-columns(12);
-	font-size: 0.8em;
-	text-transform: uppercase;
-
-	&.first {
-	  margin-top: -30px;
-	}
-
-	small {
-	  opacity: 0.4;
-	  margin-left: 5px;
-	}
+    &.active {
+      border-bottom: 2px solid cornflowerblue;
+      padding-bottom: 11px;
+    }
   }
 }
 
+.page-header {
+  font-family: 'Open Sans';
+  font-weight: 300;
+  font-size: 3.5em;
+  color: #ccc;
+  border: none;
+}
+
+.no-left-margin {
+  margin-left: 0 !important;
+}
+
+[ng-click], [ui-sref] {
+  cursor: pointer;
+}
+
+.container-xs-height {
+  display: table;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.row-xs-height {
+  display: table-row;
+}
+
+.col-xs-height {
+  display: table-cell;
+  float: none;
+}
+
+@media (min-width: 768px) {
+  .container-sm-height {
+    display: table;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .row-sm-height {
+    display: table-row;
+  }
+  .col-sm-height {
+    display: table-cell;
+    float: none;
+  }
+}
+
+@media (min-width: 992px) {
+  .container-md-height {
+    display: table;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .row-md-height {
+    display: table-row;
+  }
+  .col-md-height {
+    display: table-cell;
+    float: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container-lg-height {
+    display: table;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .row-lg-height {
+    display: table-row;
+  }
+  .col-lg-height {
+    display: table-cell;
+    float: none;
+  }
+}
+
+/* vertical alignment styles */
+.col-top {
+  vertical-align: top;
+}
+
+.col-middle {
+  vertical-align: middle;
+}
+
+.col-bottom {
+  vertical-align: bottom;
+}
