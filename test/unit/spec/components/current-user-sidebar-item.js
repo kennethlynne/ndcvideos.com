@@ -23,13 +23,6 @@ describe('Component: currentUserSidebarItemComponent', function () {
       expect(element).toHaveClass('current-user-sidebar-item-component');
     });
 
-    it('should render text', function () {
-      element = angular.element('<current-user-sidebar-item-component></current-user-sidebar-item-component>');
-      element = $compile(element)(scope);
-      scope.$digest();
-      expect(element.text()).toContain('currentUserSidebarItem');
-    });
-
   });
 
   describe('Controller: currentUserSidebarItemComponentCtrl', function () {
@@ -50,9 +43,6 @@ describe('Component: currentUserSidebarItemComponent', function () {
       });
     });
 
-    it('should render a message', function () {
-      expect(scope.text).toContain('currentUserSidebarItem');
-    });
   });
 
 });

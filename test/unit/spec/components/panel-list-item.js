@@ -19,7 +19,7 @@ describe('Component: panelListItemComponent', function () {
     it('should have the component class', function () {
       element = angular.element('<panel-list-item-component item="item"></panel-list-item-component>');
       scope.item = {
-        action: 'index'
+        uiSref: 'index'
       };
 
       element = $compile(element)(scope);

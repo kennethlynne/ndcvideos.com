@@ -16,7 +16,4 @@ describe('Controller(/admin/administrate-videos/edit): EditCtrl', function () {
     });
   });
 
-  it('should attach init data to scope', function () {
-    expect(scope.foo).toEqual('bar');
-  });
 });

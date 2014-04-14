@@ -31,7 +31,7 @@ describe('Component: videoListItemComponent', function () {
       element = angular.element('<video-list-item-component video="video"></video-list-item-component>');
       element = $compile(element)(scope);
       scope.$digest();
-      expect(element.find('.video').html()).toContain('Ellie Goulding');
+      expect(element.find('.video-info').html()).toContain('Ellie Goulding');
     });
 
   });
