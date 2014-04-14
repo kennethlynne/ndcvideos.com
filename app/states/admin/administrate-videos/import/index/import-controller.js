@@ -3,9 +3,9 @@
 angular.module('ndc')
   .config(function ($stateProvider, stateFactory) {
     $stateProvider.state('administrateVideosImport', stateFactory('Import', {
-      url: '/import/{id}',
+      url: '/videos/import/{id}',
       templateUrl: 'states/admin/administrate-videos/import/index/main-view.html',
-      parent: 'administrateVideos'
+      parent: 'admin'
     }));
   })
   .controller('ImportCtrl', function ($scope, TagRepository, $state) {
