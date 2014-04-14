@@ -3,9 +3,9 @@
 angular.module('ndc')
   .config(function ($stateProvider, stateFactory) {
     $stateProvider.state('administrateVideosEdit', stateFactory('Edit', {
-      url: '/edit/{id}',
+      url: 'videos/edit/{id}',
       templateUrl: 'states/admin/administrate-videos/edit/index/main-view.html',
-      parent: 'administrateVideos'
+      parent: 'admin'
     }));
   })
   .controller('EditCtrl', function ($scope, TagRepository, $state, $stateParams, VideoRepository) {

@@ -11,6 +11,6 @@ angular.module('ndc')
   .controller('UserCtrl', function ($scope, authentication, $state) {
     $scope.logout = function () {
       authentication.logout();
-      $state.go('index');
+      $state.go('login');
     };
   });

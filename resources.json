@@ -28,7 +28,8 @@
       "bower_components/ng-symbiosis-model/ng-symbiosis-model.src.js",
       "bower_components/log/log.js",
       "bower_components/angular-ui-select2/src/select2.js",
-      "bower_components/ng-symbiosis-accesscontrol/ng-symbiosis-accesscontrol.src.js"
+      "bower_components/ng-symbiosis-accesscontrol/ng-symbiosis-accesscontrol.src.js",
+      "bower_components/select2/select2.js"
     ],
     "externalExcludeFromBuild": [
       "bower_components/angular-mocks/angular-mocks*.js"
