@@ -15,7 +15,10 @@ $iconSpritePath:          "../assets/images/glyphicons-halflings.png" !default;
 $iconWhiteSpritePath:     "../assets/images/glyphicons-halflings-white.png" !default;
 
 $sidebar-width: 80px;
-$right-panel-width: 230px;
+
+//$right-panel-width: 230px;
+$right-panel-width: 0px;
+
 $sidebar-background: #1c1c1f;
 
 $primary-color: #1bb776;
