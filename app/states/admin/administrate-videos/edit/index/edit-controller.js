@@ -3,7 +3,7 @@
 angular.module('ndc')
   .config(function ($stateProvider, stateFactory) {
     $stateProvider.state('administrateVideosEdit', stateFactory('Edit', {
-      url: 'videos/edit/{id}',
+      url: '/videos/edit/{id}',
       templateUrl: 'states/admin/administrate-videos/edit/index/main-view.html',
       parent: 'admin'
     }));
