@@ -2,21 +2,27 @@
 
 describe('Controller(/user): UserCtrl', function () {
 
-  var UserCtrl, scope;
+  var UserCtrl, scope, authentication;
 
   beforeEach(function () {
+
+    authentication = {
+      logout: jasmine.createSpy('authentication.logout')
+    };
 
     module('ndc');
 
     inject(function ($controller, $rootScope) {
       scope = $rootScope.$new();
       UserCtrl = $controller('UserCtrl', {
-        $scope: scope
+        $scope: scope,
+        authentication: authentication
       });
     });
   });
 
-  it('should attach init data to scope', function () {
-    expect(scope.foo).toEqual('bar');
+  it('should log the user out', function () {
+    scope.logout();
+    expect(authentication.logout).toHaveBeenCalled();
   });
 });

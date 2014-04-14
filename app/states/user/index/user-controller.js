@@ -8,6 +8,9 @@ angular.module('ndc')
       parent: 'app'
     }));
   })
-  .controller('UserCtrl', function ($scope) {
-    $scope.foo = 'bar';
+  .controller('UserCtrl', function ($scope, authentication, $state) {
+    $scope.logout = function () {
+      authentication.logout();
+      $state.go('index');
+    };
   });
