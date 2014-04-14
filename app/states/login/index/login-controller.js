@@ -22,7 +22,7 @@ angular.module('ndc')
 
       authentication.login('password', username, password)
         .then(function (isLoggedIn) {
-          if (isLoggedIn) $state.go('index');
+          if (isLoggedIn) $state.go('videos');
         })
         .catch(function (reason) {
           alert(reason);
