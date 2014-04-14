@@ -2,7 +2,7 @@
 
 angular.module('ndc')
   .config(function ($urlRouterProvider) {
-    $urlRouterProvider.when('', '/');
-    $urlRouterProvider.when('', '/');
+    $urlRouterProvider.when('', '/app/videos');
+    $urlRouterProvider.when('/', '/app/videos');
     $urlRouterProvider.otherwise("/error?code=404");
   });
