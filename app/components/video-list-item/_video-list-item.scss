@@ -14,6 +14,8 @@
       overflow: hidden;
       background-size: cover;
       background-position: center;
+      padding-bottom: 56%;
+      height: 0;
 
       &:before {
         content: "";
@@ -25,11 +27,6 @@
         width: 100%;
         height: 100%;
         background: rgba(0, 0, 0, 0.3);
-      }
-
-      img.ratio {
-        width: 100%;
-        height: auto;
       }
 
       .length {
@@ -47,10 +44,11 @@
       color: #222;
 
       h3 {
+        margin-top: 15px;
+        margin-bottom: 10px;
         font-size: 1.1em;
-        line-height: 1.3em;
-        font-family: georgia;
-        font-weight: bold;
+        line-height: 1.35em;
+        font-weight: 700;
       }
 
     }

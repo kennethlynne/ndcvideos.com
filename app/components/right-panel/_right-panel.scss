@@ -3,7 +3,7 @@
   right: 0;
   top: 0;
   overflow: hidden;
-  background: #1c1c1f;
+  background: $sidebar-background;
   width: $right-panel-width;
   height: 100%;
   z-index: 10;
@@ -17,11 +17,20 @@
     margin: 0;
   }
 
-  .bottom-fixed
-  {
-    border-top: 2px solid #333;
+  .bottom-fixed {
+    border-top: 2px solid #444;
     padding-top: 15px;
     height: 50%;
     overflow-y: auto;
+  }
+
+  h4 {
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  p {
+    font-size: 12px;
+    line-height: 1em;
   }
 }

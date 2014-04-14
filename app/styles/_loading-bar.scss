@@ -36,7 +36,7 @@
   -o-transition: width 350ms;
   transition: width 350ms;
 
-  background: #29d;
+  background: $primary-color;
   position: fixed;
   z-index: 2000;
   top: 0;
@@ -52,7 +52,6 @@
   right: 0px;
   width: 100px;
   height: 100%;
-  box-shadow: 0 0 10px #29d, 0 0 5px #29d;
   opacity: 1.0;
 
   -webkit-transform: rotate(3deg) translate(0px, -4px);

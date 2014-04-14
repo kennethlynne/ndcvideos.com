@@ -1,3 +1,25 @@
 .video-state  {
 	padding-bottom: 40px;
+
+	.searchform {
+		position: relative;
+
+		.searchfield {
+			margin-top: 25px;
+			margin-bottom: 20px;
+			width: 100%;
+			padding-left: 45px;
+			font-weight: 300;
+			box-shadow: none;
+			border-left: 4px solid $primary-color;
+			border-radius: 0 4px 4px 0;
+		}
+
+		.searchicon {
+			font-size: 20px;
+			position: absolute;
+			left: 15px;
+			top: 12px;
+		}
+	}
 }

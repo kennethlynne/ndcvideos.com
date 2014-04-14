@@ -6,12 +6,17 @@ angular.module('ndc.components')
       {
         title: 'Videos',
         uiSref: 'videos',
-        cssClass: ['glyphicon', 'glyphicon-play']
+        cssClass: ['icon-camcorder']
+      },
+      {
+        title: 'Favorites',
+        uiSref: 'favorites',
+        cssClass: ['icon-heart']
       },
       {
         title: 'Admin',
         uiSref: 'admin',
-        cssClass: ['glyphicon', 'glyphicon-cog']
+        cssClass: ['icon-lock']
       }
     ];
   })

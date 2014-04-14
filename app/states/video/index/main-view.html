@@ -2,8 +2,9 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <form class="pull-right" ng-submit="search(query)">
-                <input type="text" class="searchfield" ng-model="query" ng-change="search(query)" placeholder="Search for videos..">
+            <form class="searchform" ng-submit="search(query)">
+                <span class="searchicon icon-magnifier"></span>
+                <input type="text" class="form-control input-lg searchfield" ng-model="query" ng-change="search(query)" placeholder="Search for videos..">
             </form>
 
             <div class="clearfix"></div>
