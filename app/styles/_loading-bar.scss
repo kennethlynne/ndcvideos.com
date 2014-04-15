@@ -73,15 +73,15 @@
 
 #loading-bar-spinner .spinner-icon {
   position: fixed;
-  top: 20px;
+  top: 28px;
   left: 30px;
 
   width: 14px;
   height: 14px;
 
   border:  solid 2px transparent;
-  border-top-color:  #29d;
-  border-left-color: #29d;
+  border-top-color:  $primary-color;
+  border-left-color: $primary-color;
   border-radius: 10px;
 
   -webkit-animation: loading-bar-spinner 400ms linear infinite;

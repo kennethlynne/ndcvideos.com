@@ -15,6 +15,10 @@ body {
   &.detail-view-open {
     overflow-y: hidden;
   }
+
+  &.dark {
+    background-color: #222;
+  }
 }
 
 .btn-custom {

@@ -1,4 +1,83 @@
 .login-state  {
+  padding-top: 120px;
+  background: #ddd;
+  padding-bottom: 180px;
+  border-radius: 0 0 10px 10px;
+
+  .container {
+    width: 440px;
+    margin: 0 auto;
+    // border: 2px solid #aaa;
+    border-radius: 10px;
+    padding: 10px 50px 50px 50px;
+    background: #333;
+  }
+
+  h1 {
+    margin: 3px 0 23px 0;
+    padding: 0;
+    color: #fff;
+    text-align: left;
+    font-size: 26px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 300;
+    margin: 20px 0 0 0;
+    color: #ddd;
+    text-transform: uppercase;
+    text-align: left;
+    letter-spacing: 1px;
+  }
+
+  .login-input-wrapper {
+    position: relative;
+
+    input[type="text"], input[type="password"] {
+      border: none;
+      box-shadow: none;
+      padding-left: 45px;
+      color: #444;
+      font-weight: 300;
+      font-family: "Roboto";
+    }
+
+    input[type="password"] {
+      border-top: 1px solid #ddd;
+    }
+
+    span {
+      &.icon-user, &.icon-lock {
+        display: inline-block;
+        position: absolute;
+        left: 15px;
+        top: 10px;
+        font-size: 18px;
+        z-index: 10;
+        color: #444;
+      }
+
+      &.icon-lock {
+        top: 51px;
+      }
+    }
+  }
+
+  .btn {
+    width: 100%;
+    margin-top: 20px !important;
+    background: $primary-color !important;
+    border: none !important;
+    letter-spacing: 1px;
+    font-weight: 300;
+  }
+
+
+
+
   .form-signin {
     max-width: 330px;
     padding: 15px;
@@ -53,7 +132,7 @@
   }
 
   .btn-center {
-    width: 50%;
+    // width: 50%;
     text-align: center;
     margin: inherit;
   }
@@ -104,4 +183,5 @@
     background-color: #466b99;
     border-color: #3b5a7c;
   }
+
 }

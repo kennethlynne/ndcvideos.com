@@ -1,11 +1,12 @@
 <div class="login-state container animated fadeInDown">
 
-
     <div class="container text-center">
         <form class="form-signin" data-ember-action="2">
-            <h2 class="form-signin-heading">Sign in</h2>
 
-            <small class="text-muted">Connect to NDC with your favorite social network</small>
+            <h2>Please sign in for</h2>
+            <h1>NDC Video gallery</h1>
+
+            <!-- <small class="text-muted">Connect to NDC with your favorite social network</small>
             <br><br>
 
             <p>
@@ -16,24 +17,26 @@
             <p>
                 <a class="btn btn-primary social-login-btn social-linkedin" href="#"><i class="fa fa-linkedin"></i></a>
                 <a class="btn btn-primary social-login-btn social-google"><i class="fa fa-google-plus"></i></a>
-            </p>
+            </p> -->
 
-            <br><br>
+            <!-- <br><br>
 
             <small class="text-muted">Or sign in with your NDC account</small>
-            <br><br>
+            <br><br> -->
 
             <div class="login-input-wrapper">
-                <input class="form-control login-input" placeholder="Username" type="text" ng-model="username">
-                <input class="form-control login-input" placeholder="Password" type="password" ng-model="password">
+                <span class="icon-user"></span><input class="form-control login-input" placeholder="Username" type="text" ng-model="username">
+                <span class="icon-lock"></span><input class="form-control login-input" placeholder="Password" type="password" ng-model="password">
             </div>
 
             <button class="btn btn-lg btn-primary btn-block btn-center" type="submit" ng-click="login(username, password)">Sign in
             </button>
-            <br>
+            
+            <!-- <br>
             <small class="create-account text-muted">Don't have a NDC account or social network account?
-                <button class=" btn btn-sm btn-default" type="button">Sign Up</button>
-            </small>
+                <button class="btn btn-sm btn-default" type="button">Sign Up</button>
+            </small> -->
+
         </form>
     </div>
 
