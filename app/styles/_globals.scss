@@ -5,7 +5,7 @@ html {
 
 body {
   background: #fff;
-  color: #ddd;
+  color: #555;
   // font-family: 'Open Sans';
   font-family: "Roboto";
   font-weight: 100;
@@ -14,6 +14,24 @@ body {
 
   &.detail-view-open {
     overflow-y: hidden;
+  }
+}
+
+.btn-custom {
+  background: #444 !important;
+  color: #fff !important;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  font-weight: 500;
+  letter-spacing: 1px;
+  border-radius: 10px;
+  margin-right: 5px;
+  margin-bottom: 6px;
+
+  &[disabled] {
+    opacity: 0.2;
+    cursor: not-allowed;
   }
 }
 
@@ -48,30 +66,30 @@ hr {
 }
 
 hr {
-  border-top: 1px solid #333;
+  border-top: 3px solid #ddd;
 }
 
 .page-header-menu {
   list-style: none;
   font-family: 'Open Sans';
   font-weight: 300;
-  margin-bottom: -9px;
-  padding-left: 10px;
+  margin-bottom: -10px;
+  padding: 0;
   text-transform: uppercase;
   font-size: 1em;
 
   li {
     display: inline;
-    padding-left: 5px;
-    padding-right: 5px;
+    margin-right: 15px;
 
     a {
-      color: #ccc;
+      color: #666;
       text-decoration: none !important;
+      font-size: 16px;
     }
 
     &.active {
-      border-bottom: 2px solid cornflowerblue;
+      border-bottom: 3px solid $primary-color;
       padding-bottom: 11px;
     }
   }

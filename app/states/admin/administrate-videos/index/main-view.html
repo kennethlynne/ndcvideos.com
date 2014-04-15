@@ -5,7 +5,7 @@
 
             <h2>Add videos from Vimeo</h2>
             <p>Import videos from Vimeo and add additional metadata to each element.</p>
-            <table cg-busy="'vimeoAPI.getVideos'">
+            <table cg-busy="'vimeoAPI.getVideos'" class="table table-hover">
                 <thead class="hidden-on-small">
                 <tr>
                     <th>Video name</th>
@@ -15,10 +15,10 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="video in vimeoVideos">
-                    <td><span class="hidden-on-large">Name: </span>{{video.title}}</td> <!-- Video name -->
-                    <td><span class="hidden-on-large">Length: </span>{{video.duration | time}}</td> <!-- Video length -->
-                    <td><span class="hidden-on-large">Actions: </span> <!-- Actions -->
-                        <button ui-sref="administrateVideosImport({id:video.id})">Import and edit</button>
+                    <td>{{video.title}}</td>
+                    <td>{{video.duration | time}}</td>
+                    <td>
+                        <button class="btn btn-custom" ui-sref="administrateVideosImport({id:video.id})">Import and edit</button>
                     </td>
                 </tr>
                 </tbody>
@@ -26,7 +26,7 @@
 
             <h2>All videos</h2>
             <p>Manage imported videos.</p>
-            <table cg-busy="'VideoRepository.getAll'">
+            <table cg-busy="'VideoRepository.getAll'" class="table table-hover">
                 <thead class="hidden-on-small">
                 <tr>
                     <th>Video name</th>
@@ -37,16 +37,16 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="video in existingVideos">
-                    <td><span class="hidden-on-large">Name: </span>{{video.title}}</td>
-                    <td><span class="hidden-on-large">Tags: </span>
+                    <td></span>{{video.title}}</td>
+                    <td>
                         <ul class="tags">
                             <li ng-repeat="tag in video.tags">{{tag.text}}</li>
                         </ul>
                     </td>
-                    <td><span class="hidden-on-large">Length: </span>{{video.duration | time}}</td>
-                    <td><span class="hidden-on-large">Actions: </span>
-                        <button ui-sref="administrateVideosEdit({id:video.id})">Edit</button>
-                        <button ng-click="deleteVideo(video);">Delete</button>
+                    <td></span>{{video.duration | time}}</td>
+                    <td>
+                        <button class="btn btn-custom" ui-sref="administrateVideosEdit({id:video.id})">Edit</button>
+                        <button class="btn btn-custom" ng-click="deleteVideo(video);">Delete</button>
                     </td>
                 </tr>
                 </tbody>
