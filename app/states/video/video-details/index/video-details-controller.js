@@ -17,10 +17,12 @@ angular.module('ndc')
 
     VideoRepository.getById($stateParams.id).then(function (video) {
       $scope.video = video;
+      $("body").addClass("detail-view-open");
     });
 
     $scope.close = function () {
       stateHistory.back();
+      $("body").removeClass("detail-view-open");
     }
 
   });

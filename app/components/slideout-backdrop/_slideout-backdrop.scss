@@ -2,7 +2,8 @@
   position: fixed;
   top: 0px;
   height: 100%;
-  background: rgba(255,255,255,0.9);
+  background: rgba(0,0,0,0.5);
+  box-shadow: inset 0px 0px 200px rgba(0,0,0,0.7);
   width: 100%;
   z-index: -1;
 }

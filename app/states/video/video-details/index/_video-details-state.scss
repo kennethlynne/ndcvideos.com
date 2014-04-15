@@ -1,5 +1,7 @@
 .video-details-state {
-
+  overflow-x: hidden;
+  overflow-y: scroll;
+  
   .no-padding {
     padding: {
       left: 0;
@@ -8,8 +10,9 @@
 
     .add-padding {
       padding: {
-        left: 15px;
-        right: 15px;
+        left: 32px;
+        right: 60px;
+        top: 10px;
       }
     }
   }
@@ -20,6 +23,76 @@
       background: #fff;
       color: #222;
       border-radius: 0;
+      border: none !important;
+      margin-right: -1px;
+
+      h2 {
+        font-size: 35px;
+        line-height: 1.2em;
+        font-weight: 800;
+        margin-bottom: 20px;
+      }
+
+      h3 {
+        font-size: 14px;
+        line-height: 1.2em;
+        font-weight: 400;
+        margin-top: 30px;
+      }
+
+      p {
+        font-size: 20px;
+        line-height: 1.3em;
+        font-weight: 300;
+      }
+
+      ul.tags {
+        list-style: none;
+        margin: 10px 0;
+        padding: 0;
+
+        li {
+          display: inline-block;
+          padding: 4px 12px;
+          border: 1px solid #aaa;
+          border-radius: 10px;
+          font-size: 12px;
+          margin-right: 10px;
+          letter-spacing: 1px;
+        }
+      }
+
+      .speaker {
+        border-top: 5px solid $primary-color;
+        margin-left: -32px;
+        padding-left: 32px;
+        margin-top: 40px;
+        padding-top: 20px;
+        display: inline-block;
+        padding-right: 30px;
+        margin-bottom: 40px;
+        letter-spacing: 1px;
+
+        img {
+          margin-right: 17px;
+          width: 57px;
+          height: auto;
+          float: left;
+        }
+
+        span {
+          display: inline-block;
+          font-size: 18px;
+          margin-top: 10px;
+          font-weight: 800;
+
+          small {
+            display: block;
+            font-size: 0.8em;
+            font-weight: 300;
+          }
+        }
+      }
     }
 
   }

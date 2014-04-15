@@ -10,6 +10,14 @@
                 <div class="add-padding">
                     <h2>{{video.title}}</h2>
                     <p>{{video.description}}</p>
+                    <h3 ng-show="video.tags.length > 0">Tagged:</h3>
+                    <ul class="tags" ng-show="video.tags.length > 0">
+                        <li ng-repeat="tag in video.tags">{{tag.text}}</li>
+                    </ul>
+                    <div class="speaker">
+                        <img src="assets/images/user.png" alt=""/>
+                        <span>John Doe <small>Javascript guru</small></span>
+                    </div>
                 </div>
             </div>
 

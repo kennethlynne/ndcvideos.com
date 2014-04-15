@@ -8,18 +8,22 @@
 			margin-top: 25px;
 			margin-bottom: 20px;
 			width: 100%;
-			padding-left: 45px;
+			padding-left: 50px;
 			font-weight: 300;
 			box-shadow: none;
-			border-left: 4px solid $primary-color;
-			border-radius: 0 4px 4px 0;
+			border-color: #ddd !important;
+			// border-left-color: $primary-color !important;
+			// box-shadow: -3px 0 0 $primary-color;
+			// border-radius: 0 4px 4px 0;
+			color: #666;
 		}
 
 		.searchicon {
 			font-size: 20px;
 			position: absolute;
-			left: 15px;
-			top: 12px;
+			left: 20px;
+			top: 11px;
+			color: #aaa;
 		}
 	}
 }
