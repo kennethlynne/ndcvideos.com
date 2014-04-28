@@ -40,9 +40,12 @@ angular.module('ndc')
                     if (response && response.data) {
                         var data = response.data;
                         $localStorage.token = data.access_token;
-                        deferred.resolve(true);
 
-                        UserRepository.getById(data.user.id).then(CurrentUser.set);
+                        return UserRepository.getById(data.user.id)
+                          .then(CurrentUser.set)
+                          .then(function () {
+                              deferred.resolve(true);
+                          });
                     }
                     else {
                         deferred.reject('No data received');
