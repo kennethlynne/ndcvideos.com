@@ -12,6 +12,11 @@
     right: 10px;
   }
 
+  @media (max-width: 768px) {
+    width: 100% !important;
+    left: 0 !important;
+  }
+
   .wrapper {
     height: 50%;
     margin: 0;

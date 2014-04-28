@@ -19,6 +19,11 @@
       left: $sidebar-width;
     }
 
+    @media (max-width: 768px) {
+      padding: 0;
+      // top: 68px;
+    }
+
     > .container {
       width: auto !important;
       padding-right: 0;

@@ -1,11 +1,17 @@
 .panel-list-item-component {
-  font-weight: 100;
+  font-weight: 300;
   font-size: 1em;
   color: #ddd;
   margin-bottom: 15px;
   padding: {
     top: 7px;
     bottom: 5px;
+  }
+
+  @media (max-width: 768px) {
+    display: inline-block;
+    padding: 10px;
+    margin: 0 5px;
   }
 
   p.title {
@@ -20,5 +26,9 @@
   span {
     font-size: 20px;
     margin-bottom: 6px;
+
+    @media (max-width: 768px) {
+
+    }
   }
 }

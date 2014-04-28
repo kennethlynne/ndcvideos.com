@@ -11,6 +11,35 @@
   background: $sidebar-background;
   z-index: 1;
 
+  @media (max-width: 768px) {
+    position: static;
+    width: 100%;
+    height: auto;
+    overflow: auto;
+    text-align: center;
+    padding-bottom: 10px;
+    -webkit-transition: height 500ms ease-out;
+    -moz-transition: height 500ms ease-out;
+    -o-transition: height 500ms ease-out;
+    transition: height 500ms ease-out;
+
+    &.closed {
+      height: 68px;
+    }
+  }
+
+  .navbar-toggle {
+    position: absolute;
+    top: 8px;
+    right: 0;
+    outline: none;
+    box-shadow: none;
+
+    .icon-bar {
+      background-color: #fff;
+    }
+  }
+
   .logo {
     text-align: center;
     font-weight: 300;
@@ -19,22 +48,36 @@
     margin-bottom: 25px;
     color: #ddd;
     font-weight: 600;
+
+    @media (max-width: 768px) {
+      margin-bottom: 10px;
+    }
   }
 
   .wrapper {
     min-height: 100%;
     height: auto;
-
     margin: 0;
     margin: {
       bottom: -$sticky-footer-height - $logo-height;
     }
     padding-bottom: $sticky-footer-height + $logo-height;
+
+    @media (max-width: 768px) {
+      display: inline-block;
+      margin: 0;
+      padding-bottom: 0;
+      min-height: 0;
+    }
   }
 
   .bottom-fixed {
     height: $sticky-footer-height;
     text-align: center;
+
+    @media (max-width: 768px) {
+      display: inline-block;
+    }
   }
 
 }

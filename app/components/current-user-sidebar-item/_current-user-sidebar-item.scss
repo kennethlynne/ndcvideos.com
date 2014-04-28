@@ -3,6 +3,13 @@
   border-top: 1px solid #333;
   padding-top: 20px;
 
+  @media (max-width: 768px) {
+    display: inline-block;
+    border: none;
+    padding: 10px;
+    margin: 0 5px;
+  }
+
   img.profile-picture
   {
     margin-bottom: 10px;
@@ -11,6 +18,7 @@
   span {
     font-size: 24px;
     margin-bottom: 6px;
+    color: #ddd;
   }
 
   a {

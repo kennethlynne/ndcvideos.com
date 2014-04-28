@@ -14,10 +14,23 @@
         right: 60px;
         top: 10px;
       }
+
+      @media (max-width: 768px) {
+        padding-left: 20px;
+      } 
+    }
+  }
+
+  @media (max-width: 768px) {
+    .col-xs-3 {
+      display: none;
     }
   }
 
   .container {
+    @media (max-width: 768px) {
+      padding-left: 0;
+    }
 
     .panel {
       background: #fff;
@@ -25,6 +38,10 @@
       border-radius: 0;
       border: none !important;
       margin-right: -1px;
+
+      @media (max-width: 768px) {
+        width: 100%;
+      }
 
       h2 {
         font-size: 35px;
