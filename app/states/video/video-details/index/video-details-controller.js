@@ -10,6 +10,14 @@ angular.module('ndc')
           controller: 'VideodetailsCtrl'
         }
       },
+      onEnter: function () {
+        //TODO: Still hacky, should be refactored into a directive and/or a service
+        angular.element('body').addClass('detail-view-open');
+      },
+      onExit: function () {
+        //TODO: Still hacky, should be refactored into a directive and/or a service
+        angular.element('body').removeClass('detail-view-open');
+      },
       parent: 'videos'
     }));
   })
@@ -17,12 +25,10 @@ angular.module('ndc')
 
     VideoRepository.getById($stateParams.id).then(function (video) {
       $scope.video = video;
-      $("body").addClass("detail-view-open");
     });
 
     $scope.close = function () {
       stateHistory.back();
-      $("body").removeClass("detail-view-open");
     }
 
   });
