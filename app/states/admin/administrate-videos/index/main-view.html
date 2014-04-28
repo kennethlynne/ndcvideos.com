@@ -16,7 +16,7 @@
                 <tbody>
                 <tr ng-repeat="video in vimeoVideos">
                     <td>{{video.title}}</td>
-                    <td>{{video.duration | time}}</td>
+                    <td>{{video.$durationInHHMMSS}}</td>
                     <td>
                         <button class="btn btn-custom" ui-sref="administrateVideosImport({id:video.id})">Import and edit</button>
                     </td>
@@ -37,13 +37,13 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="video in existingVideos">
-                    <td></span>{{video.title}}</td>
+                    <td>{{video.title}}</td>
                     <td>
                         <ul class="tags">
                             <li ng-repeat="tag in video.tags">{{tag.text}}</li>
                         </ul>
                     </td>
-                    <td></span>{{video.duration | time}}</td>
+                    <td>{{video.$durationInHHMMSS}}</td>
                     <td>
                         <button class="btn btn-custom" ui-sref="administrateVideosEdit({id:video.id})">Edit</button>
                         <button class="btn btn-custom" ng-click="deleteVideo(video);">Delete</button>

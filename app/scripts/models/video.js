@@ -1,13 +1,16 @@
 'use strict';
 
 angular.module('ndc')
-    .factory('VideoModel', function ($q, $http, $rootScope, BaseModel, APIBaseUrl, $injector) {
+    .factory('VideoModel', function ($q, $http, $rootScope, BaseModel, APIBaseUrl, $injector, timeFilter) {
 
         var collectionUrl = 'videos';
 
         function VideoModel(data) {
             data = data || {};
             data.url = APIBaseUrl + collectionUrl;
+
+            data.$durationInHHMMSS = timeFilter(data.duration);
+
             BaseModel.call(this,data);
         }
 
