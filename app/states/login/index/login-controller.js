@@ -21,8 +21,8 @@ angular.module('ndc')
       $scope.working = true;
 
       authentication.login('password', username, password)
-        .then(function (isLoggedIn) {
-          if (isLoggedIn) $state.go('videos');
+        .then(function () {
+          $state.go('videos');
         })
         .catch(function (reason) {
           alert(reason);

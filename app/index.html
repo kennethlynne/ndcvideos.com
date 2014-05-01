@@ -30,7 +30,7 @@
     <!--/INJECT STYLES-->
 
   </head>
-  <body _oncontextmenu="return false;">
+  <body _oncontextmenu="return false;" ng-class="{'scroll-lock-enabled':$$scrollLockEnabled}">
 
     <div class="site-loading" ng-show="false">
         <div class="spinner"></div>
@@ -42,7 +42,7 @@
       </div>
     </noscript>
 
-    <div id="root" class="ng-cloak">
+    <div id="root" class="ng-cloak">  
 
         <div ui-view=""></div>
 
@@ -93,9 +93,8 @@
     <script src="config/local.js"></script>
     <script src="config/config.js"></script>
     <script src="config/routes.js"></script>
-    <script src="components/current-user-sidebar-item/current-user-sidebar-item.js"></script>
+    <script src="components/logout-sidebar-item/logout-sidebar-item.js"></script>
     <script src="components/media-player/media-player.js"></script>
-    <script src="components/navbar/navbar.js"></script>
     <script src="components/panel-list-item/panel-list-item.js"></script>
     <script src="components/panel-list/panel-list.js"></script>
     <script src="components/right-panel/right-panel.js"></script>
@@ -130,10 +129,7 @@
     <script src="scripts/repositories/video-repository.js"></script>
     <script src="scripts/services/authentication.js"></script>
     <script src="scripts/services/navbar.js"></script>
+    <script src="scripts/services/scroll-lock.js"></script>
     <script src="scripts/services/state-history.js"></script>
     <script src="scripts/services/vimeo-api.js"></script>
     <script src="scripts/utils/lodash.js"></script>
-    <!--/INJECT SCRIPTS-->
-
-  </body>
-</html>

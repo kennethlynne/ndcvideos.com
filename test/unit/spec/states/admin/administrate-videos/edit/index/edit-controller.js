@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller(/admin/administrate-videos/edit): EditCtrl', function () {
+describe('Controller(/admin/administrate-videos/edit): EditVideoCtrl', function () {
 
   var EditCtrl, scope;
 
@@ -10,10 +10,14 @@ describe('Controller(/admin/administrate-videos/edit): EditCtrl', function () {
 
     inject(function ($controller, $rootScope) {
       scope = $rootScope.$new();
-      EditCtrl = $controller('EditCtrl', {
+      EditCtrl = $controller('EditVideoCtrl', {
         $scope: scope
       });
     });
+  });
+  
+  it('should be tested!', function() {
+      
   });
 
 });

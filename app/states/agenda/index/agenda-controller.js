@@ -9,13 +9,4 @@ angular.module('ndc')
     }));
   })
   .controller('AgendaCtrl', function ($scope) {
-
-    $(".agenda .nav li a").click(function () {
-    	var index = $(this).parent().index();
-    	$(".agenda .nav li").removeClass("active");
-    	$(this).parent().addClass("active");
-    	$(".agenda .agenda-content").removeClass("active");
-    	$(".agenda-content").eq(index).addClass("active");
-    });
-
   });
