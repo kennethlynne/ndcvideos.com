@@ -2,8 +2,10 @@
   margin-top: 10px;
   margin-bottom: 10px;
 
-  &:nth-child(4n + 1) {
-    clear: left;
+  @media (min-width: 768px) {
+    &:nth-child(4n + 1) {
+      clear: left;
+    }
   }
 
   .wrapper {

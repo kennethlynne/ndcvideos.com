@@ -11,6 +11,11 @@ describe('Model: VideoModel', function () {
 
     module('ndc', function ($provide) {
       $provide.value('VideoRepository', VideoRepository);
+      $provide.service('timeFilter', function () {
+          return function () {
+              return 'timeFilter stub';
+          }
+      });
     });
 
     inject(function (_VideoModel_, _$httpBackend_, _$rootScope_, _APIBaseUrl_) {
@@ -29,6 +34,11 @@ describe('Model: VideoModel', function () {
 
   it('should have the $urlBase property set', function () {
     expect(VideoModel.$settings.url).toBe(APIBaseUrl + collectionUrl);
+  });
+
+  it('should expose a computed duration value', function() {
+    var model = new VideoModel({id: 5, duration: 60});
+    expect(model.$durationInHHMMSS).toBe('timeFilter stub');
   });
 
   describe('$save', function () {

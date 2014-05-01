@@ -8,10 +8,15 @@ angular.module('ndc.components')
         uiSref: 'videos',
         cssClass: ['icon-camcorder']
       },
+      // {
+      //   title: 'Favorites',
+      //   uiSref: 'favorites',
+      //   cssClass: ['icon-heart']
+      // },
       {
-        title: 'Favorites',
-        uiSref: 'favorites',
-        cssClass: ['icon-heart']
+        title: 'Agenda',
+        uiSref: 'agenda',
+        cssClass: ['icon-calendar']
       },
       {
         title: 'Admin',
