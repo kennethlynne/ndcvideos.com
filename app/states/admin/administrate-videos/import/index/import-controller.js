@@ -2,13 +2,29 @@
 
 angular.module('ndc')
   .config(function ($stateProvider, stateFactory) {
-    $stateProvider.state('administrateVideosImport', stateFactory('Import', {
-      url: '/videos/import/{id}',
-      templateUrl: 'states/admin/administrate-videos/import/index/main-view.html',
-      parent: 'admin'
+    $stateProvider.state('administrateVideosImport', stateFactory('ImportVideo', {
+      url: '/import/{id}',
+      resolve: {
+        scrollLock: ['scrollLock', function (sl) {
+          return sl;
+        }]
+      },
+      views: {
+        'modal@app': {
+          templateUrl: 'states/admin/administrate-videos/import/index/modal.html',
+          controller: 'ImportVideoCtrl'
+        }
+      },
+      parent: 'administrateVideos',
+      onEnter: ['scrollLock', function (sl) {
+        sl.enable();
+      }],
+      onExit: ['scrollLock',function (sl) {
+        sl.disable();
+      }]
     }));
   })
-  .controller('ImportCtrl', function ($scope, TagRepository, $state) {
+  .controller('ImportVideoCtrl', function ($scope, TagRepository, $state) {
 
     $scope.tags = []; //This variable holds selected tags
 
@@ -28,6 +44,6 @@ angular.module('ndc')
     };
 
     $scope.publish = function () {
-
-    }
+      alert('Publish');
+    };
   });

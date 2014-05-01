@@ -3,20 +3,37 @@
 
 	.searchform {
 		position: relative;
+		margin-bottom: 20px;
 
 		.searchfield {
+			-webkit-transition: all 300ms ease-in-out;
+			-moz-transition: all 300ms ease-in-out;
+			-o-transition: all 300ms ease-in-out;
+			transition: all 300ms ease-in-out;
 			margin-top: 25px;
-			margin-bottom: 20px;
-			width: 100%;
+			margin-bottom: 30px;
 			padding-left: 50px;
 			font-weight: 300;
 			box-shadow: none;
 			border-width: 1px;
-			border-color: #ccc !important;
-			// border-left-color: $primary-color !important;
-			// box-shadow: -3px 0 0 $primary-color;
-			// border-radius: 0 4px 4px 0;
-			color: #666;
+			width: 300px;
+			color: #777;
+			background: #fff;
+			border-radius: 20px;
+			box-shadow: none;
+			border: 1px solid #ddd;
+				
+			&.pristine, &:focus {
+				width: 100%;
+				background: #f2f2f2;
+				border: 1px solid #ddd;
+			}
+
+			@media (max-width: $screen-md) {
+				width: 100%;
+				background: #f2f2f2;
+				border: 1px solid #ddd;
+			}
 		}
 
 		.searchicon {
@@ -24,7 +41,7 @@
 			position: absolute;
 			left: 20px;
 			top: 11px;
-			color: #aaa;
+			color: #777;
 		}
 	}
 }
