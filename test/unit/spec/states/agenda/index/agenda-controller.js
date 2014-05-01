@@ -16,7 +16,7 @@ describe('Controller(/agenda): AgendaCtrl', function () {
     });
   });
 
-  it('should attach init data to scope', function () {
-    expect(scope.foo).toEqual('bar');
+  it('should initialize', function () {
+      //Only testing that the controller actually can load here, should be better tested
   });
 });
