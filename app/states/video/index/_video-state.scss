@@ -29,7 +29,7 @@
 				border: 1px solid #ddd;
 			}
 
-			@media (max-width: 992px) {
+			@media (max-width: $screen-md) {
 				width: 100%;
 				background: #f2f2f2;
 				border: 1px solid #ddd;
