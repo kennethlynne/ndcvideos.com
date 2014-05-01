@@ -1,54 +1,75 @@
 <div class="edit-state">
 
-    <div class="row">
-        <div class="col-lg-12">
+    <form name="editform" novalidate>
+        <div class="modal fade in" id="editModal" tabindex="-1" role="dialog" aria-hidden="false" style="display: block;">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" ng-click="cancel()">&times;</button>
+                        <h4 class="modal-title">Edit video</h4>
+                    </div>
+                    <div class="modal-body">
 
-            <form name="editform" novalidate>
-                <h2>Video title</h2>
-                <input type="text" ng-model="video.title" required>
+                        <div class="row">
+                            <div class="col-lg-12">
 
-                <h2>Video description</h2>
-                <textarea ng-model="video.description" required></textarea>
+                                <label style="margin-top: 0px;">Video title</label>
+                                <input type="text" class="form-control" ng-model="video.title" required>
 
-                <h2>Add tags to your video</h2>
-                <div class="tags-wrapper">
-                    <!-- <input type="text" class="search-tags" placeholder="Filter videos by tags .."> -->
-                    <input type="hidden" class="search" ng-change="filter()" ui-select2="select2Options" ng-model="video.tags" placeholder="Add tags to the video..">
+                                <label style="margin-top: 20px;">Video description</label>
+                                <textarea class="form-control" ng-model="video.description" required></textarea>
+
+                                <label style="margin-top: 20px;">Add tags to your video</label>
+                                <div class="tags-wrapper">
+                                    <!-- <input type="text" class="search-tags" placeholder="Filter videos by tags .."> -->
+                                    <input type="hidden" class="search" ng-change="filter()" ui-select2="select2Options" ng-model="video.tags" placeholder="Add tags to the video..">
+                                </div>
+
+                                <label style="margin-top: 20px;">Add to agenda</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <select class="form-control" style="margin-bottom: 10px;">
+                                            <option value="Day 1">
+                                                Day 1
+                                            </option>
+                                            <option value="Day 2">
+                                                Day 2
+                                            </option>
+                                        </select>
+                                        <select class="form-control" style="margin-bottom: 10px;">
+                                            <option value="Track 1">
+                                                Track 1
+                                            </option>
+                                            <option value="Track 2">
+                                                Track 2
+                                            </option>
+                                        </select>
+                                        <select class="form-control" style="margin-bottom: 10px;">
+                                            <option value="10:00">
+                                                10:00
+                                            </option>
+                                            <option value="11:00">
+                                                11:00
+                                            </option>
+                                        </select>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+        
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+                        <button class="btn btn-default" ng-click="saveChanges(video)">Save changes</button>
+                    </div>
                 </div>
-
-                <h2>Add to agenda</h2>
-                <div>
-                    <select>
-                        <option value="Day 1">
-                            Day 1
-                        </option>
-                        <option value="Day 2">
-                            Day 2
-                        </option>
-                    </select>
-                    <select>
-                        <option value="Track 1">
-                            Track 1
-                        </option>
-                        <option value="Track 2">
-                            Track 2
-                        </option>
-                    </select>
-                    <select>
-                        <option value="10:00">
-                            10:00
-                        </option>
-                        <option value="11:00">
-                            11:00
-                        </option>
-                    </select>
-                </div>
-
-                <button class="button" ng-click="cancel()">Cancel</button>
-                <button class="button" ng-click="saveChanges(video)">Save changes</button>
-            </form>
-
+            </div>
         </div>
-    </div>
+    </form>
+
+    <div class="modal-backdrop fade in"></div>
 
 </div>
