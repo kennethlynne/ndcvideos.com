@@ -1,10 +1,6 @@
 .video-list-item-component {
   margin-top: 10px;
-  margin-bottom: 10px;
-
-  &:nth-child(4n + 1) {
-    clear: left;
-  }
+  margin-bottom: 20px;
 
   .wrapper {
     // background: #222;
@@ -26,7 +22,6 @@
         left: 0;
         width: 100%;
         height: 100%;
-        // background: rgba(0, 0, 0, 0.3);
       }
 
       .length {
@@ -38,14 +33,23 @@
         color: #fff;
         font-size: 11px;
         font-weight: 400;
+
+        @media (max-width: 992px) {
+          left: 0px !important;
+        }
       }
     }
 
     .meta {
+      @include clearfix;
       color: #222;
+      height: 170px;
+      background: #f2f2f2;
+      padding: 20px;
 
       h3 {
-        margin-top: 15px;
+        display: inline-block;
+        margin-top: 0;
         margin-bottom: 10px;
         font-size: 1.1em;
         line-height: 1.35em;
