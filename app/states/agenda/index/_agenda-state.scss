@@ -1,37 +1,27 @@
 .agenda-state {
   padding-bottom: 30px;
 
-  .nav {
-    ul {
-      list-style: none;
-      margin: 0 0 30px 0;
-      padding: 0;
+  ul.nav-tabs {
+    list-style: none;
+    margin: 0 0 30px 0;
+    padding: 0;
 
-      li {
-        margin: 0 15px 0 0;
-        display: inline-block;
-        font-size: 1.5em;
+    li {
+      margin: 0 15px 0 0;
+      display: inline-block;
+      font-size: 1.5em;
 
+      a {
+        color: #777;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      &.active {
         a {
-          color: #777;
-          text-decoration: none;
-          cursor: pointer;
-        }
-
-        &.active {
-          a {
-            color: $primary-color;
-          }
+          color: $primary-color;
         }
       }
-    }
-  }
-
-  .agenda-content {
-    display: none;
-
-    &.active {
-      display: block;
     }
   }
 
