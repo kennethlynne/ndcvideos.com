@@ -29,6 +29,6 @@ angular.module('ndc')
 
     $scope.close = function () {
       stateHistory.back();
-    }
+    };
 
   });
