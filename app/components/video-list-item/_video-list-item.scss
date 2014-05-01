@@ -37,7 +37,7 @@
         -o-transition: all 100ms ease-in-out;
         transition: all 100ms ease-in-out;
 
-        @media (min-width: 992px) {
+        @media (min-width: $screen-md) {
           // background: rgba(0, 0, 0, 0.7);
         }
       }
@@ -82,7 +82,7 @@
     }
   }
 
-  @media (min-width: 992px) {
+  @media (min-width: $screen-md) {
     &:hover {
       .wrapper {
         .meta {
