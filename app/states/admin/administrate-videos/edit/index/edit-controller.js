@@ -2,13 +2,18 @@
 
 angular.module('ndc')
   .config(function ($stateProvider, stateFactory) {
-    $stateProvider.state('administrateVideosEdit', stateFactory('Edit', {
-      url: '/videos/edit/{id}',
-      templateUrl: 'states/admin/administrate-videos/edit/index/main-view.html',
-      parent: 'admin'
+    $stateProvider.state('administrateVideosEdit', stateFactory('EditVideo', {
+      url: '/edit/{id}',
+      views: {
+        'modal@app': {
+          templateUrl: 'states/admin/administrate-videos/edit/index/modal.html',
+          controller: 'EditVideoCtrl'
+        }
+      },
+      parent: 'administrateVideos'
     }));
   })
-  .controller('EditCtrl', function ($scope, TagRepository, $state, $stateParams, VideoRepository) {
+  .controller('EditVideoCtrl', function ($scope, TagRepository, $state, $stateParams, VideoRepository) {
 
     VideoRepository.getById($stateParams.id).then(function (video) {
       $scope.video = video;
@@ -24,7 +29,7 @@ angular.module('ndc')
     };
 
     $scope.saveChanges = function (video) {
-      video.$save().then(function (result) {
+      video.$save().then(function () {
         $state.go('administrateVideos');
       });
     };
