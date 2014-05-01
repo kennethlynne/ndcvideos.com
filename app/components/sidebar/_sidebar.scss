@@ -11,17 +11,14 @@
   background: $sidebar-background;
   z-index: 1;
 
-  @media (max-width: 768px) {
+  @media (max-width: $screen-sm) {
     position: static;
     width: 100%;
     height: auto;
     overflow: auto;
     text-align: center;
     padding-bottom: 10px;
-    -webkit-transition: height 500ms ease-out;
-    -moz-transition: height 500ms ease-out;
-    -o-transition: height 500ms ease-out;
-    transition: height 500ms ease-out;
+    @include transition(height 500ms ease-out);
 
     &.closed {
       height: 68px;
@@ -50,7 +47,7 @@
     color: #ddd;
     font-weight: 600;
 
-    @media (max-width: 768px) {
+    @media (max-width: $screen-sm) {
       margin-bottom: 10px;
     }
   }
@@ -64,7 +61,7 @@
     }
     padding-bottom: $sticky-footer-height + $logo-height;
 
-    @media (max-width: 768px) {
+    @media (max-width: $screen-sm) {
       display: inline-block;
       margin: 0;
       padding-bottom: 0;
@@ -76,7 +73,7 @@
     height: $sticky-footer-height;
     text-align: center;
 
-    @media (max-width: 768px) {
+    @media (max-width: $screen-sm) {
       display: inline-block;
     }
   }
