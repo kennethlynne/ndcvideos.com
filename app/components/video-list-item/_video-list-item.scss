@@ -56,6 +56,10 @@
       -o-transition: all 300ms ease-in-out;
       transition: all 300ms ease-in-out;
 
+      @media (max-width: $screen-tablet) {
+        height: auto;
+      }
+
       h3 {
         display: inline-block;
         margin-top: 0;

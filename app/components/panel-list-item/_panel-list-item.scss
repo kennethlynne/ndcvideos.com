@@ -22,10 +22,11 @@
   &.active {
     background: lighten($sidebar-background, 5);
     box-shadow: inset 3px 0 0 0 $primary-color;
-    -webkit-transition: all 200ms ease-in-out 200ms;
-    -moz-transition: all 200ms ease-in-out 200ms;
-    -o-transition: all 200ms ease-in-out 200ms;
-    transition: all 200ms ease-in-out 200ms;
+    @include transition(all 200ms ease-in-out 200ms);
+
+    @media (max-width: $screen-tablet) {
+      box-shadow: inset 0 -3px 0 0 $primary-color;
+    }
   }
 
   span {
@@ -36,10 +37,7 @@
   @media (min-width: $screen-md) {
     span, p {
       opacity: 0.5;
-      -webkit-transition: all 100ms ease-in-out;
-      -moz-transition: all 100ms ease-in-out;
-      -o-transition: all 100ms ease-in-out;
-      transition: all 100ms ease-in-out;
+      @include transition(all 100ms ease-in-out);
     }
     &.active span, &.active p {
       opacity: 1;
