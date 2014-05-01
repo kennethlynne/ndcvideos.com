@@ -38,6 +38,6 @@ angular.module('ndc')
       if (!!confirm('Er du sikker på at du vil forkaste alle data?')) {
         $state.go('administrateVideos');
       }
-    }
+    };
 
   });
