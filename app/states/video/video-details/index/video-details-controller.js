@@ -4,20 +4,23 @@ angular.module('ndc')
   .config(function ($stateProvider, stateFactory) {
     $stateProvider.state('videoDetails', stateFactory('Videodetails', {
       url: '/video/{id}',
+      resolve: {
+        scrollLock: ['scrollLock', function (sl) {
+          return sl;
+        }]
+      },
       views: {
         'slideOut@app': {
           templateUrl: 'states/video/video-details/index/slide-out-view.html',
           controller: 'VideodetailsCtrl'
         }
       },
-      onEnter: function () {
-        //TODO: Still hacky, should be refactored into a directive and/or a service
-        angular.element('body').addClass('detail-view-open');
-      },
-      onExit: function () {
-        //TODO: Still hacky, should be refactored into a directive and/or a service
-        angular.element('body').removeClass('detail-view-open');
-      },
+      onEnter: ['scrollLock', function (sl) {
+        sl.enable();
+      }],
+      onExit: ['scrollLock',function (sl) {
+        sl.disable();
+      }],
       parent: 'videos'
     }));
   })

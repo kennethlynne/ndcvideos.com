@@ -6,13 +6,11 @@ html {
 body {
   background: #fff;
   color: #555;
-  // font-family: 'Open Sans';
   font-family: "Roboto";
   font-weight: 300;
   height: 100%;
-  // font-weight: 300;
 
-  &.detail-view-open {
+  &.scroll-lock-enabled {
     overflow-y: hidden;
   }
 

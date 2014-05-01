@@ -4,6 +4,11 @@ angular.module('ndc')
   .config(function ($stateProvider, stateFactory) {
     $stateProvider.state('administrateVideosEdit', stateFactory('EditVideo', {
       url: '/edit/{id}',
+      resolve: {
+        scrollLock: ['scrollLock', function (sl) {
+          return sl;
+        }]
+      },
       views: {
         'modal@app': {
           templateUrl: 'states/admin/administrate-videos/edit/index/modal.html',
@@ -11,14 +16,12 @@ angular.module('ndc')
         }
       },
       parent: 'administrateVideos',
-      onEnter: function () {
-        //TODO: Hacky, should be refactored into a directive and/or a service
-        angular.element('body').addClass('detail-view-open');
-      },
-      onExit: function () {
-        //TODO: Hacky, should be refactored into a directive and/or a service
-        angular.element('body').removeClass('detail-view-open');
-      }
+      onEnter: ['scrollLock', function (sl) {
+        sl.enable();
+      }],
+      onExit: ['scrollLock',function (sl) {
+        sl.disable();
+      }],
     }));
   })
   .controller('EditVideoCtrl', function ($scope, TagRepository, $state, $stateParams, VideoRepository) {
