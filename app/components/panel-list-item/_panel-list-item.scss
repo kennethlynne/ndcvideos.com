@@ -26,9 +26,23 @@
   span {
     font-size: 20px;
     margin-bottom: 6px;
+  }
 
-    @media (max-width: 768px) {
-
+  @media (min-width: 992px) {
+    span, p {
+      opacity: 0.5;
+      -webkit-transition: all 100ms ease-in-out;
+      -moz-transition: all 100ms ease-in-out;
+      -o-transition: all 100ms ease-in-out;
+      transition: all 100ms ease-in-out;
+    }
+    &.active span, &.active p {
+      opacity: 1;
+    }
+    &:hover {
+      span, p {
+        opacity: 1;
+      }
     }
   }
 }

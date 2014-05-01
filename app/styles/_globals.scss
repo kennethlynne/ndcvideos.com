@@ -32,10 +32,18 @@ body {
   border-radius: 10px;
   margin-right: 5px;
   margin-bottom: 6px;
+  -webkit-transition: all 200ms ease-in-out;
+  -moz-transition: all 200ms ease-in-out;
+  -o-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
 
   &[disabled] {
     opacity: 0.2;
     cursor: not-allowed;
+  }
+
+  &:hover {
+    background: #222 !important;
   }
 }
 
