@@ -1,0 +1,43 @@
+.tabbable {
+	@include clearfix;
+
+  	.nav.nav-tabs {
+			list-style: none;
+		  font-family: 'Open Sans';
+		  font-weight: 300;
+		  padding: 0;
+		  text-transform: uppercase;
+		  font-size: 1em;
+		  margin-top: 0;
+		  margin-bottom: 30px;
+		  box-shadow: inset 0px -3px 0 #ddd;
+		  border: none;
+
+		  li {
+		    display: inline;
+		    margin-right: 15px;
+		    margin-bottom: 0;
+
+		    a {
+		    	margin: 0;
+		    	padding: 0;
+		      color: #666;
+		      text-decoration: none !important;
+		      font-size: 16px;
+		      border: none;
+		      background: none;
+		    }
+
+		    &.active {
+		    	border: none;
+		      border-bottom: 3px solid $primary-color;
+		      padding-bottom: 11px;
+
+		      a {
+		      	border: none;
+		      	color: $primary-color;
+		      }
+		    }
+		  }
+  	}
+}

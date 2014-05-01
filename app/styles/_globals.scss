@@ -77,32 +77,6 @@ hr {
   border-top: 3px solid #ddd;
 }
 
-.page-header-menu {
-  list-style: none;
-  font-family: 'Open Sans';
-  font-weight: 300;
-  margin-bottom: -10px;
-  padding: 0;
-  text-transform: uppercase;
-  font-size: 1em;
-
-  li {
-    display: inline;
-    margin-right: 15px;
-
-    a {
-      color: #666;
-      text-decoration: none !important;
-      font-size: 16px;
-    }
-
-    &.active {
-      border-bottom: 3px solid $primary-color;
-      padding-bottom: 11px;
-    }
-  }
-}
-
 .page-header {
   font-family: 'Open Sans';
   font-weight: 300;
