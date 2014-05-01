@@ -1,15 +1,8 @@
 .video-list-item-component {
   margin-top: 10px;
-  margin-bottom: 10px;
-
-  @media (min-width: 768px) {
-    &:nth-child(4n + 1) {
-      clear: left;
-    }
-  }
+  margin-bottom: 20px;
 
   .wrapper {
-    // background: #222;
 
     .thumbnail-wrapper {
       position: relative;
@@ -28,7 +21,6 @@
         left: 0;
         width: 100%;
         height: 100%;
-        // background: rgba(0, 0, 0, 0.3);
       }
 
       .length {
@@ -40,20 +32,77 @@
         color: #fff;
         font-size: 11px;
         font-weight: 400;
+        -webkit-transition: all 100ms ease-in-out;
+        -moz-transition: all 100ms ease-in-out;
+        -o-transition: all 100ms ease-in-out;
+        transition: all 100ms ease-in-out;
+
+        @media (min-width: $screen-md) {
+          // background: rgba(0, 0, 0, 0.7);
+        }
       }
     }
 
     .meta {
+      @include clearfix;
       color: #222;
+      height: 170px;
+      background: #f2f2f2;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+      -webkit-transition: all 300ms ease-in-out;
+      -moz-transition: all 300ms ease-in-out;
+      -o-transition: all 300ms ease-in-out;
+      transition: all 300ms ease-in-out;
+
+      @media (max-width: $screen-tablet) {
+        height: auto;
+      }
 
       h3 {
-        margin-top: 15px;
+        display: inline-block;
+        margin-top: 0;
         margin-bottom: 10px;
         font-size: 1.1em;
         line-height: 1.35em;
         font-weight: 700;
+
+        &:before {
+          content: "";
+          position: absolute;
+          left: 0;
+          width: 100%;
+          top: -3px;
+          border-top: 3px solid $primary-color;
+          z-index: 10;
+          -webkit-transition: all 200ms ease-in-out;
+          -moz-transition: all 200ms ease-in-out;
+          -o-transition: all 200ms ease-in-out;
+          transition: all 200ms ease-in-out;
+        }
       }
 
+    }
+  }
+
+  @media (min-width: $screen-md) {
+    &:hover {
+      .wrapper {
+        .meta {
+          // background: #ddd;
+        }
+
+        h3 {
+          &:before {
+            top: 0 !important;
+          }
+        }
+
+        .length {
+          background: $primary-color;
+        }
+      }
     }
   }
 }

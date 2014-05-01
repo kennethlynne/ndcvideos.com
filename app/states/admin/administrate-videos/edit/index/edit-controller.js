@@ -21,7 +21,7 @@ angular.module('ndc')
       }],
       onExit: ['scrollLock',function (sl) {
         sl.disable();
-      }],
+      }]
     }));
   })
   .controller('EditVideoCtrl', function ($scope, TagRepository, $state, $stateParams, VideoRepository) {
