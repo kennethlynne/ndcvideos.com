@@ -10,7 +10,15 @@ angular.module('ndc')
           controller: 'EditVideoCtrl'
         }
       },
-      parent: 'administrateVideos'
+      parent: 'administrateVideos',
+      onEnter: function () {
+        //TODO: Hacky, should be refactored into a directive and/or a service
+        angular.element('body').addClass('detail-view-open');
+      },
+      onExit: function () {
+        //TODO: Hacky, should be refactored into a directive and/or a service
+        angular.element('body').removeClass('detail-view-open');
+      }
     }));
   })
   .controller('EditVideoCtrl', function ($scope, TagRepository, $state, $stateParams, VideoRepository) {
