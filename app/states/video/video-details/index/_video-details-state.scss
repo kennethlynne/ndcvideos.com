@@ -15,20 +15,20 @@
         top: 10px;
       }
 
-      @media (max-width: 768px) {
+      @media (max-width: $screen-sm) {
         padding-left: 20px;
       } 
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: $screen-sm) {
     .col-xs-3 {
       display: none;
     }
   }
 
   .container {
-    @media (max-width: 768px) {
+    @media (max-width: $screen-sm) {
       padding-left: 0;
     }
 
@@ -39,7 +39,7 @@
       border: none !important;
       margin-right: -1px;
 
-      @media (max-width: 768px) {
+      @media (max-width: $screen-sm) {
         width: 100%;
       }
 
