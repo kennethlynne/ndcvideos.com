@@ -3,7 +3,7 @@
 angular.module('ndc')
   .config(function ($stateProvider, stateFactory) {
     $stateProvider.state('administrateVideosImport', stateFactory('ImportVideo', {
-      url: '/videos/import/{id}',
+      url: '/import/{id}',
       resolve: {
         scrollLock: ['scrollLock', function (sl) {
           return sl;
