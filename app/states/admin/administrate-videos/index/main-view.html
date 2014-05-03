@@ -24,6 +24,8 @@
                 </tbody>
             </table>
 
+            <pagination total-items="351" items-per-page="30" ng-model="currentPage" max-size="12" previous-text="Previous page" next-text="Next page" ng-change="pageChanged()"></pagination>
+
             <h2>All videos</h2>
             <p>Manage imported videos.</p>
             <table cg-busy="'VideoRepository.getAll'" class="table table-hover">
