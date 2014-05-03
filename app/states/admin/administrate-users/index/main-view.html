@@ -10,9 +10,9 @@
                 <form novalidate name="newUserForm" class="form-inline">
                     <div class="row">
                         <div class="col-lg-6">
-                            <input class="form-control" type="email" name="userName" ng-model="newUser.email" placeholder="User email .." required/>
+                            <input class="form-control" type="email" name="username" ng-model="newUser.email" placeholder="User email .." required/>
                         </div>
-                        <button class="btn btn-custom" ng-click="saveUser(newUser)" ng-disabled="newUserForm.userName.$invalid">Send invite</button>
+                        <button class="btn btn-custom" ng-click="saveUser(newUser)" ng-disabled="newUserForm.username.$invalid">Send invite</button>
                     </div>
                 </form>
             </div>
