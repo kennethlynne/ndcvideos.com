@@ -79,6 +79,17 @@ hr {
   }
 }
 
+// Fix fullscreen video
+:-webkit-full-screen-ancestor {
+  #app {
+    div[ng-view], > div[ui-view] {
+      .container {
+        display: inline !important;
+      }
+    }
+  }
+}
+
 hr {
   border-top: 3px solid #ddd;
 }
