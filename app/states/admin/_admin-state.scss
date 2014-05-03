@@ -21,6 +21,15 @@
   		font-weight: 300;
 
   		tr {
+        &.is-published {
+          opacity: 0.4;
+          &, td {
+            &, &:hover {
+              background: none !important;
+            }
+          }
+        }
+
   			th, td {
   				padding: 10px 0;
   			}

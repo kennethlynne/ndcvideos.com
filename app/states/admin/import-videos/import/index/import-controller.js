@@ -1,5 +1,5 @@
 'use strict';
-alert()
+
 angular.module('ndc')
   .config(function ($stateProvider, stateFactory) {
     $stateProvider.state('administrateVideosImportModal', stateFactory('ImportVideoModal', {

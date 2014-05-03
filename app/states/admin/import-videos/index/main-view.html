@@ -6,18 +6,17 @@
                 <thead class="hidden-on-small">
                 <tr>
                     <th>Video name</th>
-                    <th width="100">Video length</th>
+                    <th width="140">Video length</th>
                     <th width="140">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="video in vimeoVideos">
+                <tr ng-repeat="video in vimeoVideos" ng-class="{'is-published' : video.isPublished}">
                     <td>{{video.title}}</td>
                     <td>{{video.$durationInHHMMSS}}</td>
                     <td>
-                        <button class="btn btn-custom" ui-sref="administrateVideosImportModal({id:video.id})">Import and
-                            edit
-                        </button>
+                        <button ng-hide="video.isPublished" class="btn btn-custom" ui-sref="administrateVideosImport({id:video.id})">Import and edit</button>
+                        <span ng-show="video.isPublished">Imported</span>
                     </td>
                 </tr>
                 </tbody>
