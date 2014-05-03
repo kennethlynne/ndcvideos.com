@@ -32,7 +32,7 @@ angular.module('ndc')
       var index = $scope.users.indexOf(user);
       var userBackup = $scope.users.splice(index, 1);
 
-      if ($scope.confirm('Er du helt sikker på at du vil slette brukeren ' + user.userName + '?')) {
+      if ($scope.confirm('Er du helt sikker på at du vil slette brukeren ' + user.username + '?')) {
         user.$delete()
           .then(function () {
             //TODO: Give some notification of great success

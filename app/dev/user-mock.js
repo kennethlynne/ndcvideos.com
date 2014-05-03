@@ -14,7 +14,7 @@ angular.module('ndc')
       {
         id: 1,
         email: 'ali@g.com',
-        userName: 'ali@g.com',
+        username: 'ali@g.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
         profilePicture: 'http://placehold.it/50x50',
