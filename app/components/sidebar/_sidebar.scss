@@ -50,14 +50,6 @@
     @media (max-width: $screen-sm) {
       margin-bottom: 10px;
     }
-
-    @media (min-width: $screen-sm) {
-      margin: 0;
-      padding-top: 20px;
-      padding-bottom: 20px;
-      background: $primary-color;
-      color: #fff;
-    }
   }
 
   .wrapper {
