@@ -19,6 +19,8 @@
 
             <h2>All users</h2>
             <p>Manage all invited users.</p>
+            <paginator-component paginator="paginatedUsers"></paginator-component>
+
             <table class="table table-hover">
                 <thead class="hidden-on-small">
                 <tr>
@@ -28,7 +30,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="user in users">
+                <tr ng-repeat="user in paginatedUsers.getPaginatedData()">
                     <td>{{user.email}}</td>
                     <td>Yes</td>
                     <td width="300">
@@ -38,7 +40,6 @@
                 </tr>
                 </tbody>
             </table>
-
 
         </div>
     </div>
