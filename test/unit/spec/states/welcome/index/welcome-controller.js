@@ -11,12 +11,13 @@ describe('Controller(/welcome): WelcomeCtrl', function () {
     inject(function ($controller, $rootScope) {
       scope = $rootScope.$new();
       WelcomeCtrl = $controller('WelcomeCtrl', {
-        $scope: scope
+        $scope: scope,
+        userToBeVerified: 'USER'
       });
     });
   });
 
   it('should attach init data to scope', function () {
-    expect(scope.foo).toEqual('bar');
+    expect(scope.user).toEqual('USER');
   });
 });

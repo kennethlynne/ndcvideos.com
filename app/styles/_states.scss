@@ -5,7 +5,6 @@
 @import '../states/admin/administrate-users/index/administrate-users-state';
 @import '../states/admin/administrate-videos/index/administrate-videos-state';
 @import '../states/admin/administrate-videos/edit/index/edit-state';
-@import '../states/admin/administrate-videos/import/index/import-state';
 @import '../states/login/index/login-state';
 @import '../states/video/index/video-state';
 @import '../states/video/video-details/index/video-details-state';
@@ -13,3 +12,5 @@
 @import '../states/user/index/user-state';
 @import '../states/agenda/index/agenda-state';
 @import '../states//welcome/index/welcome-state';
+@import '../states/admin/import-videos/index/import-videos-state';
+@import '../states/admin/import-videos/import/index/import-modal-state';
