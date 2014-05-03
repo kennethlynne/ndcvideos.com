@@ -14,11 +14,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="video in vimeoVideos">
+                <tr ng-repeat="video in vimeoVideos" ng-class="video.isPublished ? 'is-published' : ''">
                     <td>{{video.title}}</td>
                     <td>{{video.$durationInHHMMSS}}</td>
                     <td>
-                        <button class="btn btn-custom" ui-sref="administrateVideosImport({id:video.id})">Import and edit</button>
+                        <button ng-hide="video.isPublished" class="btn btn-custom" ui-sref="administrateVideosImport({id:video.id})">Import and edit</button>
+                        <span ng-show="video.isPublished">Imported</span>
                     </td>
                 </tr>
                 </tbody>

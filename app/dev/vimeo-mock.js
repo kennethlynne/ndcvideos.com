@@ -35,7 +35,8 @@ angular.module('ndc')
                 width: 1280,
                 height: 720,
                 tags: "developer. festival",
-                embed_privacy: "anywhere"
+                embed_privacy: "anywhere",
+                isPublished: true
             },
             {
                 id: 86396740,
@@ -61,7 +62,8 @@ angular.module('ndc')
                 width: 1280,
                 height: 720,
                 tags: "Dan North, ndclondon, keynote",
-                embed_privacy: "nowhere"
+                embed_privacy: "nowhere",
+                isPublished: false
         }
         ];
         VimeoRepo.index = {};
