@@ -22,7 +22,7 @@ angular.module('ndc')
       typeof CurrentUser.get().id !== 'undefined') {
       UserRepository.getById(CurrentUser.get().id)
         .then(CurrentUser.set)
-        .then(successHandler)
+        .then(successHandler);
     }
     else {
       authentication.logout();

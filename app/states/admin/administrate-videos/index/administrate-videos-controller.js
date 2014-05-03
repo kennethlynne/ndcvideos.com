@@ -8,19 +8,13 @@ angular.module('ndc')
       parent: 'admin'
     }));
   })
-  .controller('AdministratevideosCtrl', function ($scope, VideoRepository, vimeoAPI) {
+  .controller('AdministratevideosCtrl', function ($scope, VideoRepository) {
 
     $scope.existingVideos = [];
 
     VideoRepository.getAll().then(function (videos) {
       $scope.existingVideos = videos;
     });
-    $scope.vimeoVideos = [];
-
-    vimeoAPI.getVideos().then(function (videos) {
-      $scope.vimeoVideos = videos;
-    });
-
 
     $scope.deleteVideo = function (video) {
 
