@@ -32,7 +32,7 @@ describe('Controller(/admin/import-videos): AdminImportVideosOverviewCtrl', func
   it('should list videos from vimeo', function () {
     deferred.resolve([1, 2, 3, 4, 5]);
     $rootScope.$digest();
-    expect(scope.vimeoVideos.length).toBe(5);
+    expect(scope.paginatedVideos.data.length).toBe(5);
   });
 
 });

@@ -8,12 +8,12 @@ angular.module('ndc')
       parent: 'admin'
     }));
   })
-  .controller('AdministratevideosCtrl', function ($scope, VideoRepository) {
+  .controller('AdministratevideosCtrl', function ($scope, VideoRepository, Paginator) {
 
-    $scope.existingVideos = [];
+    $scope.paginatedVideos = new Paginator({pageSize: 10});
 
     VideoRepository.getAll().then(function (videos) {
-      $scope.existingVideos = videos;
+      $scope.paginatedVideos.setData(videos);
     });
 
     $scope.deleteVideo = function (video) {
@@ -21,9 +21,8 @@ angular.module('ndc')
       if (confirm('Are you sure you want to delete the video?')) {
         //Delete from array first, and then from rep?
         video.$delete().then(function (result) {
-
-          var index = $scope.existingVideos.indexOf(video);
-          $scope.existingVideos.splice(index, 1);
+          var index = $scope.paginatedVideos.data.indexOf(video);
+          $scope.paginatedVideos.data.splice(index, 1);
         });
       }
     };

@@ -2,8 +2,9 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <table cg-busy="'VideoRepository.getAll'" class="table table-hover">
+            <paginator-component paginator="paginatedVideos"></paginator-component>
 
+            <table cg-busy="'VideoRepository.getAll'" class="table table-hover">
                 <thead class="hidden-on-small">
                 <tr>
                     <th>Video name</th>
@@ -12,7 +13,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="video in existingVideos">
+                <tr ng-repeat="video in paginatedVideos.getPaginatedData()">
                     <td>{{video.title}}</td>
                     <td>{{video.$durationInHHMMSS}}</td>
                     <td>
@@ -22,6 +23,7 @@
                 </tr>
                 </tbody>
             </table>
+
         </div>
     </div>
 
