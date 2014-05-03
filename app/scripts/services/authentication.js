@@ -82,13 +82,16 @@ angular.module('ndc')
             //List of pages you can visit without being authorized
             var allowAnonymous = [
                 'login',
-                'error'
+                'error',
+                'welcome'
             ];
 
             var requireRole = {
                 //page: [required roles...]
                 'admin': ['administrator']
             };
+
+            console.log("State:", $state);
 
             if (allowAnonymous.indexOf(path) >= 0 || authentication.isAuthenticated()) {
 
