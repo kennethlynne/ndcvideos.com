@@ -13,6 +13,7 @@
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
+    z-index: 1 !important;
 
     padding: {
       right: $right-panel-width;
@@ -25,7 +26,7 @@
     }
 
     > .container {
-      width: auto !important;
+      width: 100% !important;
       padding-right: 0;
       height: 100%;
       display: table;
