@@ -7,9 +7,13 @@ angular.module('ndc')
     statesDir: 'states/',
     environment: 'production', //development or production
     API: {
+//      protocol: 'http', //Use the same protocol, host and port as the UI is hosted from bu default
+//      host: 'ndcapi.jit.su',
+//      port: String(80),
+//      path: '/api'
       protocol: 'http', //Use the same protocol, host and port as the UI is hosted from bu default
-      host: 'ndcapi.jit.su',
-      port: String(80),
+      host: 'localhost',
+      port: String(1337),
       path: '/api'
     }
   }, angular._localConfig || {}))

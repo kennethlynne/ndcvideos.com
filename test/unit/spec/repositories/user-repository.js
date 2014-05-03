@@ -86,6 +86,40 @@ describe('Model Repository: UserRepository', function () {
     });
   });
 
+  describe('getByToken', function () {
+    it('should return models by token', function () {
+      $httpBackend.expectGET(Model.$settings.url + '?token=MOCKTOKEN').respond(200, {id: 5});
+
+      var promise = UserRepository.getByToken('MOCKTOKEN');
+
+      var response;
+      promise.then(function (r) {
+        response = r;
+      });
+
+      $httpBackend.flush();
+
+      expect(response instanceof Model).toBeTruthy();
+      expect(response.id).toEqual(5);
+    });
+
+    it('should handle rejects', function () {
+      $httpBackend.expectGET(Model.$settings.url + '?token=MOCKTOKEN').respond(404, 'No such thang!');
+
+      var promise = UserRepository.getByToken('MOCKTOKEN'),
+        response,
+        success = jasmine.createSpy('success'),
+        error = jasmine.createSpy('error');
+
+      promise.then(success).catch(error);
+
+      $httpBackend.flush();
+
+      expect(success).not.toHaveBeenCalled();
+      expect(error).toHaveBeenCalled();
+    });
+  });
+
   describe('getAll', function () {
     it('should return models by id', function () {
       $httpBackend.expectGET(Model.$settings.url).respond(200, [
