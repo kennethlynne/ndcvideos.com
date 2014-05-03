@@ -2,7 +2,7 @@ angular.module('ndc')
     .run(function (Config, $httpBackend, $log, APIBaseUrl, regexEscape, guid) {
         if(!Config.API.useMocks) return;
 
-        var collectionUrl = Config.vimeoAPIUrl;
+        var collectionUrl = APIBaseUrl + 'imports';
         var IdRegExp = /[\d\w-_]+$/.toString().slice(1, -1);
 
         $log.log('***************************************************************************************************************');
@@ -72,14 +72,14 @@ angular.module('ndc')
             VimeoRepo.index[item.id] = item;
         });
 
-        //GET vimeo/
-        $httpBackend.whenGET(collectionUrl+'videos.json').respond(function(method, url, data, headers) {
+        //GET imports/
+        $httpBackend.whenGET(collectionUrl+'?provider=vimeo').respond(function(method, url, data, headers) {
             $log.debug('Intercepted GET to `' + collectionUrl + '`', data);
             return [200, VimeoRepo.data, {/*headers*/}];
         });
 
-        //GET vimeo/id
-        $httpBackend.whenGET( new RegExp(regexEscape(collectionUrl + '/') + IdRegExp ) ).respond(function(method, url, data, headers) {
+        //GET imports/id
+        $httpBackend.whenGET( new RegExp(regexEscape(collectionUrl + '/') + IdRegExp )+'?provider=vimeo' ).respond(function(method, url, data, headers) {
             $log.debug('Intercepted GET to `' + collectionUrl + '`');
             var id = url.match( new RegExp(IdRegExp) )[0];
             return [VimeoRepo.index[id]?200:404, VimeoRepo.index[id] || null, {/*headers*/}];
