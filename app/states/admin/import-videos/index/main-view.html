@@ -15,7 +15,7 @@
                     <td>{{video.title}}</td>
                     <td>{{video.$durationInHHMMSS}}</td>
                     <td>
-                        <button ng-hide="video.isPublished" class="btn btn-custom" ui-sref="administrateVideosImport({id:video.id})">Import and edit</button>
+                        <button ng-hide="video.isPublished" class="btn btn-custom" ui-sref="administrateVideosImportModal({id:video.id})">Import and edit</button>
                         <span ng-show="video.isPublished">Imported</span>
                     </td>
                 </tr>

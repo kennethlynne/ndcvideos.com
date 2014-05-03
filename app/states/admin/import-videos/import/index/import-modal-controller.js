@@ -11,11 +11,11 @@ angular.module('ndc')
       },
       views: {
         'modal@app': {
-          templateUrl: 'states/admin/administrate-videos/import/index/modal.html',
+          templateUrl: 'states/admin/import-videos/import/index/modal.html',
           controller: 'ImportVideoModalCtrl'
         }
       },
-      parent: 'importVideos',
+      parent: 'importVideosOverview',
       onEnter: ['scrollLock', function (sl) {
         sl.enable();
       }],
