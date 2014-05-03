@@ -41,5 +41,21 @@ describe('Service: vimeoAPI', function () {
     expect(result[0] instanceof VideoModel).toBeTruthy();
   });
 
+  it('should a video with id 5', function () {
+    $httpBackend.expectGET(APIBaseUrl + 'imports/5?provider=vimeo').respond(200, {id: 5, name: '13'});
+
+    var result = null;
+    vimeoAPI.getVideoById(5).then(function (response) {
+      console.log(response);
+
+      result = response;
+    });
+
+    $httpBackend.flush();
+
+    expect(result.name).toBe('13');
+    expect(result instanceof VideoModel).toBeTruthy();
+  });
+
 
 });

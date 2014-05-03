@@ -14,7 +14,7 @@ angular.module('ndc')
       BaseModel.call(this, data);
     }
 
-    VideoModel.$settings = {url: APIBaseUrl + collectionUrl};
+    VideoModel.$settings = {url: APIBaseUrl + collectionUrl, tracker: 'VideoModel'};
     VideoModel.prototype = Object.create(BaseModel.prototype);
 
     //Decorate save to attach this item to the Repository on successful save
