@@ -2,10 +2,15 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <form class="searchform" ng-submit="search(query)">
-                <span class="searchicon icon-magnifier"></span>
-                <input ng-class="query ? 'has-query' : ''" type="text" class="form-control input-lg searchfield" ng-model="query" ng-change="search(query)" placeholder="Search for videos..">
-            </form>
+            <h1 class="page-header">
+                Video gallery
+            </h1>
+            <div class="pull-right">
+                <form class="searchform" ng-submit="search(query)">
+                    <span class="searchicon icon-magnifier"></span>
+                    <input ng-class="query ? 'has-query' : ''" type="text" class="form-control input-lg searchfield" ng-model="query" ng-change="search(query)" placeholder="Search for videos..">
+                </form>
+            </div>
 
             <div class="clearfix"></div>
         </div>

@@ -13,7 +13,7 @@ describe('Service: authentication', function () {
     }
 
     UserRepository = {
-      getById: jasmine.createSpy('UserRepository.getById').and.callFake(getPromise)
+      getByToken: jasmine.createSpy('UserRepository.getByToken').and.callFake(getPromise)
     };
 
     module('ndc', function ($provide) {
@@ -93,7 +93,7 @@ describe('Service: authentication', function () {
 
   it('should decorate all subsequent requests to the API with the token information', function () {
     logIn();
-    $httpBackend.expectGET(BaseUrl + 'test', {"Accept": "application/json, text/plain, */*", "Authorization": "take-on-me"}).respond();
+    $httpBackend.expectGET(BaseUrl + 'test', {"Accept": "application/json, text/plain, */*", "Authorization": "Bearer take-on-me"}).respond();
     $http.get(BaseUrl + 'test');
     $httpBackend.flush();
   });

@@ -41,9 +41,17 @@ describe('Controller(/admin/administrate-users): AdministrateusersCtrl', functio
   it('should list users', function () {
     deferred.resolve([1, 2, 3, 4, 5]);
     $rootScope.$digest();
-    expect(scope.users.length).toBe(5);
+    expect(scope.paginatedUsers.data.length).toBe(5);
   });
 
+  it('should expose a paginated wrapped list of users', function () {
+    var data = [1, 2, 3, 4, 5];
+    var ref = scope.paginatedUsers.getPaginatedData();
+    deferred.resolve(data);
+    $rootScope.$digest();
+    expect(scope.paginatedUsers.data).toEqual(data);
+    expect(scope.paginatedUsers.getPaginatedData()).toBe(ref);
+  });
 
   it('should create a new user', function () {
     expect(scope.isCreatingNewUser).toBeFalsy();
@@ -72,17 +80,17 @@ describe('Controller(/admin/administrate-users): AdministrateusersCtrl', functio
   it('should remove the user from users if save fails', function () {
     scope.isCreatingNewUser = true;
     scope.newUser = 'new user';
-    expect(scope.users.length).toBe(0);
+    expect(scope.paginatedUsers.data.length).toBe(0);
 
     scope.saveUser({userName: 'test@internet.com'});
-    expect(scope.users.length).toBe(1);
+    expect(scope.paginatedUsers.data.length).toBe(1);
     expect(scope.isCreatingNewUser).toBeFalsy();
 
     deferred.reject();
     $rootScope.$digest();
     expect(scope.isCreatingNewUser).toBeTruthy();
     expect(scope.newUser).toBe('new user');
-    expect(scope.users.length).toBe(0);
+    expect(scope.paginatedUsers.data.length).toBe(0);
   });
 
   it('should reset fields for new user', function () {
@@ -102,10 +110,10 @@ describe('Controller(/admin/administrate-users): AdministrateusersCtrl', functio
   });
 
   it('should remove user on successful delete', function () {
-    scope.users.push(userModel);
+    scope.paginatedUsers.data.push(userModel);
     scope.deleteUser(userModel);
     deferred.resolve([]);
     $rootScope.$digest();
-    expect(scope.users.length).toBe(0);
+    expect(scope.paginatedUsers.data.length).toBe(0);
   });
 });

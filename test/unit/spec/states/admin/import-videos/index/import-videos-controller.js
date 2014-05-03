@@ -1,8 +1,8 @@
 'use strict';
 
-describe('Controller(/admin/administrate-videos): AdministratevideosCtrl', function () {
+describe('Controller(/admin/import-videos): AdminImportVideosOverviewCtrl', function () {
 
-  var Videos, scope, VideoRepository, deferred, promise, $rootScope;
+  var AdminImportVideosOverviewCtrl, $rootScope, scope, vimeoAPI, deferred, promise;
 
   beforeEach(function () {
 
@@ -10,8 +10,8 @@ describe('Controller(/admin/administrate-videos): AdministratevideosCtrl', funct
       return promise;
     }
 
-    VideoRepository = {
-      getAll: jasmine.createSpy('VideoRepository.getAll').and.callFake(getPromise)
+    vimeoAPI = {
+      getVideos: jasmine.createSpy('vimeoAPI.getVideos').and.callFake(getPromise)
     };
 
     module('ndc');
@@ -21,14 +21,15 @@ describe('Controller(/admin/administrate-videos): AdministratevideosCtrl', funct
       promise = deferred.promise;
       $rootScope = _$rootScope_;
       scope = $rootScope.$new();
-      Videos = $controller('AdministratevideosCtrl', {
+
+      AdminImportVideosOverviewCtrl = $controller('AdminImportVideosOverviewCtrl', {
         $scope: scope,
-        VideoRepository: VideoRepository
+        vimeoAPI: vimeoAPI
       });
     });
   });
 
-  it('should list existing videos', function () {
+  it('should list videos from vimeo', function () {
     deferred.resolve([1, 2, 3, 4, 5]);
     $rootScope.$digest();
     expect(scope.paginatedVideos.data.length).toBe(5);

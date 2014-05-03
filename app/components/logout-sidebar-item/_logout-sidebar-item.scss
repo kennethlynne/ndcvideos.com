@@ -3,6 +3,10 @@
 	border-top: 1px solid #333;
   padding-top: 20px;
 
+  @media (min-width: $screen-tablet) {
+    height: 120px;
+  }
+
   @media (max-width: $screen-sm) {
     display: inline-block;
     border: none;
