@@ -79,7 +79,7 @@ angular.module('ndc')
         });
 
         //GET imports/id
-        $httpBackend.whenGET( new RegExp(regexEscape(collectionUrl + '/') + IdRegExp +('?provider=vimeo')) ).respond(function(method, url, data, headers) {
+        $httpBackend.whenGET( new RegExp(regexEscape(collectionUrl + '/') + IdRegExp)+('?provider=vimeo') ).respond(function(method, url, data, headers) {
             $log.debug('Intercepted GET to `' + collectionUrl + '`');
             var id = url.match( new RegExp(IdRegExp) )[0];
             return [VimeoRepo.index[id]?200:404, VimeoRepo.index[id] || null, {/*headers*/}];
