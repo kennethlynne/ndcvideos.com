@@ -1,6 +1,10 @@
 .video-state  {
 	padding-bottom: 40px;
 
+	.no-videos {
+		text-align: center;
+	}
+
 	.searchform {
 		position: relative;
 		margin-bottom: 20px;
@@ -23,7 +27,7 @@
 			box-shadow: none;
 			border: 1px solid #ddd;
 				
-			&.pristine, &:focus {
+			&.pristine, &:focus, &.has-query {
 				width: 100%;
 				background: #f2f2f2;
 				border: 1px solid #ddd;
