@@ -2,7 +2,7 @@
 
 angular.module('ndc')
   .config(function ($stateProvider, stateFactory) {
-    $stateProvider.state('administrateVideosImport', stateFactory('ImportVideo', {
+    $stateProvider.state('administrateVideosImportModal', stateFactory('ImportVideoModal', {
       url: '/import/{id}',
       resolve: {
         scrollLock: ['scrollLock', function (sl) {
@@ -11,20 +11,20 @@ angular.module('ndc')
       },
       views: {
         'modal@app': {
-          templateUrl: 'states/admin/administrate-videos/import/index/modal.html',
-          controller: 'ImportVideoCtrl'
+          templateUrl: 'states/admin/import-videos/import/index/modal.html',
+          controller: 'ImportVideoModalCtrl'
         }
       },
-      parent: 'administrateVideos',
+      parent: 'importVideosOverview',
       onEnter: ['scrollLock', function (sl) {
         sl.enable();
       }],
-      onExit: ['scrollLock',function (sl) {
+      onExit: ['scrollLock', function (sl) {
         sl.disable();
       }]
     }));
   })
-  .controller('ImportVideoCtrl', function ($scope, TagRepository, $state) {
+  .controller('ImportVideoModalCtrl', function ($scope, TagRepository, $state) {
 
     $scope.tags = []; //This variable holds selected tags
 

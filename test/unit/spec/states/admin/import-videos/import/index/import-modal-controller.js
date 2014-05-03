@@ -1,8 +1,8 @@
 'use strict';
 
-describe('Controller(/admin/administrate-videos/import): ImportCtrl', function () {
+describe('Controller(/admin/import-videos/import): ImportVideoModalCtrl', function () {
 
-  var ImportCtrl, scope;
+  var ImportVideoModalCtrl, scope;
 
   beforeEach(function () {
 
@@ -10,7 +10,7 @@ describe('Controller(/admin/administrate-videos/import): ImportCtrl', function (
 
     inject(function ($controller, $rootScope) {
       scope = $rootScope.$new();
-      ImportCtrl = $controller('ImportCtrl', {
+      ImportVideoModalCtrl = $controller('ImportVideoModalCtrl', {
         $scope: scope
       });
     });

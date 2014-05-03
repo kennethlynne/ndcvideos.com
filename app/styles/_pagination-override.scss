@@ -1,8 +1,8 @@
 ul.pagination {
 	width: 100%;
 	text-align: center;
-	margin-top: 0;
-	margin-bottom: 50px;
+	margin-top: 50px;
+	margin-bottom: 0;
 
 	li {
 		@media (min-width: $screen-tablet) {
