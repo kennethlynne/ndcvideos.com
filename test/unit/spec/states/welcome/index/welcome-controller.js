@@ -2,22 +2,46 @@
 
 describe('Controller(/welcome): WelcomeCtrl', function () {
 
-  var WelcomeCtrl, scope;
+  var WelcomeCtrl, $rootScope, scope, deferred, user, authentication;
 
   beforeEach(function () {
 
-    module('ndc');
+    function getPromise() {
+      return deferred.promise;
+    }
 
-    inject(function ($controller, $rootScope) {
+    user = {
+      $verify: getPromise
+    };
+
+    authentication = {
+      login: jasmine.createSpy('authentication.login').and.callFake(getPromise),
+      getToken: function () {
+        return 'TOKEN';
+      }
+    };
+
+    module('ndc', function ($provide) {
+      $provide.value('authentication', authentication);
+    });
+
+    inject(function ($controller, _$rootScope_, $q) {
+      $rootScope = _$rootScope_;
       scope = $rootScope.$new();
+      deferred = $q.defer();
       WelcomeCtrl = $controller('WelcomeCtrl', {
         $scope: scope,
-        userToBeVerified: 'USER'
+        userToBeVerified: user
       });
     });
+
   });
 
-  it('should attach init data to scope', function () {
-    expect(scope.user).toEqual('USER');
+  it('should log a user in after verification', function () {
+    scope.verify();
+    deferred.resolve();
+    scope.$digest();
+    expect(authentication.login).toHaveBeenCalled();
   });
+
 });
