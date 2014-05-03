@@ -1,6 +1,6 @@
 .sidebar-component {
   $logo-height: 60px;
-  $sticky-footer-height: 90px;
+  $sticky-footer-height: 100px;
 
   position: fixed;
   left: 0;
@@ -49,6 +49,14 @@
 
     @media (max-width: $screen-sm) {
       margin-bottom: 10px;
+    }
+
+    @media (min-width: $screen-sm) {
+      margin: 0;
+      padding-top: 22px;
+      padding-bottom: 20px;
+      background: #00aaad;
+      color: #fff;
     }
   }
 
