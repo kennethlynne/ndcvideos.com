@@ -13,7 +13,6 @@ var app = angular.module('ndc', [
   'ndc.components',
   'ngAnimate',
   'ajoslin.promise-tracker',
-  'cgBusy',
   'chieffancypants.loadingBar',
   'ui.router',
   'ui.bootstrap',
