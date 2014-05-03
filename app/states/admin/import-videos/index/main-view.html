@@ -1,9 +1,8 @@
-<div class="administrate-videos-state">
+<div class="import-videos-state">
 
     <div class="row">
         <div class="col-lg-12">
-            <table cg-busy="'VideoRepository.getAll'" class="table table-hover">
-
+            <table cg-busy="'vimeoAPI.getVideos'" class="table table-hover">
                 <thead class="hidden-on-small">
                 <tr>
                     <th>Video name</th>
@@ -12,12 +11,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="video in existingVideos">
+                <tr ng-repeat="video in vimeoVideos" ng-class="{'is-published' : video.isPublished}">
                     <td>{{video.title}}</td>
                     <td>{{video.$durationInHHMMSS}}</td>
                     <td>
-                        <button class="btn btn-custom" ui-sref="administrateVideosEdit({id:video.id})">Edit</button>
-                        <button class="btn btn-custom" ng-click="deleteVideo(video);">Delete</button>
+                        <button ng-hide="video.isPublished" class="btn btn-custom" ui-sref="administrateVideosImportModal({id:video.id})">Import and edit</button>
+                        <span ng-show="video.isPublished">Imported</span>
                     </td>
                 </tr>
                 </tbody>
