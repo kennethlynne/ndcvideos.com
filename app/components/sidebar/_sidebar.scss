@@ -53,9 +53,9 @@
 
     @media (min-width: $screen-sm) {
       margin: 0;
-      padding-top: 32px;
-      padding-bottom: 30px;
-      background: #333;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      background: $primary-color;
       color: #fff;
     }
   }
