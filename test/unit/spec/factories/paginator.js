@@ -1,6 +1,6 @@
 'use strict';
 
-ddescribe('Service: Paginator', function () {
+describe('Service: Paginator', function () {
 
   var Paginator;
 
