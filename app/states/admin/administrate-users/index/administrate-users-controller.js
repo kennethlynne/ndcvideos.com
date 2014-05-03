@@ -8,15 +8,16 @@ angular.module('ndc')
       parent: 'admin'
     }));
   })
-  .controller('AdministrateusersCtrl', function ($scope, UserRepository) {
+  .controller('AdministrateusersCtrl', function ($scope, UserRepository, Paginator) {
+
+    $scope.paginatedUsers = new Paginator({pageSize:10});
 
     $scope.confirm = function (message) {
-      return confirm(message) == true
+      return confirm(message) == true;
     };
 
-    $scope.users = [];
     UserRepository.getAll().then(function (users) {
-      $scope.users = users;
+      $scope.paginatedUsers.setData(users);
     });
 
     $scope.createUser = function () {
@@ -29,8 +30,8 @@ angular.module('ndc')
     };
 
     $scope.deleteUser = function (user) {
-      var index = $scope.users.indexOf(user);
-      var userBackup = $scope.users.splice(index, 1);
+      var index = $scope.paginatedUsers.data.indexOf(user);
+      var userBackup = $scope.paginatedUsers.data.splice(index, 1);
 
       if ($scope.confirm('Er du helt sikker på at du vil slette brukeren ' + user.username + '?')) {
         user.$delete()
@@ -41,7 +42,7 @@ angular.module('ndc')
           .catch(function () {
             //If deletaion fails, insert the user again
             //TODO: Expose a reference from the repository and let the repository handle the removal
-            $scope.users.splice(index, 0, userBackup);
+            $scope.paginatedUsers.data.splice(index, 0, userBackup);
           })
       }
     };
@@ -50,7 +51,7 @@ angular.module('ndc')
       $scope.isCreatingNewUser = false;
 
       var User = UserRepository.create(user);
-      $scope.users.push(user);
+      $scope.paginatedUsers.data.push(user);
 
       User.$save()
         .then(function (user) {
@@ -58,7 +59,7 @@ angular.module('ndc')
         })
         .catch(function () {
           $scope.isCreatingNewUser = true;
-          $scope.users.splice($scope.users.indexOf(User), 1);
+          $scope.paginatedUsers.data.splice($scope.paginatedUsers.data.indexOf(User), 1);
           //TODO: More user friendly feedback
           alert('Klarte ikke lagre brukeren');
         });

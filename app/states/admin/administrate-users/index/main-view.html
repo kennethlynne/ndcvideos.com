@@ -28,7 +28,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="user in users">
+                <tr ng-repeat="user in paginatedUsers.getPaginatedData()">
                     <td>{{user.email}}</td>
                     <td>Yes</td>
                     <td width="300">
@@ -39,6 +39,7 @@
                 </tbody>
             </table>
 
+            <paginator-component paginator="paginatedUsers"></paginator-component>
 
         </div>
     </div>
