@@ -9,7 +9,7 @@
                 <thead class="hidden-on-small">
                 <tr>
                     <th>Video name</th>
-                    <th width="100">Video length</th>
+                    <th width="140">Video length</th>
                     <th width="140">Actions</th>
                 </tr>
                 </thead>
@@ -31,19 +31,13 @@
                 <thead class="hidden-on-small">
                 <tr>
                     <th>Video name</th>
-                    <th>Tags</th>
-                    <th width="100">Video length</th>
+                    <th width="140">Video length</th>
                     <th width="140">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="video in existingVideos">
                     <td>{{video.title}}</td>
-                    <td>
-                        <ul class="tags">
-                            <li ng-repeat="tag in video.tags">{{tag.text}}</li>
-                        </ul>
-                    </td>
                     <td>{{video.$durationInHHMMSS}}</td>
                     <td>
                         <button class="btn btn-custom" ui-sref="administrateVideosEdit({id:video.id})">Edit</button>
