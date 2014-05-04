@@ -33,10 +33,6 @@ angular.module('ndc')
 
     vimeoAPI
       .getVideoById($state.params.id).then(function (result) {
-
-        console.log(result);
-        delete result.id;
-
         $scope.vimeoVideo = result;
       })
       .catch(function (err) {

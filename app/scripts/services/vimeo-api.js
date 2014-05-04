@@ -22,6 +22,7 @@ angular.module('ndc')
       return $http
         .get(APIBaseUrl + 'imports/' + id + '?provider=vimeo', {tracker: 'vimeoAPI.getVideoById'})
         .then(function (response) {
+          delete response.data.id;
           return new VideoModel(response.data);
         });
     }
