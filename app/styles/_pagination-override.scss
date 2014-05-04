@@ -1,10 +1,12 @@
 ul.pagination {
 	width: 100%;
 	text-align: center;
-	margin-top: 50px;
-	margin-bottom: 0;
+	margin-top: 20px;
+	margin-bottom: 20px;
 
 	li {
+		z-index: 0;
+
 		@media (min-width: $screen-tablet) {
 			display: inline-block;
 
@@ -14,6 +16,7 @@ ul.pagination {
 
 		a {
 			color: inherit;
+			z-index: 0 !important;
 		}
 
 		&.active a {
