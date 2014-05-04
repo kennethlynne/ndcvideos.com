@@ -2,6 +2,23 @@
   margin-top: 10px;
   margin-bottom: 20px;
 
+  @for $i from 0 through 50 {
+    // &.ng-enter-active:nth-child(#{$i}), 
+    &:nth-child(#{$i}) {
+      @include transition(all 200ms ease-in-out #{(70*$i)}ms);
+
+      &.ng-leave,
+      &.ng-leave-active,
+      &.ng-enter { 
+        opacity: 0;
+      } 
+       
+      &.ng-enter.ng-enter-active {
+        opacity: 1;
+      }
+    }
+  }
+
   .wrapper {
 
     .thumbnail-wrapper {
