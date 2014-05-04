@@ -24,6 +24,14 @@
     }
   }
 
+  a.forgot-password {
+    margin: 5px 0 20px 0;
+    display: block;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: $primary-color;
+  }
+
   @media (min-width: $screen-tablet) {
     position: absolute;
   }
