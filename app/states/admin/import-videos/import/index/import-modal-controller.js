@@ -26,6 +26,10 @@ angular.module('ndc')
   })
   .controller('ImportVideoModalCtrl', function ($scope, TagRepository, $state, vimeoAPI, $log, VideoRepository) {
 
+    function errorHandler(code) {
+      $state.go('error', {code: code});
+    }
+
     $scope.tags = []; //This variable holds selected tags
 
     if (!$state.params.id)
@@ -58,18 +62,15 @@ angular.module('ndc')
 
     $scope.publish = function (video) {
 
-      var video = VideoRepository.create(video);
-
-      video.$save().then(function (res) {
-
-        $state.go('administrateVideos');
-
-      });
-
+      VideoRepository.create(video)
+        .$save()
+        .then(function (res) {
+          $state.go('administrateVideos');
+        })
+        .catch(function (err) {
+          $log.error(err);
+          errorHandler();
+        });
     };
-
-    function errorHandler(code) {
-      $state.go('error', {code: code});
-    }
 
   });
