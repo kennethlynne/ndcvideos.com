@@ -267,7 +267,7 @@ angular.module('ndc')
       return [UserRepo.index[id] ? 200 : 404, UserRepo.index[id] || null, {/*headers*/}];
     });
 
-    //GET users/id?token=<token>
+    //GET users?token=<token>
     $httpBackend.whenGET(new RegExp(regexEscape(collectionUrl + '?token=') + IdRegExp)).respond(function (method, url, data, headers) {
       $log.debug('Intercepted GET to `' + url + '`');
       var token = url.match(new RegExp(IdRegExp))[0];
@@ -277,7 +277,7 @@ angular.module('ndc')
       return [404, null, {/*headers*/}];
     });
 
-    //GET users/id?verificationToken=<token>
+    //GET users?verificationToken=<token>
     $httpBackend.whenGET(new RegExp(regexEscape(collectionUrl + '?verificationToken=') + IdRegExp)).respond(function (method, url, data, headers) {
       $log.debug('Intercepted GET to `' + url + '`');
       var token = url.match(new RegExp(IdRegExp))[0];
