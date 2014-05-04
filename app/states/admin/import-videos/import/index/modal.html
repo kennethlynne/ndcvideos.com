@@ -9,13 +9,18 @@
             <div class="modal-body">
 
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-12" cg-busy="VideoModel-$new$-post">
+
+                        <div class="preview">
+                            <media-player-component ng-if="vimeoVideo" video="vimeoVideo"></media-player-component>
+                        </div>
+
 
                         <label>Video title</label>
-                        <input type="text" class="form-control" value="This is the title taken from Vimeo">
+                        <input type="text" class="form-control" value="{{vimeoVideo.title}}">
 
                         <label>Video description</label>
-                        <input type="text" class="form-control" value="This is the description taken from Vimeo">
+                        <input type="text" class="form-control" value="{{vimeoVideo.description}}">
 
                         <label>Add tags to your video</label>
 
@@ -27,7 +32,7 @@
                         <hr/>
 
                         <button class="btn btn-default" ng-click="cancel()">Cancel</button>
-                        <button class="btn btn-default" ng-click="publish()">Publish video</button>
+                        <button class="btn btn-default" ng-click="publish(vimeoVideo)">Publish video</button>
 
                     </div>
                 </div>

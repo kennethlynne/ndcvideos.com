@@ -1,15 +1,15 @@
 'use strict';
 
-describe('Service: vimeoAPI', function () {
+describe('Service: videoImport', function () {
 
-  var vimeoAPI, $httpBackend, APIBaseUrl, VideoModel;
+  var videoImport, $httpBackend, APIBaseUrl, VideoModel;
 
   beforeEach(function () {
 
     module('ndc');
 
-    inject(function (_vimeoAPI_, _$httpBackend_, _APIBaseUrl_, _VideoModel_) {
-      vimeoAPI = _vimeoAPI_;
+    inject(function (_videoImport_, _$httpBackend_, _APIBaseUrl_, _VideoModel_) {
+      videoImport = _videoImport_;
       $httpBackend = _$httpBackend_;
       APIBaseUrl = _APIBaseUrl_;
       VideoModel = _VideoModel_;
@@ -30,7 +30,7 @@ describe('Service: vimeoAPI', function () {
     ]);
 
     var result = null;
-    vimeoAPI.getVideos().then(function (response) {
+    videoImport.provider('vimeo').getVideos().then(function (response) {
       result = response;
     });
 
@@ -45,9 +45,7 @@ describe('Service: vimeoAPI', function () {
     $httpBackend.expectGET(APIBaseUrl + 'imports/5?provider=vimeo').respond(200, {id: 5, name: '13'});
 
     var result = null;
-    vimeoAPI.getVideoById(5).then(function (response) {
-      console.log(response);
-
+    videoImport.provider('vimeo').getVideoById(5).then(function (response) {
       result = response;
     });
 
@@ -57,6 +55,5 @@ describe('Service: vimeoAPI', function () {
     expect(typeof result.id).toBe('undefined');
     expect(result instanceof VideoModel).toBeTruthy();
   });
-
 
 });
