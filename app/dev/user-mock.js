@@ -13,7 +13,6 @@ angular.module('ndc')
     UserRepo.data = [
       {
         id: 1,
-        email: 'ali@g.com',
         username: 'ali@g.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
@@ -31,7 +30,6 @@ angular.module('ndc')
       },
       {
         id: 2,
-        email: '2ali@g.com',
         username: 'ali@g.com',
         firstName: '2Ali',
         lastName: 'Alfredsen',
@@ -49,7 +47,6 @@ angular.module('ndc')
       },
       {
         id: 3,
-        email: '4ali@g.com',
         username: 'ali@g.com',
         firstName: '4Ali',
         lastName: 'Alfredsen',
@@ -67,7 +64,6 @@ angular.module('ndc')
       },
       {
         id: 4,
-        email: 'ali@g.com',
         username: 'ali@g.com',
         firstName: '4Ali',
         lastName: 'Alfredsen',
@@ -85,7 +81,6 @@ angular.module('ndc')
       },
       {
         id: 5,
-        email: 'ali@g.com',
         username: 'ali@g.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
@@ -103,7 +98,6 @@ angular.module('ndc')
       },
       {
         id: 6,
-        email: 'ali@g.com',
         username: 'ali@g.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
@@ -121,7 +115,6 @@ angular.module('ndc')
       },
       {
         id: 7,
-        email: 'ali@g.com',
         username: 'ali@g.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
@@ -139,7 +132,6 @@ angular.module('ndc')
       },
       {
         id: 8,
-        email: 'ali@g.com',
         username: 'ali@g.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
@@ -157,7 +149,6 @@ angular.module('ndc')
       },
       {
         id: 9,
-        email: 'ali@g.com',
         username: 'ali@g.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
@@ -175,7 +166,6 @@ angular.module('ndc')
       },
       {
         id: 10,
-        email: 'ali@g.com',
         username: 'ali@g.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
@@ -193,7 +183,6 @@ angular.module('ndc')
       },
       {
         id: 11,
-        email: 'ali@g.com',
         username: 'ali@g.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
@@ -211,7 +200,6 @@ angular.module('ndc')
       },
       {
         id: 12,
-        email: 'ali@g.com',
         username: 'ali@g.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
