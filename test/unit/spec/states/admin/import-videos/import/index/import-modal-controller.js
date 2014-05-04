@@ -2,7 +2,7 @@
 
 describe('Controller(/admin/import-videos/import): ImportVideoModalCtrl', function () {
 
-  var ImportVideoModalCtrl, scope, vimeoAPI, deferred, promise, $rootScope, $state = {params:{id:1}};
+  var ImportVideoModalCtrl, scope, vimeoAPI, deferred, promise, $rootScope;
 
   beforeEach(function () {
 
