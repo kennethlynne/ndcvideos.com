@@ -14,6 +14,12 @@ ul.pagination {
 			&:last-child { float: right; }
 		}
 
+		&.disabled {
+			&, a {
+				cursor: default !important;
+			}
+		}
+
 		a {
 			color: inherit;
 			z-index: 0 !important;

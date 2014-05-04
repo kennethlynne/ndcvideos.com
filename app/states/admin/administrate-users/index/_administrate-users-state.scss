@@ -1,5 +1,15 @@
 .administrate-users-state  {
 	.invite {
-		margin-bottom: 30px;
+		margin-bottom: 40px;
+
+		.btn {
+			height: 34px;
+		}
+
+		.form-control {
+			outline: none !important;
+			border-color: #ddd;
+			box-shadow: none;
+		}
 	}
 }

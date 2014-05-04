@@ -7,14 +7,18 @@
             <h2>Invite user</h2>
             <p>Invite new users to the platform by email.</p>
             <div class="invite">
-                <form novalidate name="newUserForm" class="form-inline">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <input class="form-control" type="email" name="username" ng-model="newUser.email" placeholder="User email .." required/>
-                        </div>
-                        <button class="btn btn-custom" ng-click="saveUser(newUser)" ng-disabled="newUserForm.username.$invalid">Send invite</button>
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12 col-lg-6">
+                        <form novalidate name="newUserForm">
+                          <div class="input-group">
+                              <input class="form-control" type="email" name="username" ng-model="newUser.email" placeholder="User email .." required>
+                              <span class="input-group-btn">
+                                  <button class="btn btn-custom" ng-click="saveUser(newUser)" ng-disabled="newUserForm.username.$invalid">Send invite</button>
+                              </span>
+                          </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
 
             <h2>All users</h2>
@@ -25,15 +29,15 @@
                 <thead class="hidden-on-small">
                 <tr>
                     <th>Email</th>
-                    <th>Account activated</th>
-                    <th>Actions</th>
+                    <th width="150">Account activated</th>
+                    <th width="250">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="user in paginatedUsers.getPaginatedData()">
                     <td>{{user.email}}</td>
                     <td>Yes</td>
-                    <td width="300">
+                    <td>
                         <button class="btn btn-custom">Reset password</button>
                         <button class="btn btn-custom" ng-click="deleteUser(user)">Delete</button>
                     </td>

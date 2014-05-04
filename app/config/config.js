@@ -12,7 +12,7 @@ angular.module('ndc')
 //      port: String(80),
 //      path: '/api'
       protocol: 'http', //Use the same protocol, host and port as the UI is hosted from bu default
-      host: 'localhost',
+      host: 'ndc.jit.su',
       port: String(1337),
       path: '/api'
     }
