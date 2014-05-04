@@ -9,7 +9,7 @@ angular.module('ndc')
     API: {
       protocol: 'http',
       host: 'ndc.jit.su',
-      port: String(1337),
+      port: String(80),
       path: '/api'
     }
   }, angular._localConfig || {}))
