@@ -33,7 +33,6 @@ describe('Controller(/admin/import-videos/import): ImportVideoModalCtrl', functi
     var video = {id:1, name:'ragnar'};
     deferred.resolve(video);
     $rootScope.$digest();
-    console.log(scope.vimeoVideo);
     expect(scope.vimeoVideo).toBe(video);
   });
 

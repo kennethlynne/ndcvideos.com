@@ -46,8 +46,6 @@ describe('Service: vimeoAPI', function () {
 
     var result = null;
     vimeoAPI.getVideoById(5).then(function (response) {
-      console.log(response);
-
       result = response;
     });
 
