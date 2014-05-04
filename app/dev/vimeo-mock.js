@@ -95,6 +95,3 @@ angular.module('ndc')
     });
 
   });
-
-
-var a = /http:\/\/localhost:1337\/api\/imports\/([0-9]+)[$\d-_]/.test();
