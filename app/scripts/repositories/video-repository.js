@@ -18,7 +18,7 @@ angular.module('ndc')
                 if(query == null || query == '')
                     _url = '';
                 else
-                    _url = '/search?q=' + query;
+                    _url = '?q=' + query;
 
                 return $http.get(Model.$settings.url + _url, {tracker: repository.$settings.name + '.search'}).then(function (response) {
                     if (angular.isArray(response.data)) {
