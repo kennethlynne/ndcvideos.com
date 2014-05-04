@@ -3,7 +3,6 @@
   margin-bottom: 20px;
 
   @for $i from 0 through 50 {
-    // &.ng-enter-active:nth-child(#{$i}), 
     &:nth-child(#{$i}) {
       @include transition(all 200ms ease-in-out #{(70*$i)}ms);
 
