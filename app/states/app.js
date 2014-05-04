@@ -18,22 +18,25 @@ angular.module('ndc')
       $scope.ready = true;
     }
 
+    function failHandler() {
+      authentication.logout();
+      $state.transitionTo('login');
+    }
+
     if (authentication.isAuthenticated) {
 
-      if(typeof CurrentUser.get().id == 'undefined')
-      {
+      if (typeof CurrentUser.get().id === 'undefined') {
         UserRepository.getByToken(authentication.getToken())
           .then(CurrentUser.set)
-          .then(successHandler);
+          .then(successHandler)
+          .catch(failHandler);
       }
-      else
-      {
+      else {
         successHandler();
       }
 
     }
     else {
-      authentication.logout();
-      $state.transitionTo('login');
+      failHandler();
     }
   });
