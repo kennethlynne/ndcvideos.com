@@ -8,7 +8,7 @@
             <div class="pull-right">
                 <form class="searchform" ng-submit="search(query)">
                     <span class="searchicon icon-magnifier"></span>
-                    <input ng-class="query ? 'has-query' : ''" type="text" class="form-control input-lg searchfield" ng-model="query" ng-change="search(query)" placeholder="Search for videos..">
+                    <input ng-class="{'has-query':query}" type="text" class="form-control input-lg searchfield" ng-model="query" ng-change="search(query)" placeholder="Search for videos..">
                 </form>
             </div>
 
