@@ -41,7 +41,6 @@ angular.module('ndc')
         errorHandler(404);
       });
 
-
     $scope.select2Options = {
       multiple: true,
       query: function (query) {
@@ -68,7 +67,6 @@ angular.module('ndc')
       });
 
     };
-
 
     function errorHandler(code) {
       $state.go('error', {code: code});
