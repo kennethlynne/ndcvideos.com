@@ -1,5 +1,5 @@
 angular.module('ndc')
-  .run(function (Config, $httpBackend, $log, APIBaseUrl, regexEscape, guid) {
+  .run(function (Config, $httpBackend, $log, APIBaseUrl, regexEscape, guid, _) {
     if (!Config.API.useMocks) return;
 
     var collectionUrl = APIBaseUrl + 'users';
@@ -240,6 +240,14 @@ angular.module('ndc')
       return [200, UserRepo.data, {/*headers*/}];
     });
 
+    //POST users/1/verify
+    var regx = (regexEscape(collectionUrl + '/') + IdRegExp + regexEscape('/verify')).replace('$','');
+    console.log(regx);
+    $httpBackend.whenPOST(new RegExp(regx)).respond(function (method, url, data, headers) {
+      $log.debug('Intercepted POST to `' + url + '`', data);
+      return [200, {}, {/*headers*/}];
+    });
+
     //POST users/
     $httpBackend.whenPOST(collectionUrl).respond(function (method, url, data, headers) {
       $log.debug('Intercepted POST to `' + url + '`', data);
@@ -257,6 +265,26 @@ angular.module('ndc')
       $log.debug('Intercepted GET to `' + url + '`');
       var id = url.match(new RegExp(IdRegExp))[0];
       return [UserRepo.index[id] ? 200 : 404, UserRepo.index[id] || null, {/*headers*/}];
+    });
+
+    //GET users?token=<token>
+    $httpBackend.whenGET(new RegExp(regexEscape(collectionUrl + '?token=') + IdRegExp)).respond(function (method, url, data, headers) {
+      $log.debug('Intercepted GET to `' + url + '`');
+      var token = url.match(new RegExp(IdRegExp))[0];
+      if (token === 'take-on-me') {
+        return [200, UserRepo.index[0], {/*headers*/}];
+      }
+      return [404, null, {/*headers*/}];
+    });
+
+    //GET users?verificationToken=<token>
+    $httpBackend.whenGET(new RegExp(regexEscape(collectionUrl + '?verificationToken=') + IdRegExp)).respond(function (method, url, data, headers) {
+      $log.debug('Intercepted GET to `' + url + '`');
+      var token = url.match(new RegExp(IdRegExp))[0];
+      if (token) {
+        return [200, UserRepo.data[0], {/*headers*/}];
+      }
+      return [404, null, {/*headers*/}];
     });
 
     //PUT users/id
