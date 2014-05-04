@@ -25,15 +25,15 @@
                 <thead class="hidden-on-small">
                 <tr>
                     <th>Email</th>
-                    <th>Account activated</th>
-                    <th>Actions</th>
+                    <th width="150">Account activated</th>
+                    <th width="250">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="user in paginatedUsers.getPaginatedData()">
                     <td>{{user.email}}</td>
                     <td>Yes</td>
-                    <td width="300">
+                    <td>
                         <button class="btn btn-custom">Reset password</button>
                         <button class="btn btn-custom" ng-click="deleteUser(user)">Delete</button>
                     </td>
