@@ -16,6 +16,47 @@ angular.module('ndc')
       };
     }]);
   })
+  .run(function ($rootScope, $urlRouter, authentication, $state, $location, CurrentUser, $log, _) {
+    $rootScope.$on('$locationChangeSuccess', function (e) {
+      e.preventDefault();
+
+      var path = $location.path().substr(1);
+
+      //List of pages you can visit without being authorized
+      var allowAnonymous = [
+        'login',
+        'error',
+        'welcome'
+      ];
+
+      var requireRole = {
+        //page: [required roles...]
+        'admin': ['administrator']
+      };
+
+      if (allowAnonymous.indexOf(path) >= 0 || authentication.isAuthenticated()) {
+
+        var index = _.chain(requireRole).keys().indexOf(path).value();
+        var userHasAllRequiredRoles = function () {
+          return _.every(requireRole[index], function (role) {
+            if (!CurrentUser.is(role)) {
+              $log.error('User does not have required role ' + role);
+              return false;
+            }
+            return true;
+          });
+        };
+
+        if (index == -1 || userHasAllRequiredRoles()) {
+          $urlRouter.sync();
+        }
+        else {
+          $log.error('User is not authorized to access ' + path);
+          $state.go('login');
+        }
+      }
+    });
+  })
   .factory('authentication', function ($http, BaseUrl, $localStorage, $log, $q, UserRepository, CurrentUser) {
 
     var _logout = function () {
@@ -71,48 +112,5 @@ angular.module('ndc')
       login: _login,
       getToken: _getToken,
       logout: _logout
-    }
-  })
-  .run(function ($rootScope, $urlRouter, authentication, $state, $location, CurrentUser, $log, _) {
-    $rootScope.$on('$locationChangeSuccess', function (e) {
-      e.preventDefault();
-
-      var path = $location.path().substr(1);
-
-      //List of pages you can visit without being authorized
-      var allowAnonymous = [
-        'login',
-        'error'
-      ];
-
-      var requireRole = {
-        //page: [required roles...]
-        'admin': ['administrator']
-      };
-
-      if (allowAnonymous.indexOf(path) >= 0 || authentication.isAuthenticated()) {
-
-        var index = _.chain(requireRole).keys().indexOf(path).value();
-        var userHasAllRequiredRoles = function () {
-          return _.every(requireRole[index], function (role) {
-            if (!CurrentUser.is(role)) {
-              $log.error('User does not have required role ' + role);
-              return false;
-            }
-            return true;
-          });
-        };
-
-        if (index == -1 || userHasAllRequiredRoles()) {
-          $urlRouter.sync();
-        }
-        else {
-          $log.error('User is not authorized to access ' + path);
-          $state.go('login');
-        }
-      }
-      else {
-        $state.go('login');
-      }
-    });
+    };
   });
