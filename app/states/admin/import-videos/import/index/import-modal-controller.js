@@ -24,9 +24,26 @@ angular.module('ndc')
       }]
     }));
   })
-  .controller('ImportVideoModalCtrl', function ($scope, TagRepository, $state) {
+  .controller('ImportVideoModalCtrl', function ($scope, TagRepository, $state, vimeoAPI, $log, VideoRepository) {
+
+    function errorHandler(code) {
+      $state.go('error', {code: code});
+    }
 
     $scope.tags = []; //This variable holds selected tags
+
+    if (!$state.params.id)
+      errorHandler(404);
+
+    vimeoAPI
+      .getVideoById($state.params.id).then(function (result) {
+        $scope.vimeoVideo = result;
+      })
+      .catch(function (err) {
+
+        $log.log(err);
+        errorHandler(404);
+      });
 
     $scope.select2Options = {
       multiple: true,
@@ -43,7 +60,17 @@ angular.module('ndc')
       }
     };
 
-    $scope.publish = function () {
-      alert('Publish');
+    $scope.publish = function (video) {
+
+      VideoRepository.create(video)
+        .$save()
+        .then(function (res) {
+          $state.go('administrateVideos');
+        })
+        .catch(function (err) {
+          $log.error(err);
+          errorHandler();
+        });
     };
+
   });
