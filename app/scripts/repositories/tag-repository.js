@@ -13,7 +13,7 @@ angular.module('ndc')
             var repository = this;
             var Model = repository.$settings.model;
 
-            return $http.get(Model.$settings.url + '/search?q=' + query, {tracker: repository.$settings.name + '.search'}).then(function (response) {
+            return $http.get(Model.$settings.url + '?q=' + query, {tracker: repository.$settings.name + '.search'}).then(function (response) {
                 if (angular.isArray(response.data)) {
                     return response.data.map(function (item) {
                         var instance = new Model(item);
