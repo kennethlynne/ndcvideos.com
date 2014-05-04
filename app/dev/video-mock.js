@@ -471,7 +471,7 @@ angular.module('ndc')
 
 
     //GET videos/search?q=<query>
-    $httpBackend.whenGET(new RegExp(regexEscape(collectionUrl + '/search?q=') + QueryRegExp)).respond(function (method, url, data, headers) {
+    $httpBackend.whenGET(new RegExp(regexEscape(collectionUrl + '?q=') + QueryRegExp)).respond(function (method, url, data, headers) {
       $log.log('Intercepted GET to `' + url + '`');
       var query = url.match(new RegExp(QueryRegExp))[0];
 
