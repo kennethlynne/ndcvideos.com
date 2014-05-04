@@ -1,11 +1,16 @@
 .login-state  {
-  padding-top: 120px;
+  padding-top: 140px;
   background: #ddd;
   padding-bottom: 180px;
-  border-radius: 0 0 10px 10px;
+  border-radius: 0;
   width: 100%;
   height: 100%;
   text-align: center;
+  background: url(/assets/images/cover-background.jpg) no-repeat center center; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 
   p.powered {
     font-weight: 400;    
