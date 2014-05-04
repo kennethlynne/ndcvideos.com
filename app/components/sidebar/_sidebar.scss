@@ -44,8 +44,12 @@
     font-size: 22px;
     margin-top: 25px;
     margin-bottom: 25px;
-    color: #ddd;
     font-weight: 600;
+
+    a {
+      color: #ddd;
+      text-decoration: none;
+    }
 
     @media (max-width: $screen-sm) {
       margin-bottom: 10px;
