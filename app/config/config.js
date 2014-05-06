@@ -8,7 +8,7 @@ angular.module('ndc')
     environment: 'production', //development or production
     API: {
       protocol: 'http',
-      host: 'ndc.jit.su',
+      host: 'ndcapi.jit.su',
       port: String(80),
       path: '/api'
     }

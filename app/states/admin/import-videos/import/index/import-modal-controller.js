@@ -48,6 +48,7 @@ angular.module('ndc')
     $scope.select2Options = {
       multiple: true,
       query: function (query) {
+
         TagRepository.search(query.term).then(function (data) {
           query.callback({results: data});
         });
@@ -61,6 +62,8 @@ angular.module('ndc')
     };
 
     $scope.publish = function (video) {
+
+
 
       VideoRepository.create(video)
         .$save()
