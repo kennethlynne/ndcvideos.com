@@ -40,7 +40,6 @@ angular.module('ndc')
         $scope.vimeoVideo = result;
       })
       .catch(function (err) {
-
         $log.log(err);
         errorHandler(404);
       });
@@ -48,7 +47,6 @@ angular.module('ndc')
     $scope.select2Options = {
       multiple: true,
       query: function (query) {
-
         TagRepository.search(query.term).then(function (data) {
           query.callback({results: data});
         });
@@ -63,7 +61,8 @@ angular.module('ndc')
 
     $scope.publish = function (video) {
 
-
+      if ($scope.tags.length > 0)
+        video.tags = $scope.tags;
 
       VideoRepository.create(video)
         .$save()
