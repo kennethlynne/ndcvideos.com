@@ -61,7 +61,7 @@ angular.module('ndc')
           $scope.isCreatingNewUser = true;
           $scope.paginatedUsers.data.splice($scope.paginatedUsers.data.indexOf(User), 1);
           //TODO: More user friendly feedback
-          alert('Klarte ikke lagre brukeren');
+          alert('User already exists');
         });
 
     };

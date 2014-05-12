@@ -20,9 +20,9 @@ angular.module('ndc')
     $scope.user = userToBeVerified;
 
     $scope.verify = function () {
-      $scope.user.$verify($stateParams.verificationToken, $scope.password)
+      $scope.user.$verify($scope.user.username, $stateParams.verificationToken, $scope.password)
         .then(function () {
-          return authentication.login($scope.user.username, $scope.password)
+          return authentication.login('password', $scope.user.username, $scope.password)
             .then(function (response) {
               $state.go('videos');
               return response;
