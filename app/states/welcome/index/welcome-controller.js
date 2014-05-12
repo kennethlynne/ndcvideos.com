@@ -6,11 +6,11 @@ angular.module('ndc')
       url: '/welcome?verificationToken',
       templateUrl: 'states/welcome/index/main-view.html',
       resolve: {
-        userToBeVerified: ['UserRepository', '$stateParams', '$log', function (UserRepository, $stateParams, $log, $state) {
+        userToBeVerified: ['UserRepository', '$stateParams', '$log', '$state', function (UserRepository, $stateParams, $log, $state) {
           return UserRepository.getByVerificationToken($stateParams.verificationToken)
             .catch(function (err) {
               $log.error(err);
-              $state.go('error', {code:404});
+              $state.go('error', {code:403});
             });
         }]
       }
