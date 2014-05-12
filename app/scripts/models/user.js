@@ -32,6 +32,24 @@ angular.module('ndc')
       return promise;
     };
 
+    Model.prototype.$resetPassword = function (username) {
+      var model = this;
+
+      model.$isResettingPassword = true;
+
+      var promise = $http
+        .post(model.$settings.urlBase + '/' + model.id + '/resetpassword', {username:username}, {tracker: model.$settings.tracker + '-' + model.id + '-resetPassword'})
+        .then(function (response) {
+          return response.data;
+        });
+
+      promise.finally(function () {
+        model.$isResettingPassword = false;
+      });
+
+      return promise;
+    };
+
     //Decorate save to attach this item to the Repository on successful save
     var _$save = Model.prototype.$save;
     Model.prototype.$save = function () {

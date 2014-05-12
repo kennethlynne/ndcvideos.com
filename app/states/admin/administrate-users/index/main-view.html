@@ -39,7 +39,7 @@
                     <td ng-if="user.verified">Yes</td>
                     <td ng-if="!user.verified">No</td>
                     <td>
-                        <button class="btn btn-custom">Reset password</button>
+                        <button class="btn btn-custom" ng-click="resetPassword(user)">Reset password</button>
                         <button class="btn btn-custom" ng-click="deleteUser(user)">Delete</button>
                     </td>
                 </tr>
