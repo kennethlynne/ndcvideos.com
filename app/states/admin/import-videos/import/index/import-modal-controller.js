@@ -78,15 +78,17 @@ angular.module('ndc')
 
         video.tags = $scope.tags;
 
-        VideoRepository.create(video)
-          .$save()
-          .then(function (res) {
-            $state.go('administrateVideos');
-          })
-          .catch(function (err) {
-            $log.error(err);
-            errorHandler();
-          });
       }
+
+      VideoRepository.create(video)
+        .$save()
+        .then(function (res) {
+          $state.go('administrateVideos');
+        })
+        .catch(function (err) {
+          $log.error(err);
+          errorHandler();
+        });
+
     };
   });
