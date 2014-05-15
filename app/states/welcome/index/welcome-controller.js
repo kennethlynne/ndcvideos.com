@@ -6,11 +6,11 @@ angular.module('ndc')
       url: '/welcome?verificationToken',
       templateUrl: 'states/welcome/index/main-view.html',
       resolve: {
-        userToBeVerified: ['UserRepository', '$stateParams', '$log', function (UserRepository, $stateParams, $log, $state) {
+        userToBeVerified: ['UserRepository', '$stateParams', '$log', '$state', function (UserRepository, $stateParams, $log, $state) {
           return UserRepository.getByVerificationToken($stateParams.verificationToken)
             .catch(function (err) {
               $log.error(err);
-              $state.go('error', {code:404});
+              $state.go('error', {code:403});
             });
         }]
       }
@@ -20,9 +20,9 @@ angular.module('ndc')
     $scope.user = userToBeVerified;
 
     $scope.verify = function () {
-      $scope.user.$verify($stateParams.verificationToken, $scope.password)
+      $scope.user.$verify($scope.user.username, $stateParams.verificationToken, $scope.password)
         .then(function () {
-          return authentication.login($scope.user.username, $scope.password)
+          return authentication.login('password', $scope.user.username, $scope.password)
             .then(function (response) {
               $state.go('videos');
               return response;

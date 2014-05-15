@@ -10,7 +10,7 @@ angular.module('ndc')
   })
   .controller('AdministrateusersCtrl', function ($scope, UserRepository, Paginator) {
 
-    $scope.paginatedUsers = new Paginator({pageSize:10});
+    $scope.paginatedUsers = new Paginator({pageSize: 10});
 
     $scope.confirm = function (message) {
       return confirm(message) == true;
@@ -29,11 +29,27 @@ angular.module('ndc')
       $scope.newUser = {};
     };
 
+    $scope.resetPassword = function (user) {
+      if ($scope.confirm('Are you sure you want to reset password for user ' + user.username + '?')) {
+
+        user.$resetPassword(user.username)
+          .then(function(){
+            //TODO: Give some notification of great success
+            alert('Reset password for user ' + user.username + '.');
+          })
+          .catch(function(err){
+            $log.log(err);
+            alert('Could not reset password for user ' + user.username + '.');
+          });
+      }
+
+    };
+
     $scope.deleteUser = function (user) {
       var index = $scope.paginatedUsers.data.indexOf(user);
       var userBackup = $scope.paginatedUsers.data.splice(index, 1);
 
-      if ($scope.confirm('Er du helt sikker på at du vil slette brukeren ' + user.username + '?')) {
+      if ($scope.confirm('Are you sure you want to delete the user ' + user.username + '?')) {
         user.$delete()
           .then(function () {
             //TODO: Give some notification of great success
@@ -61,7 +77,7 @@ angular.module('ndc')
           $scope.isCreatingNewUser = true;
           $scope.paginatedUsers.data.splice($scope.paginatedUsers.data.indexOf(User), 1);
           //TODO: More user friendly feedback
-          alert('Klarte ikke lagre brukeren');
+          alert('User already exists');
         });
 
     };

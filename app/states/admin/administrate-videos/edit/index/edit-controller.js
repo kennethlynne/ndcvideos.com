@@ -19,7 +19,7 @@ angular.module('ndc')
       onEnter: ['scrollLock', function (sl) {
         sl.enable();
       }],
-      onExit: ['scrollLock',function (sl) {
+      onExit: ['scrollLock', function (sl) {
         sl.disable();
       }]
     }));
@@ -32,6 +32,13 @@ angular.module('ndc')
 
     $scope.select2Options = {
       multiple: true,
+      createSearchChoice: function (term, data) {
+        if (_.filter(data, function (item) {
+          return item.text.localeCompare(term) === 0;
+        }).length === 0) {
+          return {id: '$$' + term, text: term};
+        }
+      },
       query: function (query) {
         TagRepository.search(query.term).then(function (data) {
           query.callback({results: data});
@@ -40,9 +47,22 @@ angular.module('ndc')
     };
 
     $scope.saveChanges = function (video) {
-      video.$save().then(function () {
-        $state.go('administrateVideos');
-      });
+
+
+      if (video.tags.length > 0) {
+
+        _.forEach(video.tags, function (item) {
+
+          if (item.id && item.id.substr(0, 1) == '$')
+            delete item.id;
+        });
+
+        video.$save().then(function () {
+          $state.go('administrateVideos');
+        });
+
+      }
+
     };
 
     $scope.cancel = function () {

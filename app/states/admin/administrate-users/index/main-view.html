@@ -11,7 +11,7 @@
                     <div class="col-sm-6 col-xs-12 col-lg-6">
                         <form novalidate name="newUserForm">
                           <div class="input-group">
-                              <input class="form-control" type="email" name="username" ng-model="newUser.email" placeholder="User email .." required>
+                              <input class="form-control" type="email" name="username" ng-model="newUser.username" placeholder="Username (email) .." required>
                               <span class="input-group-btn">
                                   <button class="btn btn-custom" ng-click="saveUser(newUser)" ng-disabled="newUserForm.username.$invalid">Send invite</button>
                               </span>
@@ -35,10 +35,11 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="user in paginatedUsers.getPaginatedData()">
-                    <td>{{user.email}}</td>
-                    <td>Yes</td>
+                    <td>{{user.username}}</td>
+                    <td ng-if="user.verified">Yes</td>
+                    <td ng-if="!user.verified">No</td>
                     <td>
-                        <button class="btn btn-custom">Reset password</button>
+                        <button class="btn btn-custom" ng-click="resetPassword(user)">Reset password</button>
                         <button class="btn btn-custom" ng-click="deleteUser(user)">Delete</button>
                     </td>
                 </tr>

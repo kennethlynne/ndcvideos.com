@@ -14,19 +14,37 @@ angular.module('ndc')
     Model.$settings = {url: url};
     Model.prototype = Object.create(BaseModel.prototype);
 
-    Model.prototype.$verify = function (verificationToken, newPassword) {
+    Model.prototype.$verify = function (username, verificationToken, newPassword) {
       var model = this;
 
       model.$isVerifying = true;
 
       var promise = $http
-        .post(model.$settings.urlBase + '/' + model.id + '/verify', {password: newPassword, verificationToken: verificationToken}, {tracker: model.$settings.tracker + '-' + model.id + '-verify'})
+        .post(model.$settings.urlBase + '/' + model.id + '/verify', {username:username,password: newPassword, verificationToken: verificationToken}, {tracker: model.$settings.tracker + '-' + model.id + '-verify'})
         .then(function (response) {
           return response.data;
         });
 
       promise.finally(function () {
         model.$isVerifying = false;
+      });
+
+      return promise;
+    };
+
+    Model.prototype.$resetPassword = function (username) {
+      var model = this;
+
+      model.$isResettingPassword = true;
+
+      var promise = $http
+        .post(model.$settings.urlBase + '/' + model.id + '/resetpassword', {username:username}, {tracker: model.$settings.tracker + '-' + model.id + '-resetPassword'})
+        .then(function (response) {
+          return response.data;
+        });
+
+      promise.finally(function () {
+        model.$isResettingPassword = false;
       });
 
       return promise;
