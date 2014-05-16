@@ -10,6 +10,9 @@ angular.module('ndc')
       data.url = APIBaseUrl + collectionUrl;
 
       data.$durationInHHMMSS = timeFilter(data.duration);
+      data.upload_date = new Date(data.upload_date);
+      data.createdAt = new Date(data.createdAt);
+      data.updatedAt = new Date(data.updatedAt);
 
       BaseModel.call(this, data);
     }
