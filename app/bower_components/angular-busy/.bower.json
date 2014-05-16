@@ -1,0 +1,43 @@
+{
+  "name": "angular-busy",
+  "version": "4.0.4",
+  "main": [
+    "dist/angular-busy.js",
+    "dist/angular-busy.css"
+  ],
+  "dependencies": {
+    "angular": "~1.2",
+    "angular-animate": "~1.2"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "components",
+    "test",
+    "temp",
+    "demo",
+    "lib",
+    "./angular-busy.css",
+    "./angular-busy.html",
+    "./angular-busy.js",
+    "Gruntfile.js",
+    "package.json",
+    "README.md"
+  ],
+  "devDependencies": {
+    "angular-mocks": "~1.2.16",
+    "jquery": "~2.1.0"
+  },
+  "homepage": "https://github.com/cgross/angular-busy",
+  "_release": "4.0.4",
+  "_resolution": {
+    "type": "version",
+    "tag": "v4.0.4",
+    "commit": "55755a99dc75259f4da5a8fef08ba72c95a5fa96"
+  },
+  "_source": "git://github.com/cgross/angular-busy.git",
+  "_target": "~4.0.4",
+  "_originalSource": "angular-busy",
+  "_direct": true
+}

@@ -12,7 +12,7 @@ angular.module('ndc')
 
     $scope.paginatedVideos = new Paginator({pageSize: 10});
 
-    VideoRepository.getAll().then(function (videos) {
+    $scope.promise = VideoRepository.getAll().then(function (videos) {
       $scope.paginatedVideos.setData(videos);
     });
 

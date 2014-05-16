@@ -12,7 +12,7 @@ angular.module('ndc')
 
     $scope.paginatedVideos = new Paginator({pageSize: 10});
 
-    vimeoAPI.getVideos().then(function (videos) {
+    $scope.promise = vimeoAPI.getVideos().then(function (videos) {
       $scope.paginatedVideos.setData(videos);
     });
 

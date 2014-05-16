@@ -16,7 +16,7 @@ angular.module('ndc')
       return confirm(message) == true;
     };
 
-    UserRepository.getAll().then(function (users) {
+    $scope.promise = UserRepository.getAll().then(function (users) {
       $scope.paginatedUsers.setData(users);
     });
 
