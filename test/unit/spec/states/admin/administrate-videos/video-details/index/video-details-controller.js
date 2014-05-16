@@ -16,7 +16,6 @@ describe('Controller(/admin/administrate-videos/video-details): VideodetailsCtrl
     });
   });
 
-  it('should attach init data to scope', function () {
-    expect(scope.foo).toEqual('bar');
+  it('should initialize', function () {
   });
 });
