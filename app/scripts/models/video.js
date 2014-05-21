@@ -10,9 +10,10 @@ angular.module('ndc')
       data.url = APIBaseUrl + collectionUrl;
 
       data.$durationInHHMMSS = timeFilter(data.duration);
-      data.upload_date = new Date(data.upload_date);
-      data.createdAt = new Date(data.createdAt);
-      data.updatedAt = new Date(data.updatedAt);
+
+      data.upload_date = data.upload_date ? new Date(data.upload_date) : new Date();
+      data.createdAt = data.createdAt ? new Date(data.createdAt) : new Date();
+      data.updatedAt = data.updatedAt ? new Date(data.updatedAt) : new Date();
 
       BaseModel.call(this, data);
     }
@@ -23,8 +24,12 @@ angular.module('ndc')
     //Decorate save to attach this item to the Repository on successful save
     var _$save = VideoModel.prototype.$save;
     VideoModel.prototype.$save = function () {
-      var Video = this;
-      return _$save.apply(this, arguments).then(function (response) {
+      var Video = angular.copy(this);
+      delete Video.upload_date;
+      delete Video.createdAt;
+      delete Video.updatedAt;
+
+      return _$save.apply(Video, arguments).then(function (response) {
         var Repository = $injector.get('VideoRepository');
         Repository.attach(Video);
         return response;
