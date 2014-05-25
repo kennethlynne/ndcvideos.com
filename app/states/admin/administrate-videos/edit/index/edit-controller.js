@@ -24,30 +24,15 @@ angular.module('ndc')
       }]
     }));
   })
-  .controller('EditVideoCtrl', function ($scope, TagRepository, $state, $stateParams, VideoRepository) {
+  .controller('EditVideoCtrl', function ($scope, TagRepository, $state, $stateParams, VideoRepository, Select2) {
 
     VideoRepository.getById($stateParams.id).then(function (video) {
       $scope.video = video;
     });
 
-    $scope.select2Options = {
-      multiple: true,
-      createSearchChoice: function (term, data) {
-        if (_.filter(data, function (item) {
-          return item.text.localeCompare(term) === 0;
-        }).length === 0) {
-          return {id: '$$' + term, text: term};
-        }
-      },
-      query: function (query) {
-        TagRepository.search(query.term).then(function (data) {
-          query.callback({results: data});
-        });
-      }
-    };
+    $scope.select2Options = Select2.tagSearch;
 
     $scope.saveChanges = function (video) {
-
 
       if (video.tags.length > 0) {
 
@@ -57,11 +42,11 @@ angular.module('ndc')
             delete item.id;
         });
 
-        video.$save().then(function () {
-          $state.go('administrateVideos');
-        });
-
       }
+
+      video.$save().then(function () {
+        $state.go('administrateVideos');
+      });
 
     };
 
