@@ -9,7 +9,7 @@ angular.module('ndc')
       parent: 'app'
     }));
   })
-  .controller('VideoCtrl', function ($scope, TagRepository, VideoRepository, $stateParams, $location, _, TagModel) {
+  .controller('VideoCtrl', function ($scope, TagRepository, VideoRepository, $stateParams, $location, _) {
     $scope.search = _.throttle(function (query) {
 
       //update query parameters and set videos by query
