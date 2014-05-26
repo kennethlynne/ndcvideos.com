@@ -120,7 +120,7 @@ describe('Model: VideoModel', function () {
       expect(model.$isDirty).toBeTruthy();
     });
 
-    it('should not be dirty after save', function () {
+    xit('should not be dirty after save', function () {
       var model = new VideoModel({id: 5, upload_date: '0', createdAt: '0', updatedAt: '0' });
       $rootScope.$digest();
       model.thing = 'Data';
