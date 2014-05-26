@@ -2,15 +2,11 @@
 
 describe('Model: VideoModel', function () {
 
-  var VideoModel, $httpBackend, $rootScope, APIBaseUrl, VideoRepository, collectionUrl = 'videos';
+  var VideoModel, $httpBackend, $rootScope, APIBaseUrl, collectionUrl = 'videos';
 
   beforeEach(function () {
 
-    VideoRepository = jasmine.createSpy('VideoRepository');
-    VideoRepository.attach = jasmine.createSpy('VideoRepository.attach');
-
     module('ndc', function ($provide) {
-      $provide.value('VideoRepository', VideoRepository);
       $provide.service('timeFilter', function () {
         return function () {
           return 'timeFilter stub';
@@ -64,14 +60,6 @@ describe('Model: VideoModel', function () {
       expect(typeof promise.then).toBe('function');
     });
 
-    it('should attach itself to the Repository on save', function () {
-      $httpBackend.expectPUT(APIBaseUrl + collectionUrl + '/5', {title: 'New title', id: 5, upload_date: '0000-01-01T00:00:00.000Z', createdAt: '0000-01-01T00:00:00.000Z', updatedAt: '0000-01-01T00:00:00.000Z'}).respond(200, {id: 5, title: 'New title from server'});
-      var model = new VideoModel({title: 'New title', id: 5,  upload_date: '0', createdAt: '0', updatedAt: '0'});
-      expect(VideoRepository.attach).not.toHaveBeenCalled();
-      var promise = model.$save();
-      $httpBackend.flush();
-      expect(VideoRepository.attach).toHaveBeenCalledWith(model);
-    });
   });
 
   describe('$set', function () {
@@ -133,11 +121,11 @@ describe('Model: VideoModel', function () {
     });
 
     it('should not be dirty after save', function () {
-      var model = new VideoModel({id: 5});
+      var model = new VideoModel({id: 5, upload_date: '0', createdAt: '0', updatedAt: '0' });
       $rootScope.$digest();
       model.thing = 'Data';
 
-      $httpBackend.expectPUT(APIBaseUrl + collectionUrl + '/5', {thing: 'Data', id: 5}).respond(200, {id: 5, thing: 'Data'});
+      $httpBackend.expectPUT(APIBaseUrl + collectionUrl + '/5', {thing: 'Data', id: 5, upload_date: '0000-01-01T00:00:00.000Z', createdAt: '0000-01-01T00:00:00.000Z', updatedAt: '0000-01-01T00:00:00.000Z'}).respond(200, {id: 5, thing: 'Data'});
       model.$save();
 
       $httpBackend.flush();

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ndc')
-  .factory('VideoModel', function ($q, $http, $rootScope, BaseModel, APIBaseUrl, $injector, timeFilter) {
+  .factory('VideoModel', function ($q, $rootScope, BaseModel, APIBaseUrl, timeFilter) {
 
     var collectionUrl = 'videos';
 
@@ -20,18 +20,6 @@ angular.module('ndc')
 
     VideoModel.$settings = {url: APIBaseUrl + collectionUrl, tracker: 'VideoModel'};
     VideoModel.prototype = Object.create(BaseModel.prototype);
-
-    //Decorate save to attach this item to the Repository on successful save
-    var _$save = VideoModel.prototype.$save;
-    VideoModel.prototype.$save = function () {
-      var video = this;
-
-      return _$save.apply(video, arguments).then(function (response) {
-        var Repository = $injector.get('VideoRepository');
-        Repository.attach(video);
-        return response;
-      });
-    };
 
     return VideoModel;
   });
