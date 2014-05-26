@@ -24,14 +24,11 @@ angular.module('ndc')
     //Decorate save to attach this item to the Repository on successful save
     var _$save = VideoModel.prototype.$save;
     VideoModel.prototype.$save = function () {
-      var Video = angular.copy(this);
-      delete Video.upload_date;
-      delete Video.createdAt;
-      delete Video.updatedAt;
+      var video = this;
 
-      return _$save.apply(Video, arguments).then(function (response) {
+      return _$save.apply(video, arguments).then(function (response) {
         var Repository = $injector.get('VideoRepository');
-        Repository.attach(Video);
+        Repository.attach(video);
         return response;
       });
     };
