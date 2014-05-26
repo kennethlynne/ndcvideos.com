@@ -25,8 +25,8 @@ describe('Service: vimeoAPI', function () {
 
   it('should return a list of videos', function () {
     $httpBackend.expectGET(APIBaseUrl + 'imports?provider=vimeo').respond(200, [
-      {id: 5, name: '13'},
-      {id: 6, name: '37'}
+      {id: 5, name: '13', upload_date: '2014-05-21T15:02:01.881Z', createdAt: '2014-05-21T15:02:01.881Z', updatedAt: '2014-05-21T15:02:01.881Z'},
+      {id: 6, name: '37', upload_date: '2014-05-21T15:02:01.881Z', createdAt: '2014-05-21T15:02:01.881Z', updatedAt: '2014-05-21T15:02:01.881Z'}
     ]);
 
     var result = null;
@@ -42,7 +42,7 @@ describe('Service: vimeoAPI', function () {
   });
 
   it('should a video with id 5 and delete the ID property', function () {
-    $httpBackend.expectGET(APIBaseUrl + 'imports/5?provider=vimeo').respond(200, {id: 5, name: '13'});
+    $httpBackend.expectGET(APIBaseUrl + 'imports/5?provider=vimeo').respond(200, {id: 5, name: '13', upload_date: '2014-05-21T15:02:01.881Z', createdAt: '2014-05-21T15:02:01.881Z', updatedAt: '2014-05-21T15:02:01.881Z' });
 
     var result = null;
     vimeoAPI.getVideoById(5).then(function (response) {
