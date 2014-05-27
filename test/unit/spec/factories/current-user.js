@@ -2,7 +2,7 @@
 
 describe('Service: CurrentUser', function () {
 
-  var CurrentUser, data, $log;
+  var CurrentUser, data, $log, profiles;
 
   beforeEach(function () {
 
@@ -10,8 +10,18 @@ describe('Service: CurrentUser', function () {
       error: jasmine.createSpy('$log.error')
     };
 
+    profiles = {
+      guest: {
+        hasRoles: jasmine.createSpy('roles.guest.hasRoles')
+      },
+      administrator: {
+        hasRoles: jasmine.createSpy('roles.administrator.hasRoles')
+      }
+    };
+
     module('ndc', function ($provide) {
       $provide.value('$log', $log);
+      $provide.value('profiles', profiles);
     });
 
     data = {id: 5, userName: "Root"};
@@ -22,7 +32,7 @@ describe('Service: CurrentUser', function () {
 
   });
 
-  it('should expose a get funciton', function () {
+  it('should expose a get function', function () {
     expect(CurrentUser.get).toBeTruthy();
   });
 
@@ -31,39 +41,32 @@ describe('Service: CurrentUser', function () {
     expect(CurrentUser.get()).toEqual(data);
   });
 
+  it('should set data', function () {
+    CurrentUser.set({name: 'User'});
+    expect(CurrentUser.get().name).toBe('User');
+  });
+
   it('should unset all data', function () {
-    CurrentUser.setPermissions(['troll']);
-    CurrentUser.setRoles(['admin', 'god']);
     CurrentUser.set({name: 'User'});
     CurrentUser.unset();
-    expect(CurrentUser.getPermissions()).toEqual([]);
-    expect(CurrentUser.getRoles()).toEqual([]);
     expect(CurrentUser.get().name).toBeUndefined();
   });
 
-  it('should set the users permissions', function () {
-    CurrentUser.setPermissions(['troll']);
-    CurrentUser.setPermissions(['roll', 'eat', 'sleep']);
-    expect(CurrentUser.getPermissions()).toEqual(['roll', 'eat', 'sleep']);
+  it('should return the users roles', function () {
+    expect(CurrentUser.hasRoles('something')).toBeFalsy();
+    expect(profiles.guest.hasRoles).toHaveBeenCalledWith('something');
   });
 
-  it('should return the users right', function () {
-    CurrentUser.setPermissions(['roll', 'eat', 'sleep']);
-    expect(CurrentUser.can('wear socks')).toBeFalsy();
-    expect(CurrentUser.can('sleep')).toBeTruthy();
+  it('should use the current users profile if he has one', function () {
+    CurrentUser.set({profile: 'administrator'});
+    expect(CurrentUser.hasRoles('something')).toBeFalsy();
+    expect(profiles.administrator.hasRoles).toHaveBeenCalledWith('something');
   });
 
-  it('should set the users roles', function () {
-    CurrentUser.setRoles(['admin', 'god']);
-    CurrentUser.setRoles(['superadmin', 'god', 'washingmachine']);
-    expect(CurrentUser.getRoles()).toEqual(['superadmin', 'god', 'washingmachine']);
-  });
-
-  it('should return the users role', function () {
-    CurrentUser.setRoles(['superadmin', 'user']);
-    expect(CurrentUser.is('god')).toBeFalsy();
-    expect(CurrentUser.is('superadmin')).toBeTruthy();
-    expect(CurrentUser.is('user')).toBeTruthy();
+  it('should use the default guest profile if the received profile is not found', function () {
+    CurrentUser.set({profile: 'some random profile'});
+    expect(CurrentUser.hasRoles('something')).toBeFalsy();
+    expect(profiles.guest.hasRoles).toHaveBeenCalledWith('something');
   });
 
 });

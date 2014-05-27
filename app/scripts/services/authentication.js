@@ -31,23 +31,14 @@ angular.module('ndc')
 
       var requireRole = {
         //page: [required roles...]
-        'admin': ['administrator']
+        'admin': ['ndcVideos.create', 'ndcVideos.remove', 'ndcVideos.view', 'ndcVideos.list', 'ndcUsers.create', 'ndcUsers.remove', 'ndcUsers.view', 'ndcUsers.list']
       };
 
       if (allowAnonymous.indexOf(path) >= 0 || authentication.isAuthenticated()) {
 
         var index = _.chain(requireRole).keys().indexOf(path).value();
-        var userHasAllRequiredRoles = function () {
-          return _.every(requireRole[index], function (role) {
-            if (!CurrentUser.is(role)) {
-              $log.error('User does not have required role ' + role);
-              return false;
-            }
-            return true;
-          });
-        };
 
-        if (index == -1 || userHasAllRequiredRoles()) {
+        if (index == -1 || CurrentUser.hasRoles(requireRole[index])) {
           $urlRouter.sync();
         }
         else {

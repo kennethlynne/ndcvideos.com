@@ -147,10 +147,10 @@ describe('Service: authentication', function () {
   it('should set the current user on login', function () {
     logIn();
     deferred.resolve({
-      roles: ['role']
+      profile: 'registered'
     });
     $rootScope.$digest();
-    expect(CurrentUser.is('role')).toBeTruthy();
+    expect(CurrentUser.hasRoles('role')).toBeFalsy();
   });
 
   it('should remove the current user on logout', function () {
