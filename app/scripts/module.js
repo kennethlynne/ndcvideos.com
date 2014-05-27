@@ -19,6 +19,7 @@ var app = angular.module('ndc', [
   'ngTouch',
   'ngStorage',
   'ui.select2',
-  'cgBusy'
+  'cgBusy',
+  'ngRoles'
 ]);
 angular.componentFactory.moduleDecorator(app);
