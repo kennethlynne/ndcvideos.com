@@ -31,7 +31,7 @@ describe('Service: stateHistory', function () {
 
   it('should return a default state if history is empty', function () {
     expect(stateHistory.history.length).toBe(0);
-    expect(stateHistory.pop()).toEqual({name: 'index', params: {}})
+    expect(stateHistory.pop()).toEqual({name: 'videos', params: {}})
   });
 
   it('should go back', function () {
