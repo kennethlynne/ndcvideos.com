@@ -13,7 +13,6 @@ angular.module('ndc')
     UserRepo.data = [
       {
         id: 1,
-        email: 'ali@g.com',
         username: 'ali@g.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
@@ -22,16 +21,11 @@ angular.module('ndc')
           {id: 1, title: 'In The Open: Ellie Goulding - Guns And Horses', description: 'Having listened to Ellie Gouldings debut album, Lights, I was always curious as to how it would translate acoustically since most of the album is more electronic driven.Portland, Oregon Ellie made it to San Francisco with just enough time to meet up.', duration: 1234, videoId: 23919731, type: 'vimeo'},
           {id: 2, title: 'Tootys Wedding', description: 'Some long description about a movie and stuff', duration: 1234, videoId: 25799594, type: 'vimeo'}
         ],
-        permissions: [
-        ],
         verified: true,
-        roles: [
-          'administrator'
-        ]
+        profile: 'administrator'
       },
       {
         id: 2,
-        email: '2ali@g.com',
         username: 'ali@g.com',
         firstName: '2Ali',
         lastName: 'Alfredsen',
@@ -40,16 +34,11 @@ angular.module('ndc')
           {id: 1, title: 'In The Open: Ellie Goulding - Guns And Horses', description: 'Having listened to Ellie Gouldings debut album, Lights, I was always curious as to how it would translate acoustically since most of the album is more electronic driven.Portland, Oregon Ellie made it to San Francisco with just enough time to meet up.', duration: 1234, videoId: 23919731, type: 'vimeo'},
           {id: 2, title: 'Tootys Wedding', description: 'Some long description about a movie and stuff', duration: 1234, videoId: 25799594, type: 'vimeo'}
         ],
-        permissions: [
-        ],
         verified: true,
-        roles: [
-          'administrator'
-        ]
+        profile: 'administrator'
       },
       {
         id: 3,
-        email: '4ali@g.com',
         username: 'ali@g.com',
         firstName: '4Ali',
         lastName: 'Alfredsen',
@@ -58,16 +47,11 @@ angular.module('ndc')
           {id: 1, title: 'In The Open: Ellie Goulding - Guns And Horses', description: 'Having listened to Ellie Gouldings debut album, Lights, I was always curious as to how it would translate acoustically since most of the album is more electronic driven.Portland, Oregon Ellie made it to San Francisco with just enough time to meet up.', duration: 1234, videoId: 23919731, type: 'vimeo'},
           {id: 2, title: 'Tootys Wedding', description: 'Some long description about a movie and stuff', duration: 1234, videoId: 25799594, type: 'vimeo'}
         ],
-        permissions: [
-        ],
         verified: true,
-        roles: [
-          'administrator'
-        ]
+        profile: 'administrator'
       },
       {
         id: 4,
-        email: 'ali@g.com',
         username: 'ali@g.com',
         firstName: '4Ali',
         lastName: 'Alfredsen',
@@ -76,16 +60,11 @@ angular.module('ndc')
           {id: 1, title: 'In The Open: Ellie Goulding - Guns And Horses', description: 'Having listened to Ellie Gouldings debut album, Lights, I was always curious as to how it would translate acoustically since most of the album is more electronic driven.Portland, Oregon Ellie made it to San Francisco with just enough time to meet up.', duration: 1234, videoId: 23919731, type: 'vimeo'},
           {id: 2, title: 'Tootys Wedding', description: 'Some long description about a movie and stuff', duration: 1234, videoId: 25799594, type: 'vimeo'}
         ],
-        permissions: [
-        ],
         verified: true,
-        roles: [
-          'administrator'
-        ]
+        profile: 'administrator'
       },
       {
         id: 5,
-        email: 'ali@g.com',
         username: 'ali@g.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
@@ -94,16 +73,11 @@ angular.module('ndc')
           {id: 1, title: 'In The Open: Ellie Goulding - Guns And Horses', description: 'Having listened to Ellie Gouldings debut album, Lights, I was always curious as to how it would translate acoustically since most of the album is more electronic driven.Portland, Oregon Ellie made it to San Francisco with just enough time to meet up.', duration: 1234, videoId: 23919731, type: 'vimeo'},
           {id: 2, title: 'Tootys Wedding', description: 'Some long description about a movie and stuff', duration: 1234, videoId: 25799594, type: 'vimeo'}
         ],
-        permissions: [
-        ],
         verified: true,
-        roles: [
-          'administrator'
-        ]
+        profile: 'administrator'
       },
       {
         id: 6,
-        email: 'ali@g.com',
         username: 'ali@g.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
@@ -112,16 +86,11 @@ angular.module('ndc')
           {id: 1, title: 'In The Open: Ellie Goulding - Guns And Horses', description: 'Having listened to Ellie Gouldings debut album, Lights, I was always curious as to how it would translate acoustically since most of the album is more electronic driven.Portland, Oregon Ellie made it to San Francisco with just enough time to meet up.', duration: 1234, videoId: 23919731, type: 'vimeo'},
           {id: 2, title: 'Tootys Wedding', description: 'Some long description about a movie and stuff', duration: 1234, videoId: 25799594, type: 'vimeo'}
         ],
-        permissions: [
-        ],
         verified: true,
-        roles: [
-          'administrator'
-        ]
+        profile: 'administrator'
       },
       {
         id: 7,
-        email: 'ali@g.com',
         username: 'ali@g.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
@@ -130,16 +99,11 @@ angular.module('ndc')
           {id: 1, title: 'In The Open: Ellie Goulding - Guns And Horses', description: 'Having listened to Ellie Gouldings debut album, Lights, I was always curious as to how it would translate acoustically since most of the album is more electronic driven.Portland, Oregon Ellie made it to San Francisco with just enough time to meet up.', duration: 1234, videoId: 23919731, type: 'vimeo'},
           {id: 2, title: 'Tootys Wedding', description: 'Some long description about a movie and stuff', duration: 1234, videoId: 25799594, type: 'vimeo'}
         ],
-        permissions: [
-        ],
         verified: true,
-        roles: [
-          'administrator'
-        ]
+        profile: 'administrator'
       },
       {
         id: 8,
-        email: 'ali@g.com',
         username: 'ali@g.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
@@ -148,16 +112,11 @@ angular.module('ndc')
           {id: 1, title: 'In The Open: Ellie Goulding - Guns And Horses', description: 'Having listened to Ellie Gouldings debut album, Lights, I was always curious as to how it would translate acoustically since most of the album is more electronic driven.Portland, Oregon Ellie made it to San Francisco with just enough time to meet up.', duration: 1234, videoId: 23919731, type: 'vimeo'},
           {id: 2, title: 'Tootys Wedding', description: 'Some long description about a movie and stuff', duration: 1234, videoId: 25799594, type: 'vimeo'}
         ],
-        permissions: [
-        ],
         verified: true,
-        roles: [
-          'administrator'
-        ]
+        profile: 'administrator'
       },
       {
         id: 9,
-        email: 'ali@g.com',
         username: 'ali@g.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
@@ -166,16 +125,11 @@ angular.module('ndc')
           {id: 1, title: 'In The Open: Ellie Goulding - Guns And Horses', description: 'Having listened to Ellie Gouldings debut album, Lights, I was always curious as to how it would translate acoustically since most of the album is more electronic driven.Portland, Oregon Ellie made it to San Francisco with just enough time to meet up.', duration: 1234, videoId: 23919731, type: 'vimeo'},
           {id: 2, title: 'Tootys Wedding', description: 'Some long description about a movie and stuff', duration: 1234, videoId: 25799594, type: 'vimeo'}
         ],
-        permissions: [
-        ],
         verified: true,
-        roles: [
-          'administrator'
-        ]
+        profile: 'administrator'
       },
       {
         id: 10,
-        email: 'ali@g.com',
         username: 'ali@g.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
@@ -184,16 +138,11 @@ angular.module('ndc')
           {id: 1, title: 'In The Open: Ellie Goulding - Guns And Horses', description: 'Having listened to Ellie Gouldings debut album, Lights, I was always curious as to how it would translate acoustically since most of the album is more electronic driven.Portland, Oregon Ellie made it to San Francisco with just enough time to meet up.', duration: 1234, videoId: 23919731, type: 'vimeo'},
           {id: 2, title: 'Tootys Wedding', description: 'Some long description about a movie and stuff', duration: 1234, videoId: 25799594, type: 'vimeo'}
         ],
-        permissions: [
-        ],
         verified: true,
-        roles: [
-          'administrator'
-        ]
+        profile: 'administrator'
       },
       {
         id: 11,
-        email: 'ali@g.com',
         username: 'ali@g.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
@@ -202,16 +151,11 @@ angular.module('ndc')
           {id: 1, title: 'In The Open: Ellie Goulding - Guns And Horses', description: 'Having listened to Ellie Gouldings debut album, Lights, I was always curious as to how it would translate acoustically since most of the album is more electronic driven.Portland, Oregon Ellie made it to San Francisco with just enough time to meet up.', duration: 1234, videoId: 23919731, type: 'vimeo'},
           {id: 2, title: 'Tootys Wedding', description: 'Some long description about a movie and stuff', duration: 1234, videoId: 25799594, type: 'vimeo'}
         ],
-        permissions: [
-        ],
         verified: true,
-        roles: [
-          'administrator'
-        ]
+        profile: 'administrator'
       },
       {
         id: 12,
-        email: 'ali@g.com',
         username: 'ali@g.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
@@ -220,12 +164,8 @@ angular.module('ndc')
           {id: 1, title: 'In The Open: Ellie Goulding - Guns And Horses', description: 'Having listened to Ellie Gouldings debut album, Lights, I was always curious as to how it would translate acoustically since most of the album is more electronic driven.Portland, Oregon Ellie made it to San Francisco with just enough time to meet up.', duration: 1234, videoId: 23919731, type: 'vimeo'},
           {id: 2, title: 'Tootys Wedding', description: 'Some long description about a movie and stuff', duration: 1234, videoId: 25799594, type: 'vimeo'}
         ],
-        permissions: [
-        ],
         verified: true,
-        roles: [
-          'administrator'
-        ]
+        profile: 'administrator'
       }
     ];
     UserRepo.index = {};
@@ -272,7 +212,7 @@ angular.module('ndc')
       $log.debug('Intercepted GET to `' + url + '`');
       var token = url.match(new RegExp(IdRegExp))[0];
       if (token === 'take-on-me') {
-        return [200, UserRepo.index[0], {/*headers*/}];
+        return [200, UserRepo.data[0], {/*headers*/}];
       }
       return [404, null, {/*headers*/}];
     });

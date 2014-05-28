@@ -24,7 +24,7 @@ angular.module('ndc')
       }]
     }));
   })
-  .controller('ImportVideoModalCtrl', function ($scope, TagRepository, $state, vimeoAPI, $log, VideoRepository) {
+  .controller('ImportVideoModalCtrl', function ($scope, TagRepository, $state, vimeoAPI, $log, VideoRepository, _, Select2) {
 
     function errorHandler(code) {
       $state.go('error', {code: code});
@@ -37,22 +37,14 @@ angular.module('ndc')
 
     vimeoAPI
       .getVideoById($state.params.id).then(function (result) {
-        $scope.vimeoVideo = result;
+        $scope.video = result;
       })
       .catch(function (err) {
-
         $log.log(err);
         errorHandler(404);
       });
 
-    $scope.select2Options = {
-      multiple: true,
-      query: function (query) {
-        TagRepository.search(query.term).then(function (data) {
-          query.callback({results: data});
-        });
-      }
-    };
+    $scope.select2Options = Select2.tagSearch;
 
     $scope.cancel = function () {
       if (!!confirm('Er du sikker på at du vil forkaste alle data?')) {
@@ -61,6 +53,18 @@ angular.module('ndc')
     };
 
     $scope.publish = function (video) {
+
+      if ($scope.tags.length > 0) {
+
+        _.forEach($scope.tags, function (item) {
+
+          if (item.id.substr(0, 1) == '$')
+            delete item.id;
+        });
+
+        video.tags = $scope.tags;
+
+      }
 
       VideoRepository.create(video)
         .$save()
@@ -71,6 +75,6 @@ angular.module('ndc')
           $log.error(err);
           errorHandler();
         });
-    };
 
+    };
   });

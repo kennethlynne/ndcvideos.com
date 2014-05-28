@@ -1,6 +1,5 @@
 @import '../states/app';
 @import '../states/error/index/error-state';
-@import '../states/index/index/index-state';
 @import '../states/admin/admin-state';
 @import '../states/admin/administrate-users/index/administrate-users-state';
 @import '../states/admin/administrate-videos/index/administrate-videos-state';
@@ -15,3 +14,5 @@
 @import '../states/admin/import-videos/index/import-videos-state';
 @import '../states/admin/import-videos/import/index/import-modal-state';
 @import '../states//forgot-password/index/forgot-password-state';
+@import '../states//privacy-policy/index/privacy-policy-state';
+@import '../states/admin/administrate-videos/video-details/index/video-details-state';

@@ -22,7 +22,7 @@ describe('Model Repository: VideoRepository', function () {
 
   describe('getById', function () {
     it('should return models by id', function () {
-      $httpBackend.expectGET(VideoModel.$settings.url + '/5').respond(200, {id: 5, title: 'Video title'});
+      $httpBackend.expectGET(VideoModel.$settings.url + '/5').respond(200, {id: 5, title: 'Video title', upload_date: '2014-05-21T15:02:01.881Z', createdAt: '2014-05-21T15:02:01.881Z', updatedAt: '2014-05-21T15:02:01.881Z'});
 
       var promise = VideoRepository.getById(5);
 
@@ -39,7 +39,7 @@ describe('Model Repository: VideoRepository', function () {
     });
 
     it('should not do subsequent calls if model already exits in pool', function () {
-      $httpBackend.expectGET(VideoModel.$settings.url + '/5').respond(200, {id: 5, title: 'Video title'});
+      $httpBackend.expectGET(VideoModel.$settings.url + '/5').respond(200, {id: 5, title: 'Video title', upload_date: '2014-05-21T15:02:01.881Z', createdAt: '2014-05-21T15:02:01.881Z', updatedAt: '2014-05-21T15:02:01.881Z'});
       VideoRepository.getById(5);
       $httpBackend.flush();
 

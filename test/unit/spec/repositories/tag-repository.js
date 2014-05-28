@@ -183,7 +183,7 @@ describe('Model Repository: TagRepository', function () {
 
   describe('search', function () {
     it('should search by tag name', function () {
-      $httpBackend.expectGET(Model.$settings.url + '/search?q=test').respond(200, [
+      $httpBackend.expectGET(Model.$settings.url + '?q=test').respond(200, [
         {id: 5, text: 'Test1'},
         {id: 6, text: 'Test2'}
       ]);

@@ -9,7 +9,7 @@ angular.module('ndc')
       parent: 'app'
     }));
   })
-  .controller('VideoCtrl', function ($scope, TagRepository, VideoRepository, $stateParams, $location, _, TagModel) {
+  .controller('VideoCtrl', function ($scope, TagRepository, VideoRepository, $stateParams, $location, _) {
     $scope.search = _.throttle(function (query) {
 
       //update query parameters and set videos by query
@@ -20,7 +20,7 @@ angular.module('ndc')
     }, 500, {'leading': false, 'trailing': true});
 
     var getVideos = function (query) {
-      VideoRepository.where(query).then(function (videos) {
+      $scope.promise = VideoRepository.where(query).then(function (videos) {
         $scope.errormsg = videos.length < 1 ? "Can't find any videos containing these search terms." : null;
 
         $scope.videos = videos;

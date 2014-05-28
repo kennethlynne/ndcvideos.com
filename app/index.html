@@ -29,7 +29,7 @@
     <!--/INJECT STYLES-->
 
   </head>
-  <body _oncontextmenu="return false;" ng-class="{'scroll-lock-enabled':$$scrollLockEnabled}">
+  <body _oncontextmenu="return false;">
 
     <div class="site-loading" ng-show="false">
         <div class="spinner"></div>
@@ -53,7 +53,7 @@
                 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-        ga('create', 'UA-XXXXX-X');
+        ga('create', 'UA-51085639-1', 'ndcvideos.com');
         ga('send', 'pageview');
     </script>
 
@@ -76,8 +76,9 @@
     <script src="bower_components/ng-symbiosis-model/ng-symbiosis-model.src.js"></script>
     <script src="bower_components/log/log.js"></script>
     <script src="bower_components/angular-ui-select2/src/select2.js"></script>
-    <script src="bower_components/ng-symbiosis-accesscontrol/ng-symbiosis-accesscontrol.src.js"></script>
     <script src="bower_components/select2/select2.js"></script>
+    <script src="bower_components/angular-busy/angular-busy.js"></script>
+    <script src="bower_components/angular-roles/angular-roles.src.js"></script>
     <script src="scripts/deepExtend.js"></script>
     <script src="scripts/module.js"></script>
     <script src="dev/authentication-mock.js"></script>
@@ -89,6 +90,7 @@
     <script src="dev/vimeo-mock.js"></script>
     <script src="config/local.js"></script>
     <script src="config/config.js"></script>
+    <script src="config/roles.js"></script>
     <script src="config/routes.js"></script>
     <script src="components/logout-sidebar-item/logout-sidebar-item.js"></script>
     <script src="components/media-player/media-player.js"></script>
@@ -104,6 +106,7 @@
     <script src="states/admin/administrate-users/index/administrate-users-controller.js"></script>
     <script src="states/admin/administrate-videos/edit/index/edit-controller.js"></script>
     <script src="states/admin/administrate-videos/index/administrate-videos-controller.js"></script>
+    <script src="states/admin/administrate-videos/video-details/index/video-details-controller.js"></script>
     <script src="states/admin/import-videos/import/index/import-modal-controller.js"></script>
     <script src="states/admin/import-videos/index/import-videos-controller.js"></script>
     <script src="states/agenda/index/agenda-controller.js"></script>
@@ -111,12 +114,13 @@
     <script src="states/error/index/error.js"></script>
     <script src="states/favorites/index/favorites-controller.js"></script>
     <script src="states/forgot-password/index/forgot-password-controller.js"></script>
-    <script src="states/index/index/index.js"></script>
     <script src="states/login/index/login-controller.js"></script>
+    <script src="states/privacy-policy/index/privacy-policy-controller.js"></script>
     <script src="states/user/index/user-controller.js"></script>
     <script src="states/video/index/video-controller.js"></script>
     <script src="states/video/video-details/index/video-details-controller.js"></script>
     <script src="states/welcome/index/welcome-controller.js"></script>
+    <script src="scripts/directives/scroll-lock.js"></script>
     <script src="scripts/factories/current-user.js"></script>
     <script src="scripts/factories/ng-symbiosis-repository.src.js"></script>
     <script src="scripts/factories/paginator.js"></script>
@@ -132,7 +136,7 @@
     <script src="scripts/repositories/video-repository.js"></script>
     <script src="scripts/services/authentication.js"></script>
     <script src="scripts/services/navbar.js"></script>
-    <script src="scripts/services/scroll-lock.js"></script>
+    <script src="scripts/services/select2.js"></script>
     <script src="scripts/services/state-history.js"></script>
     <script src="scripts/services/video-import.js"></script>
     <script src="scripts/services/vimeo-api.js"></script>

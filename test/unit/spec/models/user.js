@@ -103,13 +103,13 @@ describe('Model: UserModel', function () {
 
   describe('$verify', function () {
     it('should delete on $delete', function () {
-      $httpBackend.expectPOST(APIBaseUrl + collectionUrl + '/5/verify', {password: 'NEWPASSWORD', verificationToken: 'MOCKTOKEN'}).respond(200, {});
+      $httpBackend.expectPOST(APIBaseUrl + collectionUrl + '/5/verify', {username: 'username',password: 'NEWPASSWORD', verificationToken: 'MOCKTOKEN'}).respond(200, {});
 
       var model = new UserModel();
       model.id = 5;
       model.verificationToken = 'MOCKTOKEN';
 
-      var promise = model.$verify('MOCKTOKEN', 'NEWPASSWORD');
+      var promise = model.$verify('username', 'MOCKTOKEN', 'NEWPASSWORD');
       $httpBackend.flush();
 
       expect(typeof promise.then).toBe('function');

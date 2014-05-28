@@ -2,7 +2,7 @@
 
 describe('Controller(/admin/import-videos/import): ImportVideoModalCtrl', function () {
 
-  var ImportVideoModalCtrl, scope, vimeoAPI, deferred, promise, $rootScope, $state = {params:{id:1}};
+  var ImportVideoModalCtrl, scope, vimeoAPI, deferred, promise, $rootScope;
 
   beforeEach(function () {
 
@@ -33,8 +33,7 @@ describe('Controller(/admin/import-videos/import): ImportVideoModalCtrl', functi
     var video = {id:1, name:'ragnar'};
     deferred.resolve(video);
     $rootScope.$digest();
-    console.log(scope.vimeoVideo);
-    expect(scope.vimeoVideo).toBe(video);
+    expect(scope.video).toBe(video);
   });
 
 

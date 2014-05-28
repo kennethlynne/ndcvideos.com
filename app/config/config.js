@@ -8,7 +8,7 @@ angular.module('ndc')
     environment: 'production', //development or production
     API: {
       protocol: 'http',
-      host: 'ndc.jit.su',
+      host: 'ndcapi.jit.su',
       port: String(80),
       path: '/api'
     }
@@ -24,4 +24,11 @@ angular.module('ndc')
   })
   .factory('APIBaseUrl', function (Config) {
     return (Config.API.protocol + '://' + Config.API.host + ':' + Config.API.port + Config.API.path + '/');
-  });
+  })
+  .value('cgBusyDefaults',{
+    message:'Loading Stuff',
+    backdrop: false,
+    templateUrl: 'views/angular-busy/default-spinner.html',
+    delay: 300,
+    minDuration: 700
+});

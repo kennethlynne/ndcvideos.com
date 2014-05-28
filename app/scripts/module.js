@@ -8,7 +8,6 @@ var app = angular.module('ndc', [
   'ngSymbiosis.utils',
   'ngSymbiosis.routeProvider',
   'ngSymbiosis.repository',
-  'ngSymbiosis.accessControl',
   'ngSymbiosis.model',
   'ndc.components',
   'ngAnimate',
@@ -18,6 +17,8 @@ var app = angular.module('ndc', [
   'ui.bootstrap',
   'ngTouch',
   'ngStorage',
-  'ui.select2'
+  'ui.select2',
+  'cgBusy',
+  'ngRoles'
 ]);
 angular.componentFactory.moduleDecorator(app);

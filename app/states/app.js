@@ -23,18 +23,11 @@ angular.module('ndc')
       $state.transitionTo('login');
     }
 
-    if (authentication.isAuthenticated) {
-
-      if (typeof CurrentUser.get().id === 'undefined') {
-        UserRepository.getByToken(authentication.getToken())
-          .then(CurrentUser.set)
-          .then(successHandler)
-          .catch(failHandler);
-      }
-      else {
-        successHandler();
-      }
-
+    if (authentication.isAuthenticated()) {
+      UserRepository.getByToken(authentication.getToken())
+        .then(CurrentUser.set)
+        .then(successHandler)
+        .catch(failHandler);
     }
     else {
       failHandler();
