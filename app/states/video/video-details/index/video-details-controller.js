@@ -18,7 +18,7 @@ angular.module('ndc')
       onEnter: ['scrollLock', function (sl) {
         sl.enable();
       }],
-      onExit: ['scrollLock',function (sl) {
+      onExit: ['scrollLock', function (sl) {
         sl.disable();
       }],
       parent: 'videos'
@@ -26,9 +26,13 @@ angular.module('ndc')
   })
   .controller('VideodetailsCtrl', function ($scope, $stateParams, $state, VideoRepository, stateHistory) {
 
-    VideoRepository.getById($stateParams.id).then(function (video) {
-      $scope.video = video;
-    });
+    VideoRepository.getById($stateParams.id)
+      .then(function (video) {
+        $scope.video = video;
+      })
+      .catch(function () {
+        $state.go('error', {code: 404});
+      });
 
     $scope.close = function () {
       stateHistory.back();
