@@ -25,7 +25,7 @@ angular.module('ndc')
         };
 
         this.pop = function () {
-            return this.history.pop() || {name:'index', params: {}};
+            return this.history.pop() || {name:'videos', params: {}};
         }
 
     });
