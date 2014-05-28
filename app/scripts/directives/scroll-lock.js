@@ -13,46 +13,56 @@ angular.module('ndc')
 
     var _linkFn = function link(scope, element) {
       var scrollPos = 0;
-      var origMarginTop = angular.element(element).css('marginTop');
+
+      var wrapperDiv = element;
+      var contentDiv = element.find('> *');
 
       scope.$watch(function () {
         return scrollLock.$$scrollLockEnabled;
       }, function (newVal) {
         if (newVal) {
+
+          //Enable scroll lock
+
           scrollPos = $window.pageYOffset;
 
-          element.css({
+          wrapperDiv.css({
+            'position': 'relative',
             'height': angular.element($window).innerHeight(),
-            'overflow': 'hidden'
+            'overflow-y': 'hidden'
           });
 
-          element.find('> *').css({
-            'position':'absolute',
-            'top': (-scrollPos) + 'px'
+          contentDiv.css({
+            'position': 'fixed',
+            'top': (-scrollPos) + 'px',
+            'left': contentDiv.offset().left
           });
+
         }
         else {
-          element.css({
+
+          //Disable scroll lock / reset
+
+          wrapperDiv.css({
             'position': 'relative',
-            'overflow': 'auto',
+            'overflow-y': 'auto',
             'height': '100%'
           });
 
-          element.find('> *').css({
-            'position':'relative',
-            'top': 'inherit'
+          contentDiv.css({
+            'position': 'relative',
+            'top': 'inherit',
+            'left': 'inherit'
           });
 
           angular.element($window).scrollTop(scrollPos);
+
         }
 
       });
     };
 
     return {
-      scope: {
-        scrollLock: '='
-      },
       restrict: 'A',
       link: _linkFn
     };
