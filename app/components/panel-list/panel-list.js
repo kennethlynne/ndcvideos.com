@@ -2,6 +2,7 @@
 
 angular.module('ndc.components')
   .controller('panelListComponentCtrl', function ($scope, CurrentUser) {
+
     $scope.listItems = [
       {
         title: 'Videos',
