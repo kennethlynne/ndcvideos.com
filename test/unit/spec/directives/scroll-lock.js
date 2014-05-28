@@ -22,3 +22,22 @@ describe('Directive: scrollLock', function () {
   });
 
 });
+
+'use strict';
+
+describe('Service: scrollLock', function () {
+
+  var scrollLock, $rootScope;
+
+  beforeEach(function () {
+
+    module('ndc');
+
+    inject(function (_scrollLock_, _$rootScope_) {
+      scrollLock = _scrollLock_;
+      $rootScope = _$rootScope_;
+    });
+
+  });
+
+});
