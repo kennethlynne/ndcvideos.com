@@ -212,7 +212,7 @@ angular.module('ndc')
       $log.debug('Intercepted GET to `' + url + '`');
       var token = url.match(new RegExp(IdRegExp))[0];
       if (token === 'take-on-me') {
-        return [200, UserRepo.index[0], {/*headers*/}];
+        return [200, UserRepo.data[0], {/*headers*/}];
       }
       return [404, null, {/*headers*/}];
     });
