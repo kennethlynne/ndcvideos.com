@@ -8,7 +8,6 @@ var app = angular.module('ndc', [
   'ngSymbiosis.utils',
   'ngSymbiosis.routeProvider',
   'ngSymbiosis.repository',
-  'ngSymbiosis.accessControl',
   'ngSymbiosis.model',
   'ndc.components',
   'ngAnimate',
