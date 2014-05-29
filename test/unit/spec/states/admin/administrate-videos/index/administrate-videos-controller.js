@@ -31,7 +31,7 @@ describe('Controller(/admin/administrate-videos): AdministratevideosCtrl', funct
   it('should list existing videos', function () {
     deferred.resolve([1, 2, 3, 4, 5]);
     $rootScope.$digest();
-    expect(scope.paginatedVideos.data.length).toBe(5);
+    expect(scope.videos.length).toBe(5);
   });
 
 });

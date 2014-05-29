@@ -1,15 +1,43 @@
 'use strict';
 
-angular.module('ndc')
-  .factory('Paginator', function () {
+angular.module('ngPaginatorPlz', [])
 
+  .directive('paginator', function (Paginator) {
+    return {
+      restrict: 'E',
+      scope: {
+        data: '=',
+        pageSize: '@',
+        exportPagedDataTo: '='
+      },
+      templateUrl: 'src/templates/paginator.html',
+      controller: ['$scope',
+        function ($scope) {
+          if (!angular.isArray($scope.exportPagedDataTo)) {
+            throw Error('You must provide an array to export paged data to. Got ' + $scope.exportPagedDataTo);
+          }
+
+          $scope.paginator = new Paginator({
+            data: $scope.data,
+            pageSize: Number($scope.pageSize || 20),
+            pagedDataReference: $scope.exportPagedDataTo
+          });
+
+          $scope.$watch('data', function (newData) {
+            $scope.paginator.setData(newData);
+          });
+        }
+      ]
+    };
+  })
+  .factory('Paginator', function () {
     function Paginator(cfg) {
       this.data = [];
       this.pages = [];
-      this.currentPageData = [];
+      this.currentPageData = cfg.pagedDataReference || [];
       this.pageSize = cfg && cfg.pageSize ? cfg.pageSize : 20;
-      this.setData(cfg && cfg.data || []);
       this.currentPage = 1;
+      this.setData(cfg && cfg.data || []);
     }
 
     Paginator.prototype.next = function () {
@@ -29,6 +57,7 @@ angular.module('ndc')
     Paginator.prototype.setPage = function (page) {
       var paginator = this;
       paginator.currentPage = page;
+      paginator.getPaginatedData();
     };
 
     Paginator.prototype.getCurrentPageNumber = function () {
@@ -53,8 +82,12 @@ angular.module('ndc')
       var paginator = this,
         nrOfPages;
 
+      if (!angular.isArray(data)) {
+        throw Error('You must provide an array to Paginator.setData(). Got ' + data);
+      }
+
       paginator.data.length = 0;
-      paginator.pages.length = 0;
+      paginator.pages.length = paginator.getNumberOfPages();
 
       if (angular.isArray(data)) {
         Array.prototype.push.apply(paginator.data, data);
