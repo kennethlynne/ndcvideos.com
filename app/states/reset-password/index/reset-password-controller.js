@@ -12,13 +12,14 @@ angular.module('ndc')
     $scope.token = $stateParams.token;
 
     $scope.setPassword = function () {
-        UserRepository.setPassword($scope.token, $scope.newPassword)
-          .then(function () {
-              alert('Password changed!');
-          })
-          .catch(function () {
-              alert('Drama happened when trying to change password');
-          });
+      UserRepository.setPassword($scope.token, $scope.newPassword)
+        .then(function () {
+          alert('Password changed!');
+          //TODO: Log user in?
+        })
+        .catch(function () {
+          alert('Drama happened when trying to change password');
+        });
     }
 
   });
