@@ -51,14 +51,6 @@ module.exports = function (grunt) {
     pkg: grunt.file.readJSON('package.json'),
     yeoman: yeomanConfig,
     watch: {
-      coffee: {
-        files: ['<%= yeoman.app %>/scripts/**/*.coffee'],
-        tasks: ['coffee:dist']
-      },
-      coffeeTest: {
-        files: ['test/spec/**/*.coffee'],
-        tasks: ['coffee:test']
-      },
       compass: {
         files: ['<%= yeoman.app %>/styles/**/*.{scss,sass}', '<%= yeoman.app %>/components/**/*.{scss,sass}', '<%= yeoman.app %>/states/**/*.{scss,sass}'],
         tasks: ['compass:server']
@@ -118,34 +110,6 @@ module.exports = function (grunt) {
         ]
       },
       server: '.tmp'
-    },
-    coffee: {
-      options: {
-        sourceMap: true,
-        sourceRoot: ''
-      },
-      dist: {
-        files: [
-          {
-            expand: true,
-            cwd: '<%= yeoman.app %>/scripts',
-            src: '**/*.coffee',
-            dest: '.tmp/scripts',
-            ext: '.js'
-          }
-        ]
-      },
-      test: {
-        files: [
-          {
-            expand: true,
-            cwd: 'test/spec',
-            src: '**/*.coffee',
-            dest: '.tmp/spec',
-            ext: '.js'
-          }
-        ]
-      }
     },
     compass: {
       options: {
@@ -279,17 +243,15 @@ module.exports = function (grunt) {
         expand: true,
         cwd: '<%= yeoman.app %>/',
         dest: '<%= yeoman.dist %>/',
-        src: ['**/*', '!**/*.{scss,sass,coffee}', '!dev/**/*']
+        src: ['**/*', '!**/*.{scss,sass}', '!dev/**/*']
       }
     },
     concurrent: {
       server: [
-        'coffee:dist',
         'compass:server',
         'copy:styles'
       ],
       dist: [
-        'coffee',
         'compass:dist',
         'copy:styles',
         'imagemin',
