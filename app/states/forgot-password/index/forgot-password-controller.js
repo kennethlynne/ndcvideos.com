@@ -7,15 +7,12 @@ angular.module('ndc')
       templateUrl: 'states/forgot-password/index/main-view.html'
     }));
   })
-  .controller('ForgotpasswordCtrl', function ($scope, UserRepository, $state, $log, $stateParams) {
-
-    $scope.mailSent = !!($stateParams.mailSent || $stateParams.token);
-    $scope.token = $stateParams.token;
+  .controller('ForgotpasswordCtrl', function ($scope, UserRepository, $state, $log) {
 
     $scope.sendMail = function () {
       UserRepository.resetPasswordFor($scope.email)
         .then(function () {
-          $state.go('forgot-password', {mailSent: true});
+          $state.go('forgot-password');
         })
         .catch(function (err) {
           $log.error(err);

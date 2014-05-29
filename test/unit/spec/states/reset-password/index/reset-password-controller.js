@@ -1,8 +1,8 @@
 'use strict';
 
-describe('Controller(/forgot-password): ForgotpasswordCtrl', function () {
+describe('Controller(/reset-password): ResetpasswordCtrl', function () {
 
-  var ForgotpasswordCtrl, scope;
+  var ResetpasswordCtrl, scope;
 
   beforeEach(function () {
 
@@ -10,7 +10,7 @@ describe('Controller(/forgot-password): ForgotpasswordCtrl', function () {
 
     inject(function ($controller, $rootScope) {
       scope = $rootScope.$new();
-      ForgotpasswordCtrl = $controller('ForgotpasswordCtrl', {
+      ResetpasswordCtrl = $controller('ResetpasswordCtrl', {
         $scope: scope
       });
     });
