@@ -24,7 +24,7 @@ module.exports = function (grunt) {
     if (typeof path === 'object') {
       return yeomanConfig.app + '/' + path.min;
     }
-    path = path.replace(/(\.js|\.src.js)/, ".min.js");
+    //path = path.replace(/(\.js|\.src.js)/, ".min.js");
     return yeomanConfig.app + '/' + path;
   });
 
