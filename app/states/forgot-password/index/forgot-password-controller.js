@@ -12,7 +12,7 @@ angular.module('ndc')
     $scope.sendMail = function () {
       UserRepository.resetPasswordFor($scope.email)
         .then(function () {
-          $state.go('forgot-password');
+          $state.go('reset-password');
         })
         .catch(function (err) {
           $log.error(err);

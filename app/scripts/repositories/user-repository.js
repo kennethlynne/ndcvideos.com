@@ -26,5 +26,16 @@ angular.module('ndc')
         });
     };
 
+    BaseRepository.prototype.resetPasswordFor = function (email) {
+      var repository = this;
+      var Model = repository.$settings.model;
+
+      return $http
+        .get(Model.$settings.url + '/resetPassword?email=' + encodeURIComponent(email), {tracker: repository.$settings.name + '.resetPasswordFor'})
+        .then(function (response) {
+          return response.data;
+        });
+    };
+
     return new BaseRepository({name: 'UserRepository', model: UserModel});
   });

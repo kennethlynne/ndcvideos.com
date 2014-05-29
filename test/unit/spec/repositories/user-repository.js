@@ -246,4 +246,12 @@ describe('Model Repository: UserRepository', function () {
   describe('saveChanges', function () {
     it('should save all changes in current Repository to the server');
   });
+
+  describe('resetPasswordFor', function () {
+    it('should reset password for a user', function () {
+      $httpBackend.expectGET(Model.$settings.url + '/resetPassword?email=someone%40somewhere.global').respond(200, 'Done!');
+      UserRepository.resetPasswordFor('someone@somewhere.global');
+      $httpBackend.flush();
+    });
+  })
 });
