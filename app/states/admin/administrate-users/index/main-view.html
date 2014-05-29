@@ -35,9 +35,9 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="user in paginatedUsers.getPaginatedData()">
-                    <td>{{user.username}}</td>
-                    <td ng-if="user.verified">Yes</td>
-                    <td ng-if="!user.verified">No</td>
+                    <td once-text="user.username"></td>
+                    <td once-if="user.verified">Yes</td>
+                    <td once-if="!user.verified">No</td>
                     <td>
                         <button class="btn btn-custom" ng-click="resetPassword(user)">Reset password</button>
                         <button class="btn btn-custom" ng-click="deleteUser(user)">Delete</button>

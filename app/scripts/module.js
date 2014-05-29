@@ -19,6 +19,7 @@ var app = angular.module('ndc', [
   'ngStorage',
   'ui.select2',
   'cgBusy',
-  'ngRoles'
+  'ngRoles',
+  'once'
 ]);
 angular.componentFactory.moduleDecorator(app);
