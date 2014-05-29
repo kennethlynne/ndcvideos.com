@@ -22,7 +22,8 @@
     "angular-ui-select2": "~0.0.5",
     "select2": "~3.4.6",
     "angular-busy": "~4.0.4",
-    "angular-roles": "~0.0.2"
+    "angular-roles": "~0.0.2",
+    "angular-once": "~0.1.7"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.16",

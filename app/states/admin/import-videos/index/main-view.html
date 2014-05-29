@@ -14,8 +14,8 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="video in paginatedVideos.getPaginatedData()" ng-class="{'is-published' : video.isPublished}">
-                    <td>{{video.title}}</td>
-                    <td>{{video.$durationInHHMMSS}}</td>
+                    <td once-text="video.title"></td>
+                    <td once-text="video.$durationInHHMMSS"></td>
                     <td>
                         <button ng-hide="video.isPublished" class="btn btn-custom" ui-sref="administrateVideosImportModal({id:video.id})">Import and edit</button>
                         <span ng-show="video.isPublished">Imported</span>
