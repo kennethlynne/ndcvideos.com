@@ -1,6 +1,6 @@
 {
   "name": "ng-paginator-plz",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Yet another angular pagination library",
   "scripts": {
     "test": "grunt release"

@@ -1,5 +1,6 @@
 {
   "name": "ng-paginator-plz",
+  "version": "0.0.3",
   "homepage": "https://github.com/kennethlynne/ng-paginator-plz",
   "authors": [
     "Kenneth Lynne <kenneth.lynne@gmail.com>"
@@ -22,11 +23,11 @@
     "angular": "~1.2.16",
     "angular-mocks": "~1.2.16"
   },
-  "_release": "66dac7cc6f",
+  "_release": "0.0.3",
   "_resolution": {
-    "type": "branch",
-    "branch": "master",
-    "commit": "66dac7cc6f363ebaeeb403fbf798f39ed1c51f40"
+    "type": "version",
+    "tag": "v0.0.3",
+    "commit": "5ad1b33484ff32f56ad4073208d0c22620167dcf"
   },
   "_source": "git://github.com/kennethlynne/ng-paginator-plz.git",
   "_target": "*",
