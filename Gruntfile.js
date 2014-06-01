@@ -202,7 +202,8 @@ module.exports = function (grunt) {
               'assets/images/**/*.{gif,webp}',
               'assets/fonts/**/*',
               'CNAME',
-              'package.json'
+              'package.json',
+              'loaderio-4c0569cd3986b1fdfac3c7bf29c077de'
             ]
           },
           {
