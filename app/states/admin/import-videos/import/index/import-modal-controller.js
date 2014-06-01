@@ -24,7 +24,7 @@ angular.module('ndc')
       }]
     }));
   })
-  .controller('ImportVideoModalCtrl', function ($scope, TagRepository, $state, vimeoAPI, $log, VideoRepository, _, Select2) {
+  .controller('ImportVideoModalCtrl', function ($scope, TagRepository, $state, vimeoAPI, $log, VideoRepository, Select2) {
 
     function errorHandler(code) {
       $state.go('error', {code: code});
@@ -54,11 +54,11 @@ angular.module('ndc')
 
     $scope.publish = function (video) {
 
+
       if ($scope.tags.length > 0) {
 
-        _.forEach($scope.tags, function (item) {
-
-          if (item.id.substr(0, 1) == '$')
+        angular.forEach($scope.tags, function (item) {
+          if (String(item.id).substr(0, 1) == '$')
             delete item.id;
         });
 
