@@ -39,8 +39,8 @@ describe('Model: VideoModel', function () {
 
   describe('$save', function () {
     it('should PUT its data on $save when it has an ID (update existing)', function () {
-      $httpBackend.expectPUT(APIBaseUrl + collectionUrl + '/5', {title: 'New title', id: 5, upload_date: '0000-01-01T00:00:00.000Z', createdAt: '0000-01-01T00:00:00.000Z', updatedAt: '0000-01-01T00:00:00.000Z'}).respond(200, {id: 5, title: 'New title from server'});
-      var model = new VideoModel({title: 'New title', id: 5, upload_date: '0', createdAt: '0', updatedAt: '0'});
+      $httpBackend.expectPUT(APIBaseUrl + collectionUrl + '/5', {title: 'New title', id: 5, upload_date: '2014-06-01T00:00:00.000Z', createdAt: '2014-06-01T00:00:00.000Z', updatedAt: '2014-06-01T00:00:00.000Z'}).respond(200, {id: 5, title: 'New title from server'});
+      var model = new VideoModel({title: 'New title', id: 5, upload_date: '2014-06-01T00:00:00.000Z', createdAt: '2014-06-01T00:00:00.000Z', updatedAt: '2014-06-01T00:00:00.000Z'});
 
       var promise = model.$save();
       $httpBackend.flush();
@@ -50,8 +50,8 @@ describe('Model: VideoModel', function () {
     });
 
     it('should POST its data on $save if does not have an ID (new)', function () {
-      $httpBackend.expectPOST(APIBaseUrl + collectionUrl, {title: 'New title', upload_date: '0000-01-01T00:00:00.000Z', createdAt: '0000-01-01T00:00:00.000Z', updatedAt: '0000-01-01T00:00:00.000Z'}).respond(200, {id: 5, title: 'New title from server'});
-      var model = new VideoModel({title: 'New title', upload_date: '0', createdAt: '0', updatedAt: '0'});
+      $httpBackend.expectPOST(APIBaseUrl + collectionUrl, {title: 'New title', upload_date: '2014-06-01T00:00:00.000Z', createdAt: '2014-06-01T00:00:00.000Z', updatedAt: '2014-06-01T00:00:00.000Z'}).respond(200, {id: 5, title: 'New title from server'});
+      var model = new VideoModel({title: 'New title', upload_date: '2014-06-01T00:00:00.000Z', createdAt: '2014-06-01T00:00:00.000Z', updatedAt: '2014-06-01T00:00:00.000Z'});
 
       var promise = model.$save();
       $httpBackend.flush();
@@ -125,7 +125,7 @@ describe('Model: VideoModel', function () {
       $rootScope.$digest();
       model.thing = 'Data';
 
-      $httpBackend.expectPUT(APIBaseUrl + collectionUrl + '/5', {thing: 'Data', id: 5, upload_date: '0000-01-01T00:00:00.000Z', createdAt: '0000-01-01T00:00:00.000Z', updatedAt: '0000-01-01T00:00:00.000Z'}).respond(200, {id: 5, thing: 'Data'});
+      $httpBackend.expectPUT(APIBaseUrl + collectionUrl + '/5', {thing: 'Data', id: 5, upload_date: '2014-06-01T00:00:00.000Z', createdAt: '2014-06-01T00:00:00.000Z', updatedAt: '2014-06-01T00:00:00.000Z'}).respond(200, {id: 5, thing: 'Data'});
       model.$save();
 
       $httpBackend.flush();
