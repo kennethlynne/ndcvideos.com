@@ -1,4 +1,2 @@
-ndc-archive
+ndcvideos.com
 ===========
-
-NDC Oslo Archive Web-application
