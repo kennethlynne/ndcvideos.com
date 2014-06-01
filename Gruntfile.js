@@ -181,7 +181,7 @@ module.exports = function (grunt) {
           {
             expand: true,
             cwd: '<%= yeoman.app %>',
-            src: ['*.html', '!index.html', '../.tmp/index.html', 'views/**/*.html', 'states/**/*.html', 'components/**/*.html'],
+            src: ['*.html', 'index.html', 'views/**/*.html', 'states/**/*.html', 'components/**/*.html'],
             dest: '<%= yeoman.dist %>'
           }
         ]
@@ -254,8 +254,7 @@ module.exports = function (grunt) {
       dist: [
         'compass:dist',
         'copy:styles',
-        'imagemin',
-        'htmlmin'
+        'imagemin'
       ]
     },
     karma: {
@@ -518,7 +517,7 @@ module.exports = function (grunt) {
         'rev',
         'copy:indexHTML',
         'linkAssets-production',
-        'htmlmin'//,'manifest'
+        'htmlmin'
       ]);
     }
   });
