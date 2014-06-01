@@ -8,7 +8,7 @@ angular.module('ndc')
     environment: 'production', //development or production
     API: {
       protocol: 'http',
-      host: 'ndcapi.herokuapp.com',
+      host: 'api.ndcvideos.com',
       port: String(80),
       path: '/api'
     }
