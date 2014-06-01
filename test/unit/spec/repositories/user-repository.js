@@ -249,7 +249,7 @@ describe('Model Repository: UserRepository', function () {
 
   describe('resetPasswordFor', function () {
     it('should reset password for a user', function () {
-      $httpBackend.expectPOST(Model.$settings.url + '/resetPassword?email=someone%40somewhere.global').respond(200, 'Done!');
+      $httpBackend.expectPOST(Model.$settings.url + '/resetPassword', {username: 'someone@somewhere.global'}).respond(200, 'Done!');
       UserRepository.resetPasswordFor('someone@somewhere.global');
       $httpBackend.flush();
     });
@@ -257,7 +257,7 @@ describe('Model Repository: UserRepository', function () {
 
   describe('setPassword', function () {
     it('should set password for a user', function () {
-      $httpBackend.expectPUT(Model.$settings.url + '/setPassword', {token:'TOKEN',password:'PASSWORD'}).respond(200, 'Done!');
+      $httpBackend.expectPUT(Model.$settings.url + '/setPassword', {token: 'TOKEN', password: 'PASSWORD'}).respond(200, 'Done!');
       UserRepository.setPassword('TOKEN', 'PASSWORD');
       $httpBackend.flush();
     });
