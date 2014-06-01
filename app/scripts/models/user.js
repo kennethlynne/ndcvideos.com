@@ -38,7 +38,7 @@ angular.module('ndc')
       model.$isResettingPassword = true;
 
       var promise = $http
-        .post(model.$settings.urlBase + '/' + model.id + '/resetpassword', {username:username}, {tracker: model.$settings.tracker + '-' + model.id + '-resetPassword'})
+        .post(model.$settings.urlBase + '/resetpassword', {username:username}, {tracker: model.$settings.tracker + '-' + model.id + '-resetPassword'})
         .then(function (response) {
           return response.data;
         });
