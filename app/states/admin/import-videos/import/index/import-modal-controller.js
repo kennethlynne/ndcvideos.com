@@ -27,6 +27,7 @@ angular.module('ndc')
   .controller('ImportVideoModalCtrl', function ($scope, TagRepository, $state, vimeoAPI, $log, VideoRepository, Select2) {
 
     function errorHandler(code) {
+      $scope.isPublishing = false;
       $state.go('error', {code: code});
     }
 
@@ -54,6 +55,7 @@ angular.module('ndc')
 
     $scope.publish = function (video) {
 
+      $scope.isPublishing = true;
 
       if ($scope.tags.length > 0) {
 
@@ -68,7 +70,7 @@ angular.module('ndc')
 
       VideoRepository.create(video)
         .$save()
-        .then(function (res) {
+        .then(function () {
           $state.go('administrateVideos');
         })
         .catch(function (err) {

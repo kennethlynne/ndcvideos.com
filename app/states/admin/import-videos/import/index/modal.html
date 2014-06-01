@@ -32,7 +32,7 @@
                         <hr/>
 
                         <button class="btn btn-default" ng-click="cancel()">Cancel</button>
-                        <button class="btn btn-default" ng-click="publish(video)">Publish video</button>
+                        <button class="btn btn-default" ng-click="publish(video)" ng-disabled="isPublishing">{{isPublishing?'Publishing...':'Publish video'}}</button>
 
                     </div>
                 </div>
