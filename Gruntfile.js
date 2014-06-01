@@ -203,7 +203,7 @@ module.exports = function (grunt) {
               'assets/fonts/**/*',
               'CNAME',
               'package.json',
-              'loaderio-4c0569cd3986b1fdfac3c7bf29c077de'
+              'loaderio-4c0569cd3986b1fdfac3c7bf29c077de.txt'
             ]
           },
           {
