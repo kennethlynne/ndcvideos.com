@@ -22,14 +22,13 @@
     "angular": "~1.2.16",
     "angular-mocks": "~1.2.16"
   },
-  "_release": "02482ad3d2",
+  "_release": "66dac7cc6f",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "02482ad3d2d601976db8e4274796f86e594ead0b"
+    "commit": "66dac7cc6f363ebaeeb403fbf798f39ed1c51f40"
   },
   "_source": "git://github.com/kennethlynne/ng-paginator-plz.git",
   "_target": "*",
-  "_originalSource": "ng-paginator-plz",
-  "_direct": true
+  "_originalSource": "ng-paginator-plz"
 }
