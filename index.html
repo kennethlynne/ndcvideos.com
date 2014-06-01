@@ -1,65 +1,7 @@
-<!doctype html>
-<html ng-app="ndc">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>NDC video gallery | Norwegian Developers Conference</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-    <link rel="shortcut icon" href="assets/images/favicon.png">
-
-    <!-- TODO: Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!--<link rel="apple-touch-icon" href="assets/images/custom_icon.png">-->
-    <!--<link rel="apple-touch-icon" href="assets/images/touch-icon-iphone.png">-->
-    <!--<link rel="apple-touch-icon" sizes="76x76" href="assets/images/touch-icon-ipad.png">-->
-    <!--<link rel="apple-touch-icon" sizes="120x120" href="assets/images/touch-icon-iphone-retina.png">-->
-    <!--<link rel="apple-touch-icon" sizes="152x152" href="assets/images/touch-icon-ipad-retina.png">-->
-
-    <!-- TODO: Add startup image - On iPhone and iPod touch, the image must be 320 x 480 pixels and in portrait orientation.-->
-    <!--<link rel="apple-touch-startup-image" href="images/startup.png">-->
-
-    <!-- TODO: Insert Qbaka script-->
-    <!-- /Qbaka -->
-
-    <!--INJECT STYLES-->
-    <link rel="stylesheet" href="styles/e925a2cf.main.css">
-    <!--/INJECT STYLES-->
-
-  </head>
-  <body _oncontextmenu="return false;">
-
-    <div class="site-loading" ng-show="false">
-        <div class="spinner"></div>
-    </div>
-
-    <noscript>
-      <div>
-        <h3>Javascript is deactivated. You must <a href="http://www.activatejavascript.org/">activate javascript</a> in order to use this site.</h3>
-      </div>
-    </noscript>
-
-    <div id="root" class="ng-cloak">  
-
-        <div ui-view=""></div>
-
-    </div>
-
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+<!DOCTYPE html><html ng-app=ndc><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>NDCVideos.com | Norwegian Developers Conference</title><meta name=description content=""><meta name=viewport content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1"><meta name=mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><link rel="shortcut icon" href=assets/images/favicon.png><link rel=stylesheet href=styles/main.css><body _oncontextmenu="return false;"><div class=site-loading ng-show=false><div class=spinner></div></div><noscript><div><h3>Javascript is deactivated. You must <a href="http://www.activatejavascript.org/">activate javascript</a> in order to use this site.</h3></div></noscript><div id=root class=ng-cloak><div ui-view=""></div></div><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
                 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
         ga('create', 'UA-51085639-1', 'ndcvideos.com');
-        ga('send', 'pageview');
-    </script>
-
-    <!--INJECT SCRIPTS-->
-    <script src="scripts/2bb8b0dc.scripts.js"></script>
-    <!--/INJECT SCRIPTS-->
-
-  </body>
-</html>
+        ga('send', 'pageview');</script><script src=bower_components/jquery/dist/jquery.min.js></script><script src=bower_components/angular/angular.js></script><script src=bower_components/angular-mocks/angular-mocks.js></script><script src=bower_components/lodash/dist/lodash.min.js></script><script src=bower_components/angular-animate/angular-animate.min.js></script><script src=bower_components/angular-touch/angular-touch.min.js></script><script src=bower_components/angular-component-factory/angular-component-factory.min.js></script><script src=bower_components/angular-loading-bar/build/loading-bar.min.js></script><script src=bower_components/angular-promise-tracker/promise-tracker.min.js></script><script src=bower_components/angular-ui-router/release/angular-ui-router.min.js></script><script src=bower_components/angular-ui-bootstrap-bower/ui-bootstrap.min.js></script><script src=bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.min.js></script><script src=bower_components/ngstorage/ngStorage.min.js></script><script src=bower_components/ng-symbiosis-utils/ng-symbiosis-utils.min.js></script><script src=bower_components/ng-symbiosis-routeprovider/ng-symbiosis-routeprovider.min.js></script><script src=bower_components/ng-symbiosis-model/ng-symbiosis-model.min.js></script><script src=bower_components/log/log.min.js></script><script src=bower_components/angular-ui-select2/src/select2.js></script><script src=bower_components/select2/select2.min.js></script><script src=bower_components/angular-busy/dist/angular-busy.js></script><script src=bower_components/angular-roles/angular-roles.min.js></script><script src=bower_components/angular-once/once.js></script><script src=bower_components/ng-paginator-plz/src/js/ng-paginator-plz.js></script><script src=scripts/deepExtend.js></script><script src=scripts/module.js></script><script src=dev/authentication-mock.js></script><script src=dev/favorite-mock.js></script><script src=dev/mock-api.js></script><script src=dev/tag-mock.js></script><script src=dev/user-mock.js></script><script src=dev/video-mock.js></script><script src=dev/vimeo-mock.js></script><script src=config/local.js></script><script src=config/config.js></script><script src=config/roles.js></script><script src=config/routes.js></script><script src=components/logout-sidebar-item/logout-sidebar-item.js></script><script src=components/media-player/media-player.js></script><script src=components/panel-list-item/panel-list-item.js></script><script src=components/panel-list/panel-list.js></script><script src=components/sidebar/sidebar.js></script><script src=components/slideout-backdrop/slideout-backdrop.js></script><script src=components/video-list-item/video-list-item.js></script><script src=states/admin/admin-controller.js></script><script src=states/admin/administrate-users/index/administrate-users-controller.js></script><script src=states/admin/administrate-videos/edit/index/edit-controller.js></script><script src=states/admin/administrate-videos/index/administrate-videos-controller.js></script><script src=states/admin/administrate-videos/video-details/index/video-details-controller.js></script><script src=states/admin/import-videos/import/index/import-modal-controller.js></script><script src=states/admin/import-videos/index/import-videos-controller.js></script><script src=states/agenda/index/agenda-controller.js></script><script src=states/app.js></script><script src=states/error/index/error.js></script><script src=states/favorites/index/favorites-controller.js></script><script src=states/forgot-password/index/forgot-password-controller.js></script><script src=states/login/index/login-controller.js></script><script src=states/privacy-policy/index/privacy-policy-controller.js></script><script src=states/reset-password/index/reset-password-controller.js></script><script src=states/user/index/user-controller.js></script><script src=states/video/index/video-controller.js></script><script src=states/video/video-details/index/video-details-controller.js></script><script src=states/welcome/index/welcome-controller.js></script><script src=scripts/directives/scroll-lock.js></script><script src=scripts/factories/current-user.js></script><script src=scripts/factories/ng-symbiosis-repository.src.js></script><script src=scripts/filters/time.js></script><script src=scripts/log.js></script><script src=scripts/models/favorite.js></script><script src=scripts/models/tag.js></script><script src=scripts/models/user.js></script><script src=scripts/models/video.js></script><script src=scripts/repositories/favorite-repository.js></script><script src=scripts/repositories/tag-repository.js></script><script src=scripts/repositories/user-repository.js></script><script src=scripts/repositories/video-repository.js></script><script src=scripts/services/array.js></script><script src=scripts/services/authentication.js></script><script src=scripts/services/navbar.js></script><script src=scripts/services/select2.js></script><script src=scripts/services/state-history.js></script><script src=scripts/services/video-import.js></script><script src=scripts/services/vimeo-api.js></script><script src=scripts/utils/lodash.js></script>
