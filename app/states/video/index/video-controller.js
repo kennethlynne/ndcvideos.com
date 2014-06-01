@@ -20,11 +20,15 @@ angular.module('ndc')
     }, 500, {'leading': false, 'trailing': true});
 
     var getVideos = function (query) {
-      $scope.promise = VideoRepository.where(query).then(function (videos) {
-        $scope.errormsg = videos.length < 1 ? "Can't find any videos containing these search terms." : null;
-
-        $scope.videos = videos;
-      });
+      $scope.promise = VideoRepository.where(query)
+        .then(function (videos) {
+          $scope.errormsg = videos.length < 1 ? "Can't find any videos containing these search terms." : null;
+          $scope.videos = videos;
+        })
+        .catch(function (err) {
+          //authentication.logout();
+          //$state.transitionTo('login');
+        });
     };
 
     $scope.query = $stateParams.q;
