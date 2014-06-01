@@ -31,7 +31,7 @@ angular.module('ndc')
       var Model = repository.$settings.model;
 
       return $http
-        .post(Model.$settings.url + '/resetPassword?email=' + encodeURIComponent(email), {}, {tracker: repository.$settings.name + '.resetPasswordFor'})
+        .post(Model.$settings.url + '/resetPassword', {username:email}, {tracker: repository.$settings.name + '.resetPasswordFor'})
         .then(function (response) {
           return response.data;
         });
