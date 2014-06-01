@@ -8,7 +8,7 @@ angular.module('ndc')
       parent: 'admin'
     }));
   })
-  .controller('AdministrateusersCtrl', function ($scope, UserRepository, array) {
+  .controller('AdministrateusersCtrl', function ($scope, UserRepository, array, $log) {
 
     $scope.confirm = function (message) {
       return confirm(message) == true;
@@ -36,7 +36,7 @@ angular.module('ndc')
         user.$resetPassword(user.username)
           .then(function(){
             //TODO: Give some notification of great success
-            alert('Reset password for user ' + user.username + '.');
+            $scope.status = 'Password reset verification mail sent.';
           })
           .catch(function(err){
             $log.log(err);
