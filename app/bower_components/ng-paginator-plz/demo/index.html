@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <title>Paginator Demo</title>
+</head>
+<body ng-controller="DemoController">
+
+
+<paginator data="data" page-size="2" export-paged-data-to="target"></paginator>
+
+<ul>
+    <li ng-repeat="row in target">{{row}}</li>
+</ul>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular.js"></script>
+<script src="../src/ng-paginator-plz.js"></script>
+<script src="js/demo.js"></script>
+</body>
+</html>

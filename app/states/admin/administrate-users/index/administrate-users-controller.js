@@ -8,16 +8,17 @@ angular.module('ndc')
       parent: 'admin'
     }));
   })
-  .controller('AdministrateusersCtrl', function ($scope, UserRepository, Paginator) {
-
-    $scope.paginatedUsers = new Paginator({pageSize: 10});
+  .controller('AdministrateusersCtrl', function ($scope, UserRepository, array) {
 
     $scope.confirm = function (message) {
       return confirm(message) == true;
     };
 
+    $scope.users = [];
+    $scope.paginatedUsers = [];
+
     $scope.promise = UserRepository.getAll().then(function (users) {
-      $scope.paginatedUsers.setData(users);
+      array($scope.users).set(users);
     });
 
     $scope.createUser = function () {
@@ -46,8 +47,8 @@ angular.module('ndc')
     };
 
     $scope.deleteUser = function (user) {
-      var index = $scope.paginatedUsers.data.indexOf(user);
-      var userBackup = $scope.paginatedUsers.data.splice(index, 1);
+      var index = $scope.users.indexOf(user);
+      var userBackup = $scope.users.splice(index, 1);
 
       if ($scope.confirm('Are you sure you want to delete the user ' + user.username + '?')) {
         user.$delete()
@@ -58,7 +59,7 @@ angular.module('ndc')
           .catch(function () {
             //If deletaion fails, insert the user again
             //TODO: Expose a reference from the repository and let the repository handle the removal
-            $scope.paginatedUsers.data.splice(index, 0, userBackup);
+            $scope.users.splice(index, 0, userBackup);
           })
       }
     };
@@ -67,7 +68,7 @@ angular.module('ndc')
       $scope.isCreatingNewUser = false;
 
       var User = UserRepository.create(user);
-      $scope.paginatedUsers.data.push(user);
+      $scope.users.push(user);
 
       User.$save()
         .then(function (user) {
@@ -75,7 +76,7 @@ angular.module('ndc')
         })
         .catch(function () {
           $scope.isCreatingNewUser = true;
-          $scope.paginatedUsers.data.splice($scope.paginatedUsers.data.indexOf(User), 1);
+          $scope.users.splice($scope.users.indexOf(User), 1);
           //TODO: More user friendly feedback
           alert('User already exists');
         });

@@ -1,0 +1,37 @@
+{
+  "name": "ng-paginator-plz",
+  "version": "0.0.3",
+  "description": "Yet another angular pagination library",
+  "scripts": {
+    "test": "grunt release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kennethlynne/ng-paginator-plz.git"
+  },
+  "keywords": [
+    "pagination",
+    "angular"
+  ],
+  "author": "Kenneth Lynne <kenneth.lynne@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kennethlynne/ng-paginator-plz/issues"
+  },
+  "homepage": "https://github.com/kennethlynne/ng-paginator-plz",
+  "devDependencies": {
+    "grunt": "~0.4.4",
+    "karma": "^0.12.16",
+    "load-grunt-tasks": "~0.4.0",
+    "time-grunt": "~0.3.1",
+    "karma-chrome-launcher": "~0.1.1",
+    "karma-jasmine": "^0.1.5",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-karma": "^0.8.3",
+    "karma-ng-html2js-preprocessor": "^0.1.0",
+    "grunt-contrib-concat": "^0.4.0",
+    "grunt-angular-templates": "^0.5.5",
+    "grunt-contrib-connect": "^0.7.1"
+  }
+}

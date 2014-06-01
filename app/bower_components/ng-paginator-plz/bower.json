@@ -1,0 +1,26 @@
+{
+  "name": "ng-paginator-plz",
+  "version": "0.0.3",
+  "homepage": "https://github.com/kennethlynne/ng-paginator-plz",
+  "authors": [
+    "Kenneth Lynne <kenneth.lynne@gmail.com>"
+  ],
+  "description": "Non intrusive angular pagination library",
+  "main": "ng-paginator-plz.js",
+  "keywords": [
+    "angular",
+    "pagination"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.16",
+    "angular-mocks": "~1.2.16"
+  }
+}

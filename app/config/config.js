@@ -25,10 +25,11 @@ angular.module('ndc')
   .factory('APIBaseUrl', function (Config) {
     return (Config.API.protocol + '://' + Config.API.host + ':' + Config.API.port + Config.API.path + '/');
   })
-  .value('cgBusyDefaults',{
-    message:'Loading Stuff',
+  .value('cgBusyDefaults', {
+    message: 'Loading Stuff',
     backdrop: false,
     templateUrl: 'views/angular-busy/default-spinner.html',
     delay: 300,
     minDuration: 700
-});
+  })
+  .value('DefaultPaginatorTemplate', 'views/ng-paginator-plz/custom-paginator.html');

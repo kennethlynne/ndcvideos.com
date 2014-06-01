@@ -8,12 +8,12 @@ angular.module('ndc')
       parent: 'admin'
     }));
   })
-  .controller('AdminImportVideosOverviewCtrl', function ($scope, vimeoAPI, Paginator) {
+  .controller('AdminImportVideosOverviewCtrl', function ($scope, vimeoAPI, array) {
 
-    $scope.paginatedVideos = new Paginator({pageSize: 10});
-
+    $scope.videos = [];
+    $scope.paginatedVideos = [];
     $scope.promise = vimeoAPI.getVideos().then(function (videos) {
-      $scope.paginatedVideos.setData(videos);
+      array($scope.videos).set(videos);
     });
 
   });

@@ -20,6 +20,7 @@ var app = angular.module('ndc', [
   'ui.select2',
   'cgBusy',
   'ngRoles',
-  'once'
+  'once',
+  'ngPaginatorPlz'
 ]);
 angular.componentFactory.moduleDecorator(app);

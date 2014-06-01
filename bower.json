@@ -23,7 +23,8 @@
     "select2": "~3.4.6",
     "angular-busy": "~4.0.4",
     "angular-roles": "~0.0.2",
-    "angular-once": "~0.1.7"
+    "angular-once": "~0.1.7",
+    "ng-paginator-plz": "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.16",
