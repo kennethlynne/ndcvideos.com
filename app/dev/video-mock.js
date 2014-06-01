@@ -27,7 +27,9 @@ angular.module('ndc')
             text: 'Javascript'
           }
         ],
-        upload_date: "2014-02-13 08:04:18",
+        upload_date: '0000-01-01T00:00:00.000Z',
+        createdAt: '0000-01-01T00:00:00.000Z',
+        updatedAt: '0000-01-01T00:00:00.000Z',
         thumbnail_small: "http://b.vimeocdn.com/ts/464/338/464338254_100.jpg",
         thumbnail_medium: "http://b.vimeocdn.com/ts/464/338/464338254_200.jpg",
         thumbnail_large: "http://b.vimeocdn.com/ts/464/338/464338254_640.jpg"
@@ -48,7 +50,9 @@ angular.module('ndc')
             text: 'Javascript'
           }
         ],
-        upload_date: "2014-02-11 04:25:00",
+        upload_date: '0000-01-01T00:00:00.000Z',
+        createdAt: '0000-01-01T00:00:00.000Z',
+        updatedAt: '0000-01-01T00:00:00.000Z',
         thumbnail_small: "http://b.vimeocdn.com/ts/462/106/462106710_100.jpg",
         thumbnail_medium: "http://b.vimeocdn.com/ts/462/106/462106710_200.jpg",
         thumbnail_large: "http://b.vimeocdn.com/ts/462/106/462106710_640.jpg"
@@ -72,6 +76,9 @@ angular.module('ndc')
             text: 'javascript'
           }
         ],
+        upload_date: '0000-01-01T00:00:00.000Z',
+        createdAt: '0000-01-01T00:00:00.000Z',
+        updatedAt: '0000-01-01T00:00:00.000Z',
         thumbnail_small: "http://b.vimeocdn.com/ts/461/087/461087855_100.jpg",
         thumbnail_medium: "http://b.vimeocdn.com/ts/461/087/461087855_200.jpg",
         thumbnail_large: "http://b.vimeocdn.com/ts/461/087/461087855_640.jpg"
@@ -95,6 +102,9 @@ angular.module('ndc')
           }
         ],
         type: 'vimeo',
+        upload_date: '0000-01-01T00:00:00.000Z',
+        createdAt: '0000-01-01T00:00:00.000Z',
+        updatedAt: '0000-01-01T00:00:00.000Z',
         thumbnail_small: "http://b.vimeocdn.com/ts/449/150/449150990_100.jpg",
         thumbnail_medium: "http://b.vimeocdn.com/ts/449/150/449150990_200.jpg",
         thumbnail_large: "http://b.vimeocdn.com/ts/449/150/449150990_640.jpg"
@@ -114,6 +124,9 @@ angular.module('ndc')
             text: 'Data'
           }
         ],
+        upload_date: '0000-01-01T00:00:00.000Z',
+        createdAt: '0000-01-01T00:00:00.000Z',
+        updatedAt: '0000-01-01T00:00:00.000Z',
         title: "High Speed Continuous & Reliable Data Ingest into Hadoop",
         description: "10M events per second into HDFS, Under a sec query per 20GB of HDFS data. . . All of this and more will be demonstrated live during this talk",
         thumbnail_small: "http://b.vimeocdn.com/ts/449/147/449147320_100.jpg",
@@ -142,6 +155,9 @@ angular.module('ndc')
             text: 'spill'
           }
         ],
+        upload_date: '0000-01-01T00:00:00.000Z',
+        createdAt: '0000-01-01T00:00:00.000Z',
+        updatedAt: '0000-01-01T00:00:00.000Z',
         type: 'vimeo'
       },
       {
@@ -164,6 +180,9 @@ angular.module('ndc')
             text: 'Front end'
           }
         ],
+        upload_date: '0000-01-01T00:00:00.000Z',
+        createdAt: '0000-01-01T00:00:00.000Z',
+        updatedAt: '0000-01-01T00:00:00.000Z',
         type: 'vimeo'
       },
       {
@@ -186,6 +205,9 @@ angular.module('ndc')
             text: 'Data'
           }
         ],
+        upload_date: '0000-01-01T00:00:00.000Z',
+        createdAt: '0000-01-01T00:00:00.000Z',
+        updatedAt: '0000-01-01T00:00:00.000Z',
         type: 'vimeo'
       },
       {
@@ -209,6 +231,9 @@ angular.module('ndc')
             text: 'Data'
           }
         ],
+        upload_date: '0000-01-01T00:00:00.000Z',
+        createdAt: '0000-01-01T00:00:00.000Z',
+        updatedAt: '0000-01-01T00:00:00.000Z',
         type: 'vimeo'
       },
       {
@@ -234,6 +259,9 @@ angular.module('ndc')
             text: 'Google'
           }
         ],
+        upload_date: '0000-01-01T00:00:00.000Z',
+        createdAt: '0000-01-01T00:00:00.000Z',
+        updatedAt: '0000-01-01T00:00:00.000Z',
         type: 'vimeo'
       },
       {
@@ -258,6 +286,9 @@ angular.module('ndc')
             text: 'Web'
           }
         ],
+        upload_date: '0000-01-01T00:00:00.000Z',
+        createdAt: '0000-01-01T00:00:00.000Z',
+        updatedAt: '0000-01-01T00:00:00.000Z',
         type: 'vimeo'
       },
       {
@@ -281,6 +312,9 @@ angular.module('ndc')
             text: 'Web'
           }
         ],
+        upload_date: '0000-01-01T00:00:00.000Z',
+        createdAt: '0000-01-01T00:00:00.000Z',
+        updatedAt: '0000-01-01T00:00:00.000Z',
         type: 'vimeo'
       },
       {
@@ -303,6 +337,9 @@ angular.module('ndc')
             text: 'Web'
           }
         ],
+        upload_date: '0000-01-01T00:00:00.000Z',
+        createdAt: '0000-01-01T00:00:00.000Z',
+        updatedAt: '0000-01-01T00:00:00.000Z',
         type: 'vimeo'
       },
       {
@@ -326,6 +363,9 @@ angular.module('ndc')
             text: 'Web'
           }
         ],
+        upload_date: '0000-01-01T00:00:00.000Z',
+        createdAt: '0000-01-01T00:00:00.000Z',
+        updatedAt: '0000-01-01T00:00:00.000Z',
         type: 'vimeo'
       },
       {
@@ -348,6 +388,9 @@ angular.module('ndc')
             text: 'programming style'
           }
         ],
+        upload_date: '0000-01-01T00:00:00.000Z',
+        createdAt: '0000-01-01T00:00:00.000Z',
+        updatedAt: '0000-01-01T00:00:00.000Z',
         type: 'vimeo'
       },
       {
@@ -371,6 +414,9 @@ angular.module('ndc')
             text: 'debugging'
           }
         ],
+        upload_date: '0000-01-01T00:00:00.000Z',
+        createdAt: '0000-01-01T00:00:00.000Z',
+        updatedAt: '0000-01-01T00:00:00.000Z',
         type: 'vimeo'
       },
       {
@@ -394,6 +440,9 @@ angular.module('ndc')
             text: 'webos'
           }
         ],
+        upload_date: '0000-01-01T00:00:00.000Z',
+        createdAt: '0000-01-01T00:00:00.000Z',
+        updatedAt: '0000-01-01T00:00:00.000Z',
         type: 'vimeo'
       },
       {
@@ -417,6 +466,9 @@ angular.module('ndc')
             text: 'webos'
           }
         ],
+        upload_date: '0000-01-01T00:00:00.000Z',
+        createdAt: '0000-01-01T00:00:00.000Z',
+        updatedAt: '0000-01-01T00:00:00.000Z',
         type: 'vimeo'
       }
     ];
