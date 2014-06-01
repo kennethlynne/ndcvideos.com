@@ -8,15 +8,17 @@ angular.module('ndc')
       parent: 'admin'
     }));
   })
-  .controller('AdministrateusersCtrl', function ($scope, UserRepository) {
+  .controller('AdministrateusersCtrl', function ($scope, UserRepository, array) {
 
     $scope.confirm = function (message) {
       return confirm(message) == true;
     };
 
     $scope.users = [];
+    $scope.paginatedUsers = [];
+
     $scope.promise = UserRepository.getAll().then(function (users) {
-      $scope.users = users;
+      array($scope.users).set(users);
     });
 
     $scope.createUser = function () {

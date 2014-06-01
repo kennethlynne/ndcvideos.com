@@ -8,10 +8,12 @@ angular.module('ndc')
       parent: 'admin'
     }));
   })
-  .controller('AdministratevideosCtrl', function ($scope, VideoRepository) {
+  .controller('AdministratevideosCtrl', function ($scope, VideoRepository, array) {
 
+    $scope.videos = [];
+    $scope.paginatedVideos = [];
     $scope.promise = VideoRepository.getAll().then(function (videos) {
-      $scope.videos = videos;
+      array($scope.videos).set(videos);
     });
 
     $scope.deleteVideo = function (video) {
