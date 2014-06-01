@@ -13,7 +13,7 @@ angular.module('ndc')
     UserRepo.data = [
       {
         id: 1,
-        username: 'ali@g.com',
+        username: 'user@ndc.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
         profilePicture: 'http://placehold.it/50x50',
@@ -26,7 +26,7 @@ angular.module('ndc')
       },
       {
         id: 2,
-        username: 'ali@g.com',
+        username: 'user@ndc.com',
         firstName: '2Ali',
         lastName: 'Alfredsen',
         profilePicture: 'http://placehold.it/50x50',
@@ -39,7 +39,7 @@ angular.module('ndc')
       },
       {
         id: 3,
-        username: 'ali@g.com',
+        username: 'user@ndc.com',
         firstName: '4Ali',
         lastName: 'Alfredsen',
         profilePicture: 'http://placehold.it/50x50',
@@ -52,7 +52,7 @@ angular.module('ndc')
       },
       {
         id: 4,
-        username: 'ali@g.com',
+        username: 'user@ndc.com',
         firstName: '4Ali',
         lastName: 'Alfredsen',
         profilePicture: 'http://placehold.it/50x50',
@@ -65,7 +65,7 @@ angular.module('ndc')
       },
       {
         id: 5,
-        username: 'ali@g.com',
+        username: 'user@ndc.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
         profilePicture: 'http://placehold.it/50x50',
@@ -78,7 +78,7 @@ angular.module('ndc')
       },
       {
         id: 6,
-        username: 'ali@g.com',
+        username: 'user@ndc.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
         profilePicture: 'http://placehold.it/50x50',
@@ -91,7 +91,7 @@ angular.module('ndc')
       },
       {
         id: 7,
-        username: 'ali@g.com',
+        username: 'user@ndc.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
         profilePicture: 'http://placehold.it/50x50',
@@ -104,7 +104,7 @@ angular.module('ndc')
       },
       {
         id: 8,
-        username: 'ali@g.com',
+        username: 'user@ndc.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
         profilePicture: 'http://placehold.it/50x50',
@@ -117,7 +117,7 @@ angular.module('ndc')
       },
       {
         id: 9,
-        username: 'ali@g.com',
+        username: 'user@ndc.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
         profilePicture: 'http://placehold.it/50x50',
@@ -130,7 +130,7 @@ angular.module('ndc')
       },
       {
         id: 10,
-        username: 'ali@g.com',
+        username: 'user@ndc.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
         profilePicture: 'http://placehold.it/50x50',
@@ -143,7 +143,7 @@ angular.module('ndc')
       },
       {
         id: 11,
-        username: 'ali@g.com',
+        username: 'user@ndc.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
         profilePicture: 'http://placehold.it/50x50',
@@ -156,7 +156,7 @@ angular.module('ndc')
       },
       {
         id: 12,
-        username: 'ali@g.com',
+        username: 'user@ndc.com',
         firstName: 'Ali',
         lastName: 'Alfredsen',
         profilePicture: 'http://placehold.it/50x50',

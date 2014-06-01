@@ -22,7 +22,7 @@ angular.module('ndc')
         $httpBackend.whenPOST(baseUrl).respond(function (method, url, data, headers) {
             $log.log('Intercepted POST to `' + url + '`', data);
 
-            //data == 'grant_type=password&username=ali@g.com&password=pw' && headers['Accept'] == 'application/json, text/plain, */*'
+            //data == 'grant_type=password&username=user@ndc.com&password=pw' && headers['Accept'] == 'application/json, text/plain, */*'
             if (true) {
                 var response = {
                     access_token: "take-on-me",
