@@ -93,10 +93,10 @@
   .login-input-wrapper {
     position: relative;
 
-    input[type="text"], input[type="password"] {
+    .form-control {
       border: none;
       box-shadow: none;
-      padding-left: 45px;
+      padding-left: 45px !important;
       color: #444;
       font-weight: 300;
       font-family: "Roboto";
