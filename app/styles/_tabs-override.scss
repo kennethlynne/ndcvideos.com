@@ -17,6 +17,8 @@
 		    display: inline;
 		    margin-right: 15px;
 		    margin-bottom: 0;
+		    padding-bottom: 11px;
+		    border-bottom: 3px solid #ddd;
 
 		    a {
 		    	margin: 0;
@@ -31,7 +33,6 @@
 		    &.active {
 		    	border: none;
 		      border-bottom: 3px solid $primary-color;
-		      padding-bottom: 11px;
 
 		      a {
 		      	border: none;
