@@ -22398,7 +22398,7 @@ angular.module('ngPaginatorPlz', [])
 // Source: .tmp/scripts/app.js
 /**
  * 
- * @version v0.0.0 - 2014-06-01
+ * @version v0.0.0 - 2014-06-02
  * @link 
  * @author 
  * @license MIT License, http://www.opensource.org/licenses/MIT
