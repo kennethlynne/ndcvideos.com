@@ -1,10 +1,10 @@
 [ui-view="modal"]
 {
-  position: relative;
+  // position: relative;
 
   .modal-view
   {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     margin: 0;
@@ -12,6 +12,7 @@
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
+    z-index: 999;
 
     padding: {
       left: $sidebar-width;
