@@ -12,7 +12,7 @@ angular.module('ndc')
     $scope.token = $stateParams.token;
 
     $scope.setPassword = function () {
-      UserRepository.setPassword($scope.token, $scope.newPassword)
+      UserRepository.setPassword($scope.token, $scope.password)
         .then(function () {
           alert('Password changed!');
           //TODO: Log user in?
