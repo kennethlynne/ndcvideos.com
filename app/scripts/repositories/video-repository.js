@@ -29,7 +29,6 @@ angular.module('ndc')
               repository.cache[item.id] = instance;
               return instance;
             })
-            .sortBy('upload_date')
             .value();
         }
         else {
