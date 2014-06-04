@@ -1,8 +1,8 @@
 [www.ndcvideos.com](http://www.ndcvideos.com)
 ===========
 
-Angular based front-end for the ndc-videos application.
-Uses [generator-angular-xl](https://github.com/kennethlynne/generator-angular-xl). Check out the readme for the generator for more detailed information about the folder structure and development instructions.
+AngularJS based front-end for the ndcvideos application.
+Based on [generator-angular-xl](https://github.com/kennethlynne/generator-angular-xl). Check out the readme for the generator for more detailed information about the folder structure and development instructions.
 
 ## Usage
 Copy or clone the repository.
