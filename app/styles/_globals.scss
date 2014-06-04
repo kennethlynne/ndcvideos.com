@@ -3,6 +3,7 @@ html {
   height: 100%;
 }
 
+
 body {
   background: #fff;
   color: #555;
@@ -56,6 +57,7 @@ hr {
 #root {
   position: relative; //View will be positioned absolute during animations
   height: 100%;
+  overflow:auto;
 }
 
 #app {
