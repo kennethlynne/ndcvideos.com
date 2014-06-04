@@ -12,9 +12,7 @@
                     <h2 once-text="video.title"></h2>
                     <p once-text="video.description"></p>
                     <h3 once-show="video.tags.length > 0">Tagged:</h3>
-                    <ul class="tags" ng-show="video.tags.length > 0">
-                        <li ng-repeat="tag in video.tags" once-text="tag.text"></li>
-                    </ul>
+                    <tag-list-component tags="video.tags"></tag-list-component>
                 </div>
             </div>
 

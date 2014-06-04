@@ -1,0 +1,399 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@1.3.17
+3 info using node@v0.10.23
+4 warn package.json ndc@0.0.0 No repository field.
+5 verbose readDependencies using package.json deps
+6 verbose install where, deps [ '/Users/Almaas/Documents/Development/ndc-archive',
+6 verbose install   [ 'bower',
+6 verbose install     'grunt',
+6 verbose install     'grunt-concurrent',
+6 verbose install     'grunt-autoprefixer',
+6 verbose install     'grunt-contrib-clean',
+6 verbose install     'grunt-contrib-compass',
+6 verbose install     'grunt-contrib-concat',
+6 verbose install     'grunt-contrib-connect',
+6 verbose install     'grunt-contrib-copy',
+6 verbose install     'grunt-contrib-cssmin',
+6 verbose install     'grunt-contrib-htmlmin',
+6 verbose install     'grunt-contrib-imagemin',
+6 verbose install     'grunt-contrib-jshint',
+6 verbose install     'grunt-contrib-uglify',
+6 verbose install     'grunt-contrib-watch',
+6 verbose install     'grunt-conventional-changelog',
+6 verbose install     'grunt-ngmin',
+6 verbose install     'grunt-rev',
+6 verbose install     'jshint-stylish',
+6 verbose install     'load-grunt-tasks',
+6 verbose install     'time-grunt',
+6 verbose install     'karma-spec-reporter',
+6 verbose install     'karma-ng-html2js-preprocessor',
+6 verbose install     'karma-jshint-preprocessor',
+6 verbose install     'karma-phantomjs-launcher',
+6 verbose install     'grunt-karma',
+6 verbose install     'karma-jasmine',
+6 verbose install     'karma-coverage',
+6 verbose install     'path',
+6 verbose install     'grunt-sails-linker',
+6 verbose install     'grunt-bump',
+6 verbose install     'protractor',
+6 verbose install     'grunt-protractor-runner',
+6 verbose install     'grunt-gh-pages',
+6 verbose install     'underscore.string',
+6 verbose install     'grunt-manifest' ] ]
+7 info preinstall ndc@0.0.0
+8 warn package.json path@0.4.9 path is also the name of a node core module.
+9 verbose readDependencies using package.json deps
+10 verbose already installed skipping grunt-concurrent@~0.5.0 /Users/Almaas/Documents/Development/ndc-archive
+11 verbose already installed skipping bower@1.2.6 /Users/Almaas/Documents/Development/ndc-archive
+12 verbose already installed skipping grunt@~0.4.1 /Users/Almaas/Documents/Development/ndc-archive
+13 verbose already installed skipping grunt-autoprefixer@~0.4.0 /Users/Almaas/Documents/Development/ndc-archive
+14 verbose already installed skipping grunt-contrib-clean@~0.5.0 /Users/Almaas/Documents/Development/ndc-archive
+15 verbose already installed skipping grunt-contrib-compass@~0.7.2 /Users/Almaas/Documents/Development/ndc-archive
+16 verbose already installed skipping grunt-contrib-concat@~0.3.0 /Users/Almaas/Documents/Development/ndc-archive
+17 verbose already installed skipping grunt-contrib-connect@~0.5.0 /Users/Almaas/Documents/Development/ndc-archive
+18 verbose already installed skipping grunt-contrib-copy@~0.4.1 /Users/Almaas/Documents/Development/ndc-archive
+19 verbose already installed skipping grunt-contrib-cssmin@~0.7.0 /Users/Almaas/Documents/Development/ndc-archive
+20 verbose already installed skipping grunt-contrib-htmlmin@~0.1.3 /Users/Almaas/Documents/Development/ndc-archive
+21 verbose already installed skipping grunt-contrib-imagemin@~0.3.0 /Users/Almaas/Documents/Development/ndc-archive
+22 verbose already installed skipping grunt-contrib-jshint@~0.7.1 /Users/Almaas/Documents/Development/ndc-archive
+23 verbose already installed skipping grunt-contrib-uglify@~0.2.0 /Users/Almaas/Documents/Development/ndc-archive
+24 verbose already installed skipping grunt-contrib-watch@~0.5.2 /Users/Almaas/Documents/Development/ndc-archive
+25 verbose already installed skipping grunt-conventional-changelog@~1.0.0 /Users/Almaas/Documents/Development/ndc-archive
+26 verbose already installed skipping grunt-ngmin@~0.0.2 /Users/Almaas/Documents/Development/ndc-archive
+27 verbose already installed skipping grunt-rev@~0.1.0 /Users/Almaas/Documents/Development/ndc-archive
+28 verbose already installed skipping jshint-stylish@~0.1.3 /Users/Almaas/Documents/Development/ndc-archive
+29 verbose already installed skipping load-grunt-tasks@~0.4.0 /Users/Almaas/Documents/Development/ndc-archive
+30 verbose already installed skipping time-grunt@~0.2.1 /Users/Almaas/Documents/Development/ndc-archive
+31 verbose already installed skipping karma-spec-reporter@0.0.6 /Users/Almaas/Documents/Development/ndc-archive
+32 verbose already installed skipping karma-ng-html2js-preprocessor@~0.1.0 /Users/Almaas/Documents/Development/ndc-archive
+33 verbose already installed skipping karma-jshint-preprocessor@~0.0.3 /Users/Almaas/Documents/Development/ndc-archive
+34 verbose already installed skipping karma-phantomjs-launcher@~0.1.0 /Users/Almaas/Documents/Development/ndc-archive
+35 verbose already installed skipping grunt-karma@~0.8.2 /Users/Almaas/Documents/Development/ndc-archive
+36 verbose already installed skipping karma-jasmine@~0.2.0 /Users/Almaas/Documents/Development/ndc-archive
+37 verbose already installed skipping karma-coverage@~0.1.2 /Users/Almaas/Documents/Development/ndc-archive
+38 verbose already installed skipping path@~0.4.9 /Users/Almaas/Documents/Development/ndc-archive
+39 verbose already installed skipping grunt-sails-linker@~0.9.4 /Users/Almaas/Documents/Development/ndc-archive
+40 verbose already installed skipping grunt-bump@~0.0.13 /Users/Almaas/Documents/Development/ndc-archive
+41 verbose already installed skipping protractor@~0.15.0 /Users/Almaas/Documents/Development/ndc-archive
+42 verbose already installed skipping grunt-protractor-runner@~0.2.0 /Users/Almaas/Documents/Development/ndc-archive
+43 verbose already installed skipping grunt-gh-pages@~0.9.0 /Users/Almaas/Documents/Development/ndc-archive
+44 verbose already installed skipping underscore.string@~2.3.3 /Users/Almaas/Documents/Development/ndc-archive
+45 verbose already installed skipping grunt-manifest@~0.4.0 /Users/Almaas/Documents/Development/ndc-archive
+46 silly resolved []
+47 info build /Users/Almaas/Documents/Development/ndc-archive
+48 verbose linkStuff [ false, false, false, '/Users/Almaas/Documents/Development' ]
+49 info linkStuff ndc@0.0.0
+50 verbose linkBins ndc@0.0.0
+51 verbose linkMans ndc@0.0.0
+52 verbose rebuildBundles ndc@0.0.0
+53 verbose rebuildBundles [ '.DS_Store',
+53 verbose rebuildBundles   '.bin',
+53 verbose rebuildBundles   'bower',
+53 verbose rebuildBundles   'generator-angular-xl',
+53 verbose rebuildBundles   'generator-karma',
+53 verbose rebuildBundles   'grunt',
+53 verbose rebuildBundles   'grunt-autoprefixer',
+53 verbose rebuildBundles   'grunt-bump',
+53 verbose rebuildBundles   'grunt-cli',
+53 verbose rebuildBundles   'grunt-concurrent',
+53 verbose rebuildBundles   'grunt-contrib-clean',
+53 verbose rebuildBundles   'grunt-contrib-coffee',
+53 verbose rebuildBundles   'grunt-contrib-compass',
+53 verbose rebuildBundles   'grunt-contrib-concat',
+53 verbose rebuildBundles   'grunt-contrib-connect',
+53 verbose rebuildBundles   'grunt-contrib-copy',
+53 verbose rebuildBundles   'grunt-contrib-cssmin',
+53 verbose rebuildBundles   'grunt-contrib-htmlmin',
+53 verbose rebuildBundles   'grunt-contrib-imagemin',
+53 verbose rebuildBundles   'grunt-contrib-jshint',
+53 verbose rebuildBundles   'grunt-contrib-uglify',
+53 verbose rebuildBundles   'grunt-contrib-watch',
+53 verbose rebuildBundles   'grunt-conventional-changelog',
+53 verbose rebuildBundles   'grunt-ddescribe-iit',
+53 verbose rebuildBundles   'grunt-gh-pages',
+53 verbose rebuildBundles   'grunt-karma',
+53 verbose rebuildBundles   'grunt-manifest',
+53 verbose rebuildBundles   'grunt-ngmin',
+53 verbose rebuildBundles   'grunt-protractor-runner',
+53 verbose rebuildBundles   'grunt-rev',
+53 verbose rebuildBundles   'grunt-sails-linker',
+53 verbose rebuildBundles   'jshint-stylish',
+53 verbose rebuildBundles   'karma',
+53 verbose rebuildBundles   'karma-chrome-launcher',
+53 verbose rebuildBundles   'karma-coffee-preprocessor',
+53 verbose rebuildBundles   'karma-coverage',
+53 verbose rebuildBundles   'karma-firefox-launcher',
+53 verbose rebuildBundles   'karma-html2js-preprocessor',
+53 verbose rebuildBundles   'karma-jasmine',
+53 verbose rebuildBundles   'karma-jshint-preprocessor',
+53 verbose rebuildBundles   'karma-ng-html2js-preprocessor',
+53 verbose rebuildBundles   'karma-phantomjs-launcher',
+53 verbose rebuildBundles   'karma-requirejs',
+53 verbose rebuildBundles   'karma-script-launcher',
+53 verbose rebuildBundles   'karma-spec-reporter',
+53 verbose rebuildBundles   'load-grunt-tasks',
+53 verbose rebuildBundles   'path',
+53 verbose rebuildBundles   'protractor',
+53 verbose rebuildBundles   'requirejs',
+53 verbose rebuildBundles   'string',
+53 verbose rebuildBundles   'time-grunt',
+53 verbose rebuildBundles   'underscore.string',
+53 verbose rebuildBundles   'yo' ]
+54 verbose rebuild bundle /Users/Almaas/Documents/Development/ndc-archive/node_modules/generator-angular-xl
+55 info build /Users/Almaas/Documents/Development/ndc-archive/node_modules/generator-angular-xl
+56 info preinstall generator-angular-xl@0.6.1
+57 verbose linkStuff [ false,
+57 verbose linkStuff   false,
+57 verbose linkStuff   false,
+57 verbose linkStuff   '/Users/Almaas/Documents/Development/ndc-archive/node_modules' ]
+58 info linkStuff generator-angular-xl@0.6.1
+59 verbose linkBins generator-angular-xl@0.6.1
+60 verbose linkMans generator-angular-xl@0.6.1
+61 verbose rebuildBundles generator-angular-xl@0.6.1
+62 verbose rebuildBundles [ 'inflection', 'yeoman-generator' ]
+63 info install generator-angular-xl@0.6.1
+64 info postinstall generator-angular-xl@0.6.1
+65 verbose rebuild bundle /Users/Almaas/Documents/Development/ndc-archive/node_modules/generator-karma
+66 info build /Users/Almaas/Documents/Development/ndc-archive/node_modules/generator-karma
+67 info preinstall generator-karma@0.6.0
+68 verbose linkStuff [ false,
+68 verbose linkStuff   false,
+68 verbose linkStuff   false,
+68 verbose linkStuff   '/Users/Almaas/Documents/Development/ndc-archive/node_modules' ]
+69 info linkStuff generator-karma@0.6.0
+70 verbose linkBins generator-karma@0.6.0
+71 verbose linkMans generator-karma@0.6.0
+72 verbose rebuildBundles generator-karma@0.6.0
+73 verbose rebuildBundles [ 'yeoman-generator' ]
+74 info install generator-karma@0.6.0
+75 info postinstall generator-karma@0.6.0
+76 verbose rebuild bundle /Users/Almaas/Documents/Development/ndc-archive/node_modules/grunt-cli
+77 info build /Users/Almaas/Documents/Development/ndc-archive/node_modules/grunt-cli
+78 info preinstall grunt-cli@0.1.13
+79 verbose linkStuff [ false,
+79 verbose linkStuff   false,
+79 verbose linkStuff   false,
+79 verbose linkStuff   '/Users/Almaas/Documents/Development/ndc-archive/node_modules' ]
+80 info linkStuff grunt-cli@0.1.13
+81 warn prefer global grunt-cli@0.1.13 should be installed with -g
+82 verbose linkBins grunt-cli@0.1.13
+83 verbose link bins [ { grunt: 'bin/grunt' },
+83 verbose link bins   '/Users/Almaas/Documents/Development/ndc-archive/node_modules/.bin',
+83 verbose link bins   false ]
+84 verbose linkMans grunt-cli@0.1.13
+85 verbose rebuildBundles grunt-cli@0.1.13
+86 verbose rebuildBundles [ '.bin', 'findup-sync', 'nopt', 'resolve' ]
+87 info install grunt-cli@0.1.13
+88 info postinstall grunt-cli@0.1.13
+89 verbose rebuild bundle /Users/Almaas/Documents/Development/ndc-archive/node_modules/grunt-contrib-coffee
+90 info build /Users/Almaas/Documents/Development/ndc-archive/node_modules/grunt-contrib-coffee
+91 info preinstall grunt-contrib-coffee@0.7.0
+92 verbose linkStuff [ false,
+92 verbose linkStuff   false,
+92 verbose linkStuff   false,
+92 verbose linkStuff   '/Users/Almaas/Documents/Development/ndc-archive/node_modules' ]
+93 info linkStuff grunt-contrib-coffee@0.7.0
+94 verbose linkBins grunt-contrib-coffee@0.7.0
+95 verbose linkMans grunt-contrib-coffee@0.7.0
+96 verbose rebuildBundles grunt-contrib-coffee@0.7.0
+97 verbose rebuildBundles [ '.bin', 'coffee-script' ]
+98 info install grunt-contrib-coffee@0.7.0
+99 info postinstall grunt-contrib-coffee@0.7.0
+100 verbose rebuild bundle /Users/Almaas/Documents/Development/ndc-archive/node_modules/grunt-ddescribe-iit
+101 info build /Users/Almaas/Documents/Development/ndc-archive/node_modules/grunt-ddescribe-iit
+102 info preinstall grunt-ddescribe-iit@0.0.2
+103 verbose linkStuff [ false,
+103 verbose linkStuff   false,
+103 verbose linkStuff   false,
+103 verbose linkStuff   '/Users/Almaas/Documents/Development/ndc-archive/node_modules' ]
+104 info linkStuff grunt-ddescribe-iit@0.0.2
+105 verbose linkBins grunt-ddescribe-iit@0.0.2
+106 verbose linkMans grunt-ddescribe-iit@0.0.2
+107 verbose rebuildBundles grunt-ddescribe-iit@0.0.2
+108 info install grunt-ddescribe-iit@0.0.2
+109 info postinstall grunt-ddescribe-iit@0.0.2
+110 verbose rebuild bundle /Users/Almaas/Documents/Development/ndc-archive/node_modules/karma
+111 info build /Users/Almaas/Documents/Development/ndc-archive/node_modules/karma
+112 info preinstall karma@0.10.10
+113 verbose linkStuff [ false,
+113 verbose linkStuff   false,
+113 verbose linkStuff   false,
+113 verbose linkStuff   '/Users/Almaas/Documents/Development/ndc-archive/node_modules' ]
+114 info linkStuff karma@0.10.10
+115 verbose linkBins karma@0.10.10
+116 verbose link bins [ { karma: './bin/karma' },
+116 verbose link bins   '/Users/Almaas/Documents/Development/ndc-archive/node_modules/.bin',
+116 verbose link bins   false ]
+117 verbose linkMans karma@0.10.10
+118 verbose rebuildBundles karma@0.10.10
+119 verbose rebuildBundles [ '.bin',
+119 verbose rebuildBundles   'chokidar',
+119 verbose rebuildBundles   'coffee-script',
+119 verbose rebuildBundles   'colors',
+119 verbose rebuildBundles   'connect',
+119 verbose rebuildBundles   'di',
+119 verbose rebuildBundles   'glob',
+119 verbose rebuildBundles   'graceful-fs',
+119 verbose rebuildBundles   'http-proxy',
+119 verbose rebuildBundles   'lodash',
+119 verbose rebuildBundles   'log4js',
+119 verbose rebuildBundles   'mime',
+119 verbose rebuildBundles   'minimatch',
+119 verbose rebuildBundles   'optimist',
+119 verbose rebuildBundles   'q',
+119 verbose rebuildBundles   'rimraf',
+119 verbose rebuildBundles   'socket.io',
+119 verbose rebuildBundles   'useragent' ]
+120 info install karma@0.10.10
+121 info postinstall karma@0.10.10
+122 verbose rebuild bundle /Users/Almaas/Documents/Development/ndc-archive/node_modules/karma-chrome-launcher
+123 info build /Users/Almaas/Documents/Development/ndc-archive/node_modules/karma-chrome-launcher
+124 info preinstall karma-chrome-launcher@0.1.2
+125 verbose linkStuff [ false,
+125 verbose linkStuff   false,
+125 verbose linkStuff   false,
+125 verbose linkStuff   '/Users/Almaas/Documents/Development/ndc-archive/node_modules' ]
+126 info linkStuff karma-chrome-launcher@0.1.2
+127 verbose linkBins karma-chrome-launcher@0.1.2
+128 verbose linkMans karma-chrome-launcher@0.1.2
+129 verbose rebuildBundles karma-chrome-launcher@0.1.2
+130 info install karma-chrome-launcher@0.1.2
+131 info postinstall karma-chrome-launcher@0.1.2
+132 verbose rebuild bundle /Users/Almaas/Documents/Development/ndc-archive/node_modules/karma-coffee-preprocessor
+133 info build /Users/Almaas/Documents/Development/ndc-archive/node_modules/karma-coffee-preprocessor
+134 info preinstall karma-coffee-preprocessor@0.1.3
+135 verbose linkStuff [ false,
+135 verbose linkStuff   false,
+135 verbose linkStuff   false,
+135 verbose linkStuff   '/Users/Almaas/Documents/Development/ndc-archive/node_modules' ]
+136 info linkStuff karma-coffee-preprocessor@0.1.3
+137 verbose linkBins karma-coffee-preprocessor@0.1.3
+138 verbose linkMans karma-coffee-preprocessor@0.1.3
+139 verbose rebuildBundles karma-coffee-preprocessor@0.1.3
+140 verbose rebuildBundles [ '.bin', 'coffee-script' ]
+141 info install karma-coffee-preprocessor@0.1.3
+142 info postinstall karma-coffee-preprocessor@0.1.3
+143 verbose rebuild bundle /Users/Almaas/Documents/Development/ndc-archive/node_modules/karma-firefox-launcher
+144 info build /Users/Almaas/Documents/Development/ndc-archive/node_modules/karma-firefox-launcher
+145 info preinstall karma-firefox-launcher@0.1.3
+146 verbose linkStuff [ false,
+146 verbose linkStuff   false,
+146 verbose linkStuff   false,
+146 verbose linkStuff   '/Users/Almaas/Documents/Development/ndc-archive/node_modules' ]
+147 info linkStuff karma-firefox-launcher@0.1.3
+148 verbose linkBins karma-firefox-launcher@0.1.3
+149 verbose linkMans karma-firefox-launcher@0.1.3
+150 verbose rebuildBundles karma-firefox-launcher@0.1.3
+151 info install karma-firefox-launcher@0.1.3
+152 info postinstall karma-firefox-launcher@0.1.3
+153 verbose rebuild bundle /Users/Almaas/Documents/Development/ndc-archive/node_modules/karma-html2js-preprocessor
+154 info build /Users/Almaas/Documents/Development/ndc-archive/node_modules/karma-html2js-preprocessor
+155 info preinstall karma-html2js-preprocessor@0.1.0
+156 verbose linkStuff [ false,
+156 verbose linkStuff   false,
+156 verbose linkStuff   false,
+156 verbose linkStuff   '/Users/Almaas/Documents/Development/ndc-archive/node_modules' ]
+157 info linkStuff karma-html2js-preprocessor@0.1.0
+158 verbose linkBins karma-html2js-preprocessor@0.1.0
+159 verbose linkMans karma-html2js-preprocessor@0.1.0
+160 verbose rebuildBundles karma-html2js-preprocessor@0.1.0
+161 info install karma-html2js-preprocessor@0.1.0
+162 info postinstall karma-html2js-preprocessor@0.1.0
+163 verbose rebuild bundle /Users/Almaas/Documents/Development/ndc-archive/node_modules/karma-requirejs
+164 info build /Users/Almaas/Documents/Development/ndc-archive/node_modules/karma-requirejs
+165 info preinstall karma-requirejs@0.1.0
+166 verbose linkStuff [ false,
+166 verbose linkStuff   false,
+166 verbose linkStuff   false,
+166 verbose linkStuff   '/Users/Almaas/Documents/Development/ndc-archive/node_modules' ]
+167 info linkStuff karma-requirejs@0.1.0
+168 verbose linkBins karma-requirejs@0.1.0
+169 verbose linkMans karma-requirejs@0.1.0
+170 verbose rebuildBundles karma-requirejs@0.1.0
+171 info install karma-requirejs@0.1.0
+172 info postinstall karma-requirejs@0.1.0
+173 verbose rebuild bundle /Users/Almaas/Documents/Development/ndc-archive/node_modules/karma-script-launcher
+174 info build /Users/Almaas/Documents/Development/ndc-archive/node_modules/karma-script-launcher
+175 info preinstall karma-script-launcher@0.1.0
+176 verbose linkStuff [ false,
+176 verbose linkStuff   false,
+176 verbose linkStuff   false,
+176 verbose linkStuff   '/Users/Almaas/Documents/Development/ndc-archive/node_modules' ]
+177 info linkStuff karma-script-launcher@0.1.0
+178 verbose linkBins karma-script-launcher@0.1.0
+179 verbose linkMans karma-script-launcher@0.1.0
+180 verbose rebuildBundles karma-script-launcher@0.1.0
+181 info install karma-script-launcher@0.1.0
+182 info postinstall karma-script-launcher@0.1.0
+183 verbose rebuild bundle /Users/Almaas/Documents/Development/ndc-archive/node_modules/requirejs
+184 info build /Users/Almaas/Documents/Development/ndc-archive/node_modules/requirejs
+185 info preinstall requirejs@2.1.11
+186 verbose linkStuff [ false,
+186 verbose linkStuff   false,
+186 verbose linkStuff   false,
+186 verbose linkStuff   '/Users/Almaas/Documents/Development/ndc-archive/node_modules' ]
+187 info linkStuff requirejs@2.1.11
+188 verbose linkBins requirejs@2.1.11
+189 verbose link bins [ { 'r.js': './bin/r.js' },
+189 verbose link bins   '/Users/Almaas/Documents/Development/ndc-archive/node_modules/.bin',
+189 verbose link bins   false ]
+190 verbose linkMans requirejs@2.1.11
+191 verbose rebuildBundles requirejs@2.1.11
+192 info install requirejs@2.1.11
+193 info postinstall requirejs@2.1.11
+194 verbose rebuild bundle /Users/Almaas/Documents/Development/ndc-archive/node_modules/string
+195 info build /Users/Almaas/Documents/Development/ndc-archive/node_modules/string
+196 info preinstall string@1.8.1
+197 verbose linkStuff [ false,
+197 verbose linkStuff   false,
+197 verbose linkStuff   false,
+197 verbose linkStuff   '/Users/Almaas/Documents/Development/ndc-archive/node_modules' ]
+198 info linkStuff string@1.8.1
+199 verbose linkBins string@1.8.1
+200 verbose linkMans string@1.8.1
+201 verbose rebuildBundles string@1.8.1
+202 info install string@1.8.1
+203 info postinstall string@1.8.1
+204 verbose rebuild bundle /Users/Almaas/Documents/Development/ndc-archive/node_modules/yo
+205 info build /Users/Almaas/Documents/Development/ndc-archive/node_modules/yo
+206 info preinstall yo@1.1.2
+207 verbose linkStuff [ false,
+207 verbose linkStuff   false,
+207 verbose linkStuff   false,
+207 verbose linkStuff   '/Users/Almaas/Documents/Development/ndc-archive/node_modules' ]
+208 info linkStuff yo@1.1.2
+209 warn prefer global yo@1.1.2 should be installed with -g
+210 verbose linkBins yo@1.1.2
+211 verbose link bins [ { yo: 'cli.js' },
+211 verbose link bins   '/Users/Almaas/Documents/Development/ndc-archive/node_modules/.bin',
+211 verbose link bins   false ]
+212 verbose linkMans yo@1.1.2
+213 verbose rebuildBundles yo@1.1.2
+214 verbose rebuildBundles [ '.bin',
+214 verbose rebuildBundles   'async',
+214 verbose rebuildBundles   'chalk',
+214 verbose rebuildBundles   'findup',
+214 verbose rebuildBundles   'insight',
+214 verbose rebuildBundles   'lodash',
+214 verbose rebuildBundles   'nopt',
+214 verbose rebuildBundles   'open',
+214 verbose rebuildBundles   'shelljs',
+214 verbose rebuildBundles   'sudo-block',
+214 verbose rebuildBundles   'update-notifier',
+214 verbose rebuildBundles   'yeoman-generator' ]
+215 info install yo@1.1.2
+216 info postinstall yo@1.1.2
+217 verbose unsafe-perm in lifecycle false
+218 info install ndc@0.0.0
+219 info postinstall ndc@0.0.0
+220 info prepublish ndc@0.0.0
+221 error peerinvalid The package karma-jasmine does not satisfy its siblings' peerDependencies requirements!
+221 error peerinvalid Peer karma@0.10.10 wants karma-jasmine@~0.1.0
+222 error System Darwin 13.2.0
+223 error command "node" "/usr/local/bin/npm" "install"
+224 error cwd /Users/Almaas/Documents/Development/ndc-archive
+225 error node -v v0.10.23
+226 error npm -v 1.3.17
+227 error code EPEERINVALID
+228 verbose exit [ 1, true ]
