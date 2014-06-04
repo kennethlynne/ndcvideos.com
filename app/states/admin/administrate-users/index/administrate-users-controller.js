@@ -8,7 +8,7 @@ angular.module('ndc')
       parent: 'admin'
     }));
   })
-  .controller('AdministrateusersCtrl', function ($scope, UserRepository, array, $log) {
+  .controller('AdministrateusersCtrl', function ($scope, UserRepository, array, $log, _) {
 
     $scope.confirm = function (message) {
       return confirm(message) == true;
@@ -19,6 +19,12 @@ angular.module('ndc')
 
     $scope.promise = UserRepository.getAll().then(function (users) {
       array($scope.users).set(users);
+      $scope.numberOfVerifiedUsers = _.chain(users)
+        .filter(function (user) {
+          return user.verified;
+        })
+        .size()
+        .value();
     });
 
     $scope.createUser = function () {
