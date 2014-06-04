@@ -17,8 +17,8 @@
       border: none;
       outline: none;
       box-shadow: none;
-      padding: 10px;
-      font-size: 20px;
+      padding: 10px 20px;
+      font-size: 25px;
       text-align: right;
       width: 100%;
       background: #222;
@@ -60,6 +60,7 @@
 
       @media (max-width: $screen-sm) {
         width: 100%;
+        min-height: 100%;
         padding-bottom: 30px;
         margin-bottom: 0;
       }
