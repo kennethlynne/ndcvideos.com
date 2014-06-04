@@ -70,9 +70,6 @@ angular.module('ndc')
 
       VideoRepository.create(video)
         .$save()
-        .then(function () {
-          $state.go('administrateVideos');
-        })
         .catch(function (err) {
           $log.error(err);
           errorHandler();
