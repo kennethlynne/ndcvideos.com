@@ -64,7 +64,7 @@ angular.module('ndc')
 
     return {
       restrict: 'A',
-      link: _linkFn
+      link: angular.noop //_linkFn
     };
 
   });
