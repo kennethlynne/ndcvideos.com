@@ -13,7 +13,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="video in paginatedVideos | orderBy:'video.createdAt'">
+                <tr ng-repeat="video in paginatedVideos">
                     <td><a ui-sref="adminVideoDetails({id: video.id})">{{video.title}}</a></td>
                     <td once-text="video.$durationInHHMMSS"></td>
                     <td>
