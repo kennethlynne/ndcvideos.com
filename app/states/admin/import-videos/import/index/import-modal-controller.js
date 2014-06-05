@@ -49,7 +49,7 @@ angular.module('ndc')
 
     $scope.cancel = function () {
       if (!!confirm('Er du sikker på at du vil forkaste alle data?')) {
-        $state.go('administrateVideos');
+        $state.go('importVideosOverview');
       }
     };
 
@@ -70,6 +70,9 @@ angular.module('ndc')
 
       VideoRepository.create(video)
         .$save()
+        .then(function(){
+          $state.go('importVideosOverview', {reload:true});
+        })
         .catch(function (err) {
           $log.error(err);
           errorHandler();
