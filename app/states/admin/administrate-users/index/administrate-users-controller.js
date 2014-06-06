@@ -14,18 +14,28 @@ angular.module('ndc')
       return confirm(message) == true;
     };
 
-    $scope.users = [];
+    var userlist = [];
+
+    $scope.filteredUsers = [];
+
     $scope.paginatedUsers = [];
 
     $scope.promise = UserRepository.getAll().then(function (users) {
-      array($scope.users).set(users);
-      $scope.numberOfVerifiedUsers = _.chain(users)
+      array(userlist).set(users);
+    });
+
+    $scope.search = function (query) {
+      array($scope.filteredUsers).set(userlist.filter(function (user) {
+        return !query || user.username.indexOf(query) > 0;
+      }));
+      $scope.numberOfVerifiedUsers = _.chain($scope.filteredUsers)
         .filter(function (user) {
           return user.verified;
         })
         .size()
         .value();
-    });
+    };
+    $scope.search(); //Set initial data
 
     $scope.createUser = function () {
       $scope.isCreatingNewUser = true;
@@ -40,11 +50,11 @@ angular.module('ndc')
       if ($scope.confirm('Are you sure you want to reset password for user ' + user.username + '?')) {
 
         user.$resetPassword(user.username)
-          .then(function(){
+          .then(function () {
             //TODO: Give some notification of great success
             $scope.status = 'Password reset verification mail sent.';
           })
-          .catch(function(err){
+          .catch(function (err) {
             $log.log(err);
             alert('Could not reset password for user ' + user.username + '.');
           });
