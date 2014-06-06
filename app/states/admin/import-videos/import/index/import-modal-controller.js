@@ -48,9 +48,9 @@ angular.module('ndc')
     $scope.select2Options = Select2.tagSearch;
 
     $scope.cancel = function () {
-      if (!!confirm('Er du sikker på at du vil forkaste alle data?')) {
+//      if (!!confirm('Er du sikker på at du vil forkaste alle data?')) {
         $state.go('importVideosOverview');
-      }
+//      }
     };
 
     $scope.publish = function (video) {

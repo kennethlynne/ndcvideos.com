@@ -17,7 +17,7 @@ angular.module('ndc')
         multiple: true,
         createSearchChoice: function (term, data) {
           if (_.filter(data, function (item) {
-            return item.text.localeCompare(term) === 0;
+            return item.text.localeCompare(term.toLowerCase()) === 0;
           }).length === 0) {
             return {id: '$' + term, text: term};
           }
