@@ -42,24 +42,4 @@ describe('Component: panelListComponent', function () {
 
   });
 
-  describe('Controller: panelListComponentCtrl', function () {
-
-    var Ctrl, scope, element;
-
-    beforeEach(function () {
-
-      module('app');
-
-      inject(function ($controller, $rootScope) {
-        scope = $rootScope.$new();
-        element = angular.element('<panel-list-component></panel-list-component>');
-        Ctrl = $controller('panelListComponentCtrl', {
-          $scope: scope,
-          $element: element
-        });
-      });
-    });
-
-  });
-
 });
