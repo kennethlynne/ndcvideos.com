@@ -3,55 +3,65 @@
 describe('Component: loginSidebarItemComponent', function () {
 
   describe('Directive: loginSidebarItemComponent', function () {
-    var element, scope, $compile;
+    var element, scope, $compile, $state;
 
     beforeEach(function () {
 
-      module('ndc');
+      module('ndc', function ($provide) {
+        $provide.decorator('$state', function ($delegate) {
+          $delegate.go = jasmine.createSpy('$state.logout');
+          return $delegate;
+        });
+      });
 
-      inject(function ($rootScope, _$compile_) {
+      inject(function ($rootScope, _$compile_, _$state_) {
         scope = $rootScope.$new();
         $compile = _$compile_;
+        $state = _$state_;
       });
 
     });
 
     it('should have the component class', function () {
-      element = angular.element('<login-sidebar-item-component></login-sidebar-item-component>');
+      element = angular.element('<logout-sidebar-item-component></logout-sidebar-item-component>');
       element = $compile(element)(scope);
       scope.$digest();
-      expect(element).toHaveClass('login-sidebar-item-component');
+      expect(element).toHaveClass('logout-sidebar-item-component');
     });
 
-    it('should render text', function () {
-      element = angular.element('<login-sidebar-item-component></login-sidebar-item-component>');
+    it('should log the user out', function () {
+      element = angular.element('<logout-sidebar-item-component></logout-sidebar-item-component>');
       element = $compile(element)(scope);
       scope.$digest();
-      expect(element.text()).toContain('loginSidebarItem');
+      element.click();
+      expect($state.go).toHaveBeenCalled();
     });
-
   });
 
   describe('Controller: loginSidebarItemComponentCtrl', function () {
 
-    var Ctrl, scope, element;
+    var Ctrl, scope, $state;
 
     beforeEach(function () {
+
+      $state = {
+        go: jasmine.createSpy('$state.logout')
+      };
 
       module('ndc');
 
       inject(function ($controller, $rootScope) {
         scope = $rootScope.$new();
-        element = angular.element('<login-sidebar-item-component></login-sidebar-item-component>');
         Ctrl = $controller('loginSidebarItemComponentCtrl', {
           $scope: scope,
-          $element: element
+          $state: $state
         });
       });
     });
 
-    it('should render a message', function () {
-      expect(scope.text).toContain('loginSidebarItem');
+    it('should log the user out', function () {
+      scope.login();
+      expect($state.go).toHaveBeenCalled();
     });
   });
 
