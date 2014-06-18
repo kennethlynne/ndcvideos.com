@@ -14,7 +14,8 @@
     </div>
 
     <div class="bottom-fixed">
-        <logout-sidebar-item-component></logout-sidebar-item-component>
+        <logout-sidebar-item-component ng-if="isAuthenticated()"></logout-sidebar-item-component>
+        <login-sidebar-item-component ng-if="!isAuthenticated()"></login-sidebar-item-component>
     </div>
 
 </div>
