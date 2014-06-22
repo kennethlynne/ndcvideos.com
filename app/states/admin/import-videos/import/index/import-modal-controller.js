@@ -48,9 +48,9 @@ angular.module('ndc')
     $scope.select2Options = Select2.tagSearch;
 
     $scope.cancel = function () {
-      if (!!confirm('Er du sikker på at du vil forkaste alle data?')) {
-        $state.go('administrateVideos');
-      }
+//      if (!!confirm('Er du sikker på at du vil forkaste alle data?')) {
+        $state.go('importVideosOverview');
+//      }
     };
 
     $scope.publish = function (video) {
@@ -70,6 +70,9 @@ angular.module('ndc')
 
       VideoRepository.create(video)
         .$save()
+        .then(function(){
+          $state.go('importVideosOverview', {reload:true});
+        })
         .catch(function (err) {
           $log.error(err);
           errorHandler();

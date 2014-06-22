@@ -26,7 +26,8 @@ angular.module('ndc')
       var allowAnonymous = [
         'login',
         'error',
-        'welcome'
+        'welcome',
+        'videos'
       ];
 
       var requireRole = {

@@ -18,18 +18,13 @@ angular.module('ndc')
       $scope.ready = true;
     }
 
-    function failHandler() {
-      authentication.logout();
-      $state.transitionTo('login');
-    }
-
     if (authentication.isAuthenticated()) {
       UserRepository.getByToken(authentication.getToken())
         .then(CurrentUser.set)
-        .then(successHandler)
-        .catch(failHandler);
+        .then(successHandler);
     }
-    else {
-      failHandler();
+    else
+    {
+      successHandler();
     }
   });

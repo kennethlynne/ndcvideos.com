@@ -3,9 +3,10 @@
 angular.module('ndc')
   .config(function ($stateProvider, stateFactory) {
     $stateProvider.state('importVideosOverview', stateFactory('AdminImportVideosOverview', {
-      url: '/import-videos',
+      url: '/import-videos?reload',
       templateUrl: 'states/admin/import-videos/index/main-view.html',
-      parent: 'admin'
+      parent: 'admin',
+      reloadOnSearch: true
     }));
   })
   .controller('AdminImportVideosOverviewCtrl', function ($scope, vimeoAPI, array) {
