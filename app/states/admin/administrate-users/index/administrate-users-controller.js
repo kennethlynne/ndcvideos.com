@@ -14,25 +14,26 @@ angular.module('ndc')
       return confirm(message) == true;
     };
 
-    var userlist = [];
-
+    $scope.userlist = [];
     $scope.filteredUsers = [];
-
     $scope.paginatedUsers = [];
 
+    $scope.$watch('userlist', $scope.updateResults, true); //Update filtered results when original ref changes
+
     $scope.promise = UserRepository.getAll().then(function (users) {
-      array(userlist).set(users);
-      $scope.search(); //Set initial data
+      array($scope.userlist).set(users);
+      $scope.updateResults();
     });
 
-    $scope.search = function (query) {
+    $scope.updateResults = function () {
+      var query = ($scope.query = $scope.query || '');
       //Copy to avoid changing original array
-      var users = angular.copy(userlist),
+      var users = angular.copy($scope.userlist),
         hits = _.filter(users, function (user) {
           return !query || user.username.indexOf(query) >= 0;
         });
 
-        array($scope.filteredUsers).set(hits);
+      array($scope.filteredUsers).set(hits);
 
       $scope.numberOfVerifiedUsers = _.chain($scope.filteredUsers)
         .filter(function (user) {
@@ -68,8 +69,8 @@ angular.module('ndc')
     };
 
     $scope.deleteUser = function (user) {
-      var index = $scope.users.indexOf(user);
-      var userBackup = $scope.users.splice(index, 1);
+      var index = $scope.userlist.indexOf(user);
+      var userBackup = $scope.userlist.splice(index, 1);
 
       if ($scope.confirm('Are you sure you want to delete the user ' + user.username + '?')) {
         user.$delete()
@@ -80,7 +81,7 @@ angular.module('ndc')
           .catch(function () {
             //If deletaion fails, insert the user again
             //TODO: Expose a reference from the repository and let the repository handle the removal
-            $scope.users.splice(index, 0, userBackup);
+            $scope.userlist.splice(index, 0, userBackup);
           })
       }
     };
@@ -89,15 +90,17 @@ angular.module('ndc')
       $scope.isCreatingNewUser = false;
 
       var User = UserRepository.create(user);
-      $scope.users.push(user);
+      $scope.userlist.push(user);
 
       User.$save()
         .then(function (user) {
           $scope.newUser = {};
+          //Replace placeholder with received instance
+          $scope.userlist.splice($scope.userlist.indexOf(User), 1, user);
         })
         .catch(function () {
           $scope.isCreatingNewUser = true;
-          $scope.users.splice($scope.users.indexOf(User), 1);
+          $scope.userlist.splice($scope.userlist.indexOf(User), 1);
           //TODO: More user friendly feedback
           alert('User already exists');
         });
