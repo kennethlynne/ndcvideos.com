@@ -22,12 +22,18 @@ angular.module('ndc')
 
     $scope.promise = UserRepository.getAll().then(function (users) {
       array(userlist).set(users);
+      $scope.search(); //Set initial data
     });
 
     $scope.search = function (query) {
-      array($scope.filteredUsers).set(userlist.filter(function (user) {
-        return !query || user.username.indexOf(query) > 0;
-      }));
+      //Copy to avoid changing original array
+      var users = angular.copy(userlist),
+        hits = _.filter(users, function (user) {
+          return !query || user.username.indexOf(query) >= 0;
+        });
+
+        array($scope.filteredUsers).set(hits);
+
       $scope.numberOfVerifiedUsers = _.chain($scope.filteredUsers)
         .filter(function (user) {
           return user.verified;
@@ -35,7 +41,6 @@ angular.module('ndc')
         .size()
         .value();
     };
-    $scope.search(); //Set initial data
 
     $scope.createUser = function () {
       $scope.isCreatingNewUser = true;
