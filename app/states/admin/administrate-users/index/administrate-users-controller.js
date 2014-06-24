@@ -18,7 +18,8 @@ angular.module('ndc')
     $scope.filteredUsers = [];
     $scope.paginatedUsers = [];
 
-    $scope.$watch('userlist', $scope.updateResults, true); //Update filtered results when original ref changes
+    //Whenever the original list of users changes, the filtered "view" projected from that should also be updated.
+    $scope.$watch('userlist', $scope.updateResults, true);
 
     $scope.gettingUsersPromise = UserRepository.getAll().then(function (users) {
       array($scope.userlist).set(users);
