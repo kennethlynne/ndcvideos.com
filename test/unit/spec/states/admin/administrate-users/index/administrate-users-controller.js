@@ -115,21 +115,38 @@ describe('Controller(/admin/administrate-users): AdministrateusersCtrl', functio
     expect(scope.userlist.length).toBe(0);
   });
 
-  it('should filter users', function () {
-    deferred.resolve([]);
-    $rootScope.$digest();
+  describe('search', function () {
+    beforeEach(function () {
+      deferred.resolve([]);
+      $rootScope.$digest();
 
-    scope.userlist.push({
-      username: 'a'
+      scope.userlist.push({
+        username: 'a'
+      });
+      scope.userlist.push({
+        username: 'b'
+      });
+
+      scope.updateResults();
+
     });
-    scope.userlist.push({
-      username: 'b'
+
+    describe('when no query is defined', function () {
+      it('should list all users', function () {
+        expect(scope.filteredUsers.length).toBe(2);
+      });
     });
 
-    expect(scope.filteredUsers.length).toBe(0);
+    describe('when query is defined', function () {
+      beforeEach(function () {
+        scope.query = 'a';
+        scope.updateResults();
+      });
 
-    scope.updateResults();
+      it('should list all user if no query is defined users', function () {
+        expect(scope.filteredUsers.length).toBe(1);
+      });
+    });
 
-    expect(scope.filteredUsers.length).toBe(2);
-  });
+  })
 });
