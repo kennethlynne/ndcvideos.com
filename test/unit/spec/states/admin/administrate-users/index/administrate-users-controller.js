@@ -114,4 +114,22 @@ describe('Controller(/admin/administrate-users): AdministrateusersCtrl', functio
     $rootScope.$digest();
     expect(scope.userlist.length).toBe(0);
   });
+
+  it('should filter users', function () {
+    deferred.resolve([]);
+    $rootScope.$digest();
+
+    scope.userlist.push({
+      username: 'a'
+    });
+    scope.userlist.push({
+      username: 'b'
+    });
+
+    expect(scope.filteredUsers.length).toBe(0);
+
+    scope.updateResults();
+
+    expect(scope.filteredUsers.length).toBe(2);
+  });
 });
