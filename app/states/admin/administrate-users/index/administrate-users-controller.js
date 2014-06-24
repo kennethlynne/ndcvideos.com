@@ -20,7 +20,7 @@ angular.module('ndc')
 
     $scope.$watch('userlist', $scope.updateResults, true); //Update filtered results when original ref changes
 
-    $scope.promise = UserRepository.getAll().then(function (users) {
+    $scope.gettingUsersPromise = UserRepository.getAll().then(function (users) {
       array($scope.userlist).set(users);
       $scope.updateResults();
     });
