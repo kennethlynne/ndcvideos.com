@@ -25,7 +25,6 @@ angular.module('ndc')
       // dynamic content.
       var doc = $document;
       var documentHeight = doc.height();
-      console.log(documentHeight);
 
       var documentTimer = null;
       var documentDelay = 2000;
@@ -130,8 +129,6 @@ angular.module('ndc')
 
         // Log here so we can see how often this
         // gets called during page activity.
-        console.log("Checking for visible images...");
-
         var visible = [];
         var hidden = [];
 
@@ -212,7 +209,6 @@ angular.module('ndc')
 
       // I start watching the window for changes in dimension.
       function startWatchingWindow() {
-        console.log('WINDWOS CHANHED BITCH!');
         isWatchingWindow = true;
 
         // Listen for window changes.
