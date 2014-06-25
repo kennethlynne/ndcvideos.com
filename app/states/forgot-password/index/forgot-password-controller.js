@@ -15,6 +15,7 @@ angular.module('ndc')
           $state.go('reset-password');
         })
         .catch(function (err) {
+          alert('For security reasons, you can\'t reset your password more then one at a time. Please check your mail');
           $log.error(err);
         });
     }
