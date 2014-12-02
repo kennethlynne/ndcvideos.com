@@ -350,7 +350,6 @@ angular.module('ndc')
       function setSource(newSource) {
 
         source = newSource;
-
         if (isRendered) {
 
           renderSource();
@@ -370,7 +369,7 @@ angular.module('ndc')
       function renderSource() {
 
         element[ 0 ].src = source;
-        element.addClass('img-visible');
+//          element.addClass('lazy-img-visible');
 
       }
 
