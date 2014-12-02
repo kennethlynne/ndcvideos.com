@@ -9,9 +9,9 @@
                 <media-player-component ng-if="video" video="video"></media-player-component>
 
                 <div class="add-padding">
-                    <h2 once-text="video.title"></h2>
-                    <p once-text="video.description"></p>
-                    <h3 once-show="video.tags.length > 0">Tagged:</h3>
+                    <h2>{{ ::video.title }}</h2>
+                    <p>{{ ::video.description }}</p>
+                    <h3 ng-show="video.tags.length > 0">Tagged:</h3>
                     <tag-list-component tags="video.tags"></tag-list-component>
                 </div>
             </div>
@@ -19,6 +19,6 @@
         </div>
     </div>
 
-    <slideout-backdrop-component class=""></slideout-backdrop-component>
+    <slideout-backdrop-component></slideout-backdrop-component>
 
 </div>

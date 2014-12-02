@@ -1,5 +1,5 @@
 <div class="tag-list-component">
     <ul class="tags" ng-show="tags.length > 0">
-        <li ng-repeat="tag in tags" ui-sref="videos({q:tag.text})" once-text="tag.text"></li>
+        <li ng-repeat="tag in tags" ui-sref="videos({q:tag.text})">{{ ::tag.text }}</li>
     </ul>
 </div>
