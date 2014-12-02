@@ -14,9 +14,9 @@ angular.module('ndc')
     }
   }, angular._localConfig || {}))
   .config(function (componentFactoryProvider) {
-    componentFactoryProvider.setViewPath(function (componentSnakeName, componentName) {
+    componentFactoryProvider.setViewPath(function (componentSnakeName) {
       return 'components/' + componentSnakeName + '/' + componentSnakeName + '.html';
-    })
+    });
   })
   .value('cgBusyTemplateName', 'views/angular-busy/default-spinner.html')
   .factory('BaseUrl', function (Config) {
