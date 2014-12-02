@@ -53,6 +53,29 @@
 
 }
 
+.fade-animation{
+  &.ng-enter,
+  &.ng-leave,
+  &.ng-move {
+
+    $duration: 0.5s;
+    -webkit-transition: $duration linear all;
+    -moz-transition: $duration linear all;
+    -o-transition: $duration linear all;
+    transition: $duration linear all;
+    position:relative;
+  }
+
+  &.ng-enter {
+    //    left:-10px;
+    opacity:0;
+  }
+  &.ng-enter.ng-enter-active {
+    //    left:0;
+    opacity:1;
+  }
+}
+
 
 /*!
 Animate.css - http://daneden.me/animate
