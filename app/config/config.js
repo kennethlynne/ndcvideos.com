@@ -32,4 +32,7 @@ angular.module('ndc')
     delay: 300,
     minDuration: 700
   })
+  .config(function ($compileProvider) {
+    $compileProvider.debugInfoEnabled(false);
+  })
   .value('DefaultPaginatorTemplate', 'views/ng-paginator-plz/custom-paginator.html');
