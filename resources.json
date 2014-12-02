@@ -11,7 +11,6 @@
       "bower_components/angular-loading-bar/build/loading-bar.min.js",
       "bower_components/angular-promise-tracker/promise-tracker.min.js",
       "bower_components/angular-ui-router/release/angular-ui-router.min.js",
-      "bower_components/angular-ui-bootstrap-bower/ui-bootstrap.min.js",
       "bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.min.js",
       "bower_components/ngstorage/ngStorage.min.js",
       "bower_components/ng-symbiosis-utils/ng-symbiosis-utils.min.js",

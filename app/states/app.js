@@ -21,7 +21,8 @@ angular.module('ndc')
     if (authentication.isAuthenticated()) {
       UserRepository.getByToken(authentication.getToken())
         .then(CurrentUser.set)
-        .then(successHandler);
+        .then(successHandler)
+        .catch(successHandler);
     }
     else
     {

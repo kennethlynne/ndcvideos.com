@@ -1,44 +1,35 @@
 <div class="login-state container animated fadeInDown">
 
+    <github-fork-me-component></github-fork-me-component>
+
     <div class="container text-center">
         <form class="form-signin" data-ember-action="2">
 
             <h1 class="login-title">NDC Video gallery</h1>
 
-            <!-- <small class="text-muted">Connect to NDC with your favorite social network</small>
-            <br><br>
-
-            <p>
-                <a class="btn btn-primary social-login-btn social-facebook" href="#"><i class="fa fa-facebook"></i></a>
-                <a class="btn btn-primary social-login-btn social-twitter" href="#"><i class="fa fa-twitter"></i></a>
-            </p>
-
-            <p>
-                <a class="btn btn-primary social-login-btn social-linkedin" href="#"><i class="fa fa-linkedin"></i></a>
-                <a class="btn btn-primary social-login-btn social-google"><i class="fa fa-google-plus"></i></a>
-            </p> -->
-
-            <!-- <br><br>
-
-            <small class="text-muted">Or sign in with your NDC account</small>
-            <br><br> -->
-
             <div class="login-input-wrapper">
-                <span class="icon-user"></span><input class="form-control login-input" placeholder="Username" type="text" ng-model="username">
-                <span class="icon-lock"></span><input class="form-control login-input" placeholder="Password" type="password" ng-model="password">
+                <span class="icon-user"></span><input class="form-control login-input" placeholder="Username"
+                                                      type="text" ng-model="username">
+                <span class="icon-lock"></span><input class="form-control login-input" placeholder="Password"
+                                                      type="password" ng-model="password">
             </div>
 
-            <button class="btn btn-lg btn-primary btn-block btn-center" type="submit" ng-click="login(username, password)">Sign in
+            <button class="btn btn-lg btn-primary btn-block btn-center" type="submit"
+                    ng-click="login(username, password)">Sign in
             </button>
-            
-            <!-- <br>
-            <small class="create-account text-muted">Don't have a NDC account or social network account?
-                <button class="btn btn-sm btn-default" type="button">Sign Up</button>
-            </small> -->
 
         </form>
-        <a href="/#/forgot-password" class="forgot-password">I forgot my password, what do I do?</a>
+        <a ui-sref="forgot-password" class="forgot-password">I forgot my password, what do I do?</a>
+
         <p class="powered">Developed by <a href="http://www.sockless.no">Sockless</a></p>
+
+        <br>
+        <small class="create-account text-muted">
+            Contribute to the application?
+            <a href="https://github.com/kennethlynne/ndcvideos.com">https://github.com/kennethlynne/ndcvideos.com</a>
+            send a PR!
+        </small>
+
     </div>
 
 </div>
