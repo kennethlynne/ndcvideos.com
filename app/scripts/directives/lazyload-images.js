@@ -370,6 +370,7 @@ angular.module('ndc')
       function renderSource() {
 
         element[ 0 ].src = source;
+        element.addClass('img-visible');
 
       }
 
