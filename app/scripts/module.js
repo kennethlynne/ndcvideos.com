@@ -11,8 +11,7 @@ var app = angular.module('ndc', [
   'ngSymbiosis.model',
   'ndc.components',
   'ngAnimate',
-  'ajoslin.promise-tracker',
-  'chieffancypants.loadingBar',
+  'angular-loading-bar',
   'ui.router',
   'ui.bootstrap',
   'ngTouch',
@@ -20,7 +19,6 @@ var app = angular.module('ndc', [
   'ui.select2',
   'cgBusy',
   'ngRoles',
-  'once',
   'ngPaginatorPlz'
 ]);
 angular.componentFactory.moduleDecorator(app);
