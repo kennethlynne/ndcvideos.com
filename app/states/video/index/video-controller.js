@@ -10,14 +10,30 @@ angular.module('ndc')
     }));
   })
   .controller('VideoCtrl', function ($scope, TagRepository, VideoRepository, $stateParams, $location, _) {
-    $scope.search = _.throttle(function (query) {
 
-      //update query parameters and set videos by query
-      $location.search('q', query ? query : null);
+    //Used for search
+    var limit = 0;
 
-      getVideos(query);
+    $scope.search = function (query) {
+      limit = limit + 1;
 
-    }, 500, {'leading': false, 'trailing': true});
+      queueSearch(limit, query);
+
+      function queueSearch(_limit, query) {
+        setTimeout(function () {
+          if (_limit === limit) {
+            $location.search('q', query ? query : null);
+
+            getVideos(query);
+            limit = 0;
+          }
+        }, 500);
+      }
+
+    };
+
+
+
 
     var getVideos = function (query) {
       $scope.promise = VideoRepository.where(query)
