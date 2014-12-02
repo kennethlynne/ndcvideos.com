@@ -12,4 +12,18 @@
 			box-shadow: none;
 		}
 	}
+
+	.search-user {
+		position: relative;
+
+		.searchicon {
+			position: absolute;
+			top: 15px;
+			left: 15px;
+		}
+
+		.form-control {
+			padding-left: 35px;
+		}
+	}
 }
