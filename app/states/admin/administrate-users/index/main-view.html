@@ -21,11 +21,21 @@
                 </div>
             </div>
 
-            <h2>All users</h2>
-            <p>Manage all invited users.</p>
-            <paginator data="users" page-size="10" export-paged-data-to="paginatedUsers"></paginator>
+            <div>
+                <div class="pull-right">
+                    <form class="searchform search-user">
+                        <span class="searchicon icon-magnifier"></span>
+                        <input ng-class="{'has-query':query}" type="text" ng-change="updateResults()" class="form-control input-lg" ng-model="query" placeholder="Search for user..">
+                    </form>
+                </div>
 
-            <table class="table table-hover" cg-busy="promise">
+                <h2>All users</h2>
+                <p>Manage all invited users.</p>
+            </div>
+
+            <paginator data="filteredUsers" page-size="20" export-paged-data-to="paginatedUsers"></paginator>
+
+            <table class="table table-hover" cg-busy="gettingUsersPromise">
                 <thead class="hidden-on-small">
                 <tr>
                     <th>Email</th>
@@ -35,8 +45,8 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="user in paginatedUsers">
-                    <td once-text="user.username"></td>
-                    <td once-if="">{{user.verified?'Yes':'No'}}</td>
+                    <td>{{ ::user.username }}</td>
+                    <td>{{ user.verified?'Yes':'No'}}</td>
                     <td>
                         <button class="btn btn-custom" ng-click="resetPassword(user)">Reset password</button>
                         <button class="btn btn-custom" ng-click="deleteUser(user)">Delete</button>

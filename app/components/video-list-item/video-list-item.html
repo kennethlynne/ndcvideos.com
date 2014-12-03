@@ -1,19 +1,14 @@
 <div class="video-list-item-component">
     <div class="wrapper" ui-sref="videoDetails({id: video.id})">
-        <!--<div class="thumbnail-wrapper" style="background-image: url({{video.thumbnail_large || 'assets/images/video-placeholder.png'}})">-->
-            <!--<span class="length" once-text="video.$durationInHHMMSS"></span>-->
-        <!--</div>-->
-
-
         <div class="thumbnail-wrapper">
-            <img class="lazy" ng-show="video.thumbnail_large.length" lazy-load-src="{{video.thumbnail_large}}" style="width: 100%;" />
+            <img class="lazy" ng-show="video.thumbnail_large.length" lazy-load-src="{{video.thumbnail_large || 'assets/images/video-placeholder.png'}}" style="width: 100%;" />
             <!-- TODO: Placeholder: 'assets/images/video-placeholder.png'-->
-            <span class="length" once-text="video.$durationInHHMMSS"></span>
+            <span class="length">{{::video.$durationInHHMMSS}}</span>
         </div>
 
         <div class="meta">
             <div class="video-info">
-                <h3 once-text="video.title"></h3>
+                <h3>{{ ::video.title }}</h3>
 
                 <p>{{video.description|limitTo:85}}...</p>
             </div>

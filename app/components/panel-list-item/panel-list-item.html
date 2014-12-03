@@ -1,4 +1,4 @@
 <li class="panel-list-item-component animated fadeIn" ui-sref-active="active" ui-sref="{{item.uiSref}}">
-    <span once-class="item.cssClass"></span>
-    <p class="title" once-text="item.title"></p>
+    <span ng-class="item.cssClass"></span>
+    <p class="title">{{ ::item.title }}</p>
 </li>
