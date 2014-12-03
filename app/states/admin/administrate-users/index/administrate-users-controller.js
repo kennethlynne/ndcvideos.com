@@ -14,18 +14,35 @@ angular.module('ndc')
       return confirm(message) == true;
     };
 
-    $scope.users = [];
+    $scope.userlist = [];
+    $scope.filteredUsers = [];
     $scope.paginatedUsers = [];
 
-    $scope.promise = UserRepository.getAll().then(function (users) {
-      array($scope.users).set(users);
-      $scope.numberOfVerifiedUsers = _.chain(users)
+    //Whenever the original list of users changes, the filtered "view" projected from that should also be updated.
+    $scope.$watch('userlist', $scope.updateResults, true);
+
+    $scope.gettingUsersPromise = UserRepository.getAll().then(function (users) {
+      array($scope.userlist).set(users);
+      $scope.updateResults();
+    });
+
+    $scope.updateResults = function () {
+      var query = ($scope.query = $scope.query || '');
+      //Copy to avoid changing original array
+      var users = angular.copy($scope.userlist),
+        hits = _.filter(users, function (user) {
+          return !query || user.username.indexOf(query) >= 0;
+        });
+
+      array($scope.filteredUsers).set(hits);
+
+      $scope.numberOfVerifiedUsers = _.chain($scope.filteredUsers)
         .filter(function (user) {
           return user.verified;
         })
         .size()
         .value();
-    });
+    };
 
     $scope.createUser = function () {
       $scope.isCreatingNewUser = true;
@@ -40,11 +57,11 @@ angular.module('ndc')
       if ($scope.confirm('Are you sure you want to reset password for user ' + user.username + '?')) {
 
         user.$resetPassword(user.username)
-          .then(function(){
+          .then(function () {
             //TODO: Give some notification of great success
             $scope.status = 'Password reset verification mail sent.';
           })
-          .catch(function(err){
+          .catch(function (err) {
             $log.log(err);
             alert('Could not reset password for user ' + user.username + '.');
           });
@@ -53,8 +70,8 @@ angular.module('ndc')
     };
 
     $scope.deleteUser = function (user) {
-      var index = $scope.users.indexOf(user);
-      var userBackup = $scope.users.splice(index, 1);
+      var index = $scope.userlist.indexOf(user);
+      var userBackup = $scope.userlist.splice(index, 1);
 
       if ($scope.confirm('Are you sure you want to delete the user ' + user.username + '?')) {
         user.$delete()
@@ -65,7 +82,7 @@ angular.module('ndc')
           .catch(function () {
             //If deletaion fails, insert the user again
             //TODO: Expose a reference from the repository and let the repository handle the removal
-            $scope.users.splice(index, 0, userBackup);
+            $scope.userlist.splice(index, 0, userBackup);
           })
       }
     };
@@ -74,15 +91,17 @@ angular.module('ndc')
       $scope.isCreatingNewUser = false;
 
       var User = UserRepository.create(user);
-      $scope.users.push(user);
+      $scope.userlist.push(user);
 
       User.$save()
         .then(function (user) {
           $scope.newUser = {};
+          //Replace placeholder with received instance
+          $scope.userlist.splice($scope.userlist.indexOf(User), 1, user);
         })
         .catch(function () {
           $scope.isCreatingNewUser = true;
-          $scope.users.splice($scope.users.indexOf(User), 1);
+          $scope.userlist.splice($scope.userlist.indexOf(User), 1);
           //TODO: More user friendly feedback
           alert('User already exists');
         });
