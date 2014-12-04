@@ -295,6 +295,7 @@ module.exports = function (grunt) {
     },
     uglify: {
       options: {
+        mangle: false,
         banner: [
           '/**',
           ' * <%= pkg.description %>',
