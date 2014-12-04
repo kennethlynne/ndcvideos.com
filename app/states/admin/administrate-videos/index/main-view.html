@@ -14,7 +14,7 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="video in paginatedVideos | orderBy:'id':true">
-                    <td><a ui-sref="adminVideoDetails({id: video.id})">{{video.title}}</a></td>
+                    <td><a ui-sref="administrateVideosEdit({id: video.id})">{{video.title}}</a></td>
                     <td>{{ ::video.$durationInHHMMSS }}</td>
                     <td>
                         <button class="btn btn-custom" ui-sref="administrateVideosEdit({id:video.id})">Edit</button>
