@@ -15,8 +15,8 @@ angular.module('ndc')
     var limit = 0;
 
     $scope.search = function (query) {
-      limit = limit + 1;
 
+    limit = limit + 1;
       queueSearch(limit, query);
 
       function queueSearch(_limit, query) {
@@ -31,9 +31,6 @@ angular.module('ndc')
       }
 
     };
-
-
-
 
     var getVideos = function (query) {
       $scope.promise = VideoRepository.where(query)
