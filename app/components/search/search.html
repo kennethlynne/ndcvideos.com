@@ -1,6 +1,6 @@
 <div class="search-component">
     <form class="searchform" ng-submit="onsubmitfn({query:queryModel})">
         <span class="searchicon icon-magnifier"></span>
-        <input ng-class="{'has-query':queryModel}" type="text" class="form-control input-lg searchfield" ng-model="queryModel" ng-change="onchangefn({query:queryModel})" placeholder="Search for videos..">
+        <input ng-class="{'has-query':queryModel}" type="text" class="form-control input-lg searchfield" ng-model="queryModel" ng-model-options="{debounce: {'default': 500}}" ng-change="onchangefn({query:queryModel})" placeholder="Search for videos..">
     </form>
 </div>
