@@ -54,7 +54,7 @@ angular.module('ndc')
 
     var _logout = function () {
         CurrentUser.unset();
-        delete storage.set('token', void 0);
+        delete storage.set('token', undefined);
       },
       _getToken = function () {
         return storage.get('token') || undefined;
