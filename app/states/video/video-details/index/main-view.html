@@ -1,14 +1,28 @@
 <div class="video-details-state container">
 
-    <div class="col-md-12">
-        <button class="visible-xs visible-sm btn btn-default close-button" ng-click="close()">&times;</button>
-        <media-player-component ng-if="video" video="video"></media-player-component>
 
-        <div class="add-padding">
-            <h2 once-text="video.title"></h2>
-            <p once-text="video.description"></p>
-            <h3 once-show="video.tags.length > 0">Tagged:</h3>
-            <tag-list-component tags="video.tags"></tag-list-component>
+    <github-fork-me-component class="hidden-xs"></github-fork-me-component>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="pull-right">
+                <search-component onsubmitfn="search(query)" query-model="query"></search-component>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <button class="visible-xs visible-sm btn btn-default close-button" ng-click="close()">&times;</button>
+            <media-player-component ng-if="video" video="video"></media-player-component>
+
+            <div class="add-padding">
+                <h2>{{::video.title}}</h2>
+                <p>{{::video.description}}</p>
+                <h3 ng-show="video.tags.length > 0">Tagged:</h3>
+                <tag-list-component tags="video.tags"></tag-list-component>
+            </div>
         </div>
     </div>
 

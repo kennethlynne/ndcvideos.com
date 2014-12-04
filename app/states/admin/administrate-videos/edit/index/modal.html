@@ -10,6 +10,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-12">
+                        <media-player-component ng-if="video" video="video"></media-player-component>
 
                         <label>Video title</label>
                         <input type="text" class="form-control" ng-model="video.title" required>
