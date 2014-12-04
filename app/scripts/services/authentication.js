@@ -9,9 +9,10 @@ angular.module('ndc')
           var matchesAPIUrl = cfg.url.substr(0, BaseUrl.length) === BaseUrl;
 
           if (token && matchesAPIUrl) {
-            cfg.headers['Authorization'] = 'Bearer ' + token;
+            cfg.headers['x-access-token'] = token;
           }
-          return cfg || $q.when(cfg);
+
+          return $q.when(cfg);
         }
       };
     }]);
@@ -49,7 +50,7 @@ angular.module('ndc')
       }
     });
   })
-  .factory('authentication', function ($http, BaseUrl, $localStorage, $log, $q, UserRepository, CurrentUser) {
+  .factory('authentication', function ($http, APIBaseUrl, $localStorage, $log, $q, UserRepository, CurrentUser) {
 
     var _logout = function () {
         CurrentUser.unset();
@@ -59,14 +60,16 @@ angular.module('ndc')
         return $localStorage.token;
       },
       _login = function (grantType, username, password) {
-
+        //TODO: Remove grantType. It is pure lol
         var deferred = $q.defer();
 
         var cfg = {
           method: 'POST',
-          url: BaseUrl + 'token',
-          data: 'grant_type=' + grantType + '&username=' + username + '&password=' + password,
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          url: APIBaseUrl + 'authentication/login',
+          data: {
+            username: username,
+            password: password
+          }
         };
 
         $http(cfg).then(function (response) {
