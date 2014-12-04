@@ -9,7 +9,7 @@ angular.module('ndc')
       parent: 'app'
     }));
   })
-  .controller('VideoCtrl', function ($scope, TagRepository, VideoRepository, $stateParams, $location, _) {
+  .controller('VideoCtrl', function ($scope, TagRepository, VideoRepository, $stateParams, $location, _, $log) {
 
     $scope.search = function (query) {
         $location.search('q', query ? query : null);
@@ -23,6 +23,7 @@ angular.module('ndc')
           $scope.videos = videos;
         })
         .catch(function (err) {
+          $log.error(err);
         });
     };
 
