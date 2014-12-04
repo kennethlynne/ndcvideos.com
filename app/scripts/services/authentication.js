@@ -54,10 +54,10 @@ angular.module('ndc')
 
     var _logout = function () {
         CurrentUser.unset();
-        delete storage.set('token', {});
+        delete storage.set('token', void 0);
       },
       _getToken = function () {
-        return storage.get('token');
+        return storage.get('token') || undefined;
       },
       _login = function (grantType, username, password) {
         //TODO: Remove grantType. It is pure lol

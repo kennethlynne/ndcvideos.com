@@ -1,44 +1,46 @@
 angular.module('ndc')
-.service('storage', function ($window, $cookies) {
+  .service('storage', function ($window, $cookies) {
 
     var storage = {};
 
+    var localStorageSupported = true;
+    var cookiesSupported = $window.navigator.cookieEnabled;
+
+    try {
+      var data = 123;
+      $window.localStorage.setItem('test', data);
+      var result = $window.localStorage.getItem('test');
+      if (data !== result) {
+        throw new Error('No access to localStorage, falling back to cookies');
+      }
+    }
+    catch (e) {
+      localStorageSupported = false;
+    }
+
     var _set = function (key, data) {
-
-          try{
-            var serialized = JSON.stringify(data);
-            $window.localStorage.setItem(key, serialized);
-          }
-          catch(e)
-          {
-            if(navigator.cookieEnabled)
-              $cookies[key] = data;
-            else
-              storage[key] = data;
-          }
-
-        },
-        _get = function (key) {
-
-          var data;
-
-          try{
-            data = $window.localStorage.getItem(key);
-            if(data)
-              data = JSON.parse(data);
-            else
-              data = null;
-          }
-          catch(e)
-          {
-            if(navigator.cookieEnabled)
-              data = $cookies[key];
-            else
-              data = storage[key];
-          }
-
-          return data;
-        };
+        if (localStorageSupported) {
+          var serialized = JSON.stringify(data);
+          $window.localStorage.setItem(key, serialized);
+        }
+        else if (cookiesSupported) {
+          $cookies[key] = data;
+        }
+        else {
+          storage[key] = data;
+        }
+      },
+      _get = function (key) {
+        if (localStorageSupported) {
+          return JSON.parse(data);
+        }
+        else if (cookiesSupported) {
+          return $cookies[key];
+        }
+        else {
+          return storage[key];
+        }
+      };
 
     return {
       set: _set,

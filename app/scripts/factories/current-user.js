@@ -3,7 +3,7 @@
 angular.module('ndc')
   .factory('CurrentUser', function ($log, UserModel, _, storage, profiles) {
 
-    var userStorage = storage.get['CurrentUser'] || {};
+    var userStorage = storage.get('CurrentUser') || {};
     storage.set('CurrentUser', userStorage);
 
     var _set = function (user) {

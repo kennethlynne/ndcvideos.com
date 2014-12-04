@@ -5,8 +5,16 @@ describe('Service: authentication', function () {
   var authentication, $httpBackend, $rootScope, APIBaseUrl, $http, loginSuccessfullResponse, loginFailedResponse, logIn, storage, CurrentUser, UserRepository, promise, deferred;
 
   beforeEach(function () {
+    var localStorage = {};
 
-    storage = {};
+    storage = {
+      set: jasmine.createSpy('storage.set').and.callFake(function (key, value) {
+        localStorage[key] = value;
+      }),
+      get: jasmine.createSpy('storage.get').and.callFake(function (key) {
+        return localStorage[key];
+      })
+    };
 
     function getPromise() {
       return promise;
@@ -103,7 +111,7 @@ describe('Service: authentication', function () {
     expect(authentication.isAuthenticated()).toBeTruthy();
   });
 
-  it('should reset information on logout', function () {
+    it('should reset information on logout', function () {
     logIn();
     authentication.logout();
 
