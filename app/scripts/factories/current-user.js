@@ -19,10 +19,10 @@ angular.module('ndc')
       },
       _getProfile = function () {
         var profileName = (userStorage.profile || 'guest'),
-          profile = profiles[ profileName ];
+          profile = profiles[profileName];
 
         if (!profile) {
-          profile = profiles[ 'guest' ];
+          profile = profiles['guest'];
           $log.error('Profile ' + profileName + ' not found.');
         }
 
@@ -37,11 +37,10 @@ angular.module('ndc')
 
         if (angular.isArray(roles)) {
           return _.every(roles, function (role) {
-              return profile.hasRoles(role);
+            return profile.hasRoles(role);
           });
         }
-        else
-        {
+        else {
           return profile.hasRoles(roles);
         }
 
