@@ -2,11 +2,11 @@
 
 angular.module('ndc')
   .config(function ($httpProvider) {
-    $httpProvider.interceptors.push(['$q', '$injector', 'BaseUrl', function ($q, $injector, APIBaseUrl) {
+    $httpProvider.interceptors.push(['$q', '$injector', 'APIBaseUrl', function ($q, $injector, APIBaseUrl) {
       return {
         request: function (cfg) {
           var token = $injector.get('authentication').getToken();
-          var matchesAPIUrl = cfg.url.substr(0, BaseUrl.length) === APIBaseUrl;
+          var matchesAPIUrl = cfg.url.substr(0, APIBaseUrl.length) === APIBaseUrl;
 
           if (token && matchesAPIUrl) {
             cfg.headers['x-access-token'] = token;
@@ -50,7 +50,7 @@ angular.module('ndc')
       }
     });
   })
-  .factory('authentication', function ($http, BaseUrl, storage, $log, $q, UserRepository, CurrentUser) {
+  .factory('authentication', function ($http, APIBaseUrl, storage, $log, $q, UserRepository, CurrentUser) {
 
     var _logout = function () {
         CurrentUser.unset();
