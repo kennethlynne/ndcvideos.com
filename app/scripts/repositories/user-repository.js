@@ -23,9 +23,6 @@ angular.module('ndc')
         .get(Model.$settings.url + '?verificationToken=' + encodeURIComponent(verificationToken), {tracker: repository.$settings.name + '.getByVerificationToken'})
         .then(function (response) {
           return new Model(response.data);
-        })
-        .catch(function (err) {
-          $log.error(err);
         });
     };
 
