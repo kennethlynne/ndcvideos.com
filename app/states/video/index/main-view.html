@@ -8,10 +8,7 @@
                 Videos <small ng-show="videos.length > 0">({{videos.length}})</small>
             </h1>
             <div class="pull-right">
-                <form class="searchform" ng-submit="search(query)">
-                    <span class="searchicon icon-magnifier"></span>
-                    <input ng-class="{'has-query':query}" type="text" class="form-control input-lg searchfield" ng-model="query" ng-change="search(query)" placeholder="Search for videos..">
-                </form>
+                <search-component query-model="query" onchangefn="search(query)" onsubmitfn="search(query)"></search-component>
             </div>
 
             <div class="clearfix"></div>
