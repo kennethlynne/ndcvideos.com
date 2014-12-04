@@ -25,7 +25,7 @@
                 <div class="pull-right">
                     <form class="searchform search-user">
                         <span class="searchicon icon-magnifier"></span>
-                        <input ng-class="{'has-query':query}" type="text" ng-change="updateResults()" class="form-control input-lg" ng-model="query" placeholder="Search for user..">
+                        <input ng-class="{'has-query':query}" type="text" ng-model-options="{debounce: {'default': 800}}" ng-change="updateResults()" class="form-control input-lg" ng-model="query" placeholder="Search for user..">
                     </form>
                 </div>
 
