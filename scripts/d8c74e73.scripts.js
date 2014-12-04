@@ -6,7 +6,7 @@ if(k&&j[k]&&(e||j[k].data)||void 0!==d||"string"!=typeof b)return k||(k=i?a[h]=c
 //# sourceMappingURL=jquery.min.map
 // Source: app/bower_components/angular/angular.js
 /**
- * @license AngularJS v1.3.3
+ * @license AngularJS v1.3.5
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -61,7 +61,7 @@ function minErr(module, ErrorConstructor) {
       return match;
     });
 
-    message = message + '\nhttp://errors.angularjs.org/1.3.3/' +
+    message = message + '\nhttp://errors.angularjs.org/1.3.5/' +
       (module ? module + '/' : '') + code;
     for (i = 2; i < arguments.length; i++) {
       message = message + (i == 2 ? '?' : '&') + 'p' + (i - 2) + '=' +
@@ -233,8 +233,8 @@ if ('i' !== 'I'.toLowerCase()) {
 }
 
 
-var /** holds major version number for IE or NaN for real browsers */
-    msie,
+var
+    msie,             // holds major version number for IE, or NaN if UA is not IE.
     jqLite,           // delay binding since jQuery could be loaded after us.
     jQuery,           // delay binding
     slice             = [].slice,
@@ -433,7 +433,7 @@ function int(str) {
 
 
 function inherit(parent, extra) {
-  return extend(new (extend(function() {}, {prototype:parent}))(), extra);
+  return extend(Object.create(parent), extra);
 }
 
 /**
@@ -696,7 +696,7 @@ function makeMap(str) {
 
 
 function nodeName_(element) {
-  return lowercase(element.nodeName || element[0].nodeName);
+  return lowercase(element.nodeName || (element[0] && element[0].nodeName));
 }
 
 function includes(array, obj) {
@@ -1402,8 +1402,8 @@ function angularInit(element, bootstrap) {
  * @param {Object=} config an object for defining configuration options for the application. The
  *     following keys are supported:
  *
- *     - `strictDi`: disable automatic function annotation for the application. This is meant to
- *       assist in finding bugs which break minified code.
+ * * `strictDi` - disable automatic function annotation for the application. This is meant to
+ *   assist in finding bugs which break minified code. Defaults to `false`.
  *
  * @returns {auto.$injector} Returns the newly created injector for this app.
  */
@@ -2107,11 +2107,11 @@ function toDebugString(obj) {
  * - `codeName` – `{string}` – Code name of the release, such as "jiggling-armfat".
  */
 var version = {
-  full: '1.3.3',    // all of these placeholder strings will be replaced by grunt's
+  full: '1.3.5',    // all of these placeholder strings will be replaced by grunt's
   major: 1,    // package task
   minor: 3,
-  dot: 3,
-  codeName: 'undersea-arithmetic'
+  dot: 5,
+  codeName: 'cybernetic-mercantilism'
 };
 
 
@@ -2334,10 +2334,12 @@ function publishExternalAPI(angular) {
  *   `'ngModel'`).
  * - `injector()` - retrieves the injector of the current element or its parent.
  * - `scope()` - retrieves the {@link ng.$rootScope.Scope scope} of the current
- *   element or its parent.
+ *   element or its parent. Requires {@link guide/production#disabling-debug-data Debug Data} to
+ *   be enabled.
  * - `isolateScope()` - retrieves an isolate {@link ng.$rootScope.Scope scope} if one is attached directly to the
  *   current element. This getter should be used only on elements that contain a directive which starts a new isolate
  *   scope. Calling `scope()` on this element always returns the original non-isolate scope.
+ *   Requires {@link guide/production#disabling-debug-data Debug Data} to be enabled.
  * - `inheritedData()` - same as `data()`, but walks up the DOM until a value is found or the top
  *   parent element is reached.
  *
@@ -3332,9 +3334,10 @@ HashMap.prototype = {
  * Creates an injector object that can be used for retrieving services as well as for
  * dependency injection (see {@link guide/di dependency injection}).
  *
-
  * @param {Array.<string|Function>} modules A list of module functions or their aliases. See
- *        {@link angular.module}. The `ng` module must be explicitly added.
+ *     {@link angular.module}. The `ng` module must be explicitly added.
+ * @param {boolean=} [strictDi=false] Whether the injector should be in strict mode, which
+ *     disallows argument name annotation inference.
  * @returns {injector} Injector object. See {@link auto.$injector $injector}.
  *
  * @example
@@ -3480,8 +3483,10 @@ function annotate(fn, strictDi, name) {
  * ## Inference
  *
  * In JavaScript calling `toString()` on a function returns the function definition. The definition
- * can then be parsed and the function arguments can be extracted. *NOTE:* This does not work with
- * minification, and obfuscation tools since these tools change the argument names.
+ * can then be parsed and the function arguments can be extracted. This method of discovering
+ * annotations is disallowed when the injector is in strict mode.
+ * *NOTE:* This does not work with minification, and obfuscation tools since these tools change the
+ * argument names.
  *
  * ## `$inject` Annotation
  * By adding an `$inject` property onto a function the injection parameters can be specified.
@@ -3566,6 +3571,8 @@ function annotate(fn, strictDi, name) {
  *   expect(injector.annotate(MyController)).toEqual(['$scope', '$route']);
  * ```
  *
+ * You can disallow this method by using strict injection mode.
+ *
  * This method does not work with code minification / obfuscation. For this reason the following
  * annotation strategies are supported.
  *
@@ -3617,6 +3624,8 @@ function annotate(fn, strictDi, name) {
  *
  * @param {Function|Array.<string|Function>} fn Function for which dependent service names need to
  * be retrieved as described above.
+ *
+ * @param {boolean=} [strictDi=false] Disallow argument name annotation inference.
  *
  * @returns {Array.<string>} The names of the services which the function requires.
  */
@@ -4137,14 +4146,11 @@ function createInjector(modulesToLoad, strictDi) {
     }
 
     function instantiate(Type, locals, serviceName) {
-      var Constructor = function() {},
-          instance, returnedValue;
-
       // Check if Type is annotated and use just the given function at n-1 as parameter
       // e.g. someModule.factory('greeter', ['$window', function(renamed$window) {}]);
-      Constructor.prototype = (isArray(Type) ? Type[Type.length - 1] : Type).prototype;
-      instance = new Constructor();
-      returnedValue = invoke(Type, instance, locals, serviceName);
+      // Object creation: http://jsperf.com/create-constructor/2
+      var instance = Object.create((isArray(Type) ? Type[Type.length - 1] : Type).prototype);
+      var returnedValue = invoke(Type, instance, locals, serviceName);
 
       return isObject(returnedValue) || isFunction(returnedValue) ? returnedValue : instance;
     }
@@ -4980,7 +4986,7 @@ function Browser(window, document, $log, $sniffer) {
       // IE<10 from getting into redirect loop when in LocationHashbangInHtml5Url mode.
       // See https://github.com/angular/angular.js/commit/ffb2701
       if (lastBrowserUrl === url && (!$sniffer.history || sameState)) {
-        return;
+        return self;
       }
       var sameBase = lastBrowserUrl && stripHash(lastBrowserUrl) === stripHash(url);
       lastBrowserUrl = url;
@@ -6468,7 +6474,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
    * Retrieves or overrides the default regular expression that is used for whitelisting of safe
    * urls during a[href] sanitization.
    *
-   * The sanitization is a security measure aimed at prevent XSS attacks via html links.
+   * The sanitization is a security measure aimed at preventing XSS attacks via html links.
    *
    * Any url about to be assigned to a[href] via data-binding is first normalized and turned into
    * an absolute url. Afterwards, the url is matched against the `aHrefSanitizationWhitelist`
@@ -6535,7 +6541,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
    * * `ng-binding` CSS class
    * * `$binding` data property containing an array of the binding expressions
    *
-   * You may want to use this in production for a significant performance boost. See
+   * You may want to disable this in production for a significant performance boost. See
    * {@link guide/production#disabling-debug-data Disabling Debug Data} for more.
    *
    * The default value is true.
@@ -7892,10 +7898,10 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
         var childBoundTranscludeFn = boundTranscludeFn;
         if (scope.$$destroyed) return;
         if (linkQueue) {
-          linkQueue.push(scope);
-          linkQueue.push(node);
-          linkQueue.push(rootElement);
-          linkQueue.push(childBoundTranscludeFn);
+          linkQueue.push(scope,
+                         node,
+                         rootElement,
+                         childBoundTranscludeFn);
         } else {
           if (afterTemplateNodeLinkFn.transcludeOnThisElement) {
             childBoundTranscludeFn = createBoundTranscludeFn(scope, afterTemplateNodeLinkFn.transclude, boundTranscludeFn);
@@ -8364,10 +8370,10 @@ function $ControllerProvider() {
         //
         // This feature is not intended for use by applications, and is thus not documented
         // publicly.
-        var Constructor = function() {};
-        Constructor.prototype = (isArray(expression) ?
+        // Object creation: http://jsperf.com/create-constructor/2
+        var controllerPrototype = (isArray(expression) ?
           expression[expression.length - 1] : expression).prototype;
-        instance = new Constructor();
+        instance = Object.create(controllerPrototype);
 
         if (identifier) {
           addIdentifier(locals, identifier, instance, constructor || expression.name);
@@ -8508,7 +8514,7 @@ function defaultHttpResponseTransform(data, headers) {
  * @returns {Object} Parsed headers as key value object
  */
 function parseHeaders(headers) {
-  var parsed = {}, key, val, i;
+  var parsed = createMap(), key, val, i;
 
   if (!headers) return parsed;
 
@@ -8545,7 +8551,11 @@ function headersGetter(headers) {
     if (!headersObj) headersObj =  parseHeaders(headers);
 
     if (name) {
-      return headersObj[lowercase(name)] || null;
+      var value = headersObj[lowercase(name)];
+      if (value === void 0) {
+        value = null;
+      }
+      return value;
     }
 
     return headersObj;
@@ -8594,6 +8604,11 @@ function $HttpProvider() {
    *
    * Object containing default values for all {@link ng.$http $http} requests.
    *
+   * - **`defaults.cache`** - {Object} - an object built with {@link ng.$cacheFactory `$cacheFactory`}
+   * that will provide the cache for all requests who set their `cache` property to `true`.
+   * If you set the `default.cache = false` then only requests that specify their own custom
+   * cache object will be cached. See {@link $http#caching $http Caching} for more information.
+   *
    * - **`defaults.xsrfCookieName`** - {string} - Name of cookie containing the XSRF token.
    * Defaults value is `'XSRF-TOKEN'`.
    *
@@ -8607,6 +8622,7 @@ function $HttpProvider() {
    *     - **`defaults.headers.post`**
    *     - **`defaults.headers.put`**
    *     - **`defaults.headers.patch`**
+   *
    **/
   var defaults = this.defaults = {
     // transform incoming response data
@@ -8821,6 +8837,21 @@ function $HttpProvider() {
      * In addition, you can supply a `headers` property in the config object passed when
      * calling `$http(config)`, which overrides the defaults without changing them globally.
      *
+     * To explicitly remove a header automatically added via $httpProvider.defaults.headers on a per request basis,
+     * Use the `headers` property, setting the desired header to `undefined`. For example:
+     *
+     * ```js
+     * var req = {
+     *  method: 'POST',
+     *  url: 'http://example.com',
+     *  headers: {
+     *    'Content-Type': undefined
+     *  },
+     *  data: { test: 'test' },
+     * }
+     *
+     * $http(req).success(function(){...}).error(function(){...});
+     * ```
      *
      * ## Transforming Requests and Responses
      *
@@ -9067,12 +9098,14 @@ function $HttpProvider() {
      *      `{function(data, headersGetter)|Array.<function(data, headersGetter)>}` –
      *      transform function or an array of such functions. The transform function takes the http
      *      request body and headers and returns its transformed (typically serialized) version.
-     *      See {@link #overriding-the-default-transformations-per-request Overriding the Default Transformations}
+     *      See {@link ng.$http#overriding-the-default-transformations-per-request
+     *      Overriding the Default Transformations}
      *    - **transformResponse** –
      *      `{function(data, headersGetter)|Array.<function(data, headersGetter)>}` –
      *      transform function or an array of such functions. The transform function takes the http
      *      response body and headers and returns its transformed (typically deserialized) version.
-     *      See {@link #overriding-the-default-transformations-per-request Overriding the Default Transformations}
+     *      See {@link ng.$http#overriding-the-default-transformations-per-request
+     *      Overriding the Default Transformations}
      *    - **cache** – `{boolean|Cache}` – If true, a default $http cache will be used to cache the
      *      GET request, otherwise if a cache instance built with
      *      {@link ng.$cacheFactory $cacheFactory}, this cache will be used for
@@ -9199,6 +9232,10 @@ function $HttpProvider() {
         transformResponse: defaults.transformResponse
       };
       var headers = mergeHeaders(requestConfig);
+
+      if (!angular.isObject(requestConfig)) {
+        throw minErr('$http')('badreq', 'Http request configuration must be an object.  Received: {0}', requestConfig);
+      }
 
       extend(config, requestConfig);
       config.headers = headers;
@@ -9718,7 +9755,9 @@ function createHttpBackend($browser, createXhr, $browserDefer, callbacks, rawDoc
 
     function completeRequest(callback, status, response, headersString, statusText) {
       // cancel timeout and subsequent timeout promise resolution
-      timeoutId && $browserDefer.cancel(timeoutId);
+      if (timeoutId !== undefined) {
+        $browserDefer.cancel(timeoutId);
+      }
       jsonpDone = xhr = null;
 
       callback(status, response, headersString, statusText);
@@ -10694,6 +10733,13 @@ var locationPrototype = {
    * Return full url representation with all segments encoded according to rules specified in
    * [RFC 3986](http://www.ietf.org/rfc/rfc3986.txt).
    *
+   *
+   * ```js
+   * // given url http://example.com/#/some/path?foo=bar&baz=xoxo
+   * var absUrl = $location.absUrl();
+   * // => "http://example.com/#/some/path?foo=bar&baz=xoxo"
+   * ```
+   *
    * @return {string} full url
    */
   absUrl: locationGetter('$$absUrl'),
@@ -10709,6 +10755,13 @@ var locationPrototype = {
    *
    * Change path, search and hash, when called with parameter and return `$location`.
    *
+   *
+   * ```js
+   * // given url http://example.com/#/some/path?foo=bar&baz=xoxo
+   * var url = $location.url();
+   * // => "/some/path?foo=bar&baz=xoxo"
+   * ```
+   *
    * @param {string=} url New url without base prefix (e.g. `/path?a=b#hash`)
    * @return {string} url
    */
@@ -10717,8 +10770,8 @@ var locationPrototype = {
       return this.$$url;
 
     var match = PATH_MATCH.exec(url);
-    if (match[1]) this.path(decodeURIComponent(match[1]));
-    if (match[2] || match[1]) this.search(match[3] || '');
+    if (match[1] || url === '') this.path(decodeURIComponent(match[1]));
+    if (match[2] || match[1] || url === '') this.search(match[3] || '');
     this.hash(match[5] || '');
 
     return this;
@@ -10733,6 +10786,13 @@ var locationPrototype = {
    *
    * Return protocol of current url.
    *
+   *
+   * ```js
+   * // given url http://example.com/#/some/path?foo=bar&baz=xoxo
+   * var protocol = $location.protocol();
+   * // => "http"
+   * ```
+   *
    * @return {string} protocol of current url
    */
   protocol: locationGetter('$$protocol'),
@@ -10746,6 +10806,13 @@ var locationPrototype = {
    *
    * Return host of current url.
    *
+   *
+   * ```js
+   * // given url http://example.com/#/some/path?foo=bar&baz=xoxo
+   * var host = $location.host();
+   * // => "example.com"
+   * ```
+   *
    * @return {string} host of current url.
    */
   host: locationGetter('$$host'),
@@ -10758,6 +10825,13 @@ var locationPrototype = {
    * This method is getter only.
    *
    * Return port of current url.
+   *
+   *
+   * ```js
+   * // given url http://example.com/#/some/path?foo=bar&baz=xoxo
+   * var port = $location.port();
+   * // => 80
+   * ```
    *
    * @return {Number} port
    */
@@ -10776,6 +10850,13 @@ var locationPrototype = {
    *
    * Note: Path should always begin with forward slash (/), this method will add the forward slash
    * if it is missing.
+   *
+   *
+   * ```js
+   * // given url http://example.com/#/some/path?foo=bar&baz=xoxo
+   * var path = $location.path();
+   * // => "/some/path"
+   * ```
    *
    * @param {(string|number)=} path New path
    * @return {string} path
@@ -10802,10 +10883,9 @@ var locationPrototype = {
    * var searchObject = $location.search();
    * // => {foo: 'bar', baz: 'xoxo'}
    *
-   *
    * // set foo to 'yipee'
    * $location.search('foo', 'yipee');
-   * // => $location
+   * // $location.search() => {foo: 'yipee', baz: 'xoxo'}
    * ```
    *
    * @param {string|Object.<string>|Object.<Array.<string>>} search New search params - string or
@@ -10874,6 +10954,13 @@ var locationPrototype = {
    * Return hash fragment when called without any parameter.
    *
    * Change hash fragment when called with parameter and return `$location`.
+   *
+   *
+   * ```js
+   * // given url http://example.com/some/path?foo=bar&baz=xoxo#hashValue
+   * var hash = $location.hash();
+   * // => "hashValue"
+   * ```
    *
    * @param {(string|number)=} hash New hash fragment
    * @return {string} hash
@@ -12152,13 +12239,13 @@ Parser.prototype = {
       ensureSafeObject(context, expressionText);
       ensureSafeFunction(fn, expressionText);
 
-      // IE stupidity! (IE doesn't have apply for some native functions)
+      // IE doesn't have apply for some native functions
       var v = fn.apply
             ? fn.apply(context, args)
             : fn(args[0], args[1], args[2], args[3], args[4]);
 
       return ensureSafeObject(v, expressionText);
-    };
+      };
   },
 
   // This is used with json array declaration
@@ -15840,14 +15927,9 @@ function $TemplateRequestProvider() {
       var transformResponse = $http.defaults && $http.defaults.transformResponse;
 
       if (isArray(transformResponse)) {
-        var original = transformResponse;
-        transformResponse = [];
-        for (var i = 0; i < original.length; ++i) {
-          var transformer = original[i];
-          if (transformer !== defaultHttpResponseTransform) {
-            transformResponse.push(transformer);
-          }
-        }
+        transformResponse = transformResponse.filter(function(transformer) {
+          return transformer !== defaultHttpResponseTransform;
+        });
       } else if (transformResponse === defaultHttpResponseTransform) {
         transformResponse = null;
       }
@@ -15865,12 +15947,12 @@ function $TemplateRequestProvider() {
           return html;
         }, handleError);
 
-      function handleError() {
+      function handleError(resp) {
         self.totalPendingRequests--;
         if (!ignoreRequestError) {
           throw $compileMinErr('tpload', 'Failed to load template: {0}', tpl);
         }
-        return $q.reject();
+        return $q.reject(resp);
       }
     }
 
@@ -16606,7 +16688,7 @@ function filterFilter() {
  *
  * @param {number} amount Input to filter.
  * @param {string=} symbol Currency symbol or identifier to be displayed.
- * @param {number=} fractionSize Number of decimal places to round the amount to.
+ * @param {number=} fractionSize Number of decimal places to round the amount to, defaults to default max fraction size for current locale
  * @returns {string} Formatted number.
  *
  *
@@ -16656,8 +16738,7 @@ function currencyFilter($locale) {
     }
 
     if (isUndefined(fractionSize)) {
-      // TODO: read the default value from the locale file
-      fractionSize = 2;
+      fractionSize = formats.PATTERNS[1].maxFrac;
     }
 
     // if null or undefined pass it through
@@ -16809,9 +16890,9 @@ function formatNumber(number, pattern, groupSep, decimalSep, fractionSize) {
     }
   }
 
-  parts.push(isNegative ? pattern.negPre : pattern.posPre);
-  parts.push(formatedText);
-  parts.push(isNegative ? pattern.negSuf : pattern.posSuf);
+  parts.push(isNegative ? pattern.negPre : pattern.posPre,
+             formatedText,
+             isNegative ? pattern.negSuf : pattern.posSuf);
   return parts.join('');
 }
 
@@ -17507,9 +17588,8 @@ var htmlAnchorDirective = valueFn({
  * make the link go to the wrong URL if the user clicks it before
  * Angular has a chance to replace the `{{hash}}` markup with its
  * value. Until Angular replaces the markup the link will be broken
- * and will most likely return a 404 error.
- *
- * The `ngHref` directive solves this problem.
+ * and will most likely return a 404 error. The `ngHref` directive
+ * solves this problem.
  *
  * The wrong way to write it:
  * ```html
@@ -18391,9 +18471,7 @@ var formDirectiveFactory = function(isNgForm) {
                   controller.$setSubmitted();
                 });
 
-                event.preventDefault
-                  ? event.preventDefault()
-                  : event.returnValue = false; // IE
+                event.preventDefault();
               };
 
               addEventListenerFn(formElement[0], 'submit', handleFormSubmission);
@@ -18480,7 +18558,8 @@ var inputType = {
    * @param {number=} ngMinlength Sets `minlength` validation error key if the value is shorter than
    *    minlength.
    * @param {number=} ngMaxlength Sets `maxlength` validation error key if the value is longer than
-   *    maxlength.
+   *    maxlength. Setting the attribute to a negative or non-numeric value, allows view values of
+   *    any length.
    * @param {string=} pattern Similar to `ngPattern` except that the attribute value is the actual string
    *    that contains the regular expression body that will be converted to a regular expression
    *    as in the ngPattern directive.
@@ -19028,7 +19107,8 @@ var inputType = {
    * @param {number=} ngMinlength Sets `minlength` validation error key if the value is shorter than
    *    minlength.
    * @param {number=} ngMaxlength Sets `maxlength` validation error key if the value is longer than
-   *    maxlength.
+   *    maxlength. Setting the attribute to a negative or non-numeric value, allows view values of
+   *    any length.
    * @param {string=} pattern Similar to `ngPattern` except that the attribute value is the actual string
    *    that contains the regular expression body that will be converted to a regular expression
    *    as in the ngPattern directive.
@@ -19115,7 +19195,8 @@ var inputType = {
    * @param {number=} ngMinlength Sets `minlength` validation error key if the value is shorter than
    *    minlength.
    * @param {number=} ngMaxlength Sets `maxlength` validation error key if the value is longer than
-   *    maxlength.
+   *    maxlength. Setting the attribute to a negative or non-numeric value, allows view values of
+   *    any length.
    * @param {string=} pattern Similar to `ngPattern` except that the attribute value is the actual string
    *    that contains the regular expression body that will be converted to a regular expression
    *    as in the ngPattern directive.
@@ -19203,7 +19284,8 @@ var inputType = {
    * @param {number=} ngMinlength Sets `minlength` validation error key if the value is shorter than
    *    minlength.
    * @param {number=} ngMaxlength Sets `maxlength` validation error key if the value is longer than
-   *    maxlength.
+   *    maxlength. Setting the attribute to a negative or non-numeric value, allows view values of
+   *    any length.
    * @param {string=} pattern Similar to `ngPattern` except that the attribute value is the actual string
    *    that contains the regular expression body that will be converted to a regular expression
    *    as in the ngPattern directive.
@@ -19474,7 +19556,7 @@ function baseInputType(scope, element, attr, ctrl, $sniffer, $browser) {
   element.on('change', listener);
 
   ctrl.$render = function() {
-    element.val(ctrl.$isEmpty(ctrl.$modelValue) ? '' : ctrl.$viewValue);
+    element.val(ctrl.$isEmpty(ctrl.$viewValue) ? '' : ctrl.$viewValue);
   };
 }
 
@@ -19584,10 +19666,10 @@ function createDateInputType(type, regexp, parseDate, format) {
     });
 
     ctrl.$formatters.push(function(value) {
-      if (!ctrl.$isEmpty(value)) {
-        if (!isDate(value)) {
-          throw $ngModelMinErr('datefmt', 'Expected `{0}` to be a date', value);
-        }
+      if (value && !isDate(value)) {
+        throw $ngModelMinErr('datefmt', 'Expected `{0}` to be a date', value);
+      }
+      if (isValidDate(value)) {
         previousDate = value;
         if (previousDate && timezone === 'UTC') {
           var timezoneOffset = 60000 * previousDate.getTimezoneOffset();
@@ -19596,14 +19678,14 @@ function createDateInputType(type, regexp, parseDate, format) {
         return $filter('date')(value, format, timezone);
       } else {
         previousDate = null;
+        return '';
       }
-      return '';
     });
 
     if (isDefined(attr.min) || attr.ngMin) {
       var minVal;
       ctrl.$validators.min = function(value) {
-        return ctrl.$isEmpty(value) || isUndefined(minVal) || parseDate(value) >= minVal;
+        return !isValidDate(value) || isUndefined(minVal) || parseDate(value) >= minVal;
       };
       attr.$observe('min', function(val) {
         minVal = parseObservedDateValue(val);
@@ -19614,18 +19696,18 @@ function createDateInputType(type, regexp, parseDate, format) {
     if (isDefined(attr.max) || attr.ngMax) {
       var maxVal;
       ctrl.$validators.max = function(value) {
-        return ctrl.$isEmpty(value) || isUndefined(maxVal) || parseDate(value) <= maxVal;
+        return !isValidDate(value) || isUndefined(maxVal) || parseDate(value) <= maxVal;
       };
       attr.$observe('max', function(val) {
         maxVal = parseObservedDateValue(val);
         ctrl.$validate();
       });
     }
-    // Override the standard $isEmpty to detect invalid dates as well
-    ctrl.$isEmpty = function(value) {
+
+    function isValidDate(value) {
       // Invalid Date: getTime() returns NaN
-      return !value || (value.getTime && value.getTime() !== value.getTime());
-    };
+      return value && !(value.getTime && value.getTime() !== value.getTime());
+    }
 
     function parseObservedDateValue(val) {
       return isDefined(val) ? (isDate(val) ? val : parseDate(val)) : undefined;
@@ -19709,7 +19791,8 @@ function urlInputType(scope, element, attr, ctrl, $sniffer, $browser) {
   stringBasedInputType(ctrl);
 
   ctrl.$$parserName = 'url';
-  ctrl.$validators.url = function(value) {
+  ctrl.$validators.url = function(modelValue, viewValue) {
+    var value = modelValue || viewValue;
     return ctrl.$isEmpty(value) || URL_REGEXP.test(value);
   };
 }
@@ -19721,7 +19804,8 @@ function emailInputType(scope, element, attr, ctrl, $sniffer, $browser) {
   stringBasedInputType(ctrl);
 
   ctrl.$$parserName = 'email';
-  ctrl.$validators.email = function(value) {
+  ctrl.$validators.email = function(modelValue, viewValue) {
+    var value = modelValue || viewValue;
     return ctrl.$isEmpty(value) || EMAIL_REGEXP.test(value);
   };
 }
@@ -19775,9 +19859,11 @@ function checkboxInputType(scope, element, attr, ctrl, $sniffer, $browser, $filt
     element[0].checked = ctrl.$viewValue;
   };
 
-  // Override the standard `$isEmpty` because an empty checkbox is never equal to the trueValue
+  // Override the standard `$isEmpty` because the $viewValue of an empty checkbox is always set to `false`
+  // This is because of the parser below, which compares the `$modelValue` with `trueValue` to convert
+  // it to a boolean.
   ctrl.$isEmpty = function(value) {
-    return value !== trueValue;
+    return value === false;
   };
 
   ctrl.$formatters.push(function(value) {
@@ -19809,7 +19895,8 @@ function checkboxInputType(scope, element, attr, ctrl, $sniffer, $browser, $filt
  * @param {number=} ngMinlength Sets `minlength` validation error key if the value is shorter than
  *    minlength.
  * @param {number=} ngMaxlength Sets `maxlength` validation error key if the value is longer than
- *    maxlength.
+ *    maxlength. Setting the attribute to a negative or non-numeric value, allows view values of any
+ *    length.
  * @param {string=} ngPattern Sets `pattern` validation error key if the value does not match the
  *    RegExp pattern expression. Expected value is `/regexp/` for inline patterns or `regexp` for
  *    patterns defined as scope expressions.
@@ -19841,7 +19928,8 @@ function checkboxInputType(scope, element, attr, ctrl, $sniffer, $browser, $filt
  * @param {number=} ngMinlength Sets `minlength` validation error key if the value is shorter than
  *    minlength.
  * @param {number=} ngMaxlength Sets `maxlength` validation error key if the value is longer than
- *    maxlength.
+ *    maxlength. Setting the attribute to a negative or non-numeric value, allows view values of any
+ *    length.
  * @param {string=} ngPattern Sets `pattern` validation error key if the value does not match the
  *    RegExp pattern expression. Expected value is `/regexp/` for inline patterns or `regexp` for
  *    patterns defined as scope expressions.
@@ -20057,13 +20145,18 @@ is set to `true`. The parse error is stored in `ngModel.$error.parse`.
  *
  * @description
  *
- * `NgModelController` provides API for the `ng-model` directive. The controller contains
- * services for data-binding, validation, CSS updates, and value formatting and parsing. It
- * purposefully does not contain any logic which deals with DOM rendering or listening to
- * DOM events. Such DOM related logic should be provided by other directives which make use of
- * `NgModelController` for data-binding.
+ * `NgModelController` provides API for the {@link ngModel `ngModel`} directive.
+ * The controller contains services for data-binding, validation, CSS updates, and value formatting
+ * and parsing. It purposefully does not contain any logic which deals with DOM rendering or
+ * listening to DOM events.
+ * Such DOM related logic should be provided by other directives which make use of
+ * `NgModelController` for data-binding to control elements.
+ * Angular provides this DOM logic for most {@link input `input`} elements.
+ * At the end of this page you can find a {@link ngModel.NgModelController#custom-control-example
+ * custom control example} that uses `ngModelController` to bind to `contenteditable` elements.
  *
- * ## Custom Control Example
+ * @example
+ * ### Custom Control Example
  * This example shows how to use `NgModelController` with a custom control to achieve
  * data-binding. Notice how different directives (`contenteditable`, `ng-model`, and `required`)
  * collaborate together to achieve the desired result.
@@ -20160,6 +20253,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
     function($scope, $exceptionHandler, $attr, $element, $parse, $animate, $timeout, $rootScope, $q, $interpolate) {
   this.$viewValue = Number.NaN;
   this.$modelValue = Number.NaN;
+  this.$$rawModelValue = undefined; // stores the parsed modelValue / model set from scope regardless of validity.
   this.$validators = {};
   this.$asyncValidators = {};
   this.$parsers = [];
@@ -20178,32 +20272,33 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
 
 
   var parsedNgModel = $parse($attr.ngModel),
+      parsedNgModelAssign = parsedNgModel.assign,
+      ngModelGet = parsedNgModel,
+      ngModelSet = parsedNgModelAssign,
       pendingDebounce = null,
       ctrl = this;
 
-  var ngModelGet = function ngModelGet() {
-    var modelValue = parsedNgModel($scope);
-    if (ctrl.$options && ctrl.$options.getterSetter && isFunction(modelValue)) {
-      modelValue = modelValue();
-    }
-    return modelValue;
-  };
-
-  var ngModelSet = function ngModelSet(newValue) {
-    var getterSetter;
-    if (ctrl.$options && ctrl.$options.getterSetter &&
-        isFunction(getterSetter = parsedNgModel($scope))) {
-
-      getterSetter(ctrl.$modelValue);
-    } else {
-      parsedNgModel.assign($scope, ctrl.$modelValue);
-    }
-  };
-
   this.$$setOptions = function(options) {
     ctrl.$options = options;
+    if (options && options.getterSetter) {
+      var invokeModelGetter = $parse($attr.ngModel + '()'),
+          invokeModelSetter = $parse($attr.ngModel + '($$$p)');
 
-    if (!parsedNgModel.assign && (!options || !options.getterSetter)) {
+      ngModelGet = function($scope) {
+        var modelValue = parsedNgModel($scope);
+        if (isFunction(modelValue)) {
+          modelValue = invokeModelGetter($scope);
+        }
+        return modelValue;
+      };
+      ngModelSet = function($scope, newValue) {
+        if (isFunction(parsedNgModel($scope))) {
+          invokeModelSetter($scope, {$$$p: ctrl.$modelValue});
+        } else {
+          parsedNgModelAssign($scope, ctrl.$modelValue);
+        }
+      };
+    } else if (!parsedNgModel.assign) {
       throw $ngModelMinErr('nonassign', "Expression '{0}' is non-assignable. Element: {1}",
           $attr.ngModel, startingTag($element));
     }
@@ -20236,17 +20331,18 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
    * @name ngModel.NgModelController#$isEmpty
    *
    * @description
-   * This is called when we need to determine if the value of the input is empty.
+   * This is called when we need to determine if the value of an input is empty.
    *
    * For instance, the required directive does this to work out if the input has data or not.
+   *
    * The default `$isEmpty` function checks whether the value is `undefined`, `''`, `null` or `NaN`.
    *
    * You can override this for input directives whose concept of being empty is different to the
    * default. The `checkboxInputType` directive does this because in its case a value of `false`
    * implies empty.
    *
-   * @param {*} value Model value to check.
-   * @returns {boolean} True if `value` is empty.
+   * @param {*} value The value of the input to check for emptiness.
+   * @returns {boolean} True if `value` is "empty".
    */
   this.$isEmpty = function(value) {
     return isUndefined(value) || value === '' || value === null || value !== value;
@@ -20297,9 +20393,9 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
    * @description
    * Sets the control to its pristine state.
    *
-   * This method can be called to remove the 'ng-dirty' class and set the control to its pristine
-   * state (ng-pristine class). A model is considered to be pristine when the model has not been changed
-   * from when first compiled within then form.
+   * This method can be called to remove the `ng-dirty` class and set the control to its pristine
+   * state (`ng-pristine` class). A model is considered to be pristine when the control
+   * has not been changed from when first compiled.
    */
   this.$setPristine = function() {
     ctrl.$dirty = false;
@@ -20310,13 +20406,32 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
 
   /**
    * @ngdoc method
+   * @name ngModel.NgModelController#$setDirty
+   *
+   * @description
+   * Sets the control to its dirty state.
+   *
+   * This method can be called to remove the `ng-pristine` class and set the control to its dirty
+   * state (`ng-dirty` class). A model is considered to be dirty when the control has been changed
+   * from when first compiled.
+   */
+  this.$setDirty = function() {
+    ctrl.$dirty = true;
+    ctrl.$pristine = false;
+    $animate.removeClass($element, PRISTINE_CLASS);
+    $animate.addClass($element, DIRTY_CLASS);
+    parentForm.$setDirty();
+  };
+
+  /**
+   * @ngdoc method
    * @name ngModel.NgModelController#$setUntouched
    *
    * @description
    * Sets the control to its untouched state.
    *
-   * This method can be called to remove the 'ng-touched' class and set the control to its
-   * untouched state (ng-untouched class). Upon compilation, a model is set as untouched
+   * This method can be called to remove the `ng-touched` class and set the control to its
+   * untouched state (`ng-untouched` class). Upon compilation, a model is set as untouched
    * by default, however this function can be used to restore that state if the model has
    * already been touched by the user.
    */
@@ -20333,10 +20448,9 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
    * @description
    * Sets the control to its touched state.
    *
-   * This method can be called to remove the 'ng-untouched' class and set the control to its
-   * touched state (ng-touched class). A model is considered to be touched when the user has
-   * first interacted (focussed) on the model input element and then shifted focus away (blurred)
-   * from the input element.
+   * This method can be called to remove the `ng-untouched` class and set the control to its
+   * touched state (`ng-touched` class). A model is considered to be touched when the user has
+   * first focused the control element and then shifted focus away from the control (blur event).
    */
   this.$setTouched = function() {
     ctrl.$touched = true;
@@ -20414,14 +20528,51 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
    * @name ngModel.NgModelController#$validate
    *
    * @description
-   * Runs each of the registered validators (first synchronous validators and then asynchronous validators).
+   * Runs each of the registered validators (first synchronous validators and then
+   * asynchronous validators).
+   * If the validity changes to invalid, the model will be set to `undefined`,
+   * unless {@link ngModelOptions `ngModelOptions.allowInvalid`} is `true`.
+   * If the validity changes to valid, it will set the model to the last available valid
+   * modelValue, i.e. either the last parsed value or the last value set from the scope.
    */
   this.$validate = function() {
     // ignore $validate before model is initialized
     if (isNumber(ctrl.$modelValue) && isNaN(ctrl.$modelValue)) {
       return;
     }
-    this.$$parseAndValidate();
+
+    var viewValue = ctrl.$$lastCommittedViewValue;
+    // Note: we use the $$rawModelValue as $modelValue might have been
+    // set to undefined during a view -> model update that found validation
+    // errors. We can't parse the view here, since that could change
+    // the model although neither viewValue nor the model on the scope changed
+    var modelValue = ctrl.$$rawModelValue;
+
+    // Check if the there's a parse error, so we don't unset it accidentially
+    var parserName = ctrl.$$parserName || 'parse';
+    var parserValid = ctrl.$error[parserName] ? false : undefined;
+
+    var prevValid = ctrl.$valid;
+    var prevModelValue = ctrl.$modelValue;
+
+    var allowInvalid = ctrl.$options && ctrl.$options.allowInvalid;
+
+    ctrl.$$runValidators(parserValid, modelValue, viewValue, function(allValid) {
+      // If there was no change in validity, don't update the model
+      // This prevents changing an invalid modelValue to undefined
+      if (!allowInvalid && prevValid !== allValid) {
+        // Note: Don't check ctrl.$valid here, as we could have
+        // external validators (e.g. calculated on the server),
+        // that just call $setValidity and need the model value
+        // to calculate their validity.
+        ctrl.$modelValue = allValid ? modelValue : undefined;
+
+        if (ctrl.$modelValue !== prevModelValue) {
+          ctrl.$$writeModelToScope();
+        }
+      }
+    });
+
   };
 
   this.$$runValidators = function(parseValid, modelValue, viewValue, doneCallback) {
@@ -20540,11 +20691,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
 
     // change to dirty
     if (ctrl.$pristine) {
-      ctrl.$dirty = true;
-      ctrl.$pristine = false;
-      $animate.removeClass($element, PRISTINE_CLASS);
-      $animate.addClass($element, DIRTY_CLASS);
-      parentForm.$setDirty();
+      this.$setDirty();
     }
     this.$$parseAndValidate();
   };
@@ -20565,10 +20712,11 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
     }
     if (isNumber(ctrl.$modelValue) && isNaN(ctrl.$modelValue)) {
       // ctrl.$modelValue has not been touched yet...
-      ctrl.$modelValue = ngModelGet();
+      ctrl.$modelValue = ngModelGet($scope);
     }
     var prevModelValue = ctrl.$modelValue;
     var allowInvalid = ctrl.$options && ctrl.$options.allowInvalid;
+    ctrl.$$rawModelValue = modelValue;
     if (allowInvalid) {
       ctrl.$modelValue = modelValue;
       writeToModelIfNeeded();
@@ -20592,7 +20740,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
   };
 
   this.$$writeModelToScope = function() {
-    ngModelSet(ctrl.$modelValue);
+    ngModelSet($scope, ctrl.$modelValue);
     forEach(ctrl.$viewChangeListeners, function(listener) {
       try {
         listener();
@@ -20688,12 +20836,12 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
   //       ng-change executes in apply phase
   // 4. view should be changed back to 'a'
   $scope.$watch(function ngModelWatch() {
-    var modelValue = ngModelGet();
+    var modelValue = ngModelGet($scope);
 
     // if scope model value and ngModel value are out of sync
     // TODO(perf): why not move this to the action fn?
     if (modelValue !== ctrl.$modelValue) {
-      ctrl.$modelValue = modelValue;
+      ctrl.$modelValue = ctrl.$$rawModelValue = modelValue;
 
       var formatters = ctrl.$formatters,
           idx = formatters.length;
@@ -20878,7 +21026,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
      </file>
  * </example>
  */
-var ngModelDirective = function() {
+var ngModelDirective = ['$rootScope', function($rootScope) {
   return {
     restrict: 'A',
     require: ['ngModel', '^?form', '^?ngModelOptions'],
@@ -20922,15 +21070,17 @@ var ngModelDirective = function() {
           element.on('blur', function(ev) {
             if (modelCtrl.$touched) return;
 
-            scope.$apply(function() {
-              modelCtrl.$setTouched();
-            });
+            if ($rootScope.$$phase) {
+              scope.$evalAsync(modelCtrl.$setTouched);
+            } else {
+              scope.$apply(modelCtrl.$setTouched);
+            }
           });
         }
       };
     }
   };
-};
+}];
 
 
 /**
@@ -21019,8 +21169,8 @@ var requiredDirective = function() {
       if (!ctrl) return;
       attr.required = true; // force truthy in case we are on non input element
 
-      ctrl.$validators.required = function(value) {
-        return !attr.required || !ctrl.$isEmpty(value);
+      ctrl.$validators.required = function(modelValue, viewValue) {
+        return !attr.required || !ctrl.$isEmpty(viewValue);
       };
 
       attr.$observe('required', function() {
@@ -21069,13 +21219,14 @@ var maxlengthDirective = function() {
     link: function(scope, elm, attr, ctrl) {
       if (!ctrl) return;
 
-      var maxlength = 0;
+      var maxlength = -1;
       attr.$observe('maxlength', function(value) {
-        maxlength = int(value) || 0;
+        var intVal = int(value);
+        maxlength = isNaN(intVal) ? -1 : intVal;
         ctrl.$validate();
       });
       ctrl.$validators.maxlength = function(modelValue, viewValue) {
-        return ctrl.$isEmpty(modelValue) || viewValue.length <= maxlength;
+        return (maxlength < 0) || ctrl.$isEmpty(modelValue) || (viewValue.length <= maxlength);
       };
     }
   };
@@ -21094,7 +21245,7 @@ var minlengthDirective = function() {
         ctrl.$validate();
       });
       ctrl.$validators.minlength = function(modelValue, viewValue) {
-        return ctrl.$isEmpty(modelValue) || viewValue.length >= minlength;
+        return ctrl.$isEmpty(viewValue) || viewValue.length >= minlength;
       };
     }
   };
@@ -21722,12 +21873,11 @@ var ngBindTemplateDirective = ['$interpolate', '$compile', function($interpolate
  * @name ngBindHtml
  *
  * @description
- * Creates a binding that will innerHTML the result of evaluating the `expression` into the current
- * element in a secure way.  By default, the innerHTML-ed content will be sanitized using the {@link
- * ngSanitize.$sanitize $sanitize} service.  To utilize this functionality, ensure that `$sanitize`
- * is available, for example, by including {@link ngSanitize} in your module's dependencies (not in
- * core Angular). In order to use {@link ngSanitize} in your module's dependencies, you need to
- * include "angular-sanitize.js" in your application.
+ * Evaluates the expression and inserts the resulting HTML into the element in a secure way. By default,
+ * the resulting HTML content will be sanitized using the {@link ngSanitize.$sanitize $sanitize} service.
+ * To utilize this functionality, ensure that `$sanitize` is available, for example, by including {@link
+ * ngSanitize} in your module's dependencies (not in core Angular). In order to use {@link ngSanitize}
+ * in your module's dependencies, you need to include "angular-sanitize.js" in your application.
  *
  * You may also bypass sanitization for values you know are safe. To do so, bind to
  * an explicitly trusted value via {@link ng.$sce#trustAsHtml $sce.trustAsHtml}.  See the example
@@ -23791,7 +23941,9 @@ var ngNonBindableDirective = ngDirective({ terminal: true, priority: 1000 });
     </example>
  */
 var ngPluralizeDirective = ['$locale', '$interpolate', function($locale, $interpolate) {
-  var BRACE = /{}/g;
+  var BRACE = /{}/g,
+      IS_WHEN = /^when(Minus)?(.+)$/;
+
   return {
     restrict: 'EA',
     link: function(scope, element, attr) {
@@ -23802,34 +23954,44 @@ var ngPluralizeDirective = ['$locale', '$interpolate', function($locale, $interp
           whensExpFns = {},
           startSymbol = $interpolate.startSymbol(),
           endSymbol = $interpolate.endSymbol(),
-          isWhen = /^when(Minus)?(.+)$/;
+          braceReplacement = startSymbol + numberExp + '-' + offset + endSymbol,
+          watchRemover = angular.noop,
+          lastCount;
 
       forEach(attr, function(expression, attributeName) {
-        if (isWhen.test(attributeName)) {
-          whens[lowercase(attributeName.replace('when', '').replace('Minus', '-'))] =
-            element.attr(attr.$attr[attributeName]);
+        var tmpMatch = IS_WHEN.exec(attributeName);
+        if (tmpMatch) {
+          var whenKey = (tmpMatch[1] ? '-' : '') + lowercase(tmpMatch[2]);
+          whens[whenKey] = element.attr(attr.$attr[attributeName]);
         }
       });
       forEach(whens, function(expression, key) {
-        whensExpFns[key] =
-          $interpolate(expression.replace(BRACE, startSymbol + numberExp + '-' +
-            offset + endSymbol));
+        whensExpFns[key] = $interpolate(expression.replace(BRACE, braceReplacement));
+
       });
 
-      scope.$watch(function ngPluralizeWatch() {
-        var value = parseFloat(scope.$eval(numberExp));
+      scope.$watch(numberExp, function ngPluralizeWatchAction(newVal) {
+        var count = parseFloat(newVal);
+        var countIsNaN = isNaN(count);
 
-        if (!isNaN(value)) {
-          //if explicit number rule such as 1, 2, 3... is defined, just use it. Otherwise,
-          //check it against pluralization rules in $locale service
-          if (!(value in whens)) value = $locale.pluralCat(value - offset);
-           return whensExpFns[value](scope);
-        } else {
-          return '';
+        if (!countIsNaN && !(count in whens)) {
+          // If an explicit number rule such as 1, 2, 3... is defined, just use it.
+          // Otherwise, check it against pluralization rules in $locale service.
+          count = $locale.pluralCat(count - offset);
         }
-      }, function ngPluralizeWatchAction(newVal) {
-        element.text(newVal);
+
+        // If both `count` and `lastCount` are NaN, we don't need to re-register a watch.
+        // In JS `NaN !== NaN`, so we have to exlicitly check.
+        if ((count !== lastCount) && !(countIsNaN && isNaN(lastCount))) {
+          watchRemover();
+          watchRemover = scope.$watch(whensExpFns[count], updateElementText);
+          lastCount = count;
+        }
       });
+
+      function updateElementText(newText) {
+        element.text(newText || '');
+      }
     }
   };
 }];
@@ -24311,17 +24473,17 @@ var NG_HIDE_IN_PROGRESS_CLASS = 'ng-hide-animate';
  *
  * ### Overriding `.ng-hide`
  *
- * By default, the `.ng-hide` class will style the element with `display:none!important`. If you wish to change
+ * By default, the `.ng-hide` class will style the element with `display: none!important`. If you wish to change
  * the hide behavior with ngShow/ngHide then this can be achieved by restating the styles for the `.ng-hide`
  * class in CSS:
  *
  * ```css
  * .ng-hide {
  *   /&#42; this is just another form of hiding an element &#42;/
- *   display:block!important;
- *   position:absolute;
- *   top:-9999px;
- *   left:-9999px;
+ *   display: block!important;
+ *   position: absolute;
+ *   top: -9999px;
+ *   left: -9999px;
  * }
  * ```
  *
@@ -24341,13 +24503,13 @@ var NG_HIDE_IN_PROGRESS_CLASS = 'ng-hide-animate';
  * .my-element.ng-hide-add, .my-element.ng-hide-remove {
  *   /&#42; this is required as of 1.3x to properly
  *      apply all styling in a show/hide animation &#42;/
- *   transition:0s linear all;
+ *   transition: 0s linear all;
  * }
  *
  * .my-element.ng-hide-add-active,
  * .my-element.ng-hide-remove-active {
  *   /&#42; the transition is defined in the active class &#42;/
- *   transition:1s linear all;
+ *   transition: 1s linear all;
  * }
  *
  * .my-element.ng-hide-add { ... }
@@ -24389,29 +24551,29 @@ var NG_HIDE_IN_PROGRESS_CLASS = 'ng-hide-animate';
     </file>
     <file name="animations.css">
       .animate-show {
-        line-height:20px;
-        opacity:1;
-        padding:10px;
-        border:1px solid black;
-        background:white;
+        line-height: 20px;
+        opacity: 1;
+        padding: 10px;
+        border: 1px solid black;
+        background: white;
       }
 
       .animate-show.ng-hide-add.ng-hide-add-active,
       .animate-show.ng-hide-remove.ng-hide-remove-active {
-        -webkit-transition:all linear 0.5s;
-        transition:all linear 0.5s;
+        -webkit-transition: all linear 0.5s;
+        transition: all linear 0.5s;
       }
 
       .animate-show.ng-hide {
-        line-height:0;
-        opacity:0;
-        padding:0 10px;
+        line-height: 0;
+        opacity: 0;
+        padding: 0 10px;
       }
 
       .check-element {
-        padding:10px;
-        border:1px solid black;
-        background:white;
+        padding: 10px;
+        border: 1px solid black;
+        background: white;
       }
     </file>
     <file name="protractor.js" type="protractor">
@@ -24485,17 +24647,17 @@ var ngShowDirective = ['$animate', function($animate) {
  *
  * ### Overriding `.ng-hide`
  *
- * By default, the `.ng-hide` class will style the element with `display:none!important`. If you wish to change
+ * By default, the `.ng-hide` class will style the element with `display: none!important`. If you wish to change
  * the hide behavior with ngShow/ngHide then this can be achieved by restating the styles for the `.ng-hide`
  * class in CSS:
  *
  * ```css
  * .ng-hide {
  *   /&#42; this is just another form of hiding an element &#42;/
- *   display:block!important;
- *   position:absolute;
- *   top:-9999px;
- *   left:-9999px;
+ *   display: block!important;
+ *   position: absolute;
+ *   top: -9999px;
+ *   left: -9999px;
  * }
  * ```
  *
@@ -24512,7 +24674,7 @@ var ngShowDirective = ['$animate', function($animate) {
  * //a working example can be found at the bottom of this page
  * //
  * .my-element.ng-hide-add, .my-element.ng-hide-remove {
- *   transition:0.5s linear all;
+ *   transition: 0.5s linear all;
  * }
  *
  * .my-element.ng-hide-add { ... }
@@ -24554,25 +24716,25 @@ var ngShowDirective = ['$animate', function($animate) {
     </file>
     <file name="animations.css">
       .animate-hide {
-        -webkit-transition:all linear 0.5s;
-        transition:all linear 0.5s;
-        line-height:20px;
-        opacity:1;
-        padding:10px;
-        border:1px solid black;
-        background:white;
+        -webkit-transition: all linear 0.5s;
+        transition: all linear 0.5s;
+        line-height: 20px;
+        opacity: 1;
+        padding: 10px;
+        border: 1px solid black;
+        background: white;
       }
 
       .animate-hide.ng-hide {
-        line-height:0;
-        opacity:0;
-        padding:0 10px;
+        line-height: 0;
+        opacity: 0;
+        padding: 0 10px;
       }
 
       .check-element {
-        padding:10px;
-        border:1px solid black;
-        background:white;
+        padding: 10px;
+        border: 1px solid black;
+        background: white;
       }
     </file>
     <file name="protractor.js" type="protractor">
@@ -24979,7 +25141,6 @@ var scriptDirective = ['$templateCache', function($templateCache) {
     compile: function(element, attr) {
       if (attr.type == 'text/ng-template') {
         var templateUrl = attr.id,
-            // IE is not consistent, in scripts we have to read .text but in other nodes we have to read .textContent
             text = element[0].text;
 
         $templateCache.put(templateUrl, text);
@@ -25200,7 +25361,7 @@ var selectDirective = ['$compile', '$parse', function($compile,   $parse) {
       self.removeOption = function(value) {
         if (this.hasOption(value)) {
           delete optionsMap[value];
-          if (ngModelCtrl.$viewValue == value) {
+          if (ngModelCtrl.$viewValue === value) {
             this.renderUnknownOption(value);
           }
         }
@@ -25667,18 +25828,23 @@ var selectDirective = ['$compile', '$parse', function($compile,   $parse) {
               updateLabelMap(labelMap, option.label, false);
               option.element.remove();
             }
-            forEach(labelMap, function(count, label) {
-              if (count > 0) {
-                selectCtrl.addOption(label);
-              } else if (count < 0) {
-                selectCtrl.removeOption(label);
-              }
-            });
           }
           // remove any excessive OPTGROUPs from select
           while (optionGroupsCache.length > groupIndex) {
-            optionGroupsCache.pop()[0].element.remove();
+            // remove all the labels in the option group
+            optionGroup = optionGroupsCache.pop();
+            for (index = 1; index < optionGroup.length; ++index) {
+              updateLabelMap(labelMap, optionGroup[index].label, false);
+            }
+            optionGroup[0].element.remove();
           }
+          forEach(labelMap, function(count, label) {
+            if (count > 0) {
+              selectCtrl.addOption(label);
+            } else if (count < 0) {
+              selectCtrl.removeOption(label);
+            }
+          });
         }
       }
     }
@@ -25892,8 +26058,6 @@ l,!0),f=[]),m=Date.now(),d(f,h,t),r&&r.blur(),u.isDefined(g.disabled)&&!1!==g.di
 angular.module("ui.bootstrap",["ui.bootstrap.tpls","ui.bootstrap.transition","ui.bootstrap.collapse","ui.bootstrap.accordion","ui.bootstrap.alert","ui.bootstrap.bindHtml","ui.bootstrap.buttons","ui.bootstrap.carousel","ui.bootstrap.dateparser","ui.bootstrap.position","ui.bootstrap.datepicker","ui.bootstrap.dropdown","ui.bootstrap.modal","ui.bootstrap.pagination","ui.bootstrap.tooltip","ui.bootstrap.popover","ui.bootstrap.progressbar","ui.bootstrap.rating","ui.bootstrap.tabs","ui.bootstrap.timepicker","ui.bootstrap.typeahead"]),angular.module("ui.bootstrap.tpls",["template/accordion/accordion-group.html","template/accordion/accordion.html","template/alert/alert.html","template/carousel/carousel.html","template/carousel/slide.html","template/datepicker/datepicker.html","template/datepicker/day.html","template/datepicker/month.html","template/datepicker/popup.html","template/datepicker/year.html","template/modal/backdrop.html","template/modal/window.html","template/pagination/pager.html","template/pagination/pagination.html","template/tooltip/tooltip-html-unsafe-popup.html","template/tooltip/tooltip-popup.html","template/popover/popover.html","template/progressbar/bar.html","template/progressbar/progress.html","template/progressbar/progressbar.html","template/rating/rating.html","template/tabs/tab.html","template/tabs/tabset.html","template/timepicker/timepicker.html","template/typeahead/typeahead-match.html","template/typeahead/typeahead-popup.html"]),angular.module("ui.bootstrap.transition",[]).factory("$transition",["$q","$timeout","$rootScope",function(a,b,c){function d(a){for(var b in a)if(void 0!==f.style[b])return a[b]}var e=function(d,f,g){g=g||{};var h=a.defer(),i=e[g.animation?"animationEndEventName":"transitionEndEventName"],j=function(){c.$apply(function(){d.unbind(i,j),h.resolve(d)})};return i&&d.bind(i,j),b(function(){angular.isString(f)?d.addClass(f):angular.isFunction(f)?f(d):angular.isObject(f)&&d.css(f),i||h.resolve(d)}),h.promise.cancel=function(){i&&d.unbind(i,j),h.reject("Transition cancelled")},h.promise},f=document.createElement("trans"),g={WebkitTransition:"webkitTransitionEnd",MozTransition:"transitionend",OTransition:"oTransitionEnd",transition:"transitionend"},h={WebkitTransition:"webkitAnimationEnd",MozTransition:"animationend",OTransition:"oAnimationEnd",transition:"animationend"};return e.transitionEndEventName=d(g),e.animationEndEventName=d(h),e}]),angular.module("ui.bootstrap.collapse",["ui.bootstrap.transition"]).directive("collapse",["$transition",function(a){return{link:function(b,c,d){function e(b){function d(){j===e&&(j=void 0)}var e=a(c,b);return j&&j.cancel(),j=e,e.then(d,d),e}function f(){k?(k=!1,g()):(c.removeClass("collapse").addClass("collapsing"),e({height:c[0].scrollHeight+"px"}).then(g))}function g(){c.removeClass("collapsing"),c.addClass("collapse in"),c.css({height:"auto"})}function h(){if(k)k=!1,i(),c.css({height:0});else{c.css({height:c[0].scrollHeight+"px"});{c[0].offsetWidth}c.removeClass("collapse in").addClass("collapsing"),e({height:0}).then(i)}}function i(){c.removeClass("collapsing"),c.addClass("collapse")}var j,k=!0;b.$watch(d.collapse,function(a){a?h():f()})}}}]),angular.module("ui.bootstrap.accordion",["ui.bootstrap.collapse"]).constant("accordionConfig",{closeOthers:!0}).controller("AccordionController",["$scope","$attrs","accordionConfig",function(a,b,c){this.groups=[],this.closeOthers=function(d){var e=angular.isDefined(b.closeOthers)?a.$eval(b.closeOthers):c.closeOthers;e&&angular.forEach(this.groups,function(a){a!==d&&(a.isOpen=!1)})},this.addGroup=function(a){var b=this;this.groups.push(a),a.$on("$destroy",function(){b.removeGroup(a)})},this.removeGroup=function(a){var b=this.groups.indexOf(a);-1!==b&&this.groups.splice(b,1)}}]).directive("accordion",function(){return{restrict:"EA",controller:"AccordionController",transclude:!0,replace:!1,templateUrl:"template/accordion/accordion.html"}}).directive("accordionGroup",function(){return{require:"^accordion",restrict:"EA",transclude:!0,replace:!0,templateUrl:"template/accordion/accordion-group.html",scope:{heading:"@",isOpen:"=?",isDisabled:"=?"},controller:function(){this.setHeading=function(a){this.heading=a}},link:function(a,b,c,d){d.addGroup(a),a.$watch("isOpen",function(b){b&&d.closeOthers(a)}),a.toggleOpen=function(){a.isDisabled||(a.isOpen=!a.isOpen)}}}}).directive("accordionHeading",function(){return{restrict:"EA",transclude:!0,template:"",replace:!0,require:"^accordionGroup",link:function(a,b,c,d,e){d.setHeading(e(a,function(){}))}}}).directive("accordionTransclude",function(){return{require:"^accordionGroup",link:function(a,b,c,d){a.$watch(function(){return d[c.accordionTransclude]},function(a){a&&(b.html(""),b.append(a))})}}}),angular.module("ui.bootstrap.alert",[]).controller("AlertController",["$scope","$attrs",function(a,b){a.closeable="close"in b,this.close=a.close}]).directive("alert",function(){return{restrict:"EA",controller:"AlertController",templateUrl:"template/alert/alert.html",transclude:!0,replace:!0,scope:{type:"@",close:"&"}}}).directive("dismissOnTimeout",["$timeout",function(a){return{require:"alert",link:function(b,c,d,e){a(function(){e.close()},parseInt(d.dismissOnTimeout,10))}}}]),angular.module("ui.bootstrap.bindHtml",[]).directive("bindHtmlUnsafe",function(){return function(a,b,c){b.addClass("ng-binding").data("$binding",c.bindHtmlUnsafe),a.$watch(c.bindHtmlUnsafe,function(a){b.html(a||"")})}}),angular.module("ui.bootstrap.buttons",[]).constant("buttonConfig",{activeClass:"active",toggleEvent:"click"}).controller("ButtonsController",["buttonConfig",function(a){this.activeClass=a.activeClass||"active",this.toggleEvent=a.toggleEvent||"click"}]).directive("btnRadio",function(){return{require:["btnRadio","ngModel"],controller:"ButtonsController",link:function(a,b,c,d){var e=d[0],f=d[1];f.$render=function(){b.toggleClass(e.activeClass,angular.equals(f.$modelValue,a.$eval(c.btnRadio)))},b.bind(e.toggleEvent,function(){var d=b.hasClass(e.activeClass);(!d||angular.isDefined(c.uncheckable))&&a.$apply(function(){f.$setViewValue(d?null:a.$eval(c.btnRadio)),f.$render()})})}}}).directive("btnCheckbox",function(){return{require:["btnCheckbox","ngModel"],controller:"ButtonsController",link:function(a,b,c,d){function e(){return g(c.btnCheckboxTrue,!0)}function f(){return g(c.btnCheckboxFalse,!1)}function g(b,c){var d=a.$eval(b);return angular.isDefined(d)?d:c}var h=d[0],i=d[1];i.$render=function(){b.toggleClass(h.activeClass,angular.equals(i.$modelValue,e()))},b.bind(h.toggleEvent,function(){a.$apply(function(){i.$setViewValue(b.hasClass(h.activeClass)?f():e()),i.$render()})})}}}),angular.module("ui.bootstrap.carousel",["ui.bootstrap.transition"]).controller("CarouselController",["$scope","$timeout","$interval","$transition",function(a,b,c,d){function e(){f();var b=+a.interval;!isNaN(b)&&b>0&&(h=c(g,b))}function f(){h&&(c.cancel(h),h=null)}function g(){var b=+a.interval;i&&!isNaN(b)&&b>0?a.next():a.pause()}var h,i,j=this,k=j.slides=a.slides=[],l=-1;j.currentSlide=null;var m=!1;j.select=a.select=function(c,f){function g(){if(!m){if(j.currentSlide&&angular.isString(f)&&!a.noTransition&&c.$element){c.$element.addClass(f);{c.$element[0].offsetWidth}angular.forEach(k,function(a){angular.extend(a,{direction:"",entering:!1,leaving:!1,active:!1})}),angular.extend(c,{direction:f,active:!0,entering:!0}),angular.extend(j.currentSlide||{},{direction:f,leaving:!0}),a.$currentTransition=d(c.$element,{}),function(b,c){a.$currentTransition.then(function(){h(b,c)},function(){h(b,c)})}(c,j.currentSlide)}else h(c,j.currentSlide);j.currentSlide=c,l=i,e()}}function h(b,c){angular.extend(b,{direction:"",active:!0,leaving:!1,entering:!1}),angular.extend(c||{},{direction:"",active:!1,leaving:!1,entering:!1}),a.$currentTransition=null}var i=k.indexOf(c);void 0===f&&(f=i>l?"next":"prev"),c&&c!==j.currentSlide&&(a.$currentTransition?(a.$currentTransition.cancel(),b(g)):g())},a.$on("$destroy",function(){m=!0}),j.indexOfSlide=function(a){return k.indexOf(a)},a.next=function(){var b=(l+1)%k.length;return a.$currentTransition?void 0:j.select(k[b],"next")},a.prev=function(){var b=0>l-1?k.length-1:l-1;return a.$currentTransition?void 0:j.select(k[b],"prev")},a.isActive=function(a){return j.currentSlide===a},a.$watch("interval",e),a.$on("$destroy",f),a.play=function(){i||(i=!0,e())},a.pause=function(){a.noPause||(i=!1,f())},j.addSlide=function(b,c){b.$element=c,k.push(b),1===k.length||b.active?(j.select(k[k.length-1]),1==k.length&&a.play()):b.active=!1},j.removeSlide=function(a){var b=k.indexOf(a);k.splice(b,1),k.length>0&&a.active?j.select(b>=k.length?k[b-1]:k[b]):l>b&&l--}}]).directive("carousel",[function(){return{restrict:"EA",transclude:!0,replace:!0,controller:"CarouselController",require:"carousel",templateUrl:"template/carousel/carousel.html",scope:{interval:"=",noTransition:"=",noPause:"="}}}]).directive("slide",function(){return{require:"^carousel",restrict:"EA",transclude:!0,replace:!0,templateUrl:"template/carousel/slide.html",scope:{active:"=?"},link:function(a,b,c,d){d.addSlide(a,b),a.$on("$destroy",function(){d.removeSlide(a)}),a.$watch("active",function(b){b&&d.select(a)})}}}),angular.module("ui.bootstrap.dateparser",[]).service("dateParser",["$locale","orderByFilter",function(a,b){function c(a){var c=[],d=a.split("");return angular.forEach(e,function(b,e){var f=a.indexOf(e);if(f>-1){a=a.split(""),d[f]="("+b.regex+")",a[f]="$";for(var g=f+1,h=f+e.length;h>g;g++)d[g]="",a[g]="$";a=a.join(""),c.push({index:f,apply:b.apply})}}),{regex:new RegExp("^"+d.join("")+"$"),map:b(c,"index")}}function d(a,b,c){return 1===b&&c>28?29===c&&(a%4===0&&a%100!==0||a%400===0):3===b||5===b||8===b||10===b?31>c:!0}this.parsers={};var e={yyyy:{regex:"\\d{4}",apply:function(a){this.year=+a}},yy:{regex:"\\d{2}",apply:function(a){this.year=+a+2e3}},y:{regex:"\\d{1,4}",apply:function(a){this.year=+a}},MMMM:{regex:a.DATETIME_FORMATS.MONTH.join("|"),apply:function(b){this.month=a.DATETIME_FORMATS.MONTH.indexOf(b)}},MMM:{regex:a.DATETIME_FORMATS.SHORTMONTH.join("|"),apply:function(b){this.month=a.DATETIME_FORMATS.SHORTMONTH.indexOf(b)}},MM:{regex:"0[1-9]|1[0-2]",apply:function(a){this.month=a-1}},M:{regex:"[1-9]|1[0-2]",apply:function(a){this.month=a-1}},dd:{regex:"[0-2][0-9]{1}|3[0-1]{1}",apply:function(a){this.date=+a}},d:{regex:"[1-2]?[0-9]{1}|3[0-1]{1}",apply:function(a){this.date=+a}},EEEE:{regex:a.DATETIME_FORMATS.DAY.join("|")},EEE:{regex:a.DATETIME_FORMATS.SHORTDAY.join("|")}};this.parse=function(b,e){if(!angular.isString(b)||!e)return b;e=a.DATETIME_FORMATS[e]||e,this.parsers[e]||(this.parsers[e]=c(e));var f=this.parsers[e],g=f.regex,h=f.map,i=b.match(g);if(i&&i.length){for(var j,k={year:1900,month:0,date:1,hours:0},l=1,m=i.length;m>l;l++){var n=h[l-1];n.apply&&n.apply.call(k,i[l])}return d(k.year,k.month,k.date)&&(j=new Date(k.year,k.month,k.date,k.hours)),j}}}]),angular.module("ui.bootstrap.position",[]).factory("$position",["$document","$window",function(a,b){function c(a,c){return a.currentStyle?a.currentStyle[c]:b.getComputedStyle?b.getComputedStyle(a)[c]:a.style[c]}function d(a){return"static"===(c(a,"position")||"static")}var e=function(b){for(var c=a[0],e=b.offsetParent||c;e&&e!==c&&d(e);)e=e.offsetParent;return e||c};return{position:function(b){var c=this.offset(b),d={top:0,left:0},f=e(b[0]);f!=a[0]&&(d=this.offset(angular.element(f)),d.top+=f.clientTop-f.scrollTop,d.left+=f.clientLeft-f.scrollLeft);var g=b[0].getBoundingClientRect();return{width:g.width||b.prop("offsetWidth"),height:g.height||b.prop("offsetHeight"),top:c.top-d.top,left:c.left-d.left}},offset:function(c){var d=c[0].getBoundingClientRect();return{width:d.width||c.prop("offsetWidth"),height:d.height||c.prop("offsetHeight"),top:d.top+(b.pageYOffset||a[0].documentElement.scrollTop),left:d.left+(b.pageXOffset||a[0].documentElement.scrollLeft)}},positionElements:function(a,b,c,d){var e,f,g,h,i=c.split("-"),j=i[0],k=i[1]||"center";e=d?this.offset(a):this.position(a),f=b.prop("offsetWidth"),g=b.prop("offsetHeight");var l={center:function(){return e.left+e.width/2-f/2},left:function(){return e.left},right:function(){return e.left+e.width}},m={center:function(){return e.top+e.height/2-g/2},top:function(){return e.top},bottom:function(){return e.top+e.height}};switch(j){case"right":h={top:m[k](),left:l[j]()};break;case"left":h={top:m[k](),left:e.left-f};break;case"bottom":h={top:m[j](),left:l[k]()};break;default:h={top:e.top-g,left:l[k]()}}return h}}}]),angular.module("ui.bootstrap.datepicker",["ui.bootstrap.dateparser","ui.bootstrap.position"]).constant("datepickerConfig",{formatDay:"dd",formatMonth:"MMMM",formatYear:"yyyy",formatDayHeader:"EEE",formatDayTitle:"MMMM yyyy",formatMonthTitle:"yyyy",datepickerMode:"day",minMode:"day",maxMode:"year",showWeeks:!0,startingDay:0,yearRange:20,minDate:null,maxDate:null}).controller("DatepickerController",["$scope","$attrs","$parse","$interpolate","$timeout","$log","dateFilter","datepickerConfig",function(a,b,c,d,e,f,g,h){var i=this,j={$setViewValue:angular.noop};this.modes=["day","month","year"],angular.forEach(["formatDay","formatMonth","formatYear","formatDayHeader","formatDayTitle","formatMonthTitle","minMode","maxMode","showWeeks","startingDay","yearRange"],function(c,e){i[c]=angular.isDefined(b[c])?8>e?d(b[c])(a.$parent):a.$parent.$eval(b[c]):h[c]}),angular.forEach(["minDate","maxDate"],function(d){b[d]?a.$parent.$watch(c(b[d]),function(a){i[d]=a?new Date(a):null,i.refreshView()}):i[d]=h[d]?new Date(h[d]):null}),a.datepickerMode=a.datepickerMode||h.datepickerMode,a.uniqueId="datepicker-"+a.$id+"-"+Math.floor(1e4*Math.random()),this.activeDate=angular.isDefined(b.initDate)?a.$parent.$eval(b.initDate):new Date,a.isActive=function(b){return 0===i.compare(b.date,i.activeDate)?(a.activeDateId=b.uid,!0):!1},this.init=function(a){j=a,j.$render=function(){i.render()}},this.render=function(){if(j.$modelValue){var a=new Date(j.$modelValue),b=!isNaN(a);b?this.activeDate=a:f.error('Datepicker directive: "ng-model" value must be a Date object, a number of milliseconds since 01.01.1970 or a string representing an RFC2822 or ISO 8601 date.'),j.$setValidity("date",b)}this.refreshView()},this.refreshView=function(){if(this.element){this._refreshView();var a=j.$modelValue?new Date(j.$modelValue):null;j.$setValidity("date-disabled",!a||this.element&&!this.isDisabled(a))}},this.createDateObject=function(a,b){var c=j.$modelValue?new Date(j.$modelValue):null;return{date:a,label:g(a,b),selected:c&&0===this.compare(a,c),disabled:this.isDisabled(a),current:0===this.compare(a,new Date)}},this.isDisabled=function(c){return this.minDate&&this.compare(c,this.minDate)<0||this.maxDate&&this.compare(c,this.maxDate)>0||b.dateDisabled&&a.dateDisabled({date:c,mode:a.datepickerMode})},this.split=function(a,b){for(var c=[];a.length>0;)c.push(a.splice(0,b));return c},a.select=function(b){if(a.datepickerMode===i.minMode){var c=j.$modelValue?new Date(j.$modelValue):new Date(0,0,0,0,0,0,0);c.setFullYear(b.getFullYear(),b.getMonth(),b.getDate()),j.$setViewValue(c),j.$render()}else i.activeDate=b,a.datepickerMode=i.modes[i.modes.indexOf(a.datepickerMode)-1]},a.move=function(a){var b=i.activeDate.getFullYear()+a*(i.step.years||0),c=i.activeDate.getMonth()+a*(i.step.months||0);i.activeDate.setFullYear(b,c,1),i.refreshView()},a.toggleMode=function(b){b=b||1,a.datepickerMode===i.maxMode&&1===b||a.datepickerMode===i.minMode&&-1===b||(a.datepickerMode=i.modes[i.modes.indexOf(a.datepickerMode)+b])},a.keys={13:"enter",32:"space",33:"pageup",34:"pagedown",35:"end",36:"home",37:"left",38:"up",39:"right",40:"down"};var k=function(){e(function(){i.element[0].focus()},0,!1)};a.$on("datepicker.focus",k),a.keydown=function(b){var c=a.keys[b.which];if(c&&!b.shiftKey&&!b.altKey)if(b.preventDefault(),b.stopPropagation(),"enter"===c||"space"===c){if(i.isDisabled(i.activeDate))return;a.select(i.activeDate),k()}else!b.ctrlKey||"up"!==c&&"down"!==c?(i.handleKeyDown(c,b),i.refreshView()):(a.toggleMode("up"===c?1:-1),k())}}]).directive("datepicker",function(){return{restrict:"EA",replace:!0,templateUrl:"template/datepicker/datepicker.html",scope:{datepickerMode:"=?",dateDisabled:"&"},require:["datepicker","?^ngModel"],controller:"DatepickerController",link:function(a,b,c,d){var e=d[0],f=d[1];f&&e.init(f)}}}).directive("daypicker",["dateFilter",function(a){return{restrict:"EA",replace:!0,templateUrl:"template/datepicker/day.html",require:"^datepicker",link:function(b,c,d,e){function f(a,b){return 1!==b||a%4!==0||a%100===0&&a%400!==0?i[b]:29}function g(a,b){var c=new Array(b),d=new Date(a),e=0;for(d.setHours(12);b>e;)c[e++]=new Date(d),d.setDate(d.getDate()+1);return c}function h(a){var b=new Date(a);b.setDate(b.getDate()+4-(b.getDay()||7));var c=b.getTime();return b.setMonth(0),b.setDate(1),Math.floor(Math.round((c-b)/864e5)/7)+1}b.showWeeks=e.showWeeks,e.step={months:1},e.element=c;var i=[31,28,31,30,31,30,31,31,30,31,30,31];e._refreshView=function(){var c=e.activeDate.getFullYear(),d=e.activeDate.getMonth(),f=new Date(c,d,1),i=e.startingDay-f.getDay(),j=i>0?7-i:-i,k=new Date(f);j>0&&k.setDate(-j+1);for(var l=g(k,42),m=0;42>m;m++)l[m]=angular.extend(e.createDateObject(l[m],e.formatDay),{secondary:l[m].getMonth()!==d,uid:b.uniqueId+"-"+m});b.labels=new Array(7);for(var n=0;7>n;n++)b.labels[n]={abbr:a(l[n].date,e.formatDayHeader),full:a(l[n].date,"EEEE")};if(b.title=a(e.activeDate,e.formatDayTitle),b.rows=e.split(l,7),b.showWeeks){b.weekNumbers=[];for(var o=h(b.rows[0][0].date),p=b.rows.length;b.weekNumbers.push(o++)<p;);}},e.compare=function(a,b){return new Date(a.getFullYear(),a.getMonth(),a.getDate())-new Date(b.getFullYear(),b.getMonth(),b.getDate())},e.handleKeyDown=function(a){var b=e.activeDate.getDate();if("left"===a)b-=1;else if("up"===a)b-=7;else if("right"===a)b+=1;else if("down"===a)b+=7;else if("pageup"===a||"pagedown"===a){var c=e.activeDate.getMonth()+("pageup"===a?-1:1);e.activeDate.setMonth(c,1),b=Math.min(f(e.activeDate.getFullYear(),e.activeDate.getMonth()),b)}else"home"===a?b=1:"end"===a&&(b=f(e.activeDate.getFullYear(),e.activeDate.getMonth()));e.activeDate.setDate(b)},e.refreshView()}}}]).directive("monthpicker",["dateFilter",function(a){return{restrict:"EA",replace:!0,templateUrl:"template/datepicker/month.html",require:"^datepicker",link:function(b,c,d,e){e.step={years:1},e.element=c,e._refreshView=function(){for(var c=new Array(12),d=e.activeDate.getFullYear(),f=0;12>f;f++)c[f]=angular.extend(e.createDateObject(new Date(d,f,1),e.formatMonth),{uid:b.uniqueId+"-"+f});b.title=a(e.activeDate,e.formatMonthTitle),b.rows=e.split(c,3)},e.compare=function(a,b){return new Date(a.getFullYear(),a.getMonth())-new Date(b.getFullYear(),b.getMonth())},e.handleKeyDown=function(a){var b=e.activeDate.getMonth();if("left"===a)b-=1;else if("up"===a)b-=3;else if("right"===a)b+=1;else if("down"===a)b+=3;else if("pageup"===a||"pagedown"===a){var c=e.activeDate.getFullYear()+("pageup"===a?-1:1);e.activeDate.setFullYear(c)}else"home"===a?b=0:"end"===a&&(b=11);e.activeDate.setMonth(b)},e.refreshView()}}}]).directive("yearpicker",["dateFilter",function(){return{restrict:"EA",replace:!0,templateUrl:"template/datepicker/year.html",require:"^datepicker",link:function(a,b,c,d){function e(a){return parseInt((a-1)/f,10)*f+1}var f=d.yearRange;d.step={years:f},d.element=b,d._refreshView=function(){for(var b=new Array(f),c=0,g=e(d.activeDate.getFullYear());f>c;c++)b[c]=angular.extend(d.createDateObject(new Date(g+c,0,1),d.formatYear),{uid:a.uniqueId+"-"+c});a.title=[b[0].label,b[f-1].label].join(" - "),a.rows=d.split(b,5)},d.compare=function(a,b){return a.getFullYear()-b.getFullYear()},d.handleKeyDown=function(a){var b=d.activeDate.getFullYear();"left"===a?b-=1:"up"===a?b-=5:"right"===a?b+=1:"down"===a?b+=5:"pageup"===a||"pagedown"===a?b+=("pageup"===a?-1:1)*d.step.years:"home"===a?b=e(d.activeDate.getFullYear()):"end"===a&&(b=e(d.activeDate.getFullYear())+f-1),d.activeDate.setFullYear(b)},d.refreshView()}}}]).constant("datepickerPopupConfig",{datepickerPopup:"yyyy-MM-dd",currentText:"Today",clearText:"Clear",closeText:"Done",closeOnDateSelection:!0,appendToBody:!1,showButtonBar:!0}).directive("datepickerPopup",["$compile","$parse","$document","$position","dateFilter","dateParser","datepickerPopupConfig",function(a,b,c,d,e,f,g){return{restrict:"EA",require:"ngModel",scope:{isOpen:"=?",currentText:"@",clearText:"@",closeText:"@",dateDisabled:"&"},link:function(h,i,j,k){function l(a){return a.replace(/([A-Z])/g,function(a){return"-"+a.toLowerCase()})}function m(a){if(a){if(angular.isDate(a)&&!isNaN(a))return k.$setValidity("date",!0),a;if(angular.isString(a)){var b=f.parse(a,n)||new Date(a);return isNaN(b)?void k.$setValidity("date",!1):(k.$setValidity("date",!0),b)}return void k.$setValidity("date",!1)}return k.$setValidity("date",!0),null}var n,o=angular.isDefined(j.closeOnDateSelection)?h.$parent.$eval(j.closeOnDateSelection):g.closeOnDateSelection,p=angular.isDefined(j.datepickerAppendToBody)?h.$parent.$eval(j.datepickerAppendToBody):g.appendToBody;h.showButtonBar=angular.isDefined(j.showButtonBar)?h.$parent.$eval(j.showButtonBar):g.showButtonBar,h.getText=function(a){return h[a+"Text"]||g[a+"Text"]},j.$observe("datepickerPopup",function(a){n=a||g.datepickerPopup,k.$render()});var q=angular.element("<div datepicker-popup-wrap><div datepicker></div></div>");q.attr({"ng-model":"date","ng-change":"dateSelection()"});var r=angular.element(q.children()[0]);j.datepickerOptions&&angular.forEach(h.$parent.$eval(j.datepickerOptions),function(a,b){r.attr(l(b),a)}),h.watchData={},angular.forEach(["minDate","maxDate","datepickerMode"],function(a){if(j[a]){var c=b(j[a]);if(h.$parent.$watch(c,function(b){h.watchData[a]=b}),r.attr(l(a),"watchData."+a),"datepickerMode"===a){var d=c.assign;h.$watch("watchData."+a,function(a,b){a!==b&&d(h.$parent,a)})}}}),j.dateDisabled&&r.attr("date-disabled","dateDisabled({ date: date, mode: mode })"),k.$parsers.unshift(m),h.dateSelection=function(a){angular.isDefined(a)&&(h.date=a),k.$setViewValue(h.date),k.$render(),o&&(h.isOpen=!1,i[0].focus())},i.bind("input change keyup",function(){h.$apply(function(){h.date=k.$modelValue})}),k.$render=function(){var a=k.$viewValue?e(k.$viewValue,n):"";i.val(a),h.date=m(k.$modelValue)};var s=function(a){h.isOpen&&a.target!==i[0]&&h.$apply(function(){h.isOpen=!1})},t=function(a){h.keydown(a)};i.bind("keydown",t),h.keydown=function(a){27===a.which?(a.preventDefault(),a.stopPropagation(),h.close()):40!==a.which||h.isOpen||(h.isOpen=!0)},h.$watch("isOpen",function(a){a?(h.$broadcast("datepicker.focus"),h.position=p?d.offset(i):d.position(i),h.position.top=h.position.top+i.prop("offsetHeight"),c.bind("click",s)):c.unbind("click",s)}),h.select=function(a){if("today"===a){var b=new Date;angular.isDate(k.$modelValue)?(a=new Date(k.$modelValue),a.setFullYear(b.getFullYear(),b.getMonth(),b.getDate())):a=new Date(b.setHours(0,0,0,0))}h.dateSelection(a)},h.close=function(){h.isOpen=!1,i[0].focus()};var u=a(q)(h);q.remove(),p?c.find("body").append(u):i.after(u),h.$on("$destroy",function(){u.remove(),i.unbind("keydown",t),c.unbind("click",s)})}}}]).directive("datepickerPopupWrap",function(){return{restrict:"EA",replace:!0,transclude:!0,templateUrl:"template/datepicker/popup.html",link:function(a,b){b.bind("click",function(a){a.preventDefault(),a.stopPropagation()})}}}),angular.module("ui.bootstrap.dropdown",[]).constant("dropdownConfig",{openClass:"open"}).service("dropdownService",["$document",function(a){var b=null;this.open=function(e){b||(a.bind("click",c),a.bind("keydown",d)),b&&b!==e&&(b.isOpen=!1),b=e},this.close=function(e){b===e&&(b=null,a.unbind("click",c),a.unbind("keydown",d))};var c=function(a){if(b){var c=b.getToggleElement();a&&c&&c[0].contains(a.target)||b.$apply(function(){b.isOpen=!1})}},d=function(a){27===a.which&&(b.focusToggleElement(),c())}}]).controller("DropdownController",["$scope","$attrs","$parse","dropdownConfig","dropdownService","$animate",function(a,b,c,d,e,f){var g,h=this,i=a.$new(),j=d.openClass,k=angular.noop,l=b.onToggle?c(b.onToggle):angular.noop;this.init=function(d){h.$element=d,b.isOpen&&(g=c(b.isOpen),k=g.assign,a.$watch(g,function(a){i.isOpen=!!a}))},this.toggle=function(a){return i.isOpen=arguments.length?!!a:!i.isOpen},this.isOpen=function(){return i.isOpen},i.getToggleElement=function(){return h.toggleElement},i.focusToggleElement=function(){h.toggleElement&&h.toggleElement[0].focus()},i.$watch("isOpen",function(b,c){f[b?"addClass":"removeClass"](h.$element,j),b?(i.focusToggleElement(),e.open(i)):e.close(i),k(a,b),angular.isDefined(b)&&b!==c&&l(a,{open:!!b})}),a.$on("$locationChangeSuccess",function(){i.isOpen=!1}),a.$on("$destroy",function(){i.$destroy()})}]).directive("dropdown",function(){return{controller:"DropdownController",link:function(a,b,c,d){d.init(b)}}}).directive("dropdownToggle",function(){return{require:"?^dropdown",link:function(a,b,c,d){if(d){d.toggleElement=b;var e=function(e){e.preventDefault(),b.hasClass("disabled")||c.disabled||a.$apply(function(){d.toggle()})};b.bind("click",e),b.attr({"aria-haspopup":!0,"aria-expanded":!1}),a.$watch(d.isOpen,function(a){b.attr("aria-expanded",!!a)}),a.$on("$destroy",function(){b.unbind("click",e)})}}}}),angular.module("ui.bootstrap.modal",["ui.bootstrap.transition"]).factory("$$stackedMap",function(){return{createNew:function(){var a=[];return{add:function(b,c){a.push({key:b,value:c})},get:function(b){for(var c=0;c<a.length;c++)if(b==a[c].key)return a[c]},keys:function(){for(var b=[],c=0;c<a.length;c++)b.push(a[c].key);return b},top:function(){return a[a.length-1]},remove:function(b){for(var c=-1,d=0;d<a.length;d++)if(b==a[d].key){c=d;break}return a.splice(c,1)[0]},removeTop:function(){return a.splice(a.length-1,1)[0]},length:function(){return a.length}}}}}).directive("modalBackdrop",["$timeout",function(a){return{restrict:"EA",replace:!0,templateUrl:"template/modal/backdrop.html",link:function(b,c,d){b.backdropClass=d.backdropClass||"",b.animate=!1,a(function(){b.animate=!0})}}}]).directive("modalWindow",["$modalStack","$timeout",function(a,b){return{restrict:"EA",scope:{index:"@",animate:"="},replace:!0,transclude:!0,templateUrl:function(a,b){return b.templateUrl||"template/modal/window.html"},link:function(c,d,e){d.addClass(e.windowClass||""),c.size=e.size,b(function(){c.animate=!0,d[0].querySelectorAll("[autofocus]").length||d[0].focus()}),c.close=function(b){var c=a.getTop();c&&c.value.backdrop&&"static"!=c.value.backdrop&&b.target===b.currentTarget&&(b.preventDefault(),b.stopPropagation(),a.dismiss(c.key,"backdrop click"))}}}}]).directive("modalTransclude",function(){return{link:function(a,b,c,d,e){e(a.$parent,function(a){b.empty(),b.append(a)})}}}).factory("$modalStack",["$transition","$timeout","$document","$compile","$rootScope","$$stackedMap",function(a,b,c,d,e,f){function g(){for(var a=-1,b=n.keys(),c=0;c<b.length;c++)n.get(b[c]).value.backdrop&&(a=c);return a}function h(a){var b=c.find("body").eq(0),d=n.get(a).value;n.remove(a),j(d.modalDomEl,d.modalScope,300,function(){d.modalScope.$destroy(),b.toggleClass(m,n.length()>0),i()})}function i(){if(k&&-1==g()){var a=l;j(k,l,150,function(){a.$destroy(),a=null}),k=void 0,l=void 0}}function j(c,d,e,f){function g(){g.done||(g.done=!0,c.remove(),f&&f())}d.animate=!1;var h=a.transitionEndEventName;if(h){var i=b(g,e);c.bind(h,function(){b.cancel(i),g(),d.$apply()})}else b(g)}var k,l,m="modal-open",n=f.createNew(),o={};return e.$watch(g,function(a){l&&(l.index=a)}),c.bind("keydown",function(a){var b;27===a.which&&(b=n.top(),b&&b.value.keyboard&&(a.preventDefault(),e.$apply(function(){o.dismiss(b.key,"escape key press")})))}),o.open=function(a,b){n.add(a,{deferred:b.deferred,modalScope:b.scope,backdrop:b.backdrop,keyboard:b.keyboard});var f=c.find("body").eq(0),h=g();if(h>=0&&!k){l=e.$new(!0),l.index=h;var i=angular.element("<div modal-backdrop></div>");i.attr("backdrop-class",b.backdropClass),k=d(i)(l),f.append(k)}var j=angular.element("<div modal-window></div>");j.attr({"template-url":b.windowTemplateUrl,"window-class":b.windowClass,size:b.size,index:n.length()-1,animate:"animate"}).html(b.content);var o=d(j)(b.scope);n.top().value.modalDomEl=o,f.append(o),f.addClass(m)},o.close=function(a,b){var c=n.get(a);c&&(c.value.deferred.resolve(b),h(a))},o.dismiss=function(a,b){var c=n.get(a);c&&(c.value.deferred.reject(b),h(a))},o.dismissAll=function(a){for(var b=this.getTop();b;)this.dismiss(b.key,a),b=this.getTop()},o.getTop=function(){return n.top()},o}]).provider("$modal",function(){var a={options:{backdrop:!0,keyboard:!0},$get:["$injector","$rootScope","$q","$http","$templateCache","$controller","$modalStack",function(b,c,d,e,f,g,h){function i(a){return a.template?d.when(a.template):e.get(angular.isFunction(a.templateUrl)?a.templateUrl():a.templateUrl,{cache:f}).then(function(a){return a.data})}function j(a){var c=[];return angular.forEach(a,function(a){(angular.isFunction(a)||angular.isArray(a))&&c.push(d.when(b.invoke(a)))}),c}var k={};return k.open=function(b){var e=d.defer(),f=d.defer(),k={result:e.promise,opened:f.promise,close:function(a){h.close(k,a)},dismiss:function(a){h.dismiss(k,a)}};if(b=angular.extend({},a.options,b),b.resolve=b.resolve||{},!b.template&&!b.templateUrl)throw new Error("One of template or templateUrl options is required.");var l=d.all([i(b)].concat(j(b.resolve)));return l.then(function(a){var d=(b.scope||c).$new();d.$close=k.close,d.$dismiss=k.dismiss;var f,i={},j=1;b.controller&&(i.$scope=d,i.$modalInstance=k,angular.forEach(b.resolve,function(b,c){i[c]=a[j++]}),f=g(b.controller,i),b.controllerAs&&(d[b.controllerAs]=f)),h.open(k,{scope:d,deferred:e,content:a[0],backdrop:b.backdrop,keyboard:b.keyboard,backdropClass:b.backdropClass,windowClass:b.windowClass,windowTemplateUrl:b.windowTemplateUrl,size:b.size})},function(a){e.reject(a)}),l.then(function(){f.resolve(!0)},function(){f.reject(!1)}),k},k}]};return a}),angular.module("ui.bootstrap.pagination",[]).controller("PaginationController",["$scope","$attrs","$parse",function(a,b,c){var d=this,e={$setViewValue:angular.noop},f=b.numPages?c(b.numPages).assign:angular.noop;this.init=function(f,g){e=f,this.config=g,e.$render=function(){d.render()},b.itemsPerPage?a.$parent.$watch(c(b.itemsPerPage),function(b){d.itemsPerPage=parseInt(b,10),a.totalPages=d.calculateTotalPages()}):this.itemsPerPage=g.itemsPerPage},this.calculateTotalPages=function(){var b=this.itemsPerPage<1?1:Math.ceil(a.totalItems/this.itemsPerPage);return Math.max(b||0,1)},this.render=function(){a.page=parseInt(e.$viewValue,10)||1},a.selectPage=function(b){a.page!==b&&b>0&&b<=a.totalPages&&(e.$setViewValue(b),e.$render())},a.getText=function(b){return a[b+"Text"]||d.config[b+"Text"]},a.noPrevious=function(){return 1===a.page},a.noNext=function(){return a.page===a.totalPages},a.$watch("totalItems",function(){a.totalPages=d.calculateTotalPages()}),a.$watch("totalPages",function(b){f(a.$parent,b),a.page>b?a.selectPage(b):e.$render()})}]).constant("paginationConfig",{itemsPerPage:10,boundaryLinks:!1,directionLinks:!0,firstText:"First",previousText:"Previous",nextText:"Next",lastText:"Last",rotate:!0}).directive("pagination",["$parse","paginationConfig",function(a,b){return{restrict:"EA",scope:{totalItems:"=",firstText:"@",previousText:"@",nextText:"@",lastText:"@"},require:["pagination","?ngModel"],controller:"PaginationController",templateUrl:"template/pagination/pagination.html",replace:!0,link:function(c,d,e,f){function g(a,b,c){return{number:a,text:b,active:c}}function h(a,b){var c=[],d=1,e=b,f=angular.isDefined(k)&&b>k;f&&(l?(d=Math.max(a-Math.floor(k/2),1),e=d+k-1,e>b&&(e=b,d=e-k+1)):(d=(Math.ceil(a/k)-1)*k+1,e=Math.min(d+k-1,b)));for(var h=d;e>=h;h++){var i=g(h,h,h===a);c.push(i)}if(f&&!l){if(d>1){var j=g(d-1,"...",!1);c.unshift(j)}if(b>e){var m=g(e+1,"...",!1);c.push(m)}}return c}var i=f[0],j=f[1];if(j){var k=angular.isDefined(e.maxSize)?c.$parent.$eval(e.maxSize):b.maxSize,l=angular.isDefined(e.rotate)?c.$parent.$eval(e.rotate):b.rotate;c.boundaryLinks=angular.isDefined(e.boundaryLinks)?c.$parent.$eval(e.boundaryLinks):b.boundaryLinks,c.directionLinks=angular.isDefined(e.directionLinks)?c.$parent.$eval(e.directionLinks):b.directionLinks,i.init(j,b),e.maxSize&&c.$parent.$watch(a(e.maxSize),function(a){k=parseInt(a,10),i.render()
 });var m=i.render;i.render=function(){m(),c.page>0&&c.page<=c.totalPages&&(c.pages=h(c.page,c.totalPages))}}}}}]).constant("pagerConfig",{itemsPerPage:10,previousText:"« Previous",nextText:"Next »",align:!0}).directive("pager",["pagerConfig",function(a){return{restrict:"EA",scope:{totalItems:"=",previousText:"@",nextText:"@"},require:["pager","?ngModel"],controller:"PaginationController",templateUrl:"template/pagination/pager.html",replace:!0,link:function(b,c,d,e){var f=e[0],g=e[1];g&&(b.align=angular.isDefined(d.align)?b.$parent.$eval(d.align):a.align,f.init(g,a))}}}]),angular.module("ui.bootstrap.tooltip",["ui.bootstrap.position","ui.bootstrap.bindHtml"]).provider("$tooltip",function(){function a(a){var b=/[A-Z]/g,c="-";return a.replace(b,function(a,b){return(b?c:"")+a.toLowerCase()})}var b={placement:"top",animation:!0,popupDelay:0},c={mouseenter:"mouseleave",click:"click",focus:"blur"},d={};this.options=function(a){angular.extend(d,a)},this.setTriggers=function(a){angular.extend(c,a)},this.$get=["$window","$compile","$timeout","$document","$position","$interpolate",function(e,f,g,h,i,j){return function(e,k,l){function m(a){var b=a||n.trigger||l,d=c[b]||b;return{show:b,hide:d}}var n=angular.extend({},b,d),o=a(e),p=j.startSymbol(),q=j.endSymbol(),r="<div "+o+'-popup title="'+p+"title"+q+'" content="'+p+"content"+q+'" placement="'+p+"placement"+q+'" animation="animation" is-open="isOpen"></div>';return{restrict:"EA",compile:function(){var a=f(r);return function(b,c,d){function f(){D.isOpen?l():j()}function j(){(!C||b.$eval(d[k+"Enable"]))&&(s(),D.popupDelay?z||(z=g(o,D.popupDelay,!1),z.then(function(a){a()})):o()())}function l(){b.$apply(function(){p()})}function o(){return z=null,y&&(g.cancel(y),y=null),D.content?(q(),w.css({top:0,left:0,display:"block"}),A?h.find("body").append(w):c.after(w),E(),D.isOpen=!0,D.$digest(),E):angular.noop}function p(){D.isOpen=!1,g.cancel(z),z=null,D.animation?y||(y=g(r,500)):r()}function q(){w&&r(),x=D.$new(),w=a(x,angular.noop)}function r(){y=null,w&&(w.remove(),w=null),x&&(x.$destroy(),x=null)}function s(){t(),u()}function t(){var a=d[k+"Placement"];D.placement=angular.isDefined(a)?a:n.placement}function u(){var a=d[k+"PopupDelay"],b=parseInt(a,10);D.popupDelay=isNaN(b)?n.popupDelay:b}function v(){var a=d[k+"Trigger"];F(),B=m(a),B.show===B.hide?c.bind(B.show,f):(c.bind(B.show,j),c.bind(B.hide,l))}var w,x,y,z,A=angular.isDefined(n.appendToBody)?n.appendToBody:!1,B=m(void 0),C=angular.isDefined(d[k+"Enable"]),D=b.$new(!0),E=function(){var a=i.positionElements(c,w,D.placement,A);a.top+="px",a.left+="px",w.css(a)};D.isOpen=!1,d.$observe(e,function(a){D.content=a,!a&&D.isOpen&&p()}),d.$observe(k+"Title",function(a){D.title=a});var F=function(){c.unbind(B.show,j),c.unbind(B.hide,l)};v();var G=b.$eval(d[k+"Animation"]);D.animation=angular.isDefined(G)?!!G:n.animation;var H=b.$eval(d[k+"AppendToBody"]);A=angular.isDefined(H)?H:A,A&&b.$on("$locationChangeSuccess",function(){D.isOpen&&p()}),b.$on("$destroy",function(){g.cancel(y),g.cancel(z),F(),r(),D=null})}}}}}]}).directive("tooltipPopup",function(){return{restrict:"EA",replace:!0,scope:{content:"@",placement:"@",animation:"&",isOpen:"&"},templateUrl:"template/tooltip/tooltip-popup.html"}}).directive("tooltip",["$tooltip",function(a){return a("tooltip","tooltip","mouseenter")}]).directive("tooltipHtmlUnsafePopup",function(){return{restrict:"EA",replace:!0,scope:{content:"@",placement:"@",animation:"&",isOpen:"&"},templateUrl:"template/tooltip/tooltip-html-unsafe-popup.html"}}).directive("tooltipHtmlUnsafe",["$tooltip",function(a){return a("tooltipHtmlUnsafe","tooltip","mouseenter")}]),angular.module("ui.bootstrap.popover",["ui.bootstrap.tooltip"]).directive("popoverPopup",function(){return{restrict:"EA",replace:!0,scope:{title:"@",content:"@",placement:"@",animation:"&",isOpen:"&"},templateUrl:"template/popover/popover.html"}}).directive("popover",["$tooltip",function(a){return a("popover","popover","click")}]),angular.module("ui.bootstrap.progressbar",[]).constant("progressConfig",{animate:!0,max:100}).controller("ProgressController",["$scope","$attrs","progressConfig",function(a,b,c){var d=this,e=angular.isDefined(b.animate)?a.$parent.$eval(b.animate):c.animate;this.bars=[],a.max=angular.isDefined(b.max)?a.$parent.$eval(b.max):c.max,this.addBar=function(b,c){e||c.css({transition:"none"}),this.bars.push(b),b.$watch("value",function(c){b.percent=+(100*c/a.max).toFixed(2)}),b.$on("$destroy",function(){c=null,d.removeBar(b)})},this.removeBar=function(a){this.bars.splice(this.bars.indexOf(a),1)}}]).directive("progress",function(){return{restrict:"EA",replace:!0,transclude:!0,controller:"ProgressController",require:"progress",scope:{},templateUrl:"template/progressbar/progress.html"}}).directive("bar",function(){return{restrict:"EA",replace:!0,transclude:!0,require:"^progress",scope:{value:"=",type:"@"},templateUrl:"template/progressbar/bar.html",link:function(a,b,c,d){d.addBar(a,b)}}}).directive("progressbar",function(){return{restrict:"EA",replace:!0,transclude:!0,controller:"ProgressController",scope:{value:"=",type:"@"},templateUrl:"template/progressbar/progressbar.html",link:function(a,b,c,d){d.addBar(a,angular.element(b.children()[0]))}}}),angular.module("ui.bootstrap.rating",[]).constant("ratingConfig",{max:5,stateOn:null,stateOff:null}).controller("RatingController",["$scope","$attrs","ratingConfig",function(a,b,c){var d={$setViewValue:angular.noop};this.init=function(e){d=e,d.$render=this.render,this.stateOn=angular.isDefined(b.stateOn)?a.$parent.$eval(b.stateOn):c.stateOn,this.stateOff=angular.isDefined(b.stateOff)?a.$parent.$eval(b.stateOff):c.stateOff;var f=angular.isDefined(b.ratingStates)?a.$parent.$eval(b.ratingStates):new Array(angular.isDefined(b.max)?a.$parent.$eval(b.max):c.max);a.range=this.buildTemplateObjects(f)},this.buildTemplateObjects=function(a){for(var b=0,c=a.length;c>b;b++)a[b]=angular.extend({index:b},{stateOn:this.stateOn,stateOff:this.stateOff},a[b]);return a},a.rate=function(b){!a.readonly&&b>=0&&b<=a.range.length&&(d.$setViewValue(b),d.$render())},a.enter=function(b){a.readonly||(a.value=b),a.onHover({value:b})},a.reset=function(){a.value=d.$viewValue,a.onLeave()},a.onKeydown=function(b){/(37|38|39|40)/.test(b.which)&&(b.preventDefault(),b.stopPropagation(),a.rate(a.value+(38===b.which||39===b.which?1:-1)))},this.render=function(){a.value=d.$viewValue}}]).directive("rating",function(){return{restrict:"EA",require:["rating","ngModel"],scope:{readonly:"=?",onHover:"&",onLeave:"&"},controller:"RatingController",templateUrl:"template/rating/rating.html",replace:!0,link:function(a,b,c,d){var e=d[0],f=d[1];f&&e.init(f)}}}),angular.module("ui.bootstrap.tabs",[]).controller("TabsetController",["$scope",function(a){var b=this,c=b.tabs=a.tabs=[];b.select=function(a){angular.forEach(c,function(b){b.active&&b!==a&&(b.active=!1,b.onDeselect())}),a.active=!0,a.onSelect()},b.addTab=function(a){c.push(a),1===c.length?a.active=!0:a.active&&b.select(a)},b.removeTab=function(a){var e=c.indexOf(a);if(a.active&&c.length>1&&!d){var f=e==c.length-1?e-1:e+1;b.select(c[f])}c.splice(e,1)};var d;a.$on("$destroy",function(){d=!0})}]).directive("tabset",function(){return{restrict:"EA",transclude:!0,replace:!0,scope:{type:"@"},controller:"TabsetController",templateUrl:"template/tabs/tabset.html",link:function(a,b,c){a.vertical=angular.isDefined(c.vertical)?a.$parent.$eval(c.vertical):!1,a.justified=angular.isDefined(c.justified)?a.$parent.$eval(c.justified):!1}}}).directive("tab",["$parse",function(a){return{require:"^tabset",restrict:"EA",replace:!0,templateUrl:"template/tabs/tab.html",transclude:!0,scope:{active:"=?",heading:"@",onSelect:"&select",onDeselect:"&deselect"},controller:function(){},compile:function(b,c,d){return function(b,c,e,f){b.$watch("active",function(a){a&&f.select(b)}),b.disabled=!1,e.disabled&&b.$parent.$watch(a(e.disabled),function(a){b.disabled=!!a}),b.select=function(){b.disabled||(b.active=!0)},f.addTab(b),b.$on("$destroy",function(){f.removeTab(b)}),b.$transcludeFn=d}}}}]).directive("tabHeadingTransclude",[function(){return{restrict:"A",require:"^tab",link:function(a,b){a.$watch("headingElement",function(a){a&&(b.html(""),b.append(a))})}}}]).directive("tabContentTransclude",function(){function a(a){return a.tagName&&(a.hasAttribute("tab-heading")||a.hasAttribute("data-tab-heading")||"tab-heading"===a.tagName.toLowerCase()||"data-tab-heading"===a.tagName.toLowerCase())}return{restrict:"A",require:"^tabset",link:function(b,c,d){var e=b.$eval(d.tabContentTransclude);e.$transcludeFn(e.$parent,function(b){angular.forEach(b,function(b){a(b)?e.headingElement=b:c.append(b)})})}}}),angular.module("ui.bootstrap.timepicker",[]).constant("timepickerConfig",{hourStep:1,minuteStep:1,showMeridian:!0,meridians:null,readonlyInput:!1,mousewheel:!0}).controller("TimepickerController",["$scope","$attrs","$parse","$log","$locale","timepickerConfig",function(a,b,c,d,e,f){function g(){var b=parseInt(a.hours,10),c=a.showMeridian?b>0&&13>b:b>=0&&24>b;return c?(a.showMeridian&&(12===b&&(b=0),a.meridian===p[1]&&(b+=12)),b):void 0}function h(){var b=parseInt(a.minutes,10);return b>=0&&60>b?b:void 0}function i(a){return angular.isDefined(a)&&a.toString().length<2?"0"+a:a}function j(a){k(),o.$setViewValue(new Date(n)),l(a)}function k(){o.$setValidity("time",!0),a.invalidHours=!1,a.invalidMinutes=!1}function l(b){var c=n.getHours(),d=n.getMinutes();a.showMeridian&&(c=0===c||12===c?12:c%12),a.hours="h"===b?c:i(c),a.minutes="m"===b?d:i(d),a.meridian=n.getHours()<12?p[0]:p[1]}function m(a){var b=new Date(n.getTime()+6e4*a);n.setHours(b.getHours(),b.getMinutes()),j()}var n=new Date,o={$setViewValue:angular.noop},p=angular.isDefined(b.meridians)?a.$parent.$eval(b.meridians):f.meridians||e.DATETIME_FORMATS.AMPMS;this.init=function(c,d){o=c,o.$render=this.render;var e=d.eq(0),g=d.eq(1),h=angular.isDefined(b.mousewheel)?a.$parent.$eval(b.mousewheel):f.mousewheel;h&&this.setupMousewheelEvents(e,g),a.readonlyInput=angular.isDefined(b.readonlyInput)?a.$parent.$eval(b.readonlyInput):f.readonlyInput,this.setupInputEvents(e,g)};var q=f.hourStep;b.hourStep&&a.$parent.$watch(c(b.hourStep),function(a){q=parseInt(a,10)});var r=f.minuteStep;b.minuteStep&&a.$parent.$watch(c(b.minuteStep),function(a){r=parseInt(a,10)}),a.showMeridian=f.showMeridian,b.showMeridian&&a.$parent.$watch(c(b.showMeridian),function(b){if(a.showMeridian=!!b,o.$error.time){var c=g(),d=h();angular.isDefined(c)&&angular.isDefined(d)&&(n.setHours(c),j())}else l()}),this.setupMousewheelEvents=function(b,c){var d=function(a){a.originalEvent&&(a=a.originalEvent);var b=a.wheelDelta?a.wheelDelta:-a.deltaY;return a.detail||b>0};b.bind("mousewheel wheel",function(b){a.$apply(d(b)?a.incrementHours():a.decrementHours()),b.preventDefault()}),c.bind("mousewheel wheel",function(b){a.$apply(d(b)?a.incrementMinutes():a.decrementMinutes()),b.preventDefault()})},this.setupInputEvents=function(b,c){if(a.readonlyInput)return a.updateHours=angular.noop,void(a.updateMinutes=angular.noop);var d=function(b,c){o.$setViewValue(null),o.$setValidity("time",!1),angular.isDefined(b)&&(a.invalidHours=b),angular.isDefined(c)&&(a.invalidMinutes=c)};a.updateHours=function(){var a=g();angular.isDefined(a)?(n.setHours(a),j("h")):d(!0)},b.bind("blur",function(){!a.invalidHours&&a.hours<10&&a.$apply(function(){a.hours=i(a.hours)})}),a.updateMinutes=function(){var a=h();angular.isDefined(a)?(n.setMinutes(a),j("m")):d(void 0,!0)},c.bind("blur",function(){!a.invalidMinutes&&a.minutes<10&&a.$apply(function(){a.minutes=i(a.minutes)})})},this.render=function(){var a=o.$modelValue?new Date(o.$modelValue):null;isNaN(a)?(o.$setValidity("time",!1),d.error('Timepicker directive: "ng-model" value must be a Date object, a number of milliseconds since 01.01.1970 or a string representing an RFC2822 or ISO 8601 date.')):(a&&(n=a),k(),l())},a.incrementHours=function(){m(60*q)},a.decrementHours=function(){m(60*-q)},a.incrementMinutes=function(){m(r)},a.decrementMinutes=function(){m(-r)},a.toggleMeridian=function(){m(720*(n.getHours()<12?1:-1))}}]).directive("timepicker",function(){return{restrict:"EA",require:["timepicker","?^ngModel"],controller:"TimepickerController",replace:!0,scope:{},templateUrl:"template/timepicker/timepicker.html",link:function(a,b,c,d){var e=d[0],f=d[1];f&&e.init(f,b.find("input"))}}}),angular.module("ui.bootstrap.typeahead",["ui.bootstrap.position","ui.bootstrap.bindHtml"]).factory("typeaheadParser",["$parse",function(a){var b=/^\s*([\s\S]+?)(?:\s+as\s+([\s\S]+?))?\s+for\s+(?:([\$\w][\$\w\d]*))\s+in\s+([\s\S]+?)$/;return{parse:function(c){var d=c.match(b);if(!d)throw new Error('Expected typeahead specification in form of "_modelValue_ (as _label_)? for _item_ in _collection_" but got "'+c+'".');return{itemName:d[3],source:a(d[4]),viewMapper:a(d[2]||d[1]),modelMapper:a(d[1])}}}}]).directive("typeahead",["$compile","$parse","$q","$timeout","$document","$position","typeaheadParser",function(a,b,c,d,e,f,g){var h=[9,13,27,38,40];return{require:"ngModel",link:function(i,j,k,l){var m,n=i.$eval(k.typeaheadMinLength)||1,o=i.$eval(k.typeaheadWaitMs)||0,p=i.$eval(k.typeaheadEditable)!==!1,q=b(k.typeaheadLoading).assign||angular.noop,r=b(k.typeaheadOnSelect),s=k.typeaheadInputFormatter?b(k.typeaheadInputFormatter):void 0,t=k.typeaheadAppendToBody?i.$eval(k.typeaheadAppendToBody):!1,u=i.$eval(k.typeaheadFocusFirst)!==!1,v=b(k.ngModel).assign,w=g.parse(k.typeahead),x=i.$new();i.$on("$destroy",function(){x.$destroy()});var y="typeahead-"+x.$id+"-"+Math.floor(1e4*Math.random());j.attr({"aria-autocomplete":"list","aria-expanded":!1,"aria-owns":y});var z=angular.element("<div typeahead-popup></div>");z.attr({id:y,matches:"matches",active:"activeIdx",select:"select(activeIdx)",query:"query",position:"position"}),angular.isDefined(k.typeaheadTemplateUrl)&&z.attr("template-url",k.typeaheadTemplateUrl);var A=function(){x.matches=[],x.activeIdx=-1,j.attr("aria-expanded",!1)},B=function(a){return y+"-option-"+a};x.$watch("activeIdx",function(a){0>a?j.removeAttr("aria-activedescendant"):j.attr("aria-activedescendant",B(a))});var C=function(a){var b={$viewValue:a};q(i,!0),c.when(w.source(i,b)).then(function(c){var d=a===l.$viewValue;if(d&&m)if(c.length>0){x.activeIdx=u?0:-1,x.matches.length=0;for(var e=0;e<c.length;e++)b[w.itemName]=c[e],x.matches.push({id:B(e),label:w.viewMapper(x,b),model:c[e]});x.query=a,x.position=t?f.offset(j):f.position(j),x.position.top=x.position.top+j.prop("offsetHeight"),j.attr("aria-expanded",!0)}else A();d&&q(i,!1)},function(){A(),q(i,!1)})};A(),x.query=void 0;var D,E=function(a){D=d(function(){C(a)},o)},F=function(){D&&d.cancel(D)};l.$parsers.unshift(function(a){return m=!0,a&&a.length>=n?o>0?(F(),E(a)):C(a):(q(i,!1),F(),A()),p?a:a?void l.$setValidity("editable",!1):(l.$setValidity("editable",!0),a)}),l.$formatters.push(function(a){var b,c,d={};return s?(d.$model=a,s(i,d)):(d[w.itemName]=a,b=w.viewMapper(i,d),d[w.itemName]=void 0,c=w.viewMapper(i,d),b!==c?b:a)}),x.select=function(a){var b,c,e={};e[w.itemName]=c=x.matches[a].model,b=w.modelMapper(i,e),v(i,b),l.$setValidity("editable",!0),r(i,{$item:c,$model:b,$label:w.viewMapper(i,e)}),A(),d(function(){j[0].focus()},0,!1)},j.bind("keydown",function(a){0!==x.matches.length&&-1!==h.indexOf(a.which)&&(-1!=x.activeIdx||13!==a.which&&9!==a.which)&&(a.preventDefault(),40===a.which?(x.activeIdx=(x.activeIdx+1)%x.matches.length,x.$digest()):38===a.which?(x.activeIdx=(x.activeIdx>0?x.activeIdx:x.matches.length)-1,x.$digest()):13===a.which||9===a.which?x.$apply(function(){x.select(x.activeIdx)}):27===a.which&&(a.stopPropagation(),A(),x.$digest()))}),j.bind("blur",function(){m=!1});var G=function(a){j[0]!==a.target&&(A(),x.$digest())};e.bind("click",G),i.$on("$destroy",function(){e.unbind("click",G),t&&H.remove()});var H=a(z)(x);t?e.find("body").append(H):j.after(H)}}}]).directive("typeaheadPopup",function(){return{restrict:"EA",scope:{matches:"=",query:"=",active:"=",position:"=",select:"&"},replace:!0,templateUrl:"template/typeahead/typeahead-popup.html",link:function(a,b,c){a.templateUrl=c.templateUrl,a.isOpen=function(){return a.matches.length>0},a.isActive=function(b){return a.active==b},a.selectActive=function(b){a.active=b},a.selectMatch=function(b){a.select({activeIdx:b})}}}}).directive("typeaheadMatch",["$http","$templateCache","$compile","$parse",function(a,b,c,d){return{restrict:"EA",scope:{index:"=",match:"=",query:"="},link:function(e,f,g){var h=d(g.templateUrl)(e.$parent)||"template/typeahead/typeahead-match.html";a.get(h,{cache:b}).success(function(a){f.replaceWith(c(a.trim())(e))})}}}]).filter("typeaheadHighlight",function(){function a(a){return a.replace(/([.?*+^$[\]\\(){}|-])/g,"\\$1")}return function(b,c){return c?(""+b).replace(new RegExp(a(c),"gi"),"<strong>$&</strong>"):b}}),angular.module("template/accordion/accordion-group.html",[]).run(["$templateCache",function(a){a.put("template/accordion/accordion-group.html",'<div class="panel panel-default">\n  <div class="panel-heading">\n    <h4 class="panel-title">\n      <a href class="accordion-toggle" ng-click="toggleOpen()" accordion-transclude="heading"><span ng-class="{\'text-muted\': isDisabled}">{{heading}}</span></a>\n    </h4>\n  </div>\n  <div class="panel-collapse" collapse="!isOpen">\n	  <div class="panel-body" ng-transclude></div>\n  </div>\n</div>\n')}]),angular.module("template/accordion/accordion.html",[]).run(["$templateCache",function(a){a.put("template/accordion/accordion.html",'<div class="panel-group" ng-transclude></div>')}]),angular.module("template/alert/alert.html",[]).run(["$templateCache",function(a){a.put("template/alert/alert.html",'<div class="alert" ng-class="[\'alert-\' + (type || \'warning\'), closeable ? \'alert-dismissable\' : null]" role="alert">\n    <button ng-show="closeable" type="button" class="close" ng-click="close()">\n        <span aria-hidden="true">&times;</span>\n        <span class="sr-only">Close</span>\n    </button>\n    <div ng-transclude></div>\n</div>\n')}]),angular.module("template/carousel/carousel.html",[]).run(["$templateCache",function(a){a.put("template/carousel/carousel.html",'<div ng-mouseenter="pause()" ng-mouseleave="play()" class="carousel" ng-swipe-right="prev()" ng-swipe-left="next()">\n    <ol class="carousel-indicators" ng-show="slides.length > 1">\n        <li ng-repeat="slide in slides track by $index" ng-class="{active: isActive(slide)}" ng-click="select(slide)"></li>\n    </ol>\n    <div class="carousel-inner" ng-transclude></div>\n    <a class="left carousel-control" ng-click="prev()" ng-show="slides.length > 1"><span class="glyphicon glyphicon-chevron-left"></span></a>\n    <a class="right carousel-control" ng-click="next()" ng-show="slides.length > 1"><span class="glyphicon glyphicon-chevron-right"></span></a>\n</div>\n')}]),angular.module("template/carousel/slide.html",[]).run(["$templateCache",function(a){a.put("template/carousel/slide.html","<div ng-class=\"{\n    'active': leaving || (active && !entering),\n    'prev': (next || active) && direction=='prev',\n    'next': (next || active) && direction=='next',\n    'right': direction=='prev',\n    'left': direction=='next'\n  }\" class=\"item text-center\" ng-transclude></div>\n")}]),angular.module("template/datepicker/datepicker.html",[]).run(["$templateCache",function(a){a.put("template/datepicker/datepicker.html",'<div ng-switch="datepickerMode" role="application" ng-keydown="keydown($event)">\n  <daypicker ng-switch-when="day" tabindex="0"></daypicker>\n  <monthpicker ng-switch-when="month" tabindex="0"></monthpicker>\n  <yearpicker ng-switch-when="year" tabindex="0"></yearpicker>\n</div>')}]),angular.module("template/datepicker/day.html",[]).run(["$templateCache",function(a){a.put("template/datepicker/day.html",'<table role="grid" aria-labelledby="{{uniqueId}}-title" aria-activedescendant="{{activeDateId}}">\n  <thead>\n    <tr>\n      <th><button type="button" class="btn btn-default btn-sm pull-left" ng-click="move(-1)" tabindex="-1"><i class="glyphicon glyphicon-chevron-left"></i></button></th>\n      <th colspan="{{5 + showWeeks}}"><button id="{{uniqueId}}-title" role="heading" aria-live="assertive" aria-atomic="true" type="button" class="btn btn-default btn-sm" ng-click="toggleMode()" tabindex="-1" style="width:100%;"><strong>{{title}}</strong></button></th>\n      <th><button type="button" class="btn btn-default btn-sm pull-right" ng-click="move(1)" tabindex="-1"><i class="glyphicon glyphicon-chevron-right"></i></button></th>\n    </tr>\n    <tr>\n      <th ng-show="showWeeks" class="text-center"></th>\n      <th ng-repeat="label in labels track by $index" class="text-center"><small aria-label="{{label.full}}">{{label.abbr}}</small></th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr ng-repeat="row in rows track by $index">\n      <td ng-show="showWeeks" class="text-center h6"><em>{{ weekNumbers[$index] }}</em></td>\n      <td ng-repeat="dt in row track by dt.date" class="text-center" role="gridcell" id="{{dt.uid}}" aria-disabled="{{!!dt.disabled}}">\n        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{\'btn-info\': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{\'text-muted\': dt.secondary, \'text-info\': dt.current}">{{dt.label}}</span></button>\n      </td>\n    </tr>\n  </tbody>\n</table>\n')}]),angular.module("template/datepicker/month.html",[]).run(["$templateCache",function(a){a.put("template/datepicker/month.html",'<table role="grid" aria-labelledby="{{uniqueId}}-title" aria-activedescendant="{{activeDateId}}">\n  <thead>\n    <tr>\n      <th><button type="button" class="btn btn-default btn-sm pull-left" ng-click="move(-1)" tabindex="-1"><i class="glyphicon glyphicon-chevron-left"></i></button></th>\n      <th><button id="{{uniqueId}}-title" role="heading" aria-live="assertive" aria-atomic="true" type="button" class="btn btn-default btn-sm" ng-click="toggleMode()" tabindex="-1" style="width:100%;"><strong>{{title}}</strong></button></th>\n      <th><button type="button" class="btn btn-default btn-sm pull-right" ng-click="move(1)" tabindex="-1"><i class="glyphicon glyphicon-chevron-right"></i></button></th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr ng-repeat="row in rows track by $index">\n      <td ng-repeat="dt in row track by dt.date" class="text-center" role="gridcell" id="{{dt.uid}}" aria-disabled="{{!!dt.disabled}}">\n        <button type="button" style="width:100%;" class="btn btn-default" ng-class="{\'btn-info\': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{\'text-info\': dt.current}">{{dt.label}}</span></button>\n      </td>\n    </tr>\n  </tbody>\n</table>\n')}]),angular.module("template/datepicker/popup.html",[]).run(["$templateCache",function(a){a.put("template/datepicker/popup.html",'<ul class="dropdown-menu" ng-style="{display: (isOpen && \'block\') || \'none\', top: position.top+\'px\', left: position.left+\'px\'}" ng-keydown="keydown($event)">\n	<li ng-transclude></li>\n	<li ng-if="showButtonBar" style="padding:10px 9px 2px">\n		<span class="btn-group pull-left">\n			<button type="button" class="btn btn-sm btn-info" ng-click="select(\'today\')">{{ getText(\'current\') }}</button>\n			<button type="button" class="btn btn-sm btn-danger" ng-click="select(null)">{{ getText(\'clear\') }}</button>\n		</span>\n		<button type="button" class="btn btn-sm btn-success pull-right" ng-click="close()">{{ getText(\'close\') }}</button>\n	</li>\n</ul>\n')}]),angular.module("template/datepicker/year.html",[]).run(["$templateCache",function(a){a.put("template/datepicker/year.html",'<table role="grid" aria-labelledby="{{uniqueId}}-title" aria-activedescendant="{{activeDateId}}">\n  <thead>\n    <tr>\n      <th><button type="button" class="btn btn-default btn-sm pull-left" ng-click="move(-1)" tabindex="-1"><i class="glyphicon glyphicon-chevron-left"></i></button></th>\n      <th colspan="3"><button id="{{uniqueId}}-title" role="heading" aria-live="assertive" aria-atomic="true" type="button" class="btn btn-default btn-sm" ng-click="toggleMode()" tabindex="-1" style="width:100%;"><strong>{{title}}</strong></button></th>\n      <th><button type="button" class="btn btn-default btn-sm pull-right" ng-click="move(1)" tabindex="-1"><i class="glyphicon glyphicon-chevron-right"></i></button></th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr ng-repeat="row in rows track by $index">\n      <td ng-repeat="dt in row track by dt.date" class="text-center" role="gridcell" id="{{dt.uid}}" aria-disabled="{{!!dt.disabled}}">\n        <button type="button" style="width:100%;" class="btn btn-default" ng-class="{\'btn-info\': dt.selected, active: isActive(dt)}" ng-click="select(dt.date)" ng-disabled="dt.disabled" tabindex="-1"><span ng-class="{\'text-info\': dt.current}">{{dt.label}}</span></button>\n      </td>\n    </tr>\n  </tbody>\n</table>\n')}]),angular.module("template/modal/backdrop.html",[]).run(["$templateCache",function(a){a.put("template/modal/backdrop.html",'<div class="modal-backdrop fade {{ backdropClass }}"\n     ng-class="{in: animate}"\n     ng-style="{\'z-index\': 1040 + (index && 1 || 0) + index*10}"\n></div>\n')}]),angular.module("template/modal/window.html",[]).run(["$templateCache",function(a){a.put("template/modal/window.html",'<div tabindex="-1" role="dialog" class="modal fade" ng-class="{in: animate}" ng-style="{\'z-index\': 1050 + index*10, display: \'block\'}" ng-click="close($event)">\n    <div class="modal-dialog" ng-class="{\'modal-sm\': size == \'sm\', \'modal-lg\': size == \'lg\'}"><div class="modal-content" modal-transclude></div></div>\n</div>')}]),angular.module("template/pagination/pager.html",[]).run(["$templateCache",function(a){a.put("template/pagination/pager.html",'<ul class="pager">\n  <li ng-class="{disabled: noPrevious(), previous: align}"><a href ng-click="selectPage(page - 1)">{{getText(\'previous\')}}</a></li>\n  <li ng-class="{disabled: noNext(), next: align}"><a href ng-click="selectPage(page + 1)">{{getText(\'next\')}}</a></li>\n</ul>')}]),angular.module("template/pagination/pagination.html",[]).run(["$templateCache",function(a){a.put("template/pagination/pagination.html",'<ul class="pagination">\n  <li ng-if="boundaryLinks" ng-class="{disabled: noPrevious()}"><a href ng-click="selectPage(1)">{{getText(\'first\')}}</a></li>\n  <li ng-if="directionLinks" ng-class="{disabled: noPrevious()}"><a href ng-click="selectPage(page - 1)">{{getText(\'previous\')}}</a></li>\n  <li ng-repeat="page in pages track by $index" ng-class="{active: page.active}"><a href ng-click="selectPage(page.number)">{{page.text}}</a></li>\n  <li ng-if="directionLinks" ng-class="{disabled: noNext()}"><a href ng-click="selectPage(page + 1)">{{getText(\'next\')}}</a></li>\n  <li ng-if="boundaryLinks" ng-class="{disabled: noNext()}"><a href ng-click="selectPage(totalPages)">{{getText(\'last\')}}</a></li>\n</ul>')}]),angular.module("template/tooltip/tooltip-html-unsafe-popup.html",[]).run(["$templateCache",function(a){a.put("template/tooltip/tooltip-html-unsafe-popup.html",'<div class="tooltip {{placement}}" ng-class="{ in: isOpen(), fade: animation() }">\n  <div class="tooltip-arrow"></div>\n  <div class="tooltip-inner" bind-html-unsafe="content"></div>\n</div>\n')}]),angular.module("template/tooltip/tooltip-popup.html",[]).run(["$templateCache",function(a){a.put("template/tooltip/tooltip-popup.html",'<div class="tooltip {{placement}}" ng-class="{ in: isOpen(), fade: animation() }">\n  <div class="tooltip-arrow"></div>\n  <div class="tooltip-inner" ng-bind="content"></div>\n</div>\n')}]),angular.module("template/popover/popover.html",[]).run(["$templateCache",function(a){a.put("template/popover/popover.html",'<div class="popover {{placement}}" ng-class="{ in: isOpen(), fade: animation() }">\n  <div class="arrow"></div>\n\n  <div class="popover-inner">\n      <h3 class="popover-title" ng-bind="title" ng-show="title"></h3>\n      <div class="popover-content" ng-bind="content"></div>\n  </div>\n</div>\n')}]),angular.module("template/progressbar/bar.html",[]).run(["$templateCache",function(a){a.put("template/progressbar/bar.html",'<div class="progress-bar" ng-class="type && \'progress-bar-\' + type" role="progressbar" aria-valuenow="{{value}}" aria-valuemin="0" aria-valuemax="{{max}}" ng-style="{width: percent + \'%\'}" aria-valuetext="{{percent | number:0}}%" ng-transclude></div>')}]),angular.module("template/progressbar/progress.html",[]).run(["$templateCache",function(a){a.put("template/progressbar/progress.html",'<div class="progress" ng-transclude></div>')}]),angular.module("template/progressbar/progressbar.html",[]).run(["$templateCache",function(a){a.put("template/progressbar/progressbar.html",'<div class="progress">\n  <div class="progress-bar" ng-class="type && \'progress-bar-\' + type" role="progressbar" aria-valuenow="{{value}}" aria-valuemin="0" aria-valuemax="{{max}}" ng-style="{width: percent + \'%\'}" aria-valuetext="{{percent | number:0}}%" ng-transclude></div>\n</div>')}]),angular.module("template/rating/rating.html",[]).run(["$templateCache",function(a){a.put("template/rating/rating.html",'<span ng-mouseleave="reset()" ng-keydown="onKeydown($event)" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="{{range.length}}" aria-valuenow="{{value}}">\n    <i ng-repeat="r in range track by $index" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" class="glyphicon" ng-class="$index < value && (r.stateOn || \'glyphicon-star\') || (r.stateOff || \'glyphicon-star-empty\')">\n        <span class="sr-only">({{ $index < value ? \'*\' : \' \' }})</span>\n    </i>\n</span>')}]),angular.module("template/tabs/tab.html",[]).run(["$templateCache",function(a){a.put("template/tabs/tab.html",'<li ng-class="{active: active, disabled: disabled}">\n  <a href ng-click="select()" tab-heading-transclude>{{heading}}</a>\n</li>\n')}]),angular.module("template/tabs/tabset.html",[]).run(["$templateCache",function(a){a.put("template/tabs/tabset.html",'<div>\n  <ul class="nav nav-{{type || \'tabs\'}}" ng-class="{\'nav-stacked\': vertical, \'nav-justified\': justified}" ng-transclude></ul>\n  <div class="tab-content">\n    <div class="tab-pane" \n         ng-repeat="tab in tabs" \n         ng-class="{active: tab.active}"\n         tab-content-transclude="tab">\n    </div>\n  </div>\n</div>\n')}]),angular.module("template/timepicker/timepicker.html",[]).run(["$templateCache",function(a){a.put("template/timepicker/timepicker.html",'<table>\n	<tbody>\n		<tr class="text-center">\n			<td><a ng-click="incrementHours()" class="btn btn-link"><span class="glyphicon glyphicon-chevron-up"></span></a></td>\n			<td>&nbsp;</td>\n			<td><a ng-click="incrementMinutes()" class="btn btn-link"><span class="glyphicon glyphicon-chevron-up"></span></a></td>\n			<td ng-show="showMeridian"></td>\n		</tr>\n		<tr>\n			<td style="width:50px;" class="form-group" ng-class="{\'has-error\': invalidHours}">\n				<input type="text" ng-model="hours" ng-change="updateHours()" class="form-control text-center" ng-mousewheel="incrementHours()" ng-readonly="readonlyInput" maxlength="2">\n			</td>\n			<td>:</td>\n			<td style="width:50px;" class="form-group" ng-class="{\'has-error\': invalidMinutes}">\n				<input type="text" ng-model="minutes" ng-change="updateMinutes()" class="form-control text-center" ng-readonly="readonlyInput" maxlength="2">\n			</td>\n			<td ng-show="showMeridian"><button type="button" class="btn btn-default text-center" ng-click="toggleMeridian()">{{meridian}}</button></td>\n		</tr>\n		<tr class="text-center">\n			<td><a ng-click="decrementHours()" class="btn btn-link"><span class="glyphicon glyphicon-chevron-down"></span></a></td>\n			<td>&nbsp;</td>\n			<td><a ng-click="decrementMinutes()" class="btn btn-link"><span class="glyphicon glyphicon-chevron-down"></span></a></td>\n			<td ng-show="showMeridian"></td>\n		</tr>\n	</tbody>\n</table>\n')}]),angular.module("template/typeahead/typeahead-match.html",[]).run(["$templateCache",function(a){a.put("template/typeahead/typeahead-match.html",'<a tabindex="-1" bind-html-unsafe="match.label | typeaheadHighlight:query"></a>')
 }]),angular.module("template/typeahead/typeahead-popup.html",[]).run(["$templateCache",function(a){a.put("template/typeahead/typeahead-popup.html",'<ul class="dropdown-menu" ng-show="isOpen()" ng-style="{top: position.top+\'px\', left: position.left+\'px\'}" style="display: block;" role="listbox" aria-hidden="{{!isOpen()}}">\n    <li ng-repeat="match in matches track by $index" ng-class="{active: isActive($index) }" ng-mouseenter="selectActive($index)" ng-click="selectMatch($index)" role="option" id="{{match.id}}">\n        <div typeahead-match index="$index" match="match" query="query" template-url="templateUrl"></div>\n    </li>\n</ul>\n')}]);
-// Source: app/bower_components/ngstorage/ngStorage.min.js
-/*! ngStorage 0.3.0 | Copyright (c) 2013 Gias Kay Lee | MIT License */"use strict";!function(){function a(a){return["$rootScope","$window",function(b,c){for(var d,e,f,g=c[a]||(console.warn("This browser does not support Web Storage!"),{}),h={$default:function(a){for(var b in a)angular.isDefined(h[b])||(h[b]=a[b]);return h},$reset:function(a){for(var b in h)"$"===b[0]||delete h[b];return h.$default(a)}},i=0;i<g.length;i++)(f=g.key(i))&&"ngStorage-"===f.slice(0,10)&&(h[f.slice(10)]=angular.fromJson(g.getItem(f)));return d=angular.copy(h),b.$watch(function(){e||(e=setTimeout(function(){if(e=null,!angular.equals(h,d)){angular.forEach(h,function(a,b){angular.isDefined(a)&&"$"!==b[0]&&g.setItem("ngStorage-"+b,angular.toJson(a)),delete d[b]});for(var a in d)g.removeItem("ngStorage-"+a);d=angular.copy(h)}},100))}),"localStorage"===a&&c.addEventListener&&c.addEventListener("storage",function(a){"ngStorage-"===a.key.slice(0,10)&&(a.newValue?h[a.key.slice(10)]=angular.fromJson(a.newValue):delete h[a.key.slice(10)],d=angular.copy(h),b.$apply())}),h}]}angular.module("ngStorage",[]).factory("$localStorage",a("localStorage")).factory("$sessionStorage",a("sessionStorage"))}();
 // Source: app/bower_components/ng-symbiosis-utils/ng-symbiosis-utils.min.js
 /**
  * Utils
@@ -26570,6 +26734,214 @@ angular.module('ngPaginatorPlz', [])
     return Paginator;
   });
 
+// Source: app/bower_components/angular-cookies/angular-cookies.js
+/**
+ * @license AngularJS v1.3.5
+ * (c) 2010-2014 Google, Inc. http://angularjs.org
+ * License: MIT
+ */
+(function(window, angular, undefined) {'use strict';
+
+/**
+ * @ngdoc module
+ * @name ngCookies
+ * @description
+ *
+ * # ngCookies
+ *
+ * The `ngCookies` module provides a convenient wrapper for reading and writing browser cookies.
+ *
+ *
+ * <div doc-module-components="ngCookies"></div>
+ *
+ * See {@link ngCookies.$cookies `$cookies`} and
+ * {@link ngCookies.$cookieStore `$cookieStore`} for usage.
+ */
+
+
+angular.module('ngCookies', ['ng']).
+  /**
+   * @ngdoc service
+   * @name $cookies
+   *
+   * @description
+   * Provides read/write access to browser's cookies.
+   *
+   * Only a simple Object is exposed and by adding or removing properties to/from this object, new
+   * cookies are created/deleted at the end of current $eval.
+   * The object's properties can only be strings.
+   *
+   * Requires the {@link ngCookies `ngCookies`} module to be installed.
+   *
+   * @example
+   *
+   * ```js
+   * angular.module('cookiesExample', ['ngCookies'])
+   *   .controller('ExampleController', ['$cookies', function($cookies) {
+   *     // Retrieving a cookie
+   *     var favoriteCookie = $cookies.myFavorite;
+   *     // Setting a cookie
+   *     $cookies.myFavorite = 'oatmeal';
+   *   }]);
+   * ```
+   */
+   factory('$cookies', ['$rootScope', '$browser', function($rootScope, $browser) {
+      var cookies = {},
+          lastCookies = {},
+          lastBrowserCookies,
+          runEval = false,
+          copy = angular.copy,
+          isUndefined = angular.isUndefined;
+
+      //creates a poller fn that copies all cookies from the $browser to service & inits the service
+      $browser.addPollFn(function() {
+        var currentCookies = $browser.cookies();
+        if (lastBrowserCookies != currentCookies) { //relies on browser.cookies() impl
+          lastBrowserCookies = currentCookies;
+          copy(currentCookies, lastCookies);
+          copy(currentCookies, cookies);
+          if (runEval) $rootScope.$apply();
+        }
+      })();
+
+      runEval = true;
+
+      //at the end of each eval, push cookies
+      //TODO: this should happen before the "delayed" watches fire, because if some cookies are not
+      //      strings or browser refuses to store some cookies, we update the model in the push fn.
+      $rootScope.$watch(push);
+
+      return cookies;
+
+
+      /**
+       * Pushes all the cookies from the service to the browser and verifies if all cookies were
+       * stored.
+       */
+      function push() {
+        var name,
+            value,
+            browserCookies,
+            updated;
+
+        //delete any cookies deleted in $cookies
+        for (name in lastCookies) {
+          if (isUndefined(cookies[name])) {
+            $browser.cookies(name, undefined);
+          }
+        }
+
+        //update all cookies updated in $cookies
+        for (name in cookies) {
+          value = cookies[name];
+          if (!angular.isString(value)) {
+            value = '' + value;
+            cookies[name] = value;
+          }
+          if (value !== lastCookies[name]) {
+            $browser.cookies(name, value);
+            updated = true;
+          }
+        }
+
+        //verify what was actually stored
+        if (updated) {
+          updated = false;
+          browserCookies = $browser.cookies();
+
+          for (name in cookies) {
+            if (cookies[name] !== browserCookies[name]) {
+              //delete or reset all cookies that the browser dropped from $cookies
+              if (isUndefined(browserCookies[name])) {
+                delete cookies[name];
+              } else {
+                cookies[name] = browserCookies[name];
+              }
+              updated = true;
+            }
+          }
+        }
+      }
+    }]).
+
+
+  /**
+   * @ngdoc service
+   * @name $cookieStore
+   * @requires $cookies
+   *
+   * @description
+   * Provides a key-value (string-object) storage, that is backed by session cookies.
+   * Objects put or retrieved from this storage are automatically serialized or
+   * deserialized by angular's toJson/fromJson.
+   *
+   * Requires the {@link ngCookies `ngCookies`} module to be installed.
+   *
+   * @example
+   *
+   * ```js
+   * angular.module('cookieStoreExample', ['ngCookies'])
+   *   .controller('ExampleController', ['$cookieStore', function($cookieStore) {
+   *     // Put cookie
+   *     $cookieStore.put('myFavorite','oatmeal');
+   *     // Get cookie
+   *     var favoriteCookie = $cookieStore.get('myFavorite');
+   *     // Removing a cookie
+   *     $cookieStore.remove('myFavorite');
+   *   }]);
+   * ```
+   */
+   factory('$cookieStore', ['$cookies', function($cookies) {
+
+      return {
+        /**
+         * @ngdoc method
+         * @name $cookieStore#get
+         *
+         * @description
+         * Returns the value of given cookie key
+         *
+         * @param {string} key Id to use for lookup.
+         * @returns {Object} Deserialized cookie value.
+         */
+        get: function(key) {
+          var value = $cookies[key];
+          return value ? angular.fromJson(value) : value;
+        },
+
+        /**
+         * @ngdoc method
+         * @name $cookieStore#put
+         *
+         * @description
+         * Sets a value for given cookie key
+         *
+         * @param {string} key Id for the `value`.
+         * @param {Object} value Value to be stored.
+         */
+        put: function(key, value) {
+          $cookies[key] = angular.toJson(value);
+        },
+
+        /**
+         * @ngdoc method
+         * @name $cookieStore#remove
+         *
+         * @description
+         * Remove given cookie
+         *
+         * @param {string} key Id of the key-value pair to delete.
+         */
+        remove: function(key) {
+          delete $cookies[key];
+        }
+      };
+
+    }]);
+
+
+})(window, window.angular);
+
 // Source: .tmp/scripts/app.js
 /**
  * 
@@ -26577,5 +26949,5 @@ angular.module('ngPaginatorPlz', [])
  * @link 
  * @author 
  * @license MIT License, http://www.opensource.org/licenses/MIT
- */"use strict";angular.deepExtend=function(a,b){for(var c in b)b[c]&&b[c].constructor&&b[c].constructor===Object?(a[c]=a[c]||{},angular.deepExtend(a[c],b[c])):a[c]=b[c];return a};var components=angular.module("ndc.components",[]);angular.componentFactory.moduleDecorator(components);var app=angular.module("ndc",["kennethlynne.componentFactory","ngSymbiosis.utils","ngSymbiosis.routeProvider","ngSymbiosis.repository","ngSymbiosis.model","ndc.components","ngAnimate","angular-loading-bar","ui.router","ui.bootstrap","ngTouch","ngStorage","ui.select2","cgBusy","ngRoles","ngPaginatorPlz"]);angular.componentFactory.moduleDecorator(app),angular.module("ndc").constant("Config",angular.deepExtend({viewsDir:"views/",componentsDir:"components/",statesDir:"states/",environment:"production",API:{protocol:"http",host:"api.ndcvideos.com",port:String(80),path:"/api"}},angular._localConfig||{})).config(["componentFactoryProvider",function(a){a.setViewPath(function(a){return"components/"+a+"/"+a+".html"})}]).value("cgBusyTemplateName","views/angular-busy/default-spinner.html").factory("BaseUrl",["Config",function(a){return a.API.protocol+"://"+a.API.host+":"+a.API.port+"/"}]).factory("APIBaseUrl",["Config",function(a){return a.API.protocol+"://"+a.API.host+":"+a.API.port+a.API.path+"/"}]).value("cgBusyDefaults",{message:"Loading Stuff",backdrop:!1,templateUrl:"views/angular-busy/default-spinner.html",delay:300,minDuration:700}).config(["$compileProvider",function(a){a.debugInfoEnabled(!1)}]).value("DefaultPaginatorTemplate","views/ng-paginator-plz/custom-paginator.html"),angular.module("ndc").value("profiles",{}).run(["ngRoles","profiles",function(a,b){a.addApplication("ndcVideos",["create","remove","view","list"]),a.addApplication("ndcUsers",["create","remove","view","list"]),b.guest=b.guest||a.addProfile("guest"),b.registered=b.registered||a.addProfile("registered",["ndcVideos.list","ndcVideos.view"]),b.administrator=b.administrator||a.addProfile("administrator",["ndcVideos.*","ndcUsers.*"])}]),angular.module("ndc").run(["$rootScope","$location","$window",function(a,b,c){a.$on("$stateChangeSuccess",function(){c.ga&&c.ga("send","pageview",{page:b.path()})})}]).config(["$urlRouterProvider",function(a){a.when("","/app/videos"),a.when("/","/app/videos"),a.otherwise("/error?code=404"),a.rule(function(a,b){var c=b.path(),d=c.replace(/\/$/,"");c!==d&&b.replace().path(d)})}]),angular.module("ndc.components").component("githubForkMe"),angular.module("ndc.components").controller("loginSidebarItemComponentCtrl",["$scope","$state",function(a,b){a.login=function(){b.go("login")}}]).component("loginSidebarItem",function(){return{controller:"loginSidebarItemComponentCtrl"}}),angular.module("ndc.components").controller("logoutSidebarItemComponentCtrl",["$scope","authentication","$state",function(a,b,c){a.logout=function(){b.logout(),c.go("login")}}]).component("logoutSidebarItem",function(){return{controller:"logoutSidebarItemComponentCtrl"}}),angular.module("ndc.components").filter("whitelist",function(){return function(a,b){var c={};return angular.forEach(a,function(a,d){-1!==b.indexOf(d)&&(c[d]=a)}),c}}).filter("videoOptions",function(){return function(a){var b=[];return angular.forEach(a,function(a,c){b.push([c,a].join("="))}),"?"+b.join("&")}}).value("RegisteredPlayers",[{options:{autoplay:0,controls:1,loop:0},width:560,height:315,whitelist:["autoplay","controls","loop","playlist","rel"],playerId:"www.youtube.com/embed/",protocol:"http://",type:"youtube",playerRegExp:/(http:\/\/|https:\/\/)www\.youtube\.com\/watch\?v=([A-Za-z0-9\-\_]+)/,getEmbedUrl:function(a){return this.protocol+this.playerId+a}},{options:{autoplay:0,controls:1,loop:0},width:560,height:315,whitelist:["autoplay","controls","loop","playlist","rel"],playerId:"www.youtube-nocookie.com/embed/",protocol:"http://",type:"youtubenocookie",playerRegExp:/(http:\/\/|https:\/\/)www\.youtube\-nocookie\.com\/watch\?v=([A-Za-z0-9\-\_]+)/,getEmbedUrl:function(a){return this.protocol+this.playerId+a}},{options:{autoplay:0,loop:0},width:560,height:315,whitelist:["autoplay","color","loop"],playerId:"player.vimeo.com/video/",protocol:"http://",type:"vimeo",playerRegExp:/(http:\/\/)vimeo\.com\/([A-Za-z0-9]+)/,getEmbedUrl:function(a){return this.protocol+this.playerId+a+"?title=0&;byline=0&;portrait=0&;color=00aaad&html5=1"}}]).controller("mediaPlayerComponentCtrl",["$scope","$log","RegisteredPlayers","$filter","$sce","_",function(a,b,c,d,e,f){if(!a.video)return void b.error("Media player component can not be initialized without a video.");var g=f.find(c,function(b){return b.type===a.video.type}),h=g.options,i=g.getEmbedUrl(a.video.videoId)+d("videoOptions")(h).toString();a.videoUrl=e.trustAs("resourceUrl",i)}]).component("mediaPlayer",function(){return{controller:"mediaPlayerComponentCtrl",restrict:"E",replace:!0,scope:{video:"="},link:function(a,b,c){var d=c.height/c.width*100;b[0].style.paddingTop=d+"%",a.width=c.width,a.height=c.height}}}),angular.module("ndc.components").component("panelListItem",function(){return{scope:{item:"="}}}),angular.module("ndc.components").controller("panelListComponentCtrl",["$scope","CurrentUser",function(a,b){a.listItems=[{title:"Videos",uiSref:"videos",cssClass:["icon-camcorder"]},{title:"Admin",uiSref:"admin",requiredRoles:["ndcVideos.create","ndcVideos.remove","ndcVideos.view","ndcVideos.list","ndcUsers.create","ndcUsers.remove","ndcUsers.view","ndcUsers.list"],cssClass:["icon-lock"]}],a.currentUser={hasRoles:b.hasRoles}}]).component("panelList",function(){return{controller:"panelListComponentCtrl"}}),angular.module("ndc.components").controller("searchComponentCtrl",["$scope","$timeout",function(){}]).component("search",function(){return{controller:"searchComponentCtrl",scope:{onsubmitfn:"&",onchangefn:"&",queryModel:"="}}}),angular.module("ndc.components").controller("sidebarComponentCtrl",["$scope","authentication",function(a,b){a.isAuthenticated=b.isAuthenticated}]).component("sidebar",function(){return{controller:"sidebarComponentCtrl"}}),angular.module("ndc.components").controller("slideoutBackdropComponentCtrl",["$scope","stateHistory",function(a,b){a.close=function(){b.back()}}]).component("slideoutBackdrop",function(){return{controller:"slideoutBackdropComponentCtrl"}}),angular.module("ndc.components").controller("tagListComponentCtrl",["$scope","$element",function(a){a.text="tagList component"}]).component("tagList",function(){return{controller:"tagListComponentCtrl",scope:{tags:"="}}}),angular.module("ndc.components").controller("videoListItemComponentCtrl",["$scope",function(){}]).component("videoListItem",function(){return{scope:{video:"="},controller:"videoListItemComponentCtrl"}}),angular.module("ndc").config(["$stateProvider","$urlRouterProvider","stateFactory",function(a,b,c){b.when("/app/admin","/app/admin/videos"),b.when("/app/admin/","/app/admin/videos"),a.state("admin",c("Admin",{url:"/admin",templateUrl:"states/admin/main-view.html",parent:"app",controller:angular.noop}))}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("administrateUsers",b("Administrateusers",{url:"/users",templateUrl:"states/admin/administrate-users/index/main-view.html",parent:"admin"}))}]).controller("AdministrateusersCtrl",["$scope","UserRepository","array","$log","_",function(a,b,c,d,e){a.confirm=function(a){return 1==confirm(a)},a.userlist=[],a.filteredUsers=[],a.paginatedUsers=[],a.$watch("userlist",a.updateResults,!0),a.gettingUsersPromise=b.getAll().then(function(b){c(a.userlist).set(b),a.updateResults()}),a.updateResults=function(){var b=a.query=a.query||"",d=angular.copy(a.userlist),f=e.filter(d,function(a){return!b||a.username.indexOf(b)>=0});c(a.filteredUsers).set(f),a.numberOfVerifiedUsers=e.chain(a.filteredUsers).filter(function(a){return a.verified}).size().value()},a.createUser=function(){a.isCreatingNewUser=!0},a.resetNewUser=function(){a.isCreatingNewUser=!1,a.newUser={}},a.resetPassword=function(b){a.confirm("Are you sure you want to reset password for user "+b.username+"?")&&b.$resetPassword(b.username).then(function(){a.status="Password reset verification mail sent."}).catch(function(a){d.log(a),alert("Could not reset password for user "+b.username+".")})},a.deleteUser=function(b){var c=a.userlist.indexOf(b),d=a.userlist.splice(c,1);a.confirm("Are you sure you want to delete the user "+b.username+"?")&&b.$delete().then(function(){}).catch(function(){a.userlist.splice(c,0,d)})},a.saveUser=function(c){a.isCreatingNewUser=!1;var d=b.create(c);a.userlist.push(c),d.$save().then(function(b){a.newUser={},a.userlist.splice(a.userlist.indexOf(d),1,b)}).catch(function(){a.isCreatingNewUser=!0,a.userlist.splice(a.userlist.indexOf(d),1),alert("User already exists")})}}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("administrateVideosEdit",b("EditVideo",{url:"/edit/{id}",resolve:{scrollLock:["scrollLock",function(a){return a}]},views:{"modal@app":{templateUrl:"states/admin/administrate-videos/edit/index/modal.html",controller:"EditVideoCtrl"}},parent:"administrateVideos",onEnter:["scrollLock",function(a){a.enable()}],onExit:["scrollLock",function(a){a.disable()}]}))}]).controller("EditVideoCtrl",["$scope","TagRepository","$state","$stateParams","VideoRepository","Select2",function(a,b,c,d,e,f){e.getById(d.id).then(function(b){a.video=b}),a.select2Options=f.tagSearch,a.saveChanges=function(a){a.tags.length>0&&_.forEach(a.tags,function(a){a.id&&"$"==a.id.substr(0,1)&&delete a.id}),a.$save().then(function(){c.go("administrateVideos")})},a.cancel=function(){confirm("Er du sikker på at du vil forkaste alle data?")&&c.go("administrateVideos")}}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("administrateVideos",b("Administratevideos",{url:"/videos",templateUrl:"states/admin/administrate-videos/index/main-view.html",parent:"admin"}))}]).controller("AdministratevideosCtrl",["$scope","VideoRepository","array",function(a,b,c){a.videos=[],a.paginatedVideos=[],a.promise=b.getAll().then(function(b){c(a.videos).set(b)}),a.deleteVideo=function(b){confirm("Are you sure you want to delete the video?")&&b.$delete().then(function(){var c=a.videos.indexOf(b);a.videos.splice(c,1)})}}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("adminVideoDetails",b("Videodetails",{url:"/{id}",resolve:{scrollLock:["scrollLock",function(a){return a}]},views:{"slideOut@app":{templateUrl:"states/video/video-details/index/slide-out-view.html",controller:"VideodetailsCtrl"}},onEnter:["scrollLock",function(a){a.enable()}],onExit:["scrollLock",function(a){a.disable()}],parent:"administrateVideos"}))}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("administrateVideosImportModal",b("ImportVideoModal",{url:"/import/{id}",resolve:{scrollLock:["scrollLock",function(a){return a}]},views:{"modal@app":{templateUrl:"states/admin/import-videos/import/index/modal.html",controller:"ImportVideoModalCtrl"}},parent:"importVideosOverview",onEnter:["scrollLock",function(a){a.enable()}],onExit:["scrollLock",function(a){a.disable()}]}))}]).controller("ImportVideoModalCtrl",["$scope","TagRepository","$state","vimeoAPI","$log","VideoRepository","Select2",function(a,b,c,d,e,f,g){function h(b){a.isPublishing=!1,c.go("error",{code:b})}a.tags=[],c.params.id||h(404),d.getVideoById(c.params.id).then(function(b){a.video=b}).catch(function(a){e.log(a),h(404)}),a.select2Options=g.tagSearch,a.cancel=function(){c.go("importVideosOverview")},a.publish=function(b){a.isPublishing=!0,a.tags.length>0&&(angular.forEach(a.tags,function(a){"$"==String(a.id).substr(0,1)&&delete a.id}),b.tags=a.tags),f.create(b).$save().then(function(){c.go("importVideosOverview",{reload:!0})}).catch(function(a){e.error(a),h()})}}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("importVideosOverview",b("AdminImportVideosOverview",{url:"/import-videos?reload",templateUrl:"states/admin/import-videos/index/main-view.html",parent:"admin",reloadOnSearch:!0}))}]).controller("AdminImportVideosOverviewCtrl",["$scope","vimeoAPI","array",function(a,b,c){a.videos=[],a.paginatedVideos=[],a.promise=b.getVideos().then(function(b){c(a.videos).set(b)})}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("agenda",b("Agenda",{url:"/agenda",templateUrl:"states/agenda/index/main-view.html",parent:"app"}))}]).controller("AgendaCtrl",["$scope",function(){}]),angular.module("ndc").config(["$stateProvider","stateFactory","$urlRouterProvider",function(a,b,c){c.when("/app","/app/videos"),c.when("/app/","/app/videos"),a.state("app",b("App",{url:"/app","abstract":!0,templateUrl:"states/app-layout.html"}))}]).controller("AppCtrl",["$scope","authentication","UserRepository","CurrentUser","$state",function(a,b,c,d){function e(){a.ready=!0}b.isAuthenticated()?c.getByToken(b.getToken()).then(d.set).then(e).catch(e):e()}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("error",b("Error",{url:"/error?code"}))}]).controller("ErrorCtrl",["$scope","$stateParams",function(a,b){a.errorCode=b.code}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("favorites",b("Favorites",{url:"/favorites",templateUrl:"states/favorites/index/main-view.html",parent:"app"}))}]).controller("FavoritesCtrl",["$scope","$log","CurrentUser","FavoriteRepository",function(a,b,c,d){c.get();d.getAllByUserId(1).then(function(b){a.favorites=b})}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("forgot-password",b("Forgotpassword",{url:"/forgot-password?mailSent&token",templateUrl:"states/forgot-password/index/main-view.html"}))}]).controller("ForgotpasswordCtrl",["$scope","UserRepository","$state","$log",function(a,b,c,d){a.sendMail=function(){b.resetPasswordFor(a.email).then(function(){c.go("reset-password")}).catch(function(a){alert("For security reasons, you can't reset your password more then one at a time. Please check your mail"),d.error(a)})}}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("login",b("Login",{url:"/login",templateUrl:"states/login/index/main-view.html"}))}]).controller("LoginCtrl",["$scope","authentication","$state",function(a,b,c){b.isAuthenticated()&&a.$on("$stateChangeSuccess",function(){c.go("videos")}),a.login=function(d,e){a.working=!0,b.login("password",d,e).then(function(){c.go("videos")}).catch(function(a){alert(a)}).finally(function(){a.working=!1})}}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("privacy-policy",b("Privacypolicy",{url:"/privacy-policy",templateUrl:"states/privacy-policy/index/main-view.html"}))}]).controller("PrivacypolicyCtrl",["$scope",function(a){a.foo="bar"}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("reset-password",b("Resetpassword",{url:"/reset-password?token",templateUrl:"states/reset-password/index/main-view.html"}))}]).controller("ResetpasswordCtrl",["$scope","UserRepository","$state","$log","$stateParams",function(a,b,c,d,e){a.token=e.token,a.setPassword=function(){b.setPassword(a.token,a.password).then(function(){c.go("login")}).catch(function(){alert("Something happened while changing your password.")})}}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("user",b("User",{url:"/user",templateUrl:"states/user/index/main-view.html",parent:"app"}))}]).controller("UserCtrl",["$scope","authentication","$state",function(a,b,c){a.logout=function(){b.logout(),c.go("login")}}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("videos",b("Video",{url:"/videos?q",reloadOnSearch:!1,templateUrl:"states/video/index/main-view.html",parent:"app"}))}]).controller("VideoCtrl",["$scope","TagRepository","VideoRepository","$stateParams","$location","_","$log",function(a,b,c,d,e,f,g){a.search=function(a){e.search("q",a?a:null),h(a)};var h=function(b){a.promise=c.where(b).then(function(b){a.errormsg=b.length<1?"Can't find any videos containing these search terms.":null,a.videos=b}).catch(function(a){g.error(a)})};a.query=d.q,h(d.q)}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("videoDetails",b("Videodetails",{url:"/video/{id}",templateUrl:"states/video/video-details/index/main-view.html",parent:"app"}))}]).controller("VideodetailsCtrl",["$scope","$stateParams","$state","VideoRepository",function(a,b,c,d){a.query="",a.search=function(a){c.go("videos",{q:a})},d.getById(b.id).then(function(b){a.video=b}).catch(function(){c.go("error",{code:404})})}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("welcome",b("Welcome",{url:"/welcome?verificationToken",templateUrl:"states/welcome/index/main-view.html",resolve:{userToBeVerified:["UserRepository","$stateParams","$log","$state",function(a,b,c,d){return a.getByVerificationToken(b.verificationToken).catch(function(a){c.error(a),d.go("error",{code:403})})}]}}))}]).controller("WelcomeCtrl",["$scope","userToBeVerified","$state","$stateParams","authentication","$log",function(a,b,c,d,e,f){a.user=b,a.verify=function(){a.user.$verify(a.user.username,d.verificationToken,a.password).then(function(){return e.login("password",a.user.username,a.password).then(function(a){return c.go("videos"),a}).catch(function(a){f.log(a),c.go("error",{code:403})})}).catch(function(a){f.error(a),c.go("error",{code:403})})}}]),angular.module("ndc").directive("lazyLoadSrc",["$window","$document",function(a,b){function c(a){function b(b,c){if(!a.is(":visible"))return!1;null===h&&(h=a.height());var d=a.offset().top,e=d+h;return c>=d&&d>=b||c>=e&&e>=b||b>=d&&e>=c}function c(){g=!0,e()}function d(a){f=a,g&&e()}function e(){a[0].src=f}var f=null,g=!1,h=null;return{isVisible:b,render:c,setSource:d}}function d(a,b,d){var f=new c(b);e.addImage(f),d.$observe("lazyLoadSrc",function(a){f.setSource(a)}),a.$on("$destroy",function(){e.removeImage(f)})}var e=function(){function a(a){k.push(a),l||g(),s||h()}function c(a){for(var b=0;b<k.length;b++)if(k[b]===a){k.splice(b,1);break}k.length||(f(),i())}function d(){if(!l){var a=o.height();a!==p&&(p=a,g())}}function e(){for(var a=[],b=[],c=n.height(),d=n.scrollTop(),e=d,g=e+c,h=0;h<k.length;h++){var j=k[h];j.isVisible(e,g)?a.push(j):b.push(j)}for(var h=0;h<a.length;h++)a[h].render();k=b,f(),k.length||i()}function f(){clearTimeout(l),l=null}function g(){l=setTimeout(e,m)}function h(){s=!0,n.on("resize",j),n.on("scroll",j),q=setInterval(d,r)}function i(){s=!1,n.off("resize"),n.off("scroll"),clearInterval(q)}function j(){l||g()}var k=[],l=null,m=200,n=$(window),o=b,p=o.height(),q=null,r=2e3,s=!1;return{addImage:a,removeImage:c}}();return{link:d,restrict:"A"}}]),angular.module("ndc").service("scrollLock",function(){this.enable=function(){this.$$scrollLockEnabled=!0},this.disable=function(){this.$$scrollLockEnabled=!1}}).directive("scrollLock",["$window","scrollLock",function(a,b){return{restrict:"A",link:angular.noop}}]),angular.module("ndc").factory("CurrentUser",["$log","UserModel","_","$localStorage","profiles",function(a,b,c,d,e){var f=d.CurrentUser=d.CurrentUser||{},g=f.user=f.user||{},h=function(a){angular.copy(a,g)},i=function(){angular.copy({},g)},j=function(){return g},k=function(){var b=g.profile||"guest",c=e[b];return c||(c=e.guest,a.error("Profile "+b+" not found.")),c},l=function(a){var b=k();return a?angular.isArray(a)?c.every(a,function(a){return b.hasRoles(a)}):b.hasRoles(a):!0};return{set:h,unset:i,get:j,getProfile:k,hasRoles:l}}]),angular.module("ngSymbiosis.model",[]).factory("BaseModel",["$q","$http",function(a,b){function c(a,b){if(!a.url)throw new Error("You must specify an url");this.$settings={urlBase:a.url},delete a.url,this.$settings.tracker=b&&b.tracker?b.tracker:Math.random().toString(36).substring(2),this.$set(a)}return c.prototype={$set:function(a){var b=this;for(var c in b)"$"!==c.substr(0,1)&&delete b[c];angular.extend(b,a)},$delete:function(){var a=this;return a.$isDeleting=!0,b.delete(a.$settings.urlBase+"/"+a.id,a,{tracker:a.$settings.tracker+"-"+a.id+"-delete"}).then(function(b){return a.$set(b.data,!0),b}).finally(function(){a.$isDeleting=!1})},$save:function(){function a(a){return c.$set(a.data,!0),a}var c=this;c.$isSaving=!0;var d;return d=c.id?b.put(c.$settings.urlBase+"/"+c.id,c,{tracker:c.$settings.tracker+"-"+c.id+"-patch"}).then(a):b.post(c.$settings.urlBase,c,{tracker:c.$settings.tracker+"-$new$-post"}).then(a),d.finally(function(){c.$isSaving=!1}),d},$_changeSubscribers:[],$onChange:function(a){var b=this;b.$_changeSubscribers.push(a)},$isDeleting:!1,$isSaving:!1},c}]),angular.module("ngSymbiosis.repository",[]).factory("BaseRepository",["$q","$http",function(a,b){function c(a){if(!a.name)throw new Error("You must specify a name");this.$settings={name:a.name,model:a.model},this.cache=[]}return c.prototype.getById=function(c){var d=this,e=d.$settings.model,f=a.defer(),g=d.cache[c];return g?(f.resolve(g),f.promise):b.get(e.$settings.url+"/"+c,{tracker:d.$settings.name+".getById"}).then(function(a){var b=new e(a.data);return d.cache[c]=b,b})},c.prototype.getAll=function(){var a=this,c=a.$settings.model;return b.get(c.$settings.url,{tracker:a.$settings.name+".getAll"}).then(function(b){if(angular.isArray(b.data))return a.cache.length=0,b.data.map(function(b){var d=new c(b);return a.cache[b.id]=d,d});throw new Error("Unexpected response from API. Expected Array, got "+typeof b.data,b.data)})},c.prototype.attach=function(a){var b=this,c=b.$settings.model;if(!(a instanceof c))throw new Error("You must provide a valid "+b.$settings.name+"Model");b.cache[a.id]=a},c.prototype.create=function(a){var b=this,c=b.$settings.model;return new c(a)},c}]),angular.module("ndc").filter("time",function(){return function(a){if("string"==typeof a&&/\d/g.test(a)||"number"==typeof a){var b=parseInt(a),c=Math.floor(b/3600);b%=3600;var d=Math.floor(b/60);return d=((c>0&&10>d?"0":"")+d).substring(0,2),b%=60,b=((10>b?"0":"")+b).substring(0,2),(c?c+":":"")+(d||c?d+":":":")+b}return a}}),angular.module("ndc").config(["$provide","Config",function(a,b){a.decorator("$log",["$delegate",function(a){var c=a.log;return a.log=function(){(window.log||c).apply(null,arguments)},a.debug=function(){"development"===b.environment&&c.apply(null,arguments)},"development"===b.environment&&a.log("[c=\"font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #fff; font-size: 20px; padding: 15px 20px; background: #444; border-radius: 4px; line-height: 100px; text-shadow: 0 1px #000\"]development mode[c]"),a}])}]),angular.module("ndc").factory("FavoriteModel",["$q","$http","$rootScope","BaseModel","APIBaseUrl","$injector",function(a,b,c,d,e,f){function g(a){a=a||{},a.url=h,d.call(this,a)}var h=e+"favorites";g.$settings={url:h},g.prototype=Object.create(d.prototype);var i=g.prototype.$save;return g.prototype.$save=function(){var a=this;return i.apply(this,arguments).then(function(b){var c=f.get("FavoriteRepository");return c.attach(a),b})},g}]),angular.module("ndc").factory("TagModel",["$q","$http","$rootScope","BaseModel","APIBaseUrl","$injector",function(a,b,c,d,e,f){function g(a){a=a||{},a.url=h,d.call(this,a)}var h=e+"tags";g.$settings={url:h},g.prototype=Object.create(d.prototype);var i=g.prototype.$save;return g.prototype.$save=function(){var a=this;return i.apply(this,arguments).then(function(b){var c=f.get("TagRepository");return c.attach(a),b})},g}]),angular.module("ndc").factory("UserModel",["$q","$http","$rootScope","BaseModel","APIBaseUrl","$injector",function(a,b,c,d,e,f){function g(a){a=a||{},a.url=h,d.call(this,a)}var h=e+"users";g.$settings={url:h},g.prototype=Object.create(d.prototype),g.prototype.$verify=function(a,c,d){var e=this;e.$isVerifying=!0;var f=b.post(e.$settings.urlBase+"/"+e.id+"/verify",{username:a,password:d,verificationToken:c},{tracker:e.$settings.tracker+"-"+e.id+"-verify"}).then(function(a){return a.data});return f.finally(function(){e.$isVerifying=!1}),f},g.prototype.$resetPassword=function(a){var c=this;c.$isResettingPassword=!0;var d=b.post(c.$settings.urlBase+"/resetpassword",{username:a},{tracker:c.$settings.tracker+"-"+c.id+"-resetPassword"}).then(function(a){return a.data});return d.finally(function(){c.$isResettingPassword=!1}),d};var i=g.prototype.$save;return g.prototype.$save=function(){var a=this;return i.apply(this,arguments).then(function(b){var c=f.get("UserRepository");return c.attach(a),b})},g}]),angular.module("ndc").factory("VideoModel",["$q","$rootScope","BaseModel","APIBaseUrl","timeFilter",function(a,b,c,d,e){function f(a){a=a||{},a.url=d+g,a.$durationInHHMMSS=e(a.duration);var b=/(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/;a.upload_date=a.upload_date&&b.test(a.upload_date)?new Date(a.upload_date):new Date,a.createdAt=a.createdAt&&b.test(a.createdAt)?new Date(a.createdAt):new Date,a.updatedAt=a.updatedAt&&b.test(a.updatedAt)?new Date(a.updatedAt):new Date,c.call(this,a)}var g="videos";return f.$settings={url:d+g,tracker:"VideoModel"},f.prototype=Object.create(c.prototype),f}]),angular.module("ndc").factory("FavoriteRepository",["$injector","FavoriteModel","$http","$q","_",function(a,b,c,d,e){function f(){g.call(this,{name:"FavoriteRepository",model:b})}var g=a.get("BaseRepository");return f.prototype=Object.create(g.prototype),f.prototype.getAll=void 0,f.prototype.getById=void 0,f.prototype.getAllByUserId=function(a){var b=this,f=b.$settings.model,g=d.defer(),h=b.cache[a];return h?(g.resolve(e.map(h,function(a){return new f(a)})),g.promise):c.get(f.$settings.url+"/"+a,{tracker:b.$settings.name+".getAllByUserId"}).then(function(c){return b.cache[a]={},e.map(c.data,function(c){return b.cache[a][c.id]=c,new f(c)})})},g.prototype.attach=function(a){function b(){throw new Error("You must provide a valid "+c.$settings.name+"Model")}var c=this,d=c.$settings.model;a.id||b(),e.each(a.favourites,function(a){a instanceof d||b()}),e.each(a.favourites,function(b){var d=a.id;c.cache[d]=c.cache[a.id]||{},c.cache[d][b.id]=b})},new f}]),angular.module("ndc").factory("TagRepository",["$injector","TagModel","$http",function(a,b,c){function d(){e.call(this,{name:"TagRepository",model:b})}var e=a.get("BaseRepository");return d.prototype=Object.create(e.prototype),d.prototype.search=function(a){var b=this,d=b.$settings.model;return c.get(d.$settings.url+"?q="+a,{tracker:b.$settings.name+".search"}).then(function(a){if(angular.isArray(a.data))return a.data.map(function(a){var c=new d(a);return b.cache[a.id]=c,c});throw new Error("Unexpected response from API. Expected Array, got "+typeof a.data,a.data)})},d.prototype.createEach=function(a){var b=this,d=b.$settings.model;return c.post(d.$settings.url,{tracker:b.$settings.name+".createeach",data:a}).then(function(a){if(angular.isArray(a.data))return a.data.map(function(a){var c=new d(a);return b.cache[a.id]=c,c});var c=new d(a.data);return b.cache[a.data.id]=c,c})},new d}]),angular.module("ndc").factory("UserRepository",["$injector","$http","UserModel",function(a,b,c){var d=a.get("BaseRepository");return d.prototype.getByToken=function(a){var c=this,d=c.$settings.model;return b.get(d.$settings.url+"?token="+encodeURIComponent(a),{tracker:c.$settings.name+".getByToken"}).then(function(a){return new d(a.data)})},d.prototype.getByVerificationToken=function(a){var c=this,d=c.$settings.model;return b.get(d.$settings.url+"?verificationToken="+encodeURIComponent(a),{tracker:c.$settings.name+".getByVerificationToken"}).then(function(a){return new d(a.data)})},d.prototype.resetPasswordFor=function(a){var c=this,d=c.$settings.model;return b.post(d.$settings.url+"/resetPassword",{username:a},{tracker:c.$settings.name+".resetPasswordFor"}).then(function(a){return a.data})},d.prototype.setPassword=function(a,c){var d=this,e=d.$settings.model;return b.put(e.$settings.url+"/setPassword",{token:a,password:c},{tracker:d.$settings.name+".setPassword"}).then(function(a){return a.data})},new d({name:"UserRepository",model:c})}]),angular.module("ndc").factory("VideoRepository",["$injector","VideoModel","$http","_",function(a,b,c,d){function e(){f.call(this,{name:"VideoRepository",model:b})}var f=a.get("BaseRepository");return e.prototype=Object.create(f.prototype),e.prototype.where=function(a){var e,f=this,g=f.$settings.model;return e=null==a||""==a?"":"?q="+a,c.get(g.$settings.url+e,{tracker:f.$settings.name+".where"}).then(function(a){if(angular.isArray(a.data))return d.chain(a.data).map(function(a){var c=new b(a);return f.cache[a.id]=c,c}).value();throw new Error("Unexpected response from API. Expected Array, got "+typeof a.data,a.data)})},e.prototype.getByTags=function(a){var d=this,e=d.$settings.model;return c.get(e.$settings.url+"/search?tags="+a,{tracker:d.$settings.name+".tags"}).then(function(a){if(angular.isArray(a.data))return a.data.map(function(a){var c=new b(a);return d.cache[a.id]=c,c});throw new Error("Unexpected response from API. Expected Array, got "+typeof a.data,a.data)})},new e}]),angular.module("ndc").service("array",function(){return function(a){return{add:function(b){return Array.prototype.push.apply(a,b),a},set:function(b){a.length=0,this.add(b)}}}}),angular.module("ndc").config(["$httpProvider",function(a){a.interceptors.push(["$q","$injector","BaseUrl",function(a,b,c){return{request:function(d){var e=b.get("authentication").getToken(),f=d.url.substr(0,c.length)===c;return e&&f&&(d.headers.Authorization="Bearer "+e),d||a.when(d)}}}])}]).run(["$rootScope","$urlRouter","authentication","$state","$location","CurrentUser","$log","_",function(a,b,c,d,e,f,g,h){a.$on("$locationChangeSuccess",function(a){a.preventDefault();var i=e.path().substr(1),j=["login","error","welcome","videos"],k={admin:["ndcVideos.create","ndcVideos.remove","ndcVideos.view","ndcVideos.list","ndcUsers.create","ndcUsers.remove","ndcUsers.view","ndcUsers.list"]};if(j.indexOf(i)>=0||c.isAuthenticated()){var l=h.chain(k).keys().indexOf(i).value();-1==l||f.hasRoles(k[l])?b.sync():(g.error("User is not authorized to access "+i),d.go("login"))}})}]).factory("authentication",["$http","BaseUrl","$localStorage","$log","$q","UserRepository","CurrentUser",function(a,b,c,d,e,f,g){var h=function(){g.unset(),delete c.token},i=function(){return c.token},j=function(h,i,j){var k=e.defer(),l={method:"POST",url:b+"token",data:"grant_type="+h+"&username="+i+"&password="+j,headers:{"Content-Type":"application/x-www-form-urlencoded"}};return a(l).then(function(a){if(a&&a.data){var b=a.data;return c.token=b.access_token,f.getByToken(b.access_token).then(g.set).then(function(){k.resolve(!0)})}k.reject("No data received")}).catch(function(a){var b=a&&a.data&&a.data.message?a.data.message:"";k.reject("Could not log you in. "+b)}).finally(function(){d.log("Log in request finished.")}),k.promise},k=function(){return"string"==typeof c.token};return{isAuthenticated:k,login:j,getToken:i,logout:h}}]),angular.module("ndc").service("navbar",["_","$log",function(a,b){this.templateSrc="components/navbar/panels/navigation.html";var c=["settings","navigation","notifications"];this.isActive=function(a){return a==this.state},this.setState=function(d){a.indexOf(c,d)>=0?(this.state=d,this.templateSrc="components/navbar/panels/"+d+".html"):b.error("State "+d+" does not exist")},this.setState("navigation")}]),angular.module("ndc").service("Select2",["TagRepository",function(a){var b=_.throttle(function(b){a.search(b.term).then(function(a){b.callback({results:a})})},500,{leading:!1,trailing:!0});return{tagSearch:{multiple:!0,createSearchChoice:function(a,b){return 0===_.filter(b,function(b){return 0===b.text.localeCompare(a.toLowerCase())}).length?{id:"$"+a,text:a}:void 0},query:b}}}]),angular.module("ndc").run(["$rootScope","$state","stateHistory",function(a,b,c){a.$on("$stateChangeSuccess",function(a,d,e,f){b.previous=f,c.go(d,e)})}]).service("stateHistory",["$state",function(a){this.history=[],this.go=function(a,b){this.history.push({name:a,params:b})
-},this.back=function(){this.pop();var b=this.pop();a.go(b.name,b.params)},this.pop=function(){return this.history.pop()||{name:"videos",params:{}}}}]),angular.module("ndc").service("videoImport",["Config","$http","VideoModel","_","APIBaseUrl",function(a,b,c,d,e){this.provider=function(a){return{getVideos:function(){return b.get(e+"imports?provider="+a,{tracker:"videoImport.getVideos"}).then(function(a){return d.map(a.data,function(a){return new c(a)})})},getVideoById:function(d){return b.get(e+"imports/"+d+"?provider="+a,{tracker:"videoImport.getVideoById"}).then(function(a){return delete a.data.id,new c(a.data)})}}}}]),angular.module("ndc").service("vimeoAPI",["videoImport",function(a){return a.provider("vimeo")}]),angular.module("ndc").constant("_",window._);
+ */"use strict";angular.deepExtend=function(a,b){for(var c in b)b[c]&&b[c].constructor&&b[c].constructor===Object?(a[c]=a[c]||{},angular.deepExtend(a[c],b[c])):a[c]=b[c];return a};var components=angular.module("ndc.components",[]);angular.componentFactory.moduleDecorator(components);var app=angular.module("ndc",["kennethlynne.componentFactory","ngSymbiosis.utils","ngSymbiosis.routeProvider","ngSymbiosis.repository","ngSymbiosis.model","ndc.components","ngAnimate","angular-loading-bar","ui.router","ui.bootstrap","ngTouch","ui.select2","cgBusy","ngRoles","ngPaginatorPlz","ngCookies"]);angular.componentFactory.moduleDecorator(app),angular.module("ndc").constant("Config",angular.deepExtend({viewsDir:"views/",componentsDir:"components/",statesDir:"states/",environment:"production",API:{protocol:"http",host:"api.ndcvideos.com",port:String(80),path:"/api"}},angular._localConfig||{})).config(["componentFactoryProvider",function(a){a.setViewPath(function(a){return"components/"+a+"/"+a+".html"})}]).value("cgBusyTemplateName","views/angular-busy/default-spinner.html").factory("BaseUrl",["Config",function(a){return a.API.protocol+"://"+a.API.host+":"+a.API.port+"/"}]).factory("APIBaseUrl",["Config",function(a){return a.API.protocol+"://"+a.API.host+":"+a.API.port+a.API.path+"/"}]).value("cgBusyDefaults",{message:"Loading Stuff",backdrop:!1,templateUrl:"views/angular-busy/default-spinner.html",delay:300,minDuration:700}).config(["$compileProvider",function(a){a.debugInfoEnabled(!1)}]).value("DefaultPaginatorTemplate","views/ng-paginator-plz/custom-paginator.html"),angular.module("ndc").value("profiles",{}).run(["ngRoles","profiles",function(a,b){a.addApplication("ndcVideos",["create","remove","view","list"]),a.addApplication("ndcUsers",["create","remove","view","list"]),b.guest=b.guest||a.addProfile("guest"),b.registered=b.registered||a.addProfile("registered",["ndcVideos.list","ndcVideos.view"]),b.administrator=b.administrator||a.addProfile("administrator",["ndcVideos.*","ndcUsers.*"])}]),angular.module("ndc").run(["$rootScope","$location","$window",function(a,b,c){a.$on("$stateChangeSuccess",function(){c.ga&&c.ga("send","pageview",{page:b.path()})})}]).config(["$urlRouterProvider",function(a){a.when("","/app/videos"),a.when("/","/app/videos"),a.otherwise("/error?code=404"),a.rule(function(a,b){var c=b.path(),d=c.replace(/\/$/,"");c!==d&&b.replace().path(d)})}]),angular.module("ndc.components").component("githubForkMe"),angular.module("ndc.components").controller("loginSidebarItemComponentCtrl",["$scope","$state",function(a,b){a.login=function(){b.go("login")}}]).component("loginSidebarItem",function(){return{controller:"loginSidebarItemComponentCtrl"}}),angular.module("ndc.components").controller("logoutSidebarItemComponentCtrl",["$scope","authentication","$state",function(a,b,c){a.logout=function(){b.logout(),c.go("login")}}]).component("logoutSidebarItem",function(){return{controller:"logoutSidebarItemComponentCtrl"}}),angular.module("ndc.components").filter("whitelist",function(){return function(a,b){var c={};return angular.forEach(a,function(a,d){-1!==b.indexOf(d)&&(c[d]=a)}),c}}).filter("videoOptions",function(){return function(a){var b=[];return angular.forEach(a,function(a,c){b.push([c,a].join("="))}),"?"+b.join("&")}}).value("RegisteredPlayers",[{options:{autoplay:0,controls:1,loop:0},width:560,height:315,whitelist:["autoplay","controls","loop","playlist","rel"],playerId:"www.youtube.com/embed/",protocol:"http://",type:"youtube",playerRegExp:/(http:\/\/|https:\/\/)www\.youtube\.com\/watch\?v=([A-Za-z0-9\-\_]+)/,getEmbedUrl:function(a){return this.protocol+this.playerId+a}},{options:{autoplay:0,controls:1,loop:0},width:560,height:315,whitelist:["autoplay","controls","loop","playlist","rel"],playerId:"www.youtube-nocookie.com/embed/",protocol:"http://",type:"youtubenocookie",playerRegExp:/(http:\/\/|https:\/\/)www\.youtube\-nocookie\.com\/watch\?v=([A-Za-z0-9\-\_]+)/,getEmbedUrl:function(a){return this.protocol+this.playerId+a}},{options:{autoplay:0,loop:0},width:560,height:315,whitelist:["autoplay","color","loop"],playerId:"player.vimeo.com/video/",protocol:"http://",type:"vimeo",playerRegExp:/(http:\/\/)vimeo\.com\/([A-Za-z0-9]+)/,getEmbedUrl:function(a){return this.protocol+this.playerId+a+"?title=0&;byline=0&;portrait=0&;color=00aaad&html5=1"}}]).controller("mediaPlayerComponentCtrl",["$scope","$log","RegisteredPlayers","$filter","$sce","_",function(a,b,c,d,e,f){if(!a.video)return void b.error("Media player component can not be initialized without a video.");var g=f.find(c,function(b){return b.type===a.video.type}),h=g.options,i=g.getEmbedUrl(a.video.videoId)+d("videoOptions")(h).toString();a.videoUrl=e.trustAs("resourceUrl",i)}]).component("mediaPlayer",function(){return{controller:"mediaPlayerComponentCtrl",restrict:"E",replace:!0,scope:{video:"="},link:function(a,b,c){var d=c.height/c.width*100;b[0].style.paddingTop=d+"%",a.width=c.width,a.height=c.height}}}),angular.module("ndc.components").component("panelListItem",function(){return{scope:{item:"="}}}),angular.module("ndc.components").controller("panelListComponentCtrl",["$scope","CurrentUser",function(a,b){a.listItems=[{title:"Videos",uiSref:"videos",cssClass:["icon-camcorder"]},{title:"Admin",uiSref:"admin",requiredRoles:["ndcVideos.create","ndcVideos.remove","ndcVideos.view","ndcVideos.list","ndcUsers.create","ndcUsers.remove","ndcUsers.view","ndcUsers.list"],cssClass:["icon-lock"]}],a.currentUser={hasRoles:b.hasRoles}}]).component("panelList",function(){return{controller:"panelListComponentCtrl"}}),angular.module("ndc.components").controller("searchComponentCtrl",["$scope","$timeout",function(){}]).component("search",function(){return{controller:"searchComponentCtrl",scope:{onsubmitfn:"&",onchangefn:"&",queryModel:"="}}}),angular.module("ndc.components").controller("sidebarComponentCtrl",["$scope","authentication",function(a,b){a.isAuthenticated=b.isAuthenticated}]).component("sidebar",function(){return{controller:"sidebarComponentCtrl"}}),angular.module("ndc.components").controller("slideoutBackdropComponentCtrl",["$scope","stateHistory",function(a,b){a.close=function(){b.back()}}]).component("slideoutBackdrop",function(){return{controller:"slideoutBackdropComponentCtrl"}}),angular.module("ndc.components").controller("tagListComponentCtrl",["$scope","$element",function(a){a.text="tagList component"}]).component("tagList",function(){return{controller:"tagListComponentCtrl",scope:{tags:"="}}}),angular.module("ndc.components").controller("videoListItemComponentCtrl",["$scope",function(){}]).component("videoListItem",function(){return{scope:{video:"="},controller:"videoListItemComponentCtrl"}}),angular.module("ndc").config(["$stateProvider","$urlRouterProvider","stateFactory",function(a,b,c){b.when("/app/admin","/app/admin/videos"),b.when("/app/admin/","/app/admin/videos"),a.state("admin",c("Admin",{url:"/admin",templateUrl:"states/admin/main-view.html",parent:"app",controller:angular.noop}))}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("administrateUsers",b("Administrateusers",{url:"/users",templateUrl:"states/admin/administrate-users/index/main-view.html",parent:"admin"}))}]).controller("AdministrateusersCtrl",["$scope","UserRepository","array","$log","_",function(a,b,c,d,e){a.confirm=function(a){return 1==confirm(a)},a.userlist=[],a.filteredUsers=[],a.paginatedUsers=[],a.$watch("userlist",a.updateResults,!0),a.gettingUsersPromise=b.getAll().then(function(b){c(a.userlist).set(b),a.updateResults()}),a.updateResults=function(){var b=a.query=a.query||"",d=angular.copy(a.userlist),f=e.filter(d,function(a){return!b||a.username.indexOf(b)>=0});c(a.filteredUsers).set(f),a.numberOfVerifiedUsers=e.chain(a.filteredUsers).filter(function(a){return a.verified}).size().value()},a.createUser=function(){a.isCreatingNewUser=!0},a.resetNewUser=function(){a.isCreatingNewUser=!1,a.newUser={}},a.resetPassword=function(b){a.confirm("Are you sure you want to reset password for user "+b.username+"?")&&b.$resetPassword(b.username).then(function(){a.status="Password reset verification mail sent."}).catch(function(a){d.log(a),alert("Could not reset password for user "+b.username+".")})},a.deleteUser=function(b){var c=a.userlist.indexOf(b),d=a.userlist.splice(c,1);a.confirm("Are you sure you want to delete the user "+b.username+"?")&&b.$delete().then(function(){}).catch(function(){a.userlist.splice(c,0,d)})},a.saveUser=function(c){a.isCreatingNewUser=!1;var d=b.create(c);a.userlist.push(c),d.$save().then(function(b){a.newUser={},a.userlist.splice(a.userlist.indexOf(d),1,b)}).catch(function(){a.isCreatingNewUser=!0,a.userlist.splice(a.userlist.indexOf(d),1),alert("User already exists")})}}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("administrateVideosEdit",b("EditVideo",{url:"/edit/{id}",resolve:{scrollLock:["scrollLock",function(a){return a}]},views:{"modal@app":{templateUrl:"states/admin/administrate-videos/edit/index/modal.html",controller:"EditVideoCtrl"}},parent:"administrateVideos",onEnter:["scrollLock",function(a){a.enable()}],onExit:["scrollLock",function(a){a.disable()}]}))}]).controller("EditVideoCtrl",["$scope","TagRepository","$state","$stateParams","VideoRepository","Select2",function(a,b,c,d,e,f){e.getById(d.id).then(function(b){a.video=b}),a.select2Options=f.tagSearch,a.saveChanges=function(a){a.tags.length>0&&_.forEach(a.tags,function(a){a.id&&"$"==a.id.substr(0,1)&&delete a.id}),a.$save().then(function(){c.go("administrateVideos")})},a.cancel=function(){confirm("Er du sikker på at du vil forkaste alle data?")&&c.go("administrateVideos")}}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("administrateVideos",b("Administratevideos",{url:"/videos",templateUrl:"states/admin/administrate-videos/index/main-view.html",parent:"admin"}))}]).controller("AdministratevideosCtrl",["$scope","VideoRepository","array",function(a,b,c){a.videos=[],a.paginatedVideos=[],a.promise=b.getAll().then(function(b){c(a.videos).set(b)}),a.deleteVideo=function(b){confirm("Are you sure you want to delete the video?")&&b.$delete().then(function(){var c=a.videos.indexOf(b);a.videos.splice(c,1)})}}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("adminVideoDetails",b("Videodetails",{url:"/{id}",resolve:{scrollLock:["scrollLock",function(a){return a}]},views:{"slideOut@app":{templateUrl:"states/video/video-details/index/slide-out-view.html",controller:"VideodetailsCtrl"}},onEnter:["scrollLock",function(a){a.enable()}],onExit:["scrollLock",function(a){a.disable()}],parent:"administrateVideos"}))}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("administrateVideosImportModal",b("ImportVideoModal",{url:"/import/{id}",resolve:{scrollLock:["scrollLock",function(a){return a}]},views:{"modal@app":{templateUrl:"states/admin/import-videos/import/index/modal.html",controller:"ImportVideoModalCtrl"}},parent:"importVideosOverview",onEnter:["scrollLock",function(a){a.enable()}],onExit:["scrollLock",function(a){a.disable()}]}))}]).controller("ImportVideoModalCtrl",["$scope","TagRepository","$state","vimeoAPI","$log","VideoRepository","Select2",function(a,b,c,d,e,f,g){function h(b){a.isPublishing=!1,c.go("error",{code:b})}a.tags=[],c.params.id||h(404),d.getVideoById(c.params.id).then(function(b){a.video=b}).catch(function(a){e.log(a),h(404)}),a.select2Options=g.tagSearch,a.cancel=function(){c.go("importVideosOverview")},a.publish=function(b){a.isPublishing=!0,a.tags.length>0&&(angular.forEach(a.tags,function(a){"$"==String(a.id).substr(0,1)&&delete a.id}),b.tags=a.tags),f.create(b).$save().then(function(){c.go("importVideosOverview",{reload:!0})}).catch(function(a){e.error(a),h()})}}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("importVideosOverview",b("AdminImportVideosOverview",{url:"/import-videos?reload",templateUrl:"states/admin/import-videos/index/main-view.html",parent:"admin",reloadOnSearch:!0}))}]).controller("AdminImportVideosOverviewCtrl",["$scope","vimeoAPI","array",function(a,b,c){a.videos=[],a.paginatedVideos=[],a.promise=b.getVideos().then(function(b){c(a.videos).set(b)})}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("agenda",b("Agenda",{url:"/agenda",templateUrl:"states/agenda/index/main-view.html",parent:"app"}))}]).controller("AgendaCtrl",["$scope",function(){}]),angular.module("ndc").config(["$stateProvider","stateFactory","$urlRouterProvider",function(a,b,c){c.when("/app","/app/videos"),c.when("/app/","/app/videos"),a.state("app",b("App",{url:"/app","abstract":!0,templateUrl:"states/app-layout.html"}))}]).controller("AppCtrl",["$scope","authentication","UserRepository","CurrentUser","$state",function(a,b,c,d){function e(){a.ready=!0}b.isAuthenticated()?c.getByToken(b.getToken()).then(d.set).then(e).catch(e):e()}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("error",b("Error",{url:"/error?code"}))}]).controller("ErrorCtrl",["$scope","$stateParams",function(a,b){a.errorCode=b.code}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("favorites",b("Favorites",{url:"/favorites",templateUrl:"states/favorites/index/main-view.html",parent:"app"}))}]).controller("FavoritesCtrl",["$scope","$log","CurrentUser","FavoriteRepository",function(a,b,c,d){c.get();d.getAllByUserId(1).then(function(b){a.favorites=b})}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("forgot-password",b("Forgotpassword",{url:"/forgot-password?mailSent&token",templateUrl:"states/forgot-password/index/main-view.html"}))}]).controller("ForgotpasswordCtrl",["$scope","UserRepository","$state","$log",function(a,b,c,d){a.sendMail=function(){b.resetPasswordFor(a.email).then(function(){c.go("reset-password")}).catch(function(a){alert("For security reasons, you can't reset your password more then one at a time. Please check your mail"),d.error(a)})}}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("login",b("Login",{url:"/login",templateUrl:"states/login/index/main-view.html"}))}]).controller("LoginCtrl",["$scope","authentication","$state",function(a,b,c){b.isAuthenticated()&&a.$on("$stateChangeSuccess",function(){c.go("videos")}),a.login=function(d,e){a.working=!0,b.login("password",d,e).then(function(){c.go("videos")}).catch(function(a){alert(a)}).finally(function(){a.working=!1})}}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("privacy-policy",b("Privacypolicy",{url:"/privacy-policy",templateUrl:"states/privacy-policy/index/main-view.html"}))}]).controller("PrivacypolicyCtrl",["$scope",function(a){a.foo="bar"}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("reset-password",b("Resetpassword",{url:"/reset-password?token",templateUrl:"states/reset-password/index/main-view.html"}))}]).controller("ResetpasswordCtrl",["$scope","UserRepository","$state","$log","$stateParams",function(a,b,c,d,e){a.token=e.token,a.setPassword=function(){b.setPassword(a.token,a.password).then(function(){c.go("login")}).catch(function(){alert("Something happened while changing your password.")})}}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("user",b("User",{url:"/user",templateUrl:"states/user/index/main-view.html",parent:"app"}))}]).controller("UserCtrl",["$scope","authentication","$state",function(a,b,c){a.logout=function(){b.logout(),c.go("login")}}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("videos",b("Video",{url:"/videos?q",reloadOnSearch:!1,templateUrl:"states/video/index/main-view.html",parent:"app"}))}]).controller("VideoCtrl",["$scope","TagRepository","VideoRepository","$stateParams","$location","_","$log",function(a,b,c,d,e,f,g){a.search=function(a){e.search("q",a?a:null),h(a)};var h=function(b){a.promise=c.where(b).then(function(b){a.errormsg=b.length<1?"Can't find any videos containing these search terms.":null,a.videos=b}).catch(function(a){g.error(a)})};a.query=d.q,h(d.q)}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("videoDetails",b("Videodetails",{url:"/video/{id}",templateUrl:"states/video/video-details/index/main-view.html",parent:"app"}))}]).controller("VideodetailsCtrl",["$scope","$stateParams","$state","VideoRepository",function(a,b,c,d){a.query="",a.search=function(a){c.go("videos",{q:a})},d.getById(b.id).then(function(b){a.video=b}).catch(function(){c.go("error",{code:404})})}]),angular.module("ndc").config(["$stateProvider","stateFactory",function(a,b){a.state("welcome",b("Welcome",{url:"/welcome?verificationToken",templateUrl:"states/welcome/index/main-view.html",resolve:{userToBeVerified:["UserRepository","$stateParams","$log","$state",function(a,b,c,d){return a.getByVerificationToken(b.verificationToken).catch(function(a){c.error(a),d.go("error",{code:403})})}]}}))}]).controller("WelcomeCtrl",["$scope","userToBeVerified","$state","$stateParams","authentication","$log",function(a,b,c,d,e,f){a.user=b,a.verify=function(){a.user.$verify(a.user.username,d.verificationToken,a.password).then(function(){return e.login("password",a.user.username,a.password).then(function(a){return c.go("videos"),a}).catch(function(a){f.log(a),c.go("error",{code:403})})}).catch(function(a){f.error(a),c.go("error",{code:403})})}}]),angular.module("ndc").directive("lazyLoadSrc",["$window","$document",function(a,b){function c(a){function b(b,c){if(!a.is(":visible"))return!1;null===h&&(h=a.height());var d=a.offset().top,e=d+h;return c>=d&&d>=b||c>=e&&e>=b||b>=d&&e>=c}function c(){g=!0,e()}function d(a){f=a,g&&e()}function e(){a[0].src=f}var f=null,g=!1,h=null;return{isVisible:b,render:c,setSource:d}}function d(a,b,d){var f=new c(b);e.addImage(f),d.$observe("lazyLoadSrc",function(a){f.setSource(a)}),a.$on("$destroy",function(){e.removeImage(f)})}var e=function(){function a(a){k.push(a),l||g(),s||h()}function c(a){for(var b=0;b<k.length;b++)if(k[b]===a){k.splice(b,1);break}k.length||(f(),i())}function d(){if(!l){var a=o.height();a!==p&&(p=a,g())}}function e(){for(var a=[],b=[],c=n.height(),d=n.scrollTop(),e=d,g=e+c,h=0;h<k.length;h++){var j=k[h];j.isVisible(e,g)?a.push(j):b.push(j)}for(var h=0;h<a.length;h++)a[h].render();k=b,f(),k.length||i()}function f(){clearTimeout(l),l=null}function g(){l=setTimeout(e,m)}function h(){s=!0,n.on("resize",j),n.on("scroll",j),q=setInterval(d,r)}function i(){s=!1,n.off("resize"),n.off("scroll"),clearInterval(q)}function j(){l||g()}var k=[],l=null,m=200,n=$(window),o=b,p=o.height(),q=null,r=2e3,s=!1;return{addImage:a,removeImage:c}}();return{link:d,restrict:"A"}}]),angular.module("ndc").service("scrollLock",function(){this.enable=function(){this.$$scrollLockEnabled=!0},this.disable=function(){this.$$scrollLockEnabled=!1}}).directive("scrollLock",["$window","scrollLock",function(a,b){return{restrict:"A",link:angular.noop}}]),angular.module("ndc").factory("CurrentUser",["$log","UserModel","_","storage","profiles",function(a,b,c,d,e){var f=d.get("CurrentUser")||{};d.set("CurrentUser",f);var g=function(a){angular.copy(a,f),d.set("CurrentUser",f)},h=function(){angular.copy({},f),d.set("CurrentUser",{})},i=function(){return f},j=function(){var b=f.profile||"guest",c=e[b];return c||(c=e.guest,a.error("Profile "+b+" not found.")),c},k=function(a){var b=j();return a?angular.isArray(a)?c.every(a,function(a){return b.hasRoles(a)}):b.hasRoles(a):!0};return{set:g,unset:h,get:i,getProfile:j,hasRoles:k}}]),angular.module("ngSymbiosis.model",[]).factory("BaseModel",["$q","$http",function(a,b){function c(a,b){if(!a.url)throw new Error("You must specify an url");this.$settings={urlBase:a.url},delete a.url,this.$settings.tracker=b&&b.tracker?b.tracker:Math.random().toString(36).substring(2),this.$set(a)}return c.prototype={$set:function(a){var b=this;for(var c in b)"$"!==c.substr(0,1)&&delete b[c];angular.extend(b,a)},$delete:function(){var a=this;return a.$isDeleting=!0,b.delete(a.$settings.urlBase+"/"+a.id,a,{tracker:a.$settings.tracker+"-"+a.id+"-delete"}).then(function(b){return a.$set(b.data,!0),b}).finally(function(){a.$isDeleting=!1})},$save:function(){function a(a){return c.$set(a.data,!0),a}var c=this;c.$isSaving=!0;var d;return d=c.id?b.put(c.$settings.urlBase+"/"+c.id,c,{tracker:c.$settings.tracker+"-"+c.id+"-patch"}).then(a):b.post(c.$settings.urlBase,c,{tracker:c.$settings.tracker+"-$new$-post"}).then(a),d.finally(function(){c.$isSaving=!1}),d},$_changeSubscribers:[],$onChange:function(a){var b=this;b.$_changeSubscribers.push(a)},$isDeleting:!1,$isSaving:!1},c}]),angular.module("ngSymbiosis.repository",[]).factory("BaseRepository",["$q","$http",function(a,b){function c(a){if(!a.name)throw new Error("You must specify a name");this.$settings={name:a.name,model:a.model},this.cache=[]}return c.prototype.getById=function(c){var d=this,e=d.$settings.model,f=a.defer(),g=d.cache[c];return g?(f.resolve(g),f.promise):b.get(e.$settings.url+"/"+c,{tracker:d.$settings.name+".getById"}).then(function(a){var b=new e(a.data);return d.cache[c]=b,b})},c.prototype.getAll=function(){var a=this,c=a.$settings.model;return b.get(c.$settings.url,{tracker:a.$settings.name+".getAll"}).then(function(b){if(angular.isArray(b.data))return a.cache.length=0,b.data.map(function(b){var d=new c(b);return a.cache[b.id]=d,d});throw new Error("Unexpected response from API. Expected Array, got "+typeof b.data,b.data)})},c.prototype.attach=function(a){var b=this,c=b.$settings.model;if(!(a instanceof c))throw new Error("You must provide a valid "+b.$settings.name+"Model");b.cache[a.id]=a},c.prototype.create=function(a){var b=this,c=b.$settings.model;return new c(a)},c}]),angular.module("ndc").filter("time",function(){return function(a){if("string"==typeof a&&/\d/g.test(a)||"number"==typeof a){var b=parseInt(a),c=Math.floor(b/3600);b%=3600;var d=Math.floor(b/60);return d=((c>0&&10>d?"0":"")+d).substring(0,2),b%=60,b=((10>b?"0":"")+b).substring(0,2),(c?c+":":"")+(d||c?d+":":":")+b}return a}}),angular.module("ndc").config(["$provide","Config",function(a,b){a.decorator("$log",["$delegate",function(a){var c=a.log;return a.log=function(){(window.log||c).apply(null,arguments)},a.debug=function(){"development"===b.environment&&c.apply(null,arguments)},"development"===b.environment&&a.log("[c=\"font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #fff; font-size: 20px; padding: 15px 20px; background: #444; border-radius: 4px; line-height: 100px; text-shadow: 0 1px #000\"]development mode[c]"),a}])}]),angular.module("ndc").factory("FavoriteModel",["$q","$http","$rootScope","BaseModel","APIBaseUrl","$injector",function(a,b,c,d,e,f){function g(a){a=a||{},a.url=h,d.call(this,a)}var h=e+"favorites";g.$settings={url:h},g.prototype=Object.create(d.prototype);var i=g.prototype.$save;return g.prototype.$save=function(){var a=this;return i.apply(this,arguments).then(function(b){var c=f.get("FavoriteRepository");return c.attach(a),b})},g}]),angular.module("ndc").factory("TagModel",["$q","$http","$rootScope","BaseModel","APIBaseUrl","$injector",function(a,b,c,d,e,f){function g(a){a=a||{},a.url=h,d.call(this,a)}var h=e+"tags";g.$settings={url:h},g.prototype=Object.create(d.prototype);var i=g.prototype.$save;return g.prototype.$save=function(){var a=this;return i.apply(this,arguments).then(function(b){var c=f.get("TagRepository");return c.attach(a),b})},g}]),angular.module("ndc").factory("UserModel",["$q","$http","$rootScope","BaseModel","APIBaseUrl","$injector",function(a,b,c,d,e,f){function g(a){a=a||{},a.url=h,d.call(this,a)}var h=e+"users";g.$settings={url:h},g.prototype=Object.create(d.prototype),g.prototype.$verify=function(a,c,d){var e=this;e.$isVerifying=!0;var f=b.post(e.$settings.urlBase+"/"+e.id+"/verify",{username:a,password:d,verificationToken:c},{tracker:e.$settings.tracker+"-"+e.id+"-verify"}).then(function(a){return a.data});return f.finally(function(){e.$isVerifying=!1}),f},g.prototype.$resetPassword=function(a){var c=this;c.$isResettingPassword=!0;var d=b.post(c.$settings.urlBase+"/resetpassword",{username:a},{tracker:c.$settings.tracker+"-"+c.id+"-resetPassword"}).then(function(a){return a.data});return d.finally(function(){c.$isResettingPassword=!1}),d};var i=g.prototype.$save;return g.prototype.$save=function(){var a=this;return i.apply(this,arguments).then(function(b){var c=f.get("UserRepository");return c.attach(a),b})},g}]),angular.module("ndc").factory("VideoModel",["$q","$rootScope","BaseModel","APIBaseUrl","timeFilter",function(a,b,c,d,e){function f(a){a=a||{},a.url=d+g,a.$durationInHHMMSS=e(a.duration);var b=/(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/;a.upload_date=a.upload_date&&b.test(a.upload_date)?new Date(a.upload_date):new Date,a.createdAt=a.createdAt&&b.test(a.createdAt)?new Date(a.createdAt):new Date,a.updatedAt=a.updatedAt&&b.test(a.updatedAt)?new Date(a.updatedAt):new Date,c.call(this,a)}var g="videos";return f.$settings={url:d+g,tracker:"VideoModel"},f.prototype=Object.create(c.prototype),f}]),angular.module("ndc").factory("FavoriteRepository",["$injector","FavoriteModel","$http","$q","_",function(a,b,c,d,e){function f(){g.call(this,{name:"FavoriteRepository",model:b})}var g=a.get("BaseRepository");return f.prototype=Object.create(g.prototype),f.prototype.getAll=void 0,f.prototype.getById=void 0,f.prototype.getAllByUserId=function(a){var b=this,f=b.$settings.model,g=d.defer(),h=b.cache[a];return h?(g.resolve(e.map(h,function(a){return new f(a)})),g.promise):c.get(f.$settings.url+"/"+a,{tracker:b.$settings.name+".getAllByUserId"}).then(function(c){return b.cache[a]={},e.map(c.data,function(c){return b.cache[a][c.id]=c,new f(c)})})},g.prototype.attach=function(a){function b(){throw new Error("You must provide a valid "+c.$settings.name+"Model")}var c=this,d=c.$settings.model;a.id||b(),e.each(a.favourites,function(a){a instanceof d||b()}),e.each(a.favourites,function(b){var d=a.id;c.cache[d]=c.cache[a.id]||{},c.cache[d][b.id]=b})},new f}]),angular.module("ndc").factory("TagRepository",["$injector","TagModel","$http",function(a,b,c){function d(){e.call(this,{name:"TagRepository",model:b})}var e=a.get("BaseRepository");return d.prototype=Object.create(e.prototype),d.prototype.search=function(a){var b=this,d=b.$settings.model;return c.get(d.$settings.url+"?q="+a,{tracker:b.$settings.name+".search"}).then(function(a){if(angular.isArray(a.data))return a.data.map(function(a){var c=new d(a);return b.cache[a.id]=c,c});throw new Error("Unexpected response from API. Expected Array, got "+typeof a.data,a.data)})},d.prototype.createEach=function(a){var b=this,d=b.$settings.model;return c.post(d.$settings.url,{tracker:b.$settings.name+".createeach",data:a}).then(function(a){if(angular.isArray(a.data))return a.data.map(function(a){var c=new d(a);return b.cache[a.id]=c,c});var c=new d(a.data);return b.cache[a.data.id]=c,c})},new d}]),angular.module("ndc").factory("UserRepository",["$injector","$http","UserModel","$log",function(a,b,c){var d=a.get("BaseRepository");return d.prototype.getByToken=function(a){var c=this,d=c.$settings.model;return b.get(d.$settings.url+"?token="+encodeURIComponent(a),{tracker:c.$settings.name+".getByToken"}).then(function(a){return new d(a.data)})},d.prototype.getByVerificationToken=function(a){var c=this,d=c.$settings.model;return b.get(d.$settings.url+"?verificationToken="+encodeURIComponent(a),{tracker:c.$settings.name+".getByVerificationToken"}).then(function(a){return new d(a.data)})},d.prototype.resetPasswordFor=function(a){var c=this,d=c.$settings.model;return b.post(d.$settings.url+"/resetPassword",{username:a},{tracker:c.$settings.name+".resetPasswordFor"}).then(function(a){return a.data})},d.prototype.setPassword=function(a,c){var d=this,e=d.$settings.model;return b.put(e.$settings.url+"/setPassword",{token:a,password:c},{tracker:d.$settings.name+".setPassword"}).then(function(a){return a.data})},new d({name:"UserRepository",model:c})}]),angular.module("ndc").factory("VideoRepository",["$injector","VideoModel","$http","_",function(a,b,c,d){function e(){f.call(this,{name:"VideoRepository",model:b})}var f=a.get("BaseRepository");return e.prototype=Object.create(f.prototype),e.prototype.where=function(a){var e,f=this,g=f.$settings.model;return e=null==a||""==a?"":"?q="+a,c.get(g.$settings.url+e,{tracker:f.$settings.name+".where"}).then(function(a){if(angular.isArray(a.data))return d.chain(a.data).map(function(a){var c=new b(a);return f.cache[a.id]=c,c}).value();throw new Error("Unexpected response from API. Expected Array, got "+typeof a.data,a.data)})},e.prototype.getByTags=function(a){var d=this,e=d.$settings.model;return c.get(e.$settings.url+"/search?tags="+a,{tracker:d.$settings.name+".tags"}).then(function(a){if(angular.isArray(a.data))return a.data.map(function(a){var c=new b(a);return d.cache[a.id]=c,c});throw new Error("Unexpected response from API. Expected Array, got "+typeof a.data,a.data)})},new e}]),angular.module("ndc").service("array",function(){return function(a){return{add:function(b){return Array.prototype.push.apply(a,b),a},set:function(b){a.length=0,this.add(b)}}}}),angular.module("ndc").config(["$httpProvider",function(a){a.interceptors.push(["$q","$injector","APIBaseUrl",function(a,b,c){return{request:function(d){var e=b.get("authentication").getToken(),f=d.url.substr(0,c.length)===c;return e&&f&&(d.headers["x-access-token"]=e),a.when(d)}}}])}]).run(["$rootScope","$urlRouter","authentication","$state","$location","CurrentUser","$log","_",function(a,b,c,d,e,f,g,h){a.$on("$locationChangeSuccess",function(a){a.preventDefault();var i=e.path().substr(1),j=["login","error","welcome","videos"],k={admin:["ndcVideos.create","ndcVideos.remove","ndcVideos.view","ndcVideos.list","ndcUsers.create","ndcUsers.remove","ndcUsers.view","ndcUsers.list"]};if(j.indexOf(i)>=0||c.isAuthenticated()){var l=h.chain(k).keys().indexOf(i).value();-1==l||f.hasRoles(k[l])?b.sync():(g.error("User is not authorized to access "+i),d.go("login"))}})}]).factory("authentication",["$http","APIBaseUrl","storage","$log","$q","UserRepository","CurrentUser",function(a,b,c,d,e,f,g){var h=function(){g.unset(),delete c.set("token",void 0)},i=function(){return c.get("token")||void 0},j=function(h,i,j){var k=e.defer(),l={method:"POST",url:b+"authentication/login",data:{username:i,password:j}};return a(l).then(function(a){if(a&&a.data){var b=a.data;return c.set("token",b.access_token),f.getByToken(b.access_token).then(g.set).then(function(){k.resolve(!0)})}k.reject("No data received")}).catch(function(a){var b=a&&a.data&&a.data.message?a.data.message:"";k.reject("Could not log you in. "+b)}).finally(function(){d.log("Log in request finished.")}),k.promise},k=function(){return"string"==typeof c.get("token")};return{isAuthenticated:k,login:j,getToken:i,logout:h}}]),angular.module("ndc").service("navbar",["_","$log",function(a,b){this.templateSrc="components/navbar/panels/navigation.html";var c=["settings","navigation","notifications"];this.isActive=function(a){return a==this.state},this.setState=function(d){a.indexOf(c,d)>=0?(this.state=d,this.templateSrc="components/navbar/panels/"+d+".html"):b.error("State "+d+" does not exist")},this.setState("navigation")}]),angular.module("ndc").service("Select2",["TagRepository",function(a){var b=_.throttle(function(b){a.search(b.term).then(function(a){b.callback({results:a})})},500,{leading:!1,trailing:!0});return{tagSearch:{multiple:!0,createSearchChoice:function(a,b){return 0===_.filter(b,function(b){return 0===b.text.localeCompare(a.toLowerCase())}).length?{id:"$"+a,text:a}:void 0},query:b}}}]),angular.module("ndc").run(["$rootScope","$state","stateHistory",function(a,b,c){a.$on("$stateChangeSuccess",function(a,d,e,f){b.previous=f,c.go(d,e)})}]).service("stateHistory",["$state",function(a){this.history=[],this.go=function(a,b){this.history.push({name:a,params:b})
+},this.back=function(){this.pop();var b=this.pop();a.go(b.name,b.params)},this.pop=function(){return this.history.pop()||{name:"videos",params:{}}}}]),angular.module("ndc").service("storage",["$window","$cookies",function(a,b){var c={},d=!0,e=a.navigator.cookieEnabled;try{var f=123;a.localStorage.setItem("test",f);var g=a.localStorage.getItem("test");if(f!==g)throw new Error("No access to localStorage, falling back to cookies")}catch(h){d=!1}var i=function(f,g){if(d){var h=JSON.stringify(g);a.localStorage.setItem(f,h)}else e?b[f]=g:c[f]=g},j=function(a){return d?JSON.parse(f):e?b[a]:c[a]};return{set:i,get:j}}]),angular.module("ndc").service("videoImport",["Config","$http","VideoModel","_","APIBaseUrl",function(a,b,c,d,e){this.provider=function(a){return{getVideos:function(){return b.get(e+"imports?provider="+a,{tracker:"videoImport.getVideos"}).then(function(a){return d.map(a.data,function(a){return new c(a)})})},getVideoById:function(d){return b.get(e+"imports/"+d+"?provider="+a,{tracker:"videoImport.getVideoById"}).then(function(a){return delete a.data.id,new c(a.data)})}}}}]),angular.module("ndc").service("vimeoAPI",["videoImport",function(a){return a.provider("vimeo")}]),angular.module("ndc").constant("_",window._);
