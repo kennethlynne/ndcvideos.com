@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ndc')
-  .factory('UserRepository', function ($injector, $http, UserModel) {
+  .factory('UserRepository', function ($injector, $http, UserModel, $log) {
     var BaseRepository = $injector.get('BaseRepository');
 
     BaseRepository.prototype.getByToken = function (token) {
@@ -23,6 +23,9 @@ angular.module('ndc')
         .get(Model.$settings.url + '?verificationToken=' + encodeURIComponent(verificationToken), {tracker: repository.$settings.name + '.getByVerificationToken'})
         .then(function (response) {
           return new Model(response.data);
+        })
+        .catch(function (err) {
+          $log.error(err);
         });
     };
 
@@ -31,7 +34,7 @@ angular.module('ndc')
       var Model = repository.$settings.model;
 
       return $http
-        .post(Model.$settings.url + '/resetPassword', {username:email}, {tracker: repository.$settings.name + '.resetPasswordFor'})
+        .post(Model.$settings.url + '/resetPassword', {username: email}, {tracker: repository.$settings.name + '.resetPasswordFor'})
         .then(function (response) {
           return response.data;
         });
@@ -42,7 +45,10 @@ angular.module('ndc')
       var Model = repository.$settings.model;
 
       return $http
-        .put(Model.$settings.url + '/setPassword', {token: token, password: password}, {tracker: repository.$settings.name + '.setPassword'})
+        .put(Model.$settings.url + '/setPassword', {
+          token: token,
+          password: password
+        }, {tracker: repository.$settings.name + '.setPassword'})
         .then(function (response) {
           return response.data;
         });
