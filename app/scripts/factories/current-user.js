@@ -1,25 +1,23 @@
 'use strict';
 
 angular.module('ndc')
-  .factory('CurrentUser', function ($log, UserModel, _, storage, profiles) {
+  .factory('CurrentUser', function ($log, UserModel, _, $localStorage, profiles) {
 
-    var userStorage = storage.get('CurrentUser') || {};
-    storage.set('CurrentUser', userStorage);
+    var storage = $localStorage['CurrentUser'] = $localStorage['CurrentUser'] || {};
+    var _user = storage.user = storage.user || {};
 
     var _set = function (user) {
-        angular.copy(user, userStorage);
-        storage.set('CurrentUser', userStorage);
+        angular.copy(user, _user);
       },
       _unset = function () {
-        angular.copy({}, userStorage);
-        storage.set('CurrentUser', {});
+        angular.copy({}, _user);
       },
       _get = function () {
-        return userStorage;
+        return _user;
       },
       _getProfile = function () {
-        var profileName = (userStorage.profile || 'guest'),
-          profile = profiles[profileName];
+        var profileName = (_user.profile || 'guest'),
+          profile = profiles[ profileName ];
 
         if (!profile) {
           profile = profiles['guest'];

@@ -16,6 +16,7 @@
     "angular-ui-router": "^0.2.12",
     "angular-touch": "~1.3.5",
     "angular-ui-bootstrap-bower": "~0.12.0",
+    "ngstorage": "~0.3.0",
     "angular-ui-select2": "~0.0.5",
     "select2": "~3.4.6",
     "angular-busy": "~4.1.1",

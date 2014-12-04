@@ -15,10 +15,10 @@ var app = angular.module('ndc', [
   'ui.router',
   'ui.bootstrap',
   'ngTouch',
+  'ngStorage',
   'ui.select2',
   'cgBusy',
   'ngRoles',
-  'ngPaginatorPlz',
-  'ngCookies'
+  'ngPaginatorPlz'
 ]);
 angular.componentFactory.moduleDecorator(app);

@@ -50,14 +50,14 @@ angular.module('ndc')
       }
     });
   })
-  .factory('authentication', function ($http, APIBaseUrl, storage, $log, $q, UserRepository, CurrentUser) {
+  .factory('authentication', function ($http, APIBaseUrl, $localStorage, $log, $q, UserRepository, CurrentUser) {
 
     var _logout = function () {
         CurrentUser.unset();
-        delete storage.set('token', undefined);
+        delete $localStorage.token;
       },
       _getToken = function () {
-        return storage.get('token') || undefined;
+        return $localStorage.token;
       },
       _login = function (grantType, username, password) {
         //TODO: Remove grantType. It is pure lol
@@ -75,8 +75,7 @@ angular.module('ndc')
         $http(cfg).then(function (response) {
           if (response && response.data) {
             var data = response.data;
-
-            storage.set('token', data.access_token);
+            $localStorage.token = data.access_token;
 
             return UserRepository.getByToken(data.access_token)
               .then(CurrentUser.set)
@@ -100,7 +99,7 @@ angular.module('ndc')
 
       },
       _isAuthenticated = function () {
-        return typeof storage.get('token') == 'string';
+        return typeof $localStorage.token == 'string';
       };
 
     return {

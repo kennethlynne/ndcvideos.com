@@ -2,19 +2,11 @@
 
 describe('Service: authentication', function () {
 
-  var authentication, $httpBackend, $rootScope, APIBaseUrl, $http, loginSuccessfullResponse, loginFailedResponse, logIn, storage, CurrentUser, UserRepository, promise, deferred;
+  var authentication, $httpBackend, $rootScope, APIBaseUrl, $http, loginSuccessfullResponse, loginFailedResponse, logIn, $localStorage, CurrentUser, UserRepository, promise, deferred;
 
   beforeEach(function () {
-    var localStorage = {};
 
-    storage = {
-      set: jasmine.createSpy('storage.set').and.callFake(function (key, value) {
-        localStorage[key] = value;
-      }),
-      get: jasmine.createSpy('storage.get').and.callFake(function (key) {
-        return localStorage[key];
-      })
-    };
+    $localStorage = {};
 
     function getPromise() {
       return promise;
@@ -25,7 +17,7 @@ describe('Service: authentication', function () {
     };
 
     module('ndc', function ($provide) {
-      $provide.value('storage', storage);
+      $provide.value('$localStorage', $localStorage);
       $provide.value('UserRepository', UserRepository);
       $provide.decorator('CurrentUser', function ($delegate) {
         spyOn($delegate, 'unset').and.callThrough();
@@ -124,13 +116,13 @@ describe('Service: authentication', function () {
   });
 
   it('should save token to local storage', function () {
-    expect(storage.get('token')).toBeUndefined();
+    expect($localStorage.token).toBeUndefined();
     logIn();
-    expect(storage.get('token')).toBe('take-on-me');
+    expect($localStorage.token).toBe('take-on-me');
   });
 
   it('should use the token from local storage if defined', function () {
-    storage.set('token', 'awesome');
+    $localStorage.token = 'awesome';
     expect(authentication.getToken()).toBe('awesome');
   });
 
