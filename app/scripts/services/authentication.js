@@ -2,16 +2,17 @@
 
 angular.module('ndc')
   .config(function ($httpProvider) {
-    $httpProvider.interceptors.push(['$q', '$injector', 'BaseUrl', function ($q, $injector, BaseUrl) {
+    $httpProvider.interceptors.push(['$q', '$injector', 'BaseUrl', function ($q, $injector, APIBaseUrl) {
       return {
         request: function (cfg) {
           var token = $injector.get('authentication').getToken();
-          var matchesAPIUrl = cfg.url.substr(0, BaseUrl.length) === BaseUrl;
+          var matchesAPIUrl = cfg.url.substr(0, BaseUrl.length) === APIBaseUrl;
 
           if (token && matchesAPIUrl) {
-            cfg.headers['Authorization'] = 'Bearer ' + token;
+            cfg.headers['x-access-token'] = token;
           }
-          return cfg || $q.when(cfg);
+
+          return $q.when(cfg);
         }
       };
     }]);
@@ -59,14 +60,16 @@ angular.module('ndc')
         return storage.get('token');
       },
       _login = function (grantType, username, password) {
-
+        //TODO: Remove grantType. It is pure lol
         var deferred = $q.defer();
 
         var cfg = {
           method: 'POST',
-          url: BaseUrl + 'token',
-          data: 'grant_type=' + grantType + '&username=' + username + '&password=' + password,
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+          url: APIBaseUrl + 'authentication/login',
+          data: {
+            username: username,
+            password: password
+          }
         };
 
         $http(cfg).then(function (response) {

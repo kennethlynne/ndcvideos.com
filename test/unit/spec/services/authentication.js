@@ -2,7 +2,7 @@
 
 describe('Service: authentication', function () {
 
-  var authentication, $httpBackend, $rootScope, BaseUrl, $http, loginSuccessfullResponse, loginFailedResponse, logIn, storage, CurrentUser, UserRepository, promise, deferred;
+  var authentication, $httpBackend, $rootScope, APIBaseUrl, $http, loginSuccessfullResponse, loginFailedResponse, logIn, storage, CurrentUser, UserRepository, promise, deferred;
 
   beforeEach(function () {
 
@@ -26,11 +26,10 @@ describe('Service: authentication', function () {
     });
 
     logIn = function logIn() {
-      $httpBackend.expectPOST(BaseUrl + 'token', 'grant_type=password&username=Ali&password=password123',
-        {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Accept': 'application/json, text/plain, */*'
-        }).respond(200, loginSuccessfullResponse);
+      $httpBackend.expectPOST(APIBaseUrl + 'authentication/login', {
+        username: 'Ali',
+        password: 'password123'
+      }).respond(200, loginSuccessfullResponse);
 
       authentication.login('password', 'Ali', 'password123');
       $httpBackend.flush();
@@ -38,8 +37,6 @@ describe('Service: authentication', function () {
 
     loginSuccessfullResponse = {
       "access_token": "take-on-me",
-      "token_type": "bearer",
-      "expires_in": 1209599,
       "userName": "Ali",
       ".issued": "Mon, 14 Oct 2013 06:53:32 GMT",
       ".expires": "Mon, 28 Oct 2013 06:53:32 GMT",
@@ -53,12 +50,12 @@ describe('Service: authentication', function () {
       message: 'Not authorized.'
     };
 
-    inject(function (_authentication_, _$httpBackend_, _BaseUrl_, _$http_, _CurrentUser_, $q, _$rootScope_) {
+    inject(function (_authentication_, _$httpBackend_, _APIBaseUrl_, _$http_, _CurrentUser_, $q, _$rootScope_) {
       deferred = $q.defer();
       promise = deferred.promise;
       authentication = _authentication_;
       $httpBackend = _$httpBackend_;
-      BaseUrl = _BaseUrl_;
+      APIBaseUrl = _APIBaseUrl_;
       $http = _$http_;
       CurrentUser = _CurrentUser_;
       $rootScope = _$rootScope_;
@@ -93,8 +90,11 @@ describe('Service: authentication', function () {
 
   it('should decorate all subsequent requests to the API with the token information', function () {
     logIn();
-    $httpBackend.expectGET(BaseUrl + 'test', {"Accept": "application/json, text/plain, */*", "Authorization": "Bearer take-on-me"}).respond();
-    $http.get(BaseUrl + 'test');
+    $httpBackend.expectGET(APIBaseUrl + 'test', {
+      "Accept": "application/json, text/plain, */*",
+      "x-access-token": "take-on-me"
+    }).respond();
+    $http.get(APIBaseUrl + 'test');
     $httpBackend.flush();
   });
 
@@ -110,8 +110,8 @@ describe('Service: authentication', function () {
     expect(authentication.getToken()).toBeUndefined();
     expect(authentication.isAuthenticated()).toBeFalsy();
 
-    $httpBackend.expectGET(BaseUrl + 'test', {"Accept": "application/json, text/plain, */*"}).respond();
-    $http.get(BaseUrl + 'test', {"Accept": "application/json, text/plain, */*"});
+    $httpBackend.expectGET(APIBaseUrl + 'test', {"Accept": "application/json, text/plain, */*"}).respond();
+    $http.get(APIBaseUrl + 'test', {"Accept": "application/json, text/plain, */*"});
     $httpBackend.flush();
   });
 
@@ -127,11 +127,10 @@ describe('Service: authentication', function () {
   });
 
   it('should reject the promise if the password or username is wrong', function () {
-    $httpBackend.expectPOST(BaseUrl + 'token', 'grant_type=password&username=wrong&password=pw',
-      {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Accept': 'application/json, text/plain, */*'
-      }).respond(403, loginFailedResponse);
+    $httpBackend.expectPOST(APIBaseUrl + 'authentication/login', {
+      username: 'wrong',
+      password: 'pw'
+    }).respond(403, loginFailedResponse);
 
     var failed = jasmine.createSpy('failed');
     var success = jasmine.createSpy('success');

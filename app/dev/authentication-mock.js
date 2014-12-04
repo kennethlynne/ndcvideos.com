@@ -1,10 +1,10 @@
 angular.module('ndc')
-    .run(function (Config, $httpBackend, $log, BaseUrl) {
+    .run(function (Config, $httpBackend, $log, APIBaseUrl) {
 
         //Only load mocks if config says so
         if (!Config.API.useMocks) return;
 
-        var baseUrl = BaseUrl + 'token';
+        var baseUrl = APIBaseUrl + 'authentication/login';
         var IdRegExp = /[\d\w-_]+$/.toString().slice(1, -1);
 
         console.log('Stubbing authentication API - ' + baseUrl);
