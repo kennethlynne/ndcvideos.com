@@ -2,11 +2,11 @@
 
 describe('Service: authentication', function () {
 
-  var authentication, $httpBackend, $rootScope, BaseUrl, $http, loginSuccessfullResponse, loginFailedResponse, logIn, $localStorage, CurrentUser, UserRepository, promise, deferred;
+  var authentication, $httpBackend, $rootScope, BaseUrl, $http, loginSuccessfullResponse, loginFailedResponse, logIn, storage, CurrentUser, UserRepository, promise, deferred;
 
   beforeEach(function () {
 
-    $localStorage = {};
+    storage = {};
 
     function getPromise() {
       return promise;
@@ -17,7 +17,7 @@ describe('Service: authentication', function () {
     };
 
     module('ndc', function ($provide) {
-      $provide.value('$localStorage', $localStorage);
+      $provide.value('storage', storage);
       $provide.value('UserRepository', UserRepository);
       $provide.decorator('CurrentUser', function ($delegate) {
         spyOn($delegate, 'unset').and.callThrough();
@@ -116,13 +116,13 @@ describe('Service: authentication', function () {
   });
 
   it('should save token to local storage', function () {
-    expect($localStorage.token).toBeUndefined();
+    expect(storage.get('token')).toBeUndefined();
     logIn();
-    expect($localStorage.token).toBe('take-on-me');
+    expect(storage.get('token')).toBe('take-on-me');
   });
 
   it('should use the token from local storage if defined', function () {
-    $localStorage.token = 'awesome';
+    storage.set('token', 'awesome');
     expect(authentication.getToken()).toBe('awesome');
   });
 

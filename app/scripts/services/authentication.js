@@ -49,14 +49,14 @@ angular.module('ndc')
       }
     });
   })
-  .factory('authentication', function ($http, BaseUrl, $localStorage, $log, $q, UserRepository, CurrentUser) {
+  .factory('authentication', function ($http, BaseUrl, storage, $log, $q, UserRepository, CurrentUser) {
 
     var _logout = function () {
         CurrentUser.unset();
-        delete $localStorage.token;
+        delete storage.set('token', {});
       },
       _getToken = function () {
-        return $localStorage.token;
+        return storage.get('token');
       },
       _login = function (grantType, username, password) {
 
@@ -72,7 +72,8 @@ angular.module('ndc')
         $http(cfg).then(function (response) {
           if (response && response.data) {
             var data = response.data;
-            $localStorage.token = data.access_token;
+
+            storage.set('token', data.access_token);
 
             return UserRepository.getByToken(data.access_token)
               .then(CurrentUser.set)
@@ -96,7 +97,7 @@ angular.module('ndc')
 
       },
       _isAuthenticated = function () {
-        return typeof $localStorage.token == 'string';
+        return typeof storage.get('token') == 'string';
       };
 
     return {
