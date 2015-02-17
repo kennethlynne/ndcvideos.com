@@ -8,7 +8,7 @@ angular.module('ndc')
       parent: 'app'
     }));
   })
-  .controller('VideodetailsCtrl', function ($scope, $stateParams, $state, VideoRepository) {
+  .controller('VideodetailsCtrl', function ($scope, $stateParams, $state, VideoRepository, $rootScope) {
 
    $scope.query = '';
 
@@ -19,6 +19,7 @@ angular.module('ndc')
     VideoRepository.getById($stateParams.id)
       .then(function (video) {
         $scope.video = video;
+        $rootScope.pageTitle = video.title;
       })
       .catch(function () {
         $state.go('error', {code: 404});
