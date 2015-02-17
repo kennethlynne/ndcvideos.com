@@ -2,6 +2,10 @@
   margin-top: 10px;
   margin-bottom: 20px;
 
+  > a:hover{
+      text-decoration: none;
+  }
+
   .wrapper {
 
     .thumbnail-wrapper {
