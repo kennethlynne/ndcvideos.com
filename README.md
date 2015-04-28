@@ -1,4 +1,4 @@
-[www.ndcvideos.com](http://www.ndcvideos.com) [![forthebadge](http://forthebadge.com/images/badges/fuck-it-ship-it.svg)]
+[www.ndcvideos.com](http://www.ndcvideos.com) ![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)
 ===========
 
 AngularJS based front-end for ndcvideos.com.
