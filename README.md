@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/kennethlynne/ndcvideos.com.png?label=ready&title=Ready)](https://waffle.io/kennethlynne/ndcvideos.com)
 [www.ndcvideos.com](http://www.ndcvideos.com) ![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)
 ===========
 
