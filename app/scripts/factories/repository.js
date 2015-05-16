@@ -1,4 +1,4 @@
-angular.module('ngSymbiosis.repository', [])
+angular.module('ndc', [])
   .factory('BaseRepository', function ($q, $http) {
 
     function BaseRepository(data) {
