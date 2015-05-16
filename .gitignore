@@ -7,3 +7,4 @@ node_modules
 test/coverage
 .grunt/
 /app/config/local.js
+npm-debug.log
