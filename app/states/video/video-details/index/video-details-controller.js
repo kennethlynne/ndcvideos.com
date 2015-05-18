@@ -8,12 +8,26 @@ angular.module('ndc')
       parent: 'app'
     }));
   })
-  .controller('VideodetailsCtrl', function ($scope, $stateParams, $state, VideoRepository, $rootScope) {
+  .controller('VideodetailsCtrl', function ($scope, $stateParams, $state, VideoRepository, authentication, $rootScope, $modal) {
 
-   $scope.query = '';
+    $scope.query = '';
+
+    if (!authentication.isAuthenticated()) {
+      var modalInstance = $modal.open({
+        animation: true,
+        template: '<login-component>',
+        controller: function () {
+
+        }
+      });
+
+      modalInstance.result.then(function () {
+
+      });
+    }
 
     $scope.search = function (query) {
-        $state.go('videos', {q:query});
+      $state.go('videos', {q: query});
     };
 
     VideoRepository.getById($stateParams.id)
